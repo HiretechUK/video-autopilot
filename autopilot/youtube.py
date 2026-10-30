@@ -38,7 +38,8 @@ def connect(account: str, channel_name: str) -> str:
                 f"To let the autopilot post to the {channel_name} YouTube channel:\n\n"
                 f"1. On your phone or computer open: {d['verification_url']}\n"
                 f"2. Enter this code: {d['user_code']}\n"
-                f"3. Sign in as haseeb.ahmed.talent@gmail.com and, when asked which channel, choose {channel_name}\n"
+                f"3. Sign in as haseeb.ahmed.talent@gmail.com (not the channel's own Gmail) and, when asked which account,\n"
+                f"   choose the brand account for {channel_name}{' (listed as What Nearly Was)' if account == 'imagine_you' else ''}\n"
                 f"   (NOT your personal 'haseeb ahmed' channel).\n"
                 f"4. Click Allow. Google may warn the app is unverified: click Advanced, then continue.\n\n"
                 f"The code works for {d['expires_in'] // 60} minutes.")
@@ -54,6 +55,12 @@ def connect(account: str, channel_name: str) -> str:
                               headers={"Authorization": f"Bearer {t['access_token']}"}, timeout=30).json()
             title = ch["items"][0]["snippet"]["title"] if ch.get("items") else "?"
             cid_ = ch["items"][0]["id"] if ch.get("items") else "?"
+            if title == "?":
+                mailer.send("YouTube NOT connected: no channel on that account",
+                            f"The Google account you signed in with has no YouTube channel, so nothing was saved.\n"
+                            f"Run the connect again, sign in as haseeb.ahmed.talent@gmail.com and pick the brand account "
+                            f"that holds {channel_name} (for Imagine You it is still called 'What Nearly Was').")
+                raise RuntimeError("no channel on chosen account; refused")
             if "haseeb ahmed" in title.lower():
                 mailer.send("YouTube NOT connected: wrong channel",
                             f"You picked '{title}', your personal channel. Nothing was saved. Run the connect again and pick {channel_name}.")
