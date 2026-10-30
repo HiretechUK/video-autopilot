@@ -1,13 +1,26 @@
-"""Post an approved episode to each connected platform. Platforms that are not connected yet are skipped,
-so approved episodes simply wait (status 'approved') until the accounts are connected."""
+"""Post an approved episode to every connected platform. A platform that is not connected yet, or fails,
+is reported and retried on the next run; the others still post."""
 from __future__ import annotations
 
-import os
+import traceback
+
+ACCOUNTS = {  # series -> account key per platform
+    "imagine_you": {"youtube": "imagine_you", "made_for_kids": False,
+                    "hashtags": "#Shorts #survival #whatwouldyoudo #imagineyou"},
+}
 
 
-def publish(series: str, ep: dict, video: str) -> dict:
-    links = {}
-    # YouTube, Instagram and TikTok uploaders plug in here once their access is connected.
-    if not os.environ.get("YT_CLIENT_ID"):
-        links["youtube"] = "not connected yet (episode kept as approved)"
-    return links
+def publish(series: str, ep: dict, video: str, done: dict | None = None) -> dict:
+    from . import youtube
+    cfg = ACCOUNTS[series]
+    done = dict(done or {})
+    if not str(done.get("youtube", "")).startswith("http"):
+        desc = f"{ep.get('description', '')}\n\n{cfg['hashtags']}"
+        try:
+            done["youtube"] = youtube.upload(cfg["youtube"], video, ep["title"], desc, ep.get("tags", []), cfg["made_for_kids"])
+        except LookupError:
+            done["youtube"] = "not connected yet"
+        except Exception as e:  # keep going; retried next run
+            traceback.print_exc()
+            done["youtube"] = f"failed: {e}"[:300]
+    return done

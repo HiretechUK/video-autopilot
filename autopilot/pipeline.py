@@ -95,15 +95,7 @@ def check():
             if action == "approve":
                 rec["status"] = "approved"
                 rec["approved"] = datetime.now(timezone.utc).isoformat()
-                save(st)
-                from . import publish  # noqa: WPS433 (publish needs platform secrets)
-                links = publish.publish(rec["series"], ep, render(rec["series"], path))
-                posted = {k: v for k, v in links.items() if v.startswith("http")}
-                rec["links"] = links
-                if posted:
-                    rec["status"] = "published"
-                mailer.send(f"{'Posted' if posted else 'Approved'}: {ep['title']} [{ref}]",
-                            "\n".join(f"  {k}: {v}" for k, v in links.items()))
+                mailer.send(f"Approved: {ep['title']} [{ref}]", "It will be posted on the next run to every connected platform.")
             elif action == "skip":
                 rec["status"] = "skipped"
                 mailer.send(f"Skipped [{ref}]", f"Dropped: {ep['title']}")
@@ -117,8 +109,49 @@ def check():
             traceback.print_exc()
             mailer.send(f"Problem with {ref}", f"Your reply was:\n{text}\n\nError:\n{traceback.format_exc()[-2000:]}")
         save(st)
+    publish_queue(st)
+
+
+PLATFORMS = ("youtube",)  # add "instagram", "tiktok" as they are connected
+
+
+def publish_queue(st):
+    """Post every approved episode that is not yet live on all platforms (oldest first). Safe to rerun."""
+    from . import publish
+    for ref, rec in sorted(st["episodes"].items(), key=lambda kv: kv[1].get("approved", "")):
+        if rec["status"] not in ("approved", "partly_published"):
+            continue
+        links = rec.get("links", {})
+        if all(str(links.get(p, "")).startswith("http") for p in PLATFORMS):
+            continue
+        path = os.path.join(ROOT, rec["file"])
+        ep = json.load(open(path))
+        before = dict(links)
+        links = publish.publish(rec["series"], ep, render(rec["series"], path), links)
+        rec["links"] = links
+        live = {k: v for k, v in links.items() if str(v).startswith("http")}
+        rec["status"] = "published" if len(live) == len(PLATFORMS) else ("partly_published" if live else "approved")
+        save(st)
+        new = {k: v for k, v in live.items() if before.get(k) != v}
+        if new:
+            mailer.send(f"Posted: {ep['title']} [{ref}]", "\n".join(f"  {k}: {v}" for k, v in links.items()))
+
+
+def connect(platform: str, series: str):
+    from . import youtube
+    name = SERIES[series]["name"]
+    if platform == "youtube":
+        youtube.connect(series, name)
 
 
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "check"
-    make(sys.argv[2]) if cmd == "make" else check()
+    arg = sys.argv[2] if len(sys.argv) > 2 else "imagine_you"
+    if cmd == "make":
+        make(arg)
+    elif cmd.startswith("connect_"):
+        connect(cmd.split("_", 1)[1], arg)
+    elif cmd == "publish":
+        publish_queue(load())
+    else:
+        check()
