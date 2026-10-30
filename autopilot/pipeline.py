@@ -112,7 +112,7 @@ def check():
     publish_queue(st)
 
 
-PLATFORMS = ("youtube",)  # add "instagram", "tiktok" as they are connected
+PLATFORMS = ("youtube", "instagram")  # add "tiktok" once its API app is approved
 
 
 def publish_queue(st):
@@ -138,10 +138,12 @@ def publish_queue(st):
 
 
 def connect(platform: str, series: str):
-    from . import youtube
+    from . import instagram, youtube
     name = SERIES[series]["name"]
     if platform == "youtube":
         youtube.connect(series, name)
+    elif platform == "instagram":
+        instagram.connect(series, name)
 
 
 if __name__ == "__main__":
