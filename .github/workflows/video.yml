@@ -53,6 +53,7 @@ jobs:
           TOKEN_PASSPHRASE: ${{ secrets.TOKEN_PASSPHRASE }}
           FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
           FB_CLIENT_TOKEN: ${{ secrets.FB_CLIENT_TOKEN }}
+          IG_USER_TOKEN: ${{ secrets.IG_USER_TOKEN }}
         run: |
           CMD="${{ github.event.inputs.cmd }}"
           if [ -z "$CMD" ]; then
