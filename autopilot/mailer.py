@@ -49,7 +49,10 @@ def _typed_text(msg) -> str:
     txt = part.get_payload(decode=True).decode(part.get_content_charset() or "utf-8", "replace")
     lines = []
     for line in txt.splitlines():
-        if re.match(r"^\s*>", line) or re.match(r"^On .+wrote:\s*$", line) or line.strip().startswith("-----"):
+        st = line.strip()
+        if (re.match(r"^\s*>", line) or re.match(r"^On .+wrote:\s*$", st) or st.startswith("-----") or st.startswith("_____")
+                or re.match(r"^(From|Sent|Fra|Von|De):\s", st) or re.match(r"^Sent from (my |Outlook|Mail|Yahoo)", st, re.I)
+                or re.match(r"^Get Outlook for", st, re.I)):
             break
         lines.append(line)
     return "\n".join(lines).strip()

@@ -8,7 +8,7 @@ answer in the comments. Tone: tense, smart, a little eerie, never gory. Facts in
 
 ## Format (YouTube Short, 40-55 seconds spoken)
 - 7-9 scenes. Each scene = one `narration` of 1-3 short sentences (8-30 words).
-- Scene 1 hook: starts "Imagine you..." and lands the scenario in one breath.
+- Scene 1 hook: starts "Imagine you..." (natural grammar: "Imagine you wake up...") and lands the scenario in one breath.
 - Escalate: time jumps shown in the HUD ("DAY 2 · 10:15 AM"), 2 RULE stickers (rule one, rule two),
   one twist near the end.
 - Final scene: the choice. Narration asks the question, then "Comment A or B. And follow, to find out
@@ -27,9 +27,16 @@ answer in the comments. Tone: tense, smart, a little eerie, never gory. Facts in
 ## Moods (whole-scene delivery): calm, tense, whisper, urgent, reveal, warm
 
 ## Visual vocabulary (use ONLY these)
-- bg: city_night, island, bunker, forest_night, desert, snow, supermarket, amsterdam_1637
-- pose: stand, walk, phone, point, shock, think, sit, crouch, wave, run
-- props (optional list): car, crate, radio, fire, tulip_stall
+- bg: city_night, island, island_night, bunker, forest_night, desert, snow, supermarket, amsterdam_1637
+- pose: stand, walk, phone, point, shock, think, sit, crouch, wave, run, drink, lookout, kneel, reach,
+  carry, signal (both arms waving overhead), build (working with hands), shiver, cower
+- poses: the character must DO things. Give most scenes 2-3 actions in order, acted out across the
+  scene, matching the narration (e.g. ["kneel", "drink", "lookout"] for finding rain water).
+  "pose" = the first action. Use move_to in some scenes so the character travels.
+- props (optional list): car, crate, radio, fire (one fire), fire_triangle (three fires in a triangle),
+  ship (light on the horizon, best on island_night), leaf_water, tulip_stall
+- What is said must match what is shown: if the narration says three fires, use fire_triangle;
+  night scenes use a night background.
 - fx (optional): shake, flash, rain, red
 - x: 0.2-0.8 horizontal position; move_to: makes the character walk to that x during the scene
 - cam: {"z0": start zoom, "z1": end zoom}, 1.0-1.25

@@ -9,9 +9,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MODELS = [os.environ.get("CLAUDE_MODEL", "claude-sonnet-5-5"), "claude-sonnet-4-5"]
 
 VOCAB = {
-    "bg": {"city_night", "island", "bunker", "forest_night", "desert", "snow", "supermarket", "amsterdam_1637"},
-    "pose": {"stand", "walk", "phone", "point", "shock", "think", "sit", "crouch", "wave", "run"},
-    "props": {"car", "crate", "radio", "fire", "tulip_stall"},
+    "bg": {"city_night", "island", "island_night", "bunker", "forest_night", "desert", "snow", "supermarket", "amsterdam_1637"},
+    "pose": {"stand", "walk", "phone", "point", "shock", "think", "sit", "crouch", "wave", "run", "drink", "lookout",
+             "kneel", "reach", "carry", "signal", "build", "shiver", "cower"},
+    "props": {"car", "crate", "radio", "fire", "fire_triangle", "ship", "leaf_water", "tulip_stall"},
     "fx": {"shake", "flash", "rain", "red"},
     "mood": {"calm", "tense", "whisper", "urgent", "reveal", "warm"},
 }
@@ -21,7 +22,7 @@ SCHEMA = """Return ONLY a JSON object:
  "description": "<2-3 sentence YouTube description ending with a question>",
  "tags": ["5-10 short tags"], "series": "SURVIVE #<n>", "voice": "am_michael", "speed": 1.05,
  "costume": "cap", "hud": ["...", "● ...", "..."],
- "scenes": [{"bg": "...", "pose": "...", "x": 0.5, "move_to": 0.4 (optional), "props": [], "fx": "",
+ "scenes": [{"bg": "...", "pose": "...", "poses": ["action1", "action2"], "x": 0.5, "move_to": 0.4 (optional), "props": [], "fx": "",
    "cam": {"z0": 1.0, "z1": 1.1}, "hud": [...] (optional), "rule": {...} (optional), "mood": "...",
    "narration": "...", "highlight": ["word"]},
    ... last scene adds "choice": {"q": "WHAT DO YOU DO?", "options": ["A · ...", "B · ..."]}, "hold_after": 3.2]}"""
@@ -52,6 +53,9 @@ def validate(ep: dict) -> list[str]:
         errs.append(f"need 6-10 scenes, got {len(sc)}")
     words = 0
     for i, s in enumerate(sc, 1):
+        for ps in s.get("poses", []) or []:
+            if ps not in VOCAB["pose"]:
+                errs.append(f"scene {i}: pose '{ps}' not allowed")
         for key in ("bg", "pose", "mood"):
             if s.get(key) not in VOCAB[key]:
                 errs.append(f"scene {i}: {key} '{s.get(key)}' not allowed")
@@ -71,6 +75,8 @@ def validate(ep: dict) -> list[str]:
         r = s.get("rule")
         if r and (len(r.get("text", "")) > 16 or len(r.get("sub", "")) > 20):
             errs.append(f"scene {i}: rule text too long")
+    if sum(1 for s in sc if len(s.get("poses") or []) >= 2 or s.get("move_to") is not None) < len(sc) * 0.6:
+        errs.append("the character is too static: give most scenes 2-3 'poses' actions or a move_to")
     if sc and not sc[-1].get("choice"):
         errs.append("last scene needs a choice")
     if not 85 <= words <= 150:
