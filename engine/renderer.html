@@ -29,6 +29,11 @@ const BG={
   <path d="M0 1380 Q540 1300 1080 1380 L1080 1920 L0 1920 Z" fill="#f2d79a"/><path d="M0 1380 Q540 1300 1080 1380" stroke="#fff" stroke-width="14" fill="none" opacity=".7"/>
   <g transform="translate(160,1420)"><path d="M0 0 Q20 -300 70 -560" stroke="#7a5230" stroke-width="34" fill="none" stroke-linecap="round"/>
   <g transform="translate(70,-560) rotate(${Math.sin(t)*3})" fill="#2f8f3a">${[0,60,130,200,260,320].map(a=>`<path d="M0 0 Q${Math.cos(a*Math.PI/180)*120} ${Math.sin(a*Math.PI/180)*80-60} ${Math.cos(a*Math.PI/180)*230} ${Math.sin(a*Math.PI/180)*150+40} Q${Math.cos(a*Math.PI/180)*110} ${Math.sin(a*Math.PI/180)*60} 0 0Z"/>`).join('')}</g></g>`},
+ island_night(t){const r=rnd(21);let st='';for(let i=0;i<60;i++){st+=`<circle cx="${r()*W}" cy="${r()*900}" r="${1+r()*1.6}" fill="#e8eeff" opacity="${.3+.5*Math.abs(Math.sin(t*1.3+i))}"/>`}const wave=Math.sin(t*1.2)*8;return `<defs>${skyGrad('sky',[[0,'#040814'],[.6,'#0d1a33'],[1,'#1b2a44']])}</defs>
+  <rect width="${W}" height="${H}" fill="url(#sky)"/>${st}<circle cx="240" cy="330" r="60" fill="#e8eeff" opacity=".9"/>
+  <path d="M0 1050 Q270 ${1035+wave} 540 1050 T1080 1050 L1080 1450 L0 1450 Z" fill="#0b2340"/><path d="M0 1120 Q270 ${1105-wave} 540 1120 T1080 1120 L1080 1450 L0 1450 Z" fill="#0f2c4f" opacity=".85"/>
+  <path d="M0 1380 Q540 1300 1080 1380 L1080 1920 L0 1920 Z" fill="#3a3326"/>
+  <g transform="translate(150,1420)"><path d="M0 0 Q20 -300 70 -560" stroke="#2a1d12" stroke-width="34" fill="none" stroke-linecap="round"/><g transform="translate(70,-560) rotate(${Math.sin(t)*3})" fill="#10261a">${[0,60,130,200,260,320].map(a=>`<path d="M0 0 Q${Math.cos(a*Math.PI/180)*120} ${Math.sin(a*Math.PI/180)*80-60} ${Math.cos(a*Math.PI/180)*230} ${Math.sin(a*Math.PI/180)*150+40} Q${Math.cos(a*Math.PI/180)*110} ${Math.sin(a*Math.PI/180)*60} 0 0Z"/>`).join('')}</g></g>`},
  bunker(t){const fl=.85+.15*Math.sin(t*23)*Math.sin(t*7);return `<defs>${skyGrad('wall',[[0,'#2b2f36'],[1,'#1a1d22']])}<radialGradient id="bulb" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffe2a0" stop-opacity="${.75*fl}"/><stop offset="1" stop-color="#ffb04a" stop-opacity="0"/></radialGradient></defs>
   <rect width="${W}" height="${H}" fill="url(#wall)"/>${Array.from({length:9},(_,i)=>`<path d="M0 ${300+i*150} L${W} ${300+i*150}" stroke="#14171b" stroke-width="5"/>`).join('')}
   <rect x="80" y="980" width="320" height="380" fill="#3a3f47" stroke="${INK}" stroke-width="8"/>${[0,1,2].map(i=>`<rect x="100" y="${1010+i*115}" width="280" height="12" fill="#22262c"/><rect x="${120+i*60}" y="${960+i*115}" width="70" height="50" fill="#c9a14a" stroke="${INK}" stroke-width="5"/>`).join('')}
@@ -59,6 +64,9 @@ const PROPS={
  crate:()=>`<g transform="translate(760,1450)"><rect width="200" height="150" fill="#9a6a3a" stroke="${INK}" stroke-width="8"/><path d="M0 0 L200 150 M200 0 L0 150" stroke="${INK}" stroke-width="6"/></g>`,
  radio:()=>`<g transform="translate(800,1480)"><rect width="160" height="100" rx="12" fill="#3d4450" stroke="${INK}" stroke-width="7"/><circle cx="45" cy="50" r="26" fill="#22262c"/><rect x="85" y="25" width="55" height="14" fill="#9fd4ff"/><path d="M130 0 L160 -80" stroke="${INK}" stroke-width="6"/></g>`,
  fire:(t)=>`<g transform="translate(780,1560)"><path d="M-60 40 L60 40" stroke="#5a3a22" stroke-width="18" stroke-linecap="round"/><path d="M0 ${-120-10*Math.sin(t*9)} Q50 -40 30 30 Q0 50 -30 30 Q-50 -40 0 ${-120-10*Math.sin(t*9)}Z" fill="#ff7a2a"/><path d="M0 ${-60-8*Math.sin(t*11)} Q25 -10 12 25 Q0 35 -12 25 Q-25 -10 0 ${-60-8*Math.sin(t*11)}Z" fill="#ffd34a"/><circle r="260" fill="#ff9d3c" opacity=".12"/></g>`,
+ fire_triangle:(t)=>{const one=(x,y,sc,ph)=>`<g transform="translate(${x},${y}) scale(${sc})"><path d="M-50 36 L50 36" stroke="#5a3a22" stroke-width="16" stroke-linecap="round"/><path d="M0 ${-110-10*Math.sin(t*9+ph)} Q46 -36 28 28 Q0 46 -28 28 Q-46 -36 0 ${-110-10*Math.sin(t*9+ph)}Z" fill="#ff7a2a"/><path d="M0 ${-55-8*Math.sin(t*11+ph)} Q23 -8 11 22 Q0 32 -11 22 Q-23 -8 0 ${-55-8*Math.sin(t*11+ph)}Z" fill="#ffd34a"/><circle r="200" fill="#ff9d3c" opacity=".1"/></g>`;return one(700,1500,.8,0)+one(950,1500,.8,2)+one(825,1640,.95,4)},
+ ship:(t)=>`<g transform="translate(${860-t*4%300},1060)"><path d="M-70 0 L70 0 L50 26 L-50 26Z" fill="#1a1f2b"/><rect x="-10" y="-50" width="8" height="50" fill="#1a1f2b"/><circle cx="-6" cy="-54" r="${7+2*Math.sin(t*4)}" fill="#fff6c4"/><circle cx="-6" cy="-54" r="40" fill="#fff6c4" opacity=".15"/></g>`,
+ leaf_water:()=>`<g transform="translate(330,1600)"><path d="M-90 0 Q0 -70 90 0 Q0 40 -90 0Z" fill="#3e9b4a" stroke="${INK}" stroke-width="6"/><ellipse cx="0" cy="-6" rx="50" ry="12" fill="#8fd2ff" opacity=".9"/></g>`,
  tulip_stall:()=>`<g transform="translate(700,1100)"><path d="M0 0 L340 0 L360 60 L-20 60Z" fill="#b8312f" stroke="${INK}" stroke-width="7"/><rect x="10" y="60" width="12" height="200" fill="#2b1a14"/><rect x="318" y="60" width="12" height="200" fill="#2b1a14"/><rect x="0" y="210" width="340" height="70" fill="#6b4226" stroke="${INK}" stroke-width="7"/>${[50,110,170,230,290].map((x,i)=>`<path d="M${x} 210 L${x} 172" stroke="#2f6b2a" stroke-width="6"/><path d="M${x-12} 175 Q${x} 145 ${x+12} 175Z" fill="${['#e8384f','#f2c94c','#c86dd7'][i%3]}" stroke="${INK}" stroke-width="5"/>`).join('')}</g>`,
 };
 // ---------- stickman ----------
@@ -74,11 +82,32 @@ const POSES={
  wave:{la:[200,-10],ra:[-60,-40],ll:[100,0],rl:[80,0],lean:0},
  run:{la:[240,-90],ra:[120,90],ll:[50,40],rl:[130,30],lean:12},
  walk:{la:[200,-15],ra:[160,15],ll:[100,0],rl:[80,0],lean:3},
+ drink:{la:[200,-15],ra:[150,-150],ll:[100,0],rl:[80,0],lean:-3,look:-.3},
+ lookout:{la:[200,-15],ra:[-120,-110],ll:[105,0],rl:[75,0],lean:2,look:-.2},
+ kneel:{la:[215,-40],ra:[115,30],ll:[20,100],rl:[95,-5],lean:10,y:70},
+ reach:{la:[-20,10],ra:[-5,5],ll:[100,0],rl:[80,0],lean:6},
+ carry:{la:[150,-80],ra:[30,80],ll:[100,0],rl:[80,0],lean:-2},
+ signal:{la:[-110,-20],ra:[-70,20],ll:[105,0],rl:[75,0],lean:0,anim:'signal'},
+ build:{la:[150,-40],ra:[40,40],ll:[60,90],rl:[30,110],lean:14,y:90,anim:'build'},
+ shiver:{la:[60,150],ra:[120,-150],ll:[100,0],rl:[80,0],lean:4,anim:'shiver'},
+ cower:{la:[-120,-140],ra:[-60,140],ll:[60,90],rl:[30,110],lean:16,y:95},
 };
+const ANG=['la','ra','ll','rl'];
+function blendPose(a,b,k){const o={};for(const n of ANG)o[n]=[lerp(a[n][0],b[n][0],k),lerp(a[n][1],b[n][1],k)];o.lean=lerp(a.lean||0,b.lean||0,k);o.y=lerp(a.y||0,b.y||0,k);o.look=lerp(a.look||0,b.look||0,k);o.anim=k<.5?a.anim:b.anim;o.prop=k<.5?a.prop:b.prop;return o}
+function animate(P,t,talking){const o=JSON.parse(JSON.stringify(P));
+ if(o.anim==='signal'){const s=Math.sin(t*7);o.la[0]+=s*28;o.ra[0]-=s*28}
+ else if(o.anim==='build'){const s=Math.sin(t*6);o.la[0]+=s*20;o.ra[0]+=s*20;o.lean+=s*3}
+ else if(o.anim==='shiver'){o.lean+=Math.sin(t*40)*2}
+ else if(talking){o.ra[0]+=Math.sin(t*3.1)*9;o.ra[1]+=Math.sin(t*2.3)*12;o.la[1]+=Math.sin(t*2.7)*6}
+ return o}
+// scene can give "poses": [..] (2-4 actions in order); each eases into the next
+function scenePose(sc,lt,dur){const list=(sc.poses&&sc.poses.length?sc.poses:[sc.pose||'stand']).map(n=>POSES[n]||POSES.stand);
+ if(list.length===1)return list[0];const seg=dur/list.length;const i=clamp(Math.floor(lt/seg),0,list.length-1);const into=lt-i*seg;
+ if(i>0&&into<.45)return blendPose(list[i-1],list[i],ease(into/.45));return list[i]}
 function limb(x,y,a1,a2,l1,l2){const r1=a1*Math.PI/180,r2=(a1+a2)*Math.PI/180;const x1=x+Math.cos(r1)*l1,y1=y+Math.sin(r1)*l1;return [[x,y],[x1,y1],[x1+Math.cos(r2)*l2,y1+Math.sin(r2)*l2]]}
 function stickman(p,t,opts){
  // walking cycle
- let P=JSON.parse(JSON.stringify(p));
+ let P=animate(p,t,opts.talking);
  if(opts.walking){const s=Math.sin(t*8);P.ll=[90+28*s,Math.max(0,-30*s)+5];P.rl=[90-28*s,Math.max(0,30*s)+5];P.la=[190-25*s,-15];P.ra=[170+25*s,15]}
  const bob=opts.walking?Math.abs(Math.sin(t*8))*-8:Math.sin(t*2)*3;
  const hipY=260+(P.y||0)+bob, shY=150+(P.y||0)+bob+Math.sin(t*2)*2;
@@ -87,7 +116,7 @@ function stickman(p,t,opts){
  const path=pts=>'M'+pts.map(q=>q.join(' ')).join(' L');
  let s=`<ellipse cx="0" cy="${410}" rx="95" ry="18" fill="#000" opacity=".45"/>`;
  s+=`<g fill="none" stroke-linecap="round" stroke-linejoin="round"><g stroke="${INK}" stroke-width="30">${parts.map(q=>`<path d="${path(q)}"/>`).join('')}</g><g stroke="${BONE}" stroke-width="16">${parts.map(q=>`<path d="${path(q)}"/>`).join('')}</g></g>`;
- if(P===POSES.phone||p===POSES.phone){const hand=parts[2][2];s+=`<g transform="translate(${hand[0]-14},${hand[1]-30}) rotate(-8)"><rect width="34" height="52" rx="6" fill="#bfe3ff" stroke="${INK}" stroke-width="5"/></g><circle cx="${hand[0]}" cy="${hand[1]-10}" r="60" fill="#9fd4ff" opacity=".18"/>`}
+ if(opts.phone){const hand=parts[2][2];s+=`<g transform="translate(${hand[0]-14},${hand[1]-30}) rotate(-8)"><rect width="34" height="52" rx="6" fill="#bfe3ff" stroke="${INK}" stroke-width="5"/></g><circle cx="${hand[0]}" cy="${hand[1]-10}" r="60" fill="#9fd4ff" opacity=".18"/>`}
  if(opts.torch){const hand=parts[2][2];s+=`<path d="M${hand[0]} ${hand[1]} L${hand[0]+420} ${hand[1]-120} L${hand[0]+420} ${hand[1]+140}Z" fill="#fff3c4" opacity=".14"/><rect x="${hand[0]-6}" y="${hand[1]-14}" width="44" height="22" rx="5" fill="#3d4450" stroke="${INK}" stroke-width="5"/>`}
  const hx=shX*1.1,hy=shY-65,look=(P.look||0);const blink=(t%3.7)<.12;
  s+=`<g transform="translate(${hx},${hy})"><circle r="62" fill="${BONE}" stroke="${INK}" stroke-width="10"/>${blink?`<path d="M-20 ${10+look*10} h12 M18 ${10+look*10} h12" stroke="${INK}" stroke-width="5"/>`:`<circle cx="-14" cy="${10+look*12}" r="7" fill="${INK}"/><circle cx="22" cy="${10+look*12}" r="7" fill="${INK}"/>`}${opts.mouth?`<ellipse cx="6" cy="38" rx="9" ry="${4+Math.abs(Math.sin(t*14))*6}" fill="${INK}"/>`:''}${hat(opts.costume||'cap')}</g>`;
@@ -108,20 +137,21 @@ function sticker(rule,age){const s=age<.35?ease(clamp(age/.35,0,1))*1.15:age<.5?
 function captionSVG(words,hi){ // words: array of {w,on}
  const txt=words.map(o=>o.w).join(' ');const size=txt.length>18?84:txt.length>11?96:110;
  let x=540;const lines=[];let cur=[];let len=0;for(const o of words){if(len+o.w.length>12&&cur.length){lines.push(cur);cur=[];len=0}cur.push(o);len+=o.w.length+1}if(cur.length)lines.push(cur);
- return `<g font-family="Inter" font-weight="900" text-anchor="middle">${lines.map((ln,i)=>{const y=800+i*size*1.05;const inner=ln.map(o=>`<tspan fill="${o.hi?'#ffd23f':'#ffffff'}">${esc(o.w.toUpperCase().replace(/[^A-Z0-9'?!,.\- ]/g,'').replace(/[.,]$/,''))}</tspan>`).join(' ');return `<text class="cap" x="540" y="${y}" font-size="${size}" stroke="${INK}" stroke-width="${size*.18}" stroke-linejoin="round" paint-order="stroke">${inner}</text>`}).join('')}</g>`}
+ return `<g font-family="Inter" font-weight="900" text-anchor="middle">${lines.map((ln,i)=>{const y=800+i*size*1.05;const inner=ln.map(o=>`<tspan fill="${o.hi?'#ffd23f':'#ffffff'}">${esc(o.w.toUpperCase().replace(/[^A-Z0-9'?!,.\- ]/g,'').replace(/[.,…]+$/,''))}</tspan>`).join(' ');return `<text class="cap" x="540" y="${y}" font-size="${size}" stroke="${INK}" stroke-width="${size*.18}" stroke-linejoin="round" paint-order="stroke">${inner}</text>`}).join('')}</g>`}
 function choiceCard(c,age){const a=clamp(age/.4,0,1);return `<g opacity="${a}" transform="translate(0,${(1-ease(a))*80-560})"><rect x="70" y="1240" width="940" height="420" rx="30" fill="#0b0b12" opacity=".85" stroke="#ffd23f" stroke-width="6"/><text x="540" y="1330" font-family="Inter" font-weight="900" font-size="58" fill="#ffd23f" text-anchor="middle">${esc(c.q)}</text>${c.options.map((o,i)=>`<g transform="translate(120,${1390+i*120})"><rect width="840" height="96" rx="20" fill="${i?'#3f8cff':'#d6332f'}"/><text x="40" y="64" font-family="Inter" font-weight="900" font-size="46" fill="#fff">${esc(o)}</text></g>`).join('')}</g>`}
 
 // ---------- main ----------
 window.setup=tl=>{TL=tl;return true};
 window.renderAt=t=>{
- const sc=TL.scenes.find(s=>t>=s.start&&t<s.end)||TL.scenes[TL.scenes.length-1];
- const lt=t-sc.start,dur=sc.end-sc.start,p=clamp(lt/dur,0,1);
+ const sc=t<TL.scenes[0].start?TL.scenes[0]:(TL.scenes.find(s=>t>=s.start&&t<s.end)||TL.scenes[TL.scenes.length-1]);
+ const lt=Math.max(0,t-sc.start),dur=sc.end-sc.start,p=clamp(lt/dur,0,1);
  const cam=sc.cam||{};const z=lerp(cam.z0||1,cam.z1||1.08,ease(p));const shake=sc.fx==='shake'?Math.sin(t*60)*12:0;
  let bg=(BG[sc.bg]||BG.city_night)(t);
  let props=(sc.props||[]).map(k=>PROPS[k]?PROPS[k](t):'').join('');
  const x0=(sc.x??.55)*W,x1=(sc.move_to??sc.x??.55)*W;const walking=sc.move_to!=null&&Math.abs(x1-x0)>5;
  const mx=lerp(x0,x1,walking?p:0);const dir=x1<x0?-1:1;
- const man=stickman(POSES[sc.pose]||POSES.stand,t,{walking,torch:sc.torch,costume:sc.costume||TL.costume,mouth:false});
+ const pose=scenePose(sc,lt,dur);const curName=(sc.poses&&sc.poses.length)?sc.poses[Math.min(sc.poses.length-1,Math.floor(lt/(dur/sc.poses.length)))]:sc.pose;
+ const man=stickman(pose,t,{walking,torch:sc.torch,costume:sc.costume||TL.costume,mouth:false,phone:curName==='phone',talking:!walking&&lt<sc.voice_dur});
  const manG=`<g transform="translate(${mx},${sc.y??1180}) scale(${dir*1.18},1.18)">${man}</g>`;
  const world=`<g transform="translate(${540+shake},${1100}) scale(${z}) translate(-540,-1100)">${bg}${props}${manG}</g>`;
  // fx
