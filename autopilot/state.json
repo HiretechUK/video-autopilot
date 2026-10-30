@@ -5,10 +5,12 @@
    "number": 1,
    "title": "Imagine you wake up alone on a deserted island",
    "status": "pending",
-   "version": 1,
+   "version": 2,
    "file": "episodes/IY-01.json",
    "created": "2026-10-30T13:45:52.597659+00:00"
   }
  },
- "seen": []
+ "seen": [
+  "<AM9P194MB14596CF9145AF72C0A01C706A66D2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>"
+ ]
 }

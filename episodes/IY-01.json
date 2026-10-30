@@ -24,8 +24,14 @@
  "scenes": [
   {
    "bg": "island",
-   "pose": "shock",
+   "pose": "sit",
+   "poses": [
+    "sit",
+    "shock",
+    "lookout"
+   ],
    "x": 0.5,
+   "move_to": 0.4,
    "props": [],
    "fx": "",
    "cam": {
@@ -38,7 +44,7 @@
     "WATER: 0 BOTTLES"
    ],
    "mood": "tense",
-   "narration": "Imagine you wake alone on a beach after a plane crash. No wreck. No crew. Nobody knows you're here.",
+   "narration": "Imagine you wake up alone on a beach after a plane crash. No wreck. No crew. Nobody knows you're here.",
    "highlight": [
     "alone"
    ]
@@ -46,7 +52,13 @@
   {
    "bg": "island",
    "pose": "phone",
+   "poses": [
+    "phone",
+    "shock",
+    "point"
+   ],
    "x": 0.4,
+   "move_to": 0.55,
    "props": [],
    "fx": "",
    "cam": {
@@ -67,6 +79,11 @@
   {
    "bg": "island",
    "pose": "crouch",
+   "poses": [
+    "crouch",
+    "reach",
+    "shock"
+   ],
    "x": 0.5,
    "props": [],
    "fx": "",
@@ -92,9 +109,16 @@
   },
   {
    "bg": "island",
-   "pose": "sit",
+   "pose": "lookout",
+   "poses": [
+    "lookout",
+    "kneel",
+    "drink"
+   ],
    "x": 0.6,
-   "props": [],
+   "props": [
+    "leaf_water"
+   ],
    "fx": "rain",
    "cam": {
     "z0": 1.05,
@@ -113,11 +137,16 @@
   },
   {
    "bg": "island",
-   "pose": "crouch",
-   "x": 0.4,
+   "pose": "carry",
+   "poses": [
+    "carry",
+    "build",
+    "signal"
+   ],
+   "x": 0.3,
    "move_to": 0.55,
    "props": [
-    "fire"
+    "fire_triangle"
    ],
    "fx": "",
    "cam": {
@@ -141,11 +170,17 @@
    ]
   },
   {
-   "bg": "island",
-   "pose": "point",
+   "bg": "island_night",
+   "pose": "lookout",
+   "poses": [
+    "lookout",
+    "point",
+    "signal"
+   ],
    "x": 0.5,
    "props": [
-    "fire"
+    "fire_triangle",
+    "ship"
    ],
    "fx": "",
    "cam": {
@@ -164,11 +199,17 @@
    ]
   },
   {
-   "bg": "island",
-   "pose": "shock",
+   "bg": "island_night",
+   "pose": "signal",
+   "poses": [
+    "signal",
+    "shock",
+    "kneel"
+   ],
    "x": 0.5,
    "props": [
-    "fire"
+    "fire_triangle",
+    "ship"
    ],
    "fx": "red",
    "cam": {
@@ -189,9 +230,14 @@
   {
    "bg": "island",
    "pose": "think",
+   "poses": [
+    "think",
+    "point",
+    "crouch"
+   ],
    "x": 0.5,
    "props": [
-    "fire"
+    "fire_triangle"
    ],
    "fx": "",
    "cam": {
