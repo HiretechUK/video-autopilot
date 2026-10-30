@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       cmd:
-        description: "make or check"
+        description: "make, check, publish, or connect_youtube"
         default: make
       series:
         description: "series to make"
@@ -32,7 +32,7 @@ jobs:
       - name: Fonts
         run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-inter fonts-dejavu-core ffmpeg
       - name: Python packages
-        run: pip install -q kokoro-onnx soundfile anthropic playwright && python -m playwright install --with-deps chromium
+        run: pip install -q kokoro-onnx soundfile anthropic playwright requests cryptography && python -m playwright install --with-deps chromium
       - name: Voice model cache
         uses: actions/cache@v4
         with:
@@ -48,6 +48,9 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          TOKEN_PASSPHRASE: ${{ secrets.TOKEN_PASSPHRASE }}
         run: |
           CMD="${{ github.event.inputs.cmd }}"
           if [ -z "$CMD" ]; then
@@ -60,4 +63,5 @@ jobs:
           git config user.name "video-autopilot"
           git config user.email "actions@users.noreply.github.com"
           git add autopilot/state.json episodes || true
-          git diff --cached --quiet || (git commit -m "autopilot: update episodes and state" && git push)
+          [ -f autopilot/tokens.enc ] && git add autopilot/tokens.enc || true
+          git diff --cached --quiet || (git commit -m "autopilot: update episodes and state" && git pull --rebase && git push)
