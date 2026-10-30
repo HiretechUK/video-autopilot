@@ -1,0 +1,222 @@
+{
+ "id": "stranded-island-three-fires",
+ "title": "Imagine you wake up alone on a deserted island",
+ "description": "You survive a plane crash and wake alone on a beach with no phone signal and no fresh water. A ship passes in the night and doesn't see you. Would you stay and signal, or climb inland for water?",
+ "tags": [
+  "survival",
+  "stranded island",
+  "castaway",
+  "what would you do",
+  "plane crash",
+  "survival tips",
+  "shorts",
+  "second person"
+ ],
+ "series": "SURVIVE #01",
+ "voice": "am_michael",
+ "speed": 1.05,
+ "costume": "cap",
+ "hud": [
+  "DAY 1 \u00b7 06:10 AM",
+  "\u25cf STRANDED",
+  "WATER: 0 BOTTLES"
+ ],
+ "scenes": [
+  {
+   "bg": "island",
+   "pose": "shock",
+   "x": 0.5,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "DAY 1 \u00b7 06:10 AM",
+    "\u25cf STRANDED",
+    "WATER: 0 BOTTLES"
+   ],
+   "mood": "tense",
+   "narration": "Imagine you wake alone on a beach after a plane crash. No wreck. No crew. Nobody knows you're here.",
+   "highlight": [
+    "alone"
+   ]
+  },
+  {
+   "bg": "island",
+   "pose": "phone",
+   "x": 0.4,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.15
+   },
+   "hud": [
+    "DAY 1 \u00b7 09:30 AM",
+    "\u25cf NO SIGNAL",
+    "THIRST: RISING"
+   ],
+   "mood": "calm",
+   "narration": "Your phone? No signal. Your throat burns, and the ocean is right there.",
+   "highlight": [
+    "No signal"
+   ]
+  },
+  {
+   "bg": "island",
+   "pose": "crouch",
+   "x": 0.5,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.12
+   },
+   "hud": [
+    "DAY 1 \u00b7 12:00 PM",
+    "\u25cf SUN OVERHEAD",
+    "THIRST: HIGH"
+   ],
+   "rule": {
+    "n": 1,
+    "text": "NO SEAWATER",
+    "sub": "IT DEHYDRATES YOU"
+   },
+   "mood": "urgent",
+   "narration": "Rule one. Never drink seawater. Salt dehydrates you faster than thirst ever could.",
+   "highlight": [
+    "seawater"
+   ]
+  },
+  {
+   "bg": "island",
+   "pose": "sit",
+   "x": 0.6,
+   "props": [],
+   "fx": "rain",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 2 \u00b7 07:45 AM",
+    "\u25cf RAIN",
+    "WATER: ONE LEAF"
+   ],
+   "mood": "calm",
+   "narration": "Day two. Rain fills a wide leaf. [pause] Small sips. It keeps you alive.",
+   "highlight": [
+    "Small sips"
+   ]
+  },
+  {
+   "bg": "island",
+   "pose": "crouch",
+   "x": 0.4,
+   "move_to": 0.55,
+   "props": [
+    "fire"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.15
+   },
+   "hud": [
+    "DAY 3 \u00b7 05:20 PM",
+    "\u25cf BUILDING FIRES",
+    "FIRES: THREE"
+   ],
+   "rule": {
+    "n": 2,
+    "text": "THREE FIRES",
+    "sub": "UNIVERSAL DISTRESS"
+   },
+   "mood": "urgent",
+   "narration": "Rule two. Light three fires in a triangle. Three is the international distress signal.",
+   "highlight": [
+    "three fires"
+   ]
+  },
+  {
+   "bg": "island",
+   "pose": "point",
+   "x": 0.5,
+   "props": [
+    "fire"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.1,
+    "z1": 1.25
+   },
+   "hud": [
+    "DAY 4 \u00b7 11:40 PM",
+    "\u25cf A LIGHT AT SEA",
+    "DISTANCE: FAR"
+   ],
+   "mood": "whisper",
+   "narration": "Night. Far out on the black water... one light. A ship.",
+   "highlight": [
+    "one light"
+   ]
+  },
+  {
+   "bg": "island",
+   "pose": "shock",
+   "x": 0.5,
+   "props": [
+    "fire"
+   ],
+   "fx": "red",
+   "cam": {
+    "z0": 1.1,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 4 \u00b7 11:55 PM",
+    "\u25cf SHIP LEAVING",
+    "HOPE: FADING"
+   ],
+   "mood": "reveal",
+   "narration": "It turns away. Your fires are too small, and the dark swallows them.",
+   "highlight": [
+    "turns away"
+   ]
+  },
+  {
+   "bg": "island",
+   "pose": "think",
+   "x": 0.5,
+   "props": [
+    "fire"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "DAY 5 \u00b7 06:00 AM",
+    "\u25cf DECISION TIME",
+    "WATER: NEARLY GONE"
+   ],
+   "mood": "tense",
+   "narration": "Water is nearly gone. Stay and feed the signal fire, or climb inland to find a stream? Comment A or B. And follow, to find out what happens next.",
+   "highlight": [
+    "stay",
+    "inland"
+   ],
+   "choice": {
+    "q": "WHAT DO YOU DO?",
+    "options": [
+     "A \u00b7 STAY AND SIGNAL",
+     "B \u00b7 CLIMB INLAND"
+    ]
+   },
+   "hold_after": 3.2
+  }
+ ]
+}

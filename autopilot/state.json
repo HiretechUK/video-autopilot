@@ -1,1 +1,14 @@
-{"episodes": {}, "seen": []}
+{
+ "episodes": {
+  "IY-01": {
+   "series": "imagine_you",
+   "number": 1,
+   "title": "Imagine you wake up alone on a deserted island",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/IY-01.json",
+   "created": "2026-10-30T13:45:52.597659+00:00"
+  }
+ },
+ "seen": []
+}
