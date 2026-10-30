@@ -83,8 +83,15 @@ def validate(ep: dict) -> list[str]:
 def _extract(text: str) -> dict:
     m = re.search(r"\{.*\}", text, flags=re.S)
     if not m:
-        raise ValueError("no JSON in reply")
-    return json.loads(m.group(0))
+        raise ValueError("no JSON object in your reply")
+    raw = m.group(0)
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        # common slips: trailing commas, missing comma between "}" / "]" / '"' and the next item
+        fixed = re.sub(r",\s*([}\]])", r"\1", raw)
+        fixed = re.sub(r'([}\]"0-9e])\s*\n(\s*["{\[])', r"\1,\n\2", fixed)
+        return json.loads(fixed)
 
 
 def write_episode(series: str, number: int, recent: list[str], lessons: str = "", notes: str = "",
@@ -97,8 +104,14 @@ def write_episode(series: str, number: int, recent: list[str], lessons: str = ""
     if previous is not None:
         user += ("\nRevise this episode according to Haseeb's notes. Keep everything he did not ask to change.\n"
                  f"Notes: {notes}\nCurrent episode JSON:\n{json.dumps(previous)}\n")
-    for attempt in range(3):
-        ep = _extract(_ask(system, user))
+    errs = []
+    for attempt in range(4):
+        try:
+            ep = _extract(_ask(system, user))
+        except (ValueError, json.JSONDecodeError) as e:
+            errs = [f"reply was not valid JSON ({e}); return ONLY one valid JSON object, no comments"]
+            user += f"\nYour last reply could not be parsed: {errs[0]}\n"
+            continue
         errs = validate(ep)
         if not errs:
             ep["series"] = f"SURVIVE #{number:02d}" if series == "imagine_you" else ep.get("series", "")
