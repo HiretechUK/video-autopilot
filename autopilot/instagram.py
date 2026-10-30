@@ -48,6 +48,12 @@ def _post(path: str, **data) -> dict:
 
 def connect(account: str, name: str) -> str:
     handle = HANDLES[account]
+    pasted = (os.environ.get("IG_USER_TOKEN") or "").strip()
+    user_token = pasted.split()[-1] if pasted else _device_login(account, name, handle)
+    return _finish(account, handle, user_token)
+
+
+def _device_login(account: str, name: str, handle: str) -> str:
     app_token = f"{APP_ID}|{_secret('FB_CLIENT_TOKEN')}"
     d = _post("device/login", access_token=app_token, scope=SCOPE)
     mailer.send(f"Connect Instagram: {name} (code {d['user_code']})",
@@ -73,6 +79,10 @@ def connect(account: str, name: str) -> str:
             raise RuntimeError(f"Facebook device login failed: {s.get('error')}")
     if not user_token:
         raise RuntimeError("code expired before it was approved")
+    return user_token
+
+
+def _finish(account: str, handle: str, user_token: str) -> str:
     # Long-lived user token -> Page tokens derived from it do not expire.
     long = _get("oauth/access_token", grant_type="fb_exchange_token", client_id=APP_ID,
                 client_secret=_secret("FB_APP_SECRET"), fb_exchange_token=user_token)["access_token"]
