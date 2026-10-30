@@ -22,6 +22,10 @@ def _client():
     cid, sec = os.environ.get("YT_CLIENT_ID"), os.environ.get("YT_CLIENT_SECRET")
     if not cid or not sec:
         raise RuntimeError("YT_CLIENT_ID / YT_CLIENT_SECRET secrets are not set")
+    import re
+    cid = cid.strip()
+    m = re.search(r"GOCSPX-[A-Za-z0-9_-]+", sec)  # secret may be stored with an 'x' (and spaces) in front
+    sec = m.group(0) if m else sec.strip()
     return cid, sec
 
 
