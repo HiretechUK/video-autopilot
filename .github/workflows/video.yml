@@ -1,0 +1,63 @@
+name: Video autopilot
+
+on:
+  schedule:
+    - cron: "13 6 * * 1,4"   # Mon + Thu: write and render a new Imagine You episode, email it for approval
+    - cron: "23 17 * * *"    # daily: read approval replies, revise or post
+  workflow_dispatch:
+    inputs:
+      cmd:
+        description: "make or check"
+        default: make
+      series:
+        description: "series to make"
+        default: imagine_you
+
+permissions:
+  contents: write
+
+concurrency:
+  group: video-autopilot
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fonts
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-inter fonts-dejavu-core ffmpeg
+      - name: Python packages
+        run: pip install -q kokoro-onnx soundfile anthropic playwright && python -m playwright install --with-deps chromium
+      - name: Voice model cache
+        uses: actions/cache@v4
+        with:
+          path: engine/models
+          key: kokoro-v1.0
+      - name: Voice model
+        run: |
+          mkdir -p engine/models && cd engine/models
+          [ -f kokoro-v1.0.onnx ] || curl -sSL -o kokoro-v1.0.onnx https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+          [ -f voices-v1.0.bin ] || curl -sSL -o voices-v1.0.bin https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
+      - name: Run
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
+        run: |
+          CMD="${{ github.event.inputs.cmd }}"
+          if [ -z "$CMD" ]; then
+            if [ "${{ github.event.schedule }}" = "13 6 * * 1,4" ]; then CMD=make; else CMD=check; fi
+          fi
+          python -m autopilot.pipeline $CMD ${{ github.event.inputs.series || 'imagine_you' }}
+      - name: Save state
+        if: always()
+        run: |
+          git config user.name "video-autopilot"
+          git config user.email "actions@users.noreply.github.com"
+          git add autopilot/state.json episodes || true
+          git diff --cached --quiet || (git commit -m "autopilot: update episodes and state" && git push)
