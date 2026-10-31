@@ -67,7 +67,10 @@ def browser(p):
 
 def serve():
     os.makedirs(WWW, exist_ok=True)
-    h = lambda *a, **k: http.server.SimpleHTTPRequestHandler(*a, directory=WWW, **k)
+    class Quiet(http.server.SimpleHTTPRequestHandler):
+        def log_message(self, *a):
+            pass
+    h = lambda *a, **k: Quiet(*a, directory=WWW, **k)
     srv = http.server.ThreadingHTTPServer(("0.0.0.0", 8088), h)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     return srv
@@ -82,9 +85,40 @@ def login():
         ctx = browser(p)
         pg = ctx.pages[0] if ctx.pages else ctx.new_page()
         pg.goto("https://www.tiktok.com/login/qrcode", wait_until="domcontentloaded")
-        end = time.time() + 600
+        code_file = os.path.join(HOME, "code.txt")
+        if os.path.exists(code_file):
+            os.remove(code_file)
+        asked = False
+        end = time.time() + 900
         while time.time() < end:
             time.sleep(3)
+            try:
+                # TikTok may ask "Verify it's really you": pick Email, then wait for the code in code.txt
+                if pg.get_by_text("Verify it", exact=False).count() and not asked:
+                    pg.get_by_text("Email", exact=True).first.click()
+                    pg.wait_for_timeout(2500)
+                    for t in ("Send code", "Send", "Get code"):
+                        b = pg.get_by_role("button", name=t)
+                        if b.count():
+                            b.first.click()
+                            break
+                    asked = True
+                    print("CODE SENT TO EMAIL. In this terminal type:  echo 123456 > /opt/ttposter/code.txt  (with the real code)", flush=True)
+                if asked and os.path.exists(code_file):
+                    code = open(code_file).read().strip()
+                    os.remove(code_file)
+                    box = pg.locator('input[type="text"], input[type="tel"], input[inputmode="numeric"], input:not([type])').first
+                    box.click()
+                    pg.keyboard.type(code, delay=120)
+                    pg.wait_for_timeout(1500)
+                    for t in ("Next", "Verify", "Submit", "Continue", "Confirm"):
+                        b = pg.get_by_role("button", name=t)
+                        if b.count() and b.first.is_enabled():
+                            b.first.click()
+                            break
+                    print("code entered", flush=True)
+            except Exception as e:
+                print("step:", e, flush=True)
             pg.screenshot(path=os.path.join(WWW, "qr.png"))
             if "/login" not in pg.url:
                 break
