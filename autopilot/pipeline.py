@@ -69,8 +69,8 @@ def make(series: str, scheduled: bool = False):
     if scheduled and eps:  # the schedule fires daily; only make one if the last is at least EVERY_DAYS old
         last = max(datetime.fromisoformat(e["created"]) for e in eps)
         age_h = (datetime.now(timezone.utc) - last).total_seconds() / 3600
-        if age_h < EVERY_DAYS * 24 - 6:  # 6 h slack so a late cron run doesn't skip a whole cycle
-            print(f"last {series} episode is {age_h:.0f} h old; next one is due after {EVERY_DAYS * 24 - 6:.0f} h")
+        if age_h < EVERY_DAYS * 24 - 12:  # 12 h slack: runs are daily, so this never makes two in a row
+            print(f"last {series} episode is {age_h:.0f} h old; next one is due after {EVERY_DAYS * 24 - 12:.0f} h")
             return
     number = max([e["number"] for e in eps] or [0]) + 1
     recent = [e["title"] for e in sorted(eps, key=lambda e: e["number"])[-12:]]
