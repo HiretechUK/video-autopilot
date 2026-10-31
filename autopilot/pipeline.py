@@ -112,7 +112,7 @@ def check():
     publish_queue(st)
 
 
-PLATFORMS = ("youtube", "instagram", "tiktok")
+PLATFORMS = ("youtube", "instagram")  # TikTok: posted by the VPS (vps/ttposter.py)
 
 
 def publish_queue(st):

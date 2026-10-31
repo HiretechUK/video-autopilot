@@ -25,7 +25,7 @@ def _run(done: dict, platform: str, fn):
 
 
 def publish(series: str, ep: dict, video: str, done: dict | None = None) -> dict:
-    from . import instagram, tiktok, youtube
+    from . import instagram, youtube
     cfg = ACCOUNTS[series]
     done = dict(done or {})
     desc = ep.get("description", "")
@@ -33,5 +33,5 @@ def publish(series: str, ep: dict, video: str, done: dict | None = None) -> dict
                                                  ep.get("tags", []), cfg["made_for_kids"]))
     caption = f"{ep['title']}.\n\n{desc} Comment A or B.\n\n{cfg['ig_hashtags']}"
     _run(done, "instagram", lambda: instagram.upload(cfg["instagram"], video, caption, os.path.basename(video)))
-    _run(done, "tiktok", lambda: tiktok.upload(cfg["tiktok"], video, caption))
+    # TikTok is posted by the VPS poster (vps/ttposter.py); tiktok.upload (inbox drafts) stays as a fallback.
     return done
