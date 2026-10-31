@@ -6,6 +6,9 @@ on:
       percent:
         description: "render size, % of the scene's resolution"
         default: "50"
+      blender:
+        description: "Blender release folder, e.g. 3.6 or 5.2"
+        default: "3.6"
 
 jobs:
   preview:
@@ -20,8 +23,10 @@ jobs:
       - name: Blender 5.2 + scene (free CC-BY demo files)
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libegl1 libxkbcommon0 libsm6 > /dev/null
-          f=$(curl -s https://download.blender.org/release/Blender5.2/ | grep -oE 'blender-5\.2\.[0-9]+-linux-x64\.tar\.xz' | sort -V | tail -1)
-          curl -sL -o b.tar.xz "https://download.blender.org/release/Blender5.2/$f" && tar xf b.tar.xz && mv blender-5.2*-linux-x64 blender
+          V="${{ github.event.inputs.blender }}"
+          f=$(curl -s https://download.blender.org/release/Blender$V/ | grep -oE "blender-$V\.[0-9]+-linux-x64\.tar\.xz" | sort -V | tail -1)
+          echo "Blender $f"
+          curl -sL -o b.tar.xz "https://download.blender.org/release/Blender$V/$f" && tar xf b.tar.xz && mv blender-$V*-linux-x64 blender
           if curl -sfL -o scene.zip "https://mirror.blender.org/demo/splash/${{ matrix.scene }}.zip"; then
             unzip -q scene.zip -d sc && b=$(find sc -name "${{ matrix.scene }}.blend" | head -1); [ -n "$b" ] || b=$(find sc -name "*.blend" -printf "%s %p\n" | sort -n | tail -1 | cut -d" " -f2-); echo "using $b"; echo "SCENE=$PWD/$b" >> $GITHUB_ENV
           else
