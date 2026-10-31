@@ -1,0 +1,35 @@
+name: Blender character preview
+
+on:
+  workflow_dispatch:
+    inputs:
+      percent:
+        description: "render size, % of the scene's resolution"
+        default: "50"
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        scene: ["blender-5.2-splash", "blender-4.5-splash"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Blender 5.2 + scene (free CC-BY demo files)
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libegl1 libxkbcommon0 libsm6 > /dev/null
+          f=$(curl -s https://download.blender.org/release/Blender5.2/ | grep -oE 'blender-5\.2\.[0-9]+-linux-x64\.tar\.xz' | sort -V | tail -1)
+          curl -sL -o b.tar.xz "https://download.blender.org/release/Blender5.2/$f" && tar xf b.tar.xz && mv blender-5.2*-linux-x64 blender
+          curl -sL -o scene.blend "https://mirror.blender.org/demo/splash/${{ matrix.scene }}.blend"
+          ls -la scene.blend
+      - name: Render
+        run: |
+          mkdir -p out
+          /usr/bin/time -v ./blender/blender -b scene.blend --python tests/blender/prev.py -- 1.0 ${{ github.event.inputs.percent }} "$PWD/out/${{ matrix.scene }}.jpg" 2>&1 | grep -E "Saved|Error|Elapsed|Maximum resident" | tail -6
+          ls -la out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: preview-${{ matrix.scene }}
+          path: out/
