@@ -1,0 +1,44 @@
+name: Song test (ACE-Step, CPU)
+
+on:
+  workflow_dispatch:
+    inputs:
+      request:
+        description: "request JSON under tests/songs/"
+        default: "tests/songs/rory.json"
+
+jobs:
+  song:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq cmake build-essential libopenblas-dev ffmpeg
+      - name: Build acestep.cpp (CPU)
+        run: |
+          git clone --depth 1 --recurse-submodules https://github.com/ServeurpersoCom/acestep.cpp.git ace
+          cd ace && ./buildcpu.sh
+      - name: Model cache
+        uses: actions/cache@v4
+        with:
+          path: ace/models
+          key: acestep15-q8-lm1.7b-v1
+      - name: Models
+        run: |
+          pip install -q -U "huggingface_hub[cli]" hf_transfer || pip install -q hf
+          cd ace && ./models.sh --lm 1.7B
+          ls -la models
+      - name: Generate
+        run: |
+          cd ace
+          cp "$GITHUB_WORKSPACE/${{ github.event.inputs.request }}" /tmp/request.json
+          /usr/bin/time -v ./build/ace-lm --models models --request /tmp/request.json 2>&1 | tail -25
+          ls /tmp/request*.json
+          /usr/bin/time -v ./build/ace-synth --models models --request /tmp/request0.json /tmp/request1.json 2>&1 | tail -25
+          mkdir -p "$GITHUB_WORKSPACE/out" && cp /tmp/request*.mp3 /tmp/request*.json "$GITHUB_WORKSPACE/out/" 2>/dev/null || true
+          ls -la "$GITHUB_WORKSPACE/out"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: song
+          path: out/

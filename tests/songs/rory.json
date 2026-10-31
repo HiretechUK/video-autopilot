@@ -1,0 +1,11 @@
+{
+ "caption": "Cheerful children's nursery song for preschool TV, bright ukulele, glockenspiel, hand claps, bouncy bass and light drums, a warm friendly male cartoon lion singing, catchy sing-along chorus, happy, major key, polished modern kids music production",
+ "lyrics": "[Verse]\nRoar, roar, Rory roars!\nStomp your paws on the jungle floor!\nClap, clap, one, two, three,\nCome and roar along with me!\n\n[Chorus]\nWe're the Paws and Claws Club, hey hey hey!\nWe roar and we dance and we play all day!\nWiggle your tail and shake your mane,\nPaws and Claws Club, sing it again!",
+ "bpm": 118,
+ "duration": 32,
+ "keyscale": "C major",
+ "timesignature": "4",
+ "vocal_language": "en",
+ "lm_batch_size": 2,
+ "seed": 7
+}
