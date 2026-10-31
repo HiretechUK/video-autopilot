@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        scene: ["blender-5.2-splash", "blender-4.5-splash"]
+        scene: ["blender-3.6-splash", "blender-2.90-splash", "blender-3.1-splash"]
     steps:
       - uses: actions/checkout@v4
       - name: Blender 5.2 + scene (free CC-BY demo files)
@@ -22,8 +22,13 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -y -qq libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libegl1 libxkbcommon0 libsm6 > /dev/null
           f=$(curl -s https://download.blender.org/release/Blender5.2/ | grep -oE 'blender-5\.2\.[0-9]+-linux-x64\.tar\.xz' | sort -V | tail -1)
           curl -sL -o b.tar.xz "https://download.blender.org/release/Blender5.2/$f" && tar xf b.tar.xz && mv blender-5.2*-linux-x64 blender
-          curl -sL -o scene.blend "https://mirror.blender.org/demo/splash/${{ matrix.scene }}.blend"
+          if curl -sfL -o scene.zip "https://mirror.blender.org/demo/splash/${{ matrix.scene }}.zip"; then
+            unzip -q scene.zip -d sc && b=$(find sc -name "*.blend" -printf "%s %p\n" | sort -n | tail -1 | cut -d" " -f2-) && cp "$b" scene.blend && find sc -name "*.blend"
+          else
+            curl -sL -o scene.blend "https://mirror.blender.org/demo/splash/${{ matrix.scene }}.blend"
+          fi
           ls -la scene.blend
+          ./blender/blender -b scene.blend --python-expr "import bpy;print('ARMATURES',[(o.name,len(o.data.bones)) for o in bpy.data.objects if o.type=='ARMATURE'])" 2>&1 | grep ARMATURES || true
       - name: Render
         run: |
           mkdir -p out
