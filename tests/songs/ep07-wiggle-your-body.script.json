@@ -1,0 +1,45 @@
+{
+ "intro": [
+  "Hey hey! It's the Paws and Claws Club!",
+  "Stand up! It's time to dance!"
+ ],
+ "chorus": [
+  "Wiggle, wiggle, wiggle your body,",
+  "Dance like nobody's watching, everybody!",
+  "Shake it fast and shake it slow,",
+  "Paws and Claws, let's go, go, go!"
+ ],
+ "verses": [
+  [
+   "Rory says shake your head, shake, shake, shake,",
+   "Shake it like the jungle is starting to quake!",
+   "Shake, shake, one, two, three,",
+   "Shake your head along with me!"
+  ],
+  [
+   "Ziggy says clap your paws, clap, clap, clap,",
+   "Clap them up and clap them in your lap!",
+   "Clap, clap, one, two, three,",
+   "Clap your paws along with me!"
+  ],
+  [
+   "Waffles says wag your tail, wag, wag, wag,",
+   "Wiggle your bottom, zig and zag!",
+   "Wag, wag, one, two, three,",
+   "Wag your tail along with me!"
+  ],
+  [
+   "Pebble says stomp your feet, stomp, stomp, stomp,",
+   "Stomp them like a penguin, romp, romp, romp!",
+   "Stomp, stomp, one, two, three,",
+   "Stomp your feet along with me!"
+  ]
+ ],
+ "bridge": [
+  "Shake your head! Clap your paws!",
+  "Wag your tail! Stomp your feet!",
+  "Faster, faster, everybody now,",
+  "Freeze! And take a bow!"
+ ],
+ "outro": "Great dancing! Bye bye, friends!"
+}

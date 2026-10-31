@@ -1,0 +1,45 @@
+{
+ "intro": [
+  "Hey hey! It's the Paws and Claws Club!",
+  "Are you ready? Let's go!"
+ ],
+ "chorus": [
+  "We're the Paws and Claws Club, hey hey hey!",
+  "We sing and we dance and we play all day!",
+  "Paws up high and tails down low,",
+  "Paws and Claws Club, here we go!"
+ ],
+ "verses": [
+  [
+   "Who's got a mane and a great big roar?",
+   "Rory the lion, stomping on the floor!",
+   "Roar, roar, stomp, stomp, one, two, three,",
+   "Rory says hello, can you roar with me?"
+  ],
+  [
+   "Who's got whiskers and a jingly bell?",
+   "Ziggy the kitten, she can dance so well!",
+   "Meow, meow, twirl around, one, two, three,",
+   "Ziggy says hello, can you twirl with me?"
+  ],
+  [
+   "Who's got floppy ears and a waggy tail?",
+   "Waffles the puppy, jumping without fail!",
+   "Woof, woof, jump jump, one, two, three,",
+   "Waffles says hello, can you jump with me?"
+  ],
+  [
+   "Who's got a scarf and a waddle so small?",
+   "Pebble the penguin, the littlest of all!",
+   "Flap, flap, waddle waddle, one, two, three,",
+   "Pebble says hello, can you waddle with me?"
+  ]
+ ],
+ "bridge": [
+  "Now everybody, roar! Roar!",
+  "Now everybody, twirl! Twirl!",
+  "Now everybody, jump! Jump!",
+  "Now everybody, waddle, waddle, waddle!"
+ ],
+ "outro": "Bye bye, friends! See you next time!"
+}

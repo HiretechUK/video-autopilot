@@ -1,0 +1,45 @@
+{
+ "intro": [
+  "Hey hey! It's the Paws and Claws Club!",
+  "Let's find the colours! Let's go!"
+ ],
+ "chorus": [
+  "Red and yellow, green and blue,",
+  "Colours all around for me and you!",
+  "Look up high and look down low,",
+  "Paws and Claws, let's find a rainbow!"
+ ],
+ "verses": [
+  [
+   "Rory found something red, red, red,",
+   "A big red apple on the garden bed!",
+   "Red, red, can you see?",
+   "Point to something red with me!"
+  ],
+  [
+   "Ziggy found something yellow and bright,",
+   "A yellow sunflower, what a sight!",
+   "Yellow, yellow, can you see?",
+   "Point to something yellow with me!"
+  ],
+  [
+   "Waffles found something green, green, green,",
+   "The greenest leaf he's ever seen!",
+   "Green, green, can you see?",
+   "Point to something green with me!"
+  ],
+  [
+   "Pebble found something blue, blue, blue,",
+   "The big blue sky and the ocean too!",
+   "Blue, blue, can you see?",
+   "Point to something blue with me!"
+  ]
+ ],
+ "bridge": [
+  "Red! Yellow! Green! Blue!",
+  "A rainbow of colours for me and you!",
+  "Red! Yellow! Green! Blue!",
+  "Hooray for the rainbow, woo hoo hoo!"
+ ],
+ "outro": "Bye bye, friends! See you next time!"
+}
