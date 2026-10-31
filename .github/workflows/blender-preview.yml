@@ -31,7 +31,7 @@ jobs:
       - name: Render
         run: |
           mkdir -p out
-          /usr/bin/time -v ./blender/blender -b "$SCENE" --python "$PWD/tests/blender/prev.py" -- 1.0 ${{ github.event.inputs.percent }} "$PWD/out/${{ matrix.scene }}.jpg" > render.log 2>&1 || true; grep -iE "Saved|Error|Elapsed|Maximum resident|not found|Traceback" render.log | tail -15; tail -5 render.log
+          /usr/bin/time -v ./blender/blender -b "$SCENE" --python "$PWD/tests/blender/prev.py" -- 1.0 ${{ github.event.inputs.percent }} "$PWD/out/${{ matrix.scene }}.jpg" > render.log 2>&1 || true; grep -iE "PREV|Saved|Error|Traceback|not found" render.log | tail -25
           ls -la out
       - uses: actions/upload-artifact@v4
         with:
