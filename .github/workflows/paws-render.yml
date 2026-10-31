@@ -1,0 +1,79 @@
+name: Paws & Claws render test
+
+on:
+  workflow_dispatch:
+    inputs:
+      seconds:
+        description: "how many seconds of the song to render"
+        default: "12"
+      percent:
+        description: "resolution % of 1080x1920"
+        default: "100"
+      samples:
+        description: "Cycles samples per pixel"
+        default: "24"
+
+jobs:
+  frames:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache Blender 3.6 + free Pet Projects files
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            blender
+            s36
+          key: blender36-petprojects-v1
+      - name: Download (first run only)
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          curl -sL -o b.tar.xz https://download.blender.org/release/Blender3.6/blender-3.6.23-linux-x64.tar.xz && tar xf b.tar.xz && mv blender-3.6.23-linux-x64 blender
+          curl -sL -o s.zip https://mirror.blender.org/demo/splash/blender-3.6-splash.zip && unzip -q s.zip -d s36 && rm s.zip
+      - name: Libraries
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libegl1 libxkbcommon0 libsm6 > /dev/null
+      - name: Render my frames
+        run: |
+          N=$(python3 -c "import json;t=json.load(open('tests/paws/timing.json'));print(min(int(float('${{ github.event.inputs.seconds }}')*t['fps']), len(t['mouth'])))")
+          P=${{ matrix.part }}; per=$(( (N + 19) / 20 )); S=$(( P * per )); E=$(( S + per - 1 )); [ $E -ge $N ] && E=$((N-1))
+          echo "frames $S-$E of $N"
+          mkdir -p out
+          if [ $S -le $E ]; then
+            ./blender/blender -b -y --python tests/paws/paws_scene.py -- "$PWD/s36/blender-3.6-splash/pro/lib" tests/paws/timing.json "$PWD/out" $S $E ${{ github.event.inputs.percent }} ${{ github.event.inputs.samples }} 2>&1 | grep -E "^FRAME|RANGE DONE|Fra:.*Finished" | tail -40
+          fi
+          ls out | wc -l
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frames-${{ matrix.part }}
+          path: out/
+          retention-days: 3
+
+  video:
+    needs: frames
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: frames-*
+          merge-multiple: true
+          path: frames
+      - name: Assemble with the song
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+          ls frames | head -3; ls frames | wc -l
+          D=$(python3 -c "import os;print(len(os.listdir('frames'))/24)")
+          ffmpeg -y -loglevel error -framerate 24 -start_number 0 -i frames/%04d.png -i tests/paws/song.mp3 \
+            -af "afade=t=out:st=$(python3 -c "print(max(0,$D-0.8))"):d=0.8" -t $D \
+            -c:v libx264 -preset slow -crf 17 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart paws-test.mp4
+          ls -la paws-test.mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paws-video
+          path: paws-test.mp4
