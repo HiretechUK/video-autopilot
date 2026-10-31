@@ -23,16 +23,15 @@ jobs:
           f=$(curl -s https://download.blender.org/release/Blender5.2/ | grep -oE 'blender-5\.2\.[0-9]+-linux-x64\.tar\.xz' | sort -V | tail -1)
           curl -sL -o b.tar.xz "https://download.blender.org/release/Blender5.2/$f" && tar xf b.tar.xz && mv blender-5.2*-linux-x64 blender
           if curl -sfL -o scene.zip "https://mirror.blender.org/demo/splash/${{ matrix.scene }}.zip"; then
-            unzip -q scene.zip -d sc && b=$(find sc -name "${{ matrix.scene }}.blend" | head -1); [ -n "$b" ] || b=$(find sc -name "*.blend" -printf "%s %p\n" | sort -n | tail -1 | cut -d" " -f2-); echo "using $b"; ln -sf "$PWD/$b" scene.blend
+            unzip -q scene.zip -d sc && b=$(find sc -name "${{ matrix.scene }}.blend" | head -1); [ -n "$b" ] || b=$(find sc -name "*.blend" -printf "%s %p\n" | sort -n | tail -1 | cut -d" " -f2-); echo "using $b"; echo "SCENE=$PWD/$b" >> $GITHUB_ENV
           else
-            curl -sL -o scene.blend "https://mirror.blender.org/demo/splash/${{ matrix.scene }}.blend"
+            curl -sL -o scene.blend "https://mirror.blender.org/demo/splash/${{ matrix.scene }}.blend"; echo "SCENE=$PWD/scene.blend" >> $GITHUB_ENV
           fi
-          ls -la scene.blend
-          ./blender/blender -b scene.blend --python-expr "import bpy;print('ARMATURES',[(o.name,len(o.data.bones)) for o in bpy.data.objects if o.type=='ARMATURE']);print('CAM',bpy.context.scene.camera, bpy.context.scene.render.engine)" 2>&1 | grep -E 'ARMATURES|CAM' || true
+                    ./blender/blender -b "$SCENE" --python-expr "import bpy;print('ARMATURES',[(o.name,len(o.data.bones)) for o in bpy.data.objects if o.type=='ARMATURE']);print('CAM',bpy.context.scene.camera, bpy.context.scene.render.engine)" 2>&1 | grep -E 'ARMATURES|CAM' || true
       - name: Render
         run: |
           mkdir -p out
-          /usr/bin/time -v ./blender/blender -b scene.blend --python tests/blender/prev.py -- 1.0 ${{ github.event.inputs.percent }} "$PWD/out/${{ matrix.scene }}.jpg" 2>&1 | grep -E "Saved|Error|Elapsed|Maximum resident" | tail -6
+          /usr/bin/time -v ./blender/blender -b "$SCENE" --python "$PWD/tests/blender/prev.py" -- 1.0 ${{ github.event.inputs.percent }} "$PWD/out/${{ matrix.scene }}.jpg" > render.log 2>&1 || true; grep -iE "Saved|Error|Elapsed|Maximum resident|not found|Traceback" render.log | tail -15; tail -5 render.log
           ls -la out
       - uses: actions/upload-artifact@v4
         with:
