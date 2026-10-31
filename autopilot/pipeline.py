@@ -60,9 +60,18 @@ def email_for_approval(ref: str, rec: dict, ep: dict, video: str):
     mailer.send(subject, body, [video])
 
 
-def make(series: str):
+EVERY_DAYS = float(os.environ.get("EPISODE_EVERY_DAYS", "2"))  # Haseeb, 31 Oct: an episode every 2nd day
+
+
+def make(series: str, scheduled: bool = False):
     st = load()
     eps = [e for e in st["episodes"].values() if e["series"] == series]
+    if scheduled and eps:  # the schedule fires daily; only make one if the last is at least EVERY_DAYS old
+        last = max(datetime.fromisoformat(e["created"]) for e in eps)
+        age_h = (datetime.now(timezone.utc) - last).total_seconds() / 3600
+        if age_h < EVERY_DAYS * 24 - 6:  # 6 h slack so a late cron run doesn't skip a whole cycle
+            print(f"last {series} episode is {age_h:.0f} h old; next one is due after {EVERY_DAYS * 24 - 6:.0f} h")
+            return
     number = max([e["number"] for e in eps] or [0]) + 1
     recent = [e["title"] for e in sorted(eps, key=lambda e: e["number"])[-12:]]
     lessons = open(os.path.join(ROOT, "autopilot", f"lessons_{series}.md")).read() \
@@ -152,7 +161,7 @@ if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "check"
     arg = sys.argv[2] if len(sys.argv) > 2 else "imagine_you"
     if cmd == "make":
-        make(arg)
+        make(arg, scheduled=os.environ.get("GITHUB_EVENT_NAME") == "schedule")
     elif cmd.startswith("connect_"):
         connect(cmd.split("_", 1)[1], arg)
     elif cmd == "publish":

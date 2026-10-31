@@ -2,7 +2,7 @@ name: Video autopilot
 
 on:
   schedule:
-    - cron: "13 6 * * 1,4"   # Mon + Thu: write and render a new Imagine You episode, email it for approval
+    - cron: "13 6 * * *"     # daily check; a new Imagine You episode is made every 2nd day (EPISODE_EVERY_DAYS), emailed for approval
     - cron: "23 17 * * *"    # daily: read approval replies, revise or post
   workflow_dispatch:
     inputs:
@@ -59,7 +59,7 @@ jobs:
         run: |
           CMD="${{ github.event.inputs.cmd }}"
           if [ -z "$CMD" ]; then
-            if [ "${{ github.event.schedule }}" = "13 6 * * 1,4" ]; then CMD=make; else CMD=check; fi
+            if [ "${{ github.event.schedule }}" = "13 6 * * *" ]; then CMD=make; else CMD=check; fi
           fi
           python -m autopilot.pipeline $CMD ${{ github.event.inputs.series || 'imagine_you' }}
       - name: Save state
