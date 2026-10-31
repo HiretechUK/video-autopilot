@@ -94,16 +94,33 @@ def login():
             time.sleep(3)
             try:
                 # TikTok may ask "Verify it's really you": pick Email, then wait for the code in code.txt
-                if pg.get_by_text("Verify it", exact=False).count() and not asked:
-                    pg.get_by_text("Email", exact=True).first.click()
+                # manual helpers from the (private) VPS terminal: click.txt "x,y"  /  key.txt "Enter"
+                cf = os.path.join(HOME, "click.txt")
+                if os.path.exists(cf):
+                    x, y = map(int, open(cf).read().strip().split(","))
+                    os.remove(cf)
+                    pg.mouse.click(x, y)
+                    print("clicked", x, y, flush=True)
+                kf = os.path.join(HOME, "key.txt")
+                if os.path.exists(kf):
+                    k = open(kf).read().strip()
+                    os.remove(kf)
+                    pg.keyboard.press(k)
+                if pg.get_by_text("Verify it", exact=False).count() and not pg.get_by_text("Enter", exact=False).filter(has_text="code").count():
+                    row = pg.get_by_text("@gmail.com", exact=False).last
+                    if row.count():
+                        bb = row.bounding_box()
+                        if bb:
+                            pg.mouse.click(bb["x"] + bb["width"] / 2, bb["y"] + bb["height"] / 2)
                     pg.wait_for_timeout(2500)
                     for t in ("Send code", "Send", "Get code"):
                         b = pg.get_by_role("button", name=t)
-                        if b.count():
+                        if b.count() and b.first.is_visible():
                             b.first.click()
                             break
+                    if not asked:
+                        print("Clicking Email... when TikTok emails a code, type here:  echo 123456 > /opt/ttposter/code.txt  (real code)", flush=True)
                     asked = True
-                    print("CODE SENT TO EMAIL. In this terminal type:  echo 123456 > /opt/ttposter/code.txt  (with the real code)", flush=True)
                 if asked and os.path.exists(code_file):
                     code = open(code_file).read().strip()
                     os.remove(code_file)
