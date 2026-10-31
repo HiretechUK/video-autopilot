@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       cmd:
-        description: "make, check, publish, connect_youtube or connect_instagram"
+        description: "make, check, publish, connect_youtube, connect_instagram or connect_tiktok"
         default: make
       series:
         description: "series to make"
@@ -54,6 +54,8 @@ jobs:
           FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
           FB_CLIENT_TOKEN: ${{ secrets.FB_CLIENT_TOKEN }}
           IG_USER_TOKEN: ${{ secrets.IG_USER_TOKEN }}
+          TT_CLIENT_KEY: ${{ secrets.TT_CLIENT_KEY }}
+          TT_CLIENT_SECRET: ${{ secrets.TT_CLIENT_SECRET }}
         run: |
           CMD="${{ github.event.inputs.cmd }}"
           if [ -z "$CMD" ]; then
