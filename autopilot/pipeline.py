@@ -21,7 +21,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE = os.path.join(ROOT, "autopilot", "state.json")
 EPDIR = os.path.join(ROOT, "episodes")
 OUT = os.path.join(ROOT, "out")
-SERIES = {"imagine_you": {"prefix": "IY", "name": "Imagine You", "builder": "engine/build_short.py"}}
+SERIES = {"imagine_you": {"prefix": "IY", "name": "Imagine You", "builder": "engine/build_short_v2.py"}}
 
 HOW_TO = """How to reply (just reply to this email):
   approved            -> it gets posted

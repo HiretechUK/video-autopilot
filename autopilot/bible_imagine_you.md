@@ -37,7 +37,9 @@ answer in the comments. Tone: tense, smart, a little eerie, never gory. Facts in
   ship (light on the horizon, best on island_night), leaf_water, tulip_stall
 - What is said must match what is shown: if the narration says three fires, use fire_triangle;
   night scenes use a night background.
-- fx (optional): shake, flash, rain, red
+- fx (optional): shake, flash, rain, red, dark (city_night only: the city's lights switch off during the scene;
+  use when the power fails), window (city_night only: the city is black except one glowing window; use for a
+  sign that someone else is out there)
 - x: 0.2-0.8 horizontal position; move_to: makes the character walk to that x during the scene
 - cam: {"z0": start zoom, "z1": end zoom}, 1.0-1.25
 - hud: 2-3 short ALL-CAPS lines; first line is time ("DAY 3 · 06:10 AM"), second starts with "● ",

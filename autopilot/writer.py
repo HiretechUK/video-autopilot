@@ -13,7 +13,7 @@ VOCAB = {
     "pose": {"stand", "walk", "phone", "point", "shock", "think", "sit", "crouch", "wave", "run", "drink", "lookout",
              "kneel", "reach", "carry", "signal", "build", "shiver", "cower"},
     "props": {"car", "crate", "radio", "fire", "fire_triangle", "ship", "leaf_water", "tulip_stall"},
-    "fx": {"shake", "flash", "rain", "red"},
+    "fx": {"shake", "flash", "rain", "red", "dark", "window"},
     "mood": {"calm", "tense", "whisper", "urgent", "reveal", "warm"},
 }
 
