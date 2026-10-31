@@ -49,8 +49,12 @@ def _post(path: str, **data) -> dict:
 def connect(account: str, name: str) -> str:
     handle = HANDLES[account]
     pasted = (os.environ.get("IG_USER_TOKEN") or "").strip()
-    user_token = pasted.split()[-1] if pasted else _device_login(account, name, handle)
-    return _finish(account, handle, user_token)
+    if pasted:
+        try:
+            return _finish(account, handle, pasted.split()[-1])
+        except RuntimeError as e:  # an old pasted token expires; fall back to the emailed-code login
+            print(f"pasted IG_USER_TOKEN not usable ({e}); using the emailed code instead", flush=True)
+    return _finish(account, handle, _device_login(account, name, handle))
 
 
 def _device_login(account: str, name: str, handle: str) -> str:
