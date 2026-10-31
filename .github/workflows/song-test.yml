@@ -38,6 +38,11 @@ jobs:
           /usr/bin/time -v ./build/ace-synth --models models --request /tmp/request0.json /tmp/request1.json 2>&1 | tail -25
           mkdir -p "$GITHUB_WORKSPACE/out" && cp /tmp/request*.mp3 /tmp/request*.json "$GITHUB_WORKSPACE/out/" 2>/dev/null || true
           ls -la "$GITHUB_WORKSPACE/out"
+      - name: Split vocals (for lip sync)
+        run: |
+          pip install -q demucs soundfile torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
+          cd out && for f in request*.mp3; do python -m demucs --two-stems=vocals -n htdemucs -o stems "$f" || true; done
+          find stems -name "*.wav" | head
       - uses: actions/upload-artifact@v4
         with:
           name: song
