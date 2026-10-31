@@ -19,7 +19,7 @@ from . import mailer, tokens
 
 G = "https://graph.facebook.com/v23.0"
 APP_ID = "1140868964998355"  # Meta app "Series Autopilot" (not a secret)
-SCOPE = "instagram_basic,instagram_content_publish,pages_show_list,pages_read_engagement,business_management"
+SCOPE = "instagram_basic,instagram_content_publish,pages_show_list,pages_read_engagement,pages_manage_posts,business_management"
 PAGES_BASE = "https://hiretechuk.github.io/video-autopilot"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HANDLES = {"imagine_you": "imagineyouseries", "paws_claws": "pawsclawsclubkids"}
@@ -94,7 +94,7 @@ def _finish(account: str, handle: str, user_token: str) -> str:
         if ig.get("username", "").lower() == handle:
             tokens.put("instagram", account, {"page_token": p["access_token"], "page_id": p["id"],
                                               "ig_user_id": ig["id"], "username": ig["username"]})
-            mailer.send(f"Instagram connected: @{handle}", f"The autopilot can now post Reels to @{handle} (via the {p['name']} Page).")
+            mailer.send(f"Instagram + Facebook connected: @{handle}", f"The autopilot can now post Reels to @{handle} and to the {p['name']} Facebook Page.")
             return handle
     mailer.send(f"Instagram NOT connected: @{handle} not found",
                 "Nothing was saved. The login gave access to these Pages:\n  " + "\n  ".join(found or ["(none)"]) +
