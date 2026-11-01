@@ -55,6 +55,106 @@
      "72ayCWXDjEs"
     ]
    }
+  },
+  "PC-01": {
+   "series": "paws_claws",
+   "number": 1,
+   "title": "Meet the Paws & Claws Club! | Sing-Along Song for Kids",
+   "status": "scheduled",
+   "version": 1,
+   "file": "episodes/PC-01.json",
+   "created": "2026-11-01T16:37:52.102735+00:00",
+   "post_after": "2026-11-02T16:00:00+00:00"
+  },
+  "PC-02": {
+   "series": "paws_claws",
+   "number": 2,
+   "title": "Rainbow Colours Song | Learn Colours with the Paws & Claws Club",
+   "status": "scheduled",
+   "version": 1,
+   "file": "episodes/PC-02.json",
+   "created": "2026-11-01T16:37:52.102735+00:00",
+   "post_after": "2026-11-05T16:00:00+00:00"
+  },
+  "PC-03": {
+   "series": "paws_claws",
+   "number": 3,
+   "title": "Counting to Ten Song | Numbers for Toddlers with the Paws & Claws Club",
+   "status": "scheduled",
+   "version": 1,
+   "file": "episodes/PC-03.json",
+   "created": "2026-11-01T16:37:52.102735+00:00",
+   "post_after": "2026-11-08T16:00:00+00:00"
+  },
+  "PC-04": {
+   "series": "paws_claws",
+   "number": 4,
+   "title": "Bath Time Song | Splish Splash with the Paws & Claws Club",
+   "status": "scheduled",
+   "version": 1,
+   "file": "episodes/PC-04.json",
+   "created": "2026-11-01T16:37:52.102735+00:00",
+   "post_after": "2026-11-11T16:00:00+00:00"
+  },
+  "PC-05": {
+   "series": "paws_claws",
+   "number": 5,
+   "title": "Brush Your Teeth Song | Healthy Habits with the Paws & Claws Club",
+   "status": "scheduled",
+   "version": 1,
+   "file": "episodes/PC-05.json",
+   "created": "2026-11-01T16:37:52.102735+00:00",
+   "post_after": "2026-11-14T16:00:00+00:00"
+  },
+  "PC-06": {
+   "series": "paws_claws",
+   "number": 6,
+   "title": "Animal Sounds Song | Roar, Meow, Woof with the Paws & Claws Club",
+   "status": "scheduled",
+   "version": 1,
+   "file": "episodes/PC-06.json",
+   "created": "2026-11-01T16:37:52.102735+00:00",
+   "post_after": "2026-11-17T16:00:00+00:00"
+  },
+  "PC-07": {
+   "series": "paws_claws",
+   "number": 7,
+   "title": "Wiggle Your Body Dance Song | Kids Dance Party with the Paws & Claws Club",
+   "status": "scheduled",
+   "version": 1,
+   "file": "episodes/PC-07.json",
+   "created": "2026-11-01T16:37:52.102735+00:00",
+   "post_after": "2026-11-20T16:00:00+00:00"
+  },
+  "PC-08": {
+   "series": "paws_claws",
+   "number": 8,
+   "title": "Yummy Fruit Song | Healthy Snacks with the Paws & Claws Club",
+   "status": "scheduled",
+   "version": 1,
+   "file": "episodes/PC-08.json",
+   "created": "2026-11-01T16:37:52.102735+00:00",
+   "post_after": "2026-11-23T16:00:00+00:00"
+  },
+  "PC-09": {
+   "series": "paws_claws",
+   "number": 9,
+   "title": "Rainy Day Song | Puddle Jumping with the Paws & Claws Club",
+   "status": "scheduled",
+   "version": 1,
+   "file": "episodes/PC-09.json",
+   "created": "2026-11-01T16:37:52.102735+00:00",
+   "post_after": "2026-11-26T16:00:00+00:00"
+  },
+  "PC-10": {
+   "series": "paws_claws",
+   "number": 10,
+   "title": "Goodnight Lullaby | Bedtime Song with the Paws & Claws Club",
+   "status": "scheduled",
+   "version": 1,
+   "file": "episodes/PC-10.json",
+   "created": "2026-11-01T16:37:52.102735+00:00",
+   "post_after": "2026-11-29T16:00:00+00:00"
   }
  },
  "seen": [

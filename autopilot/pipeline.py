@@ -282,7 +282,8 @@ def check():
 
 
 PLATFORMS = ("youtube", "instagram", "facebook")  # TikTok: posted by the VPS (vps/ttposter.py)
-SERIES_PLATFORMS = {"every_how": ("youtube", "youtube_short")}  # Haseeb, 1 Nov 2026: YouTube only for now
+SERIES_PLATFORMS = {"every_how": ("youtube", "youtube_short"),  # Haseeb, 1 Nov 2026: YouTube only for now
+                    "paws_claws": ("youtube",)}  # one episode every 3rd day, YouTube first (Instagram/Facebook not connected)
 
 
 def platforms(series: str):
