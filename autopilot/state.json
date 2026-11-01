@@ -38,7 +38,14 @@
    "status": "pending",
    "version": 1,
    "file": "episodes/EH-01.json",
-   "created": "2026-11-01T14:55:53.955607+00:00"
+   "created": "2026-11-01T14:55:53.955607+00:00",
+   "private": {
+    "full": "uUZzIcorZCg",
+    "short": "72ayCWXDjEs",
+    "version": 1,
+    "minutes": 4.7,
+    "superseded": []
+   }
   }
  },
  "seen": [
