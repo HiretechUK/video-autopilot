@@ -117,7 +117,7 @@ def _host(video: str, name: str) -> str:
     git("add", rel)
     if subprocess.run(["git", "-C", ROOT, "diff", "--cached", "--quiet"]).returncode:
         git("commit", "-m", f"autopilot: host {name} for Instagram")
-        git("pull", "--rebase", "-q")
+        git("pull", "--rebase", "--autostash", "-q")
         git("push", "-q")
     url = f"{PAGES_BASE}/{rel}"
     size = os.path.getsize(video)

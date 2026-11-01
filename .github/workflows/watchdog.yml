@@ -1,0 +1,33 @@
+name: Video watchdog
+
+# Haseeb, 1 Nov 2026: never let an Imagine You episode go missing or half-posted.
+# Runs hourly; GitHub may drop some runs, but 24 chances a day is plenty. It only starts
+# a Video autopilot run when something is overdue or stuck, and never runs two at once.
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: video-watchdog
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check schedule and posting
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
+        run: python -m autopilot.watchdog
