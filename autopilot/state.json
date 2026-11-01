@@ -71,9 +71,9 @@
    "approved": "2026-11-01T19:57:53.403080+00:00",
    "links": {
     "youtube": "https://youtube.com/watch?v=tOKfsqphH0I",
-    "thumbnail": "failed: YouTube won't accept custom thumbnails on this channel until it is verified by phone: sign in to the channel's account, open youtube.com/verify and enter the code it texts you. ({\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set ",
     "instagram": "not connected yet",
-    "facebook": "not connected yet"
+    "facebook": "not connected yet",
+    "thumbnail": "set"
    }
   },
   "PC-02": {
