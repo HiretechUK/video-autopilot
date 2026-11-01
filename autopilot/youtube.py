@@ -29,8 +29,18 @@ def _client():
     return cid, sec
 
 
+# Google account to sign in with, per series. Imagine You lives on a brand account under Haseeb's own Gmail;
+# Every How has its own Gmail (Haseeb, 1 Nov 2026).
+SIGN_IN = {"every_how": "harry.taroles@gmail.com"}
+
+
 def connect(account: str, channel_name: str) -> str:
     cid, sec = _client()
+    own = SIGN_IN.get(account)
+    who = (f"3. Sign in as {own} and, if Google asks which channel, pick {channel_name}.\n" if own else
+           f"3. Sign in as haseeb.ahmed.talent@gmail.com (not the channel's own Gmail) and, when asked which account,\n"
+           f"   choose the brand account for {channel_name}{' (listed as What Nearly Was)' if account == 'imagine_you' else ''}\n"
+           f"   (NOT your personal 'haseeb ahmed' channel).\n")
     r = requests.post(DEVICE_URL, data={"client_id": cid, "scope": SCOPE}, timeout=30)
     r.raise_for_status()
     d = r.json()
@@ -38,9 +48,7 @@ def connect(account: str, channel_name: str) -> str:
                 f"To let the autopilot post to the {channel_name} YouTube channel:\n\n"
                 f"1. On your phone or computer open: {d['verification_url']}\n"
                 f"2. Enter this code: {d['user_code']}\n"
-                f"3. Sign in as haseeb.ahmed.talent@gmail.com (not the channel's own Gmail) and, when asked which account,\n"
-                f"   choose the brand account for {channel_name}{' (listed as What Nearly Was)' if account == 'imagine_you' else ''}\n"
-                f"   (NOT your personal 'haseeb ahmed' channel).\n"
+                + who +
                 f"4. Click Allow. Google may warn the app is unverified: click Advanced, then continue.\n\n"
                 f"The code works for {d['expires_in'] // 60} minutes.")
     print(f"::notice::Enter code {d['user_code']} at {d['verification_url']}", flush=True)
@@ -58,8 +66,9 @@ def connect(account: str, channel_name: str) -> str:
             if title == "?":
                 mailer.send("YouTube NOT connected: no channel on that account",
                             f"The Google account you signed in with has no YouTube channel, so nothing was saved.\n"
-                            f"Run the connect again, sign in as haseeb.ahmed.talent@gmail.com and pick the brand account "
-                            f"that holds {channel_name} (for Imagine You it is still called 'What Nearly Was').")
+                            + (f"Create the {channel_name} channel on {own} first (youtube.com, Create a channel), then run the connect again."
+                               if own else f"Run the connect again, sign in as haseeb.ahmed.talent@gmail.com and pick the brand account "
+                                           f"that holds {channel_name} (for Imagine You it is still called 'What Nearly Was')."))
                 raise RuntimeError("no channel on chosen account; refused")
             if "haseeb ahmed" in title.lower():
                 mailer.send("YouTube NOT connected: wrong channel",
