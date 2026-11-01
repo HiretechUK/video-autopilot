@@ -71,7 +71,13 @@ def main():
         (e["status"] == "approved" and hours_since(e["approved"]) > STUCK_H) or
         (e["status"] == "partly_published" and hours_since(e["approved"]) > PARTIAL_H and
          not all(str(e.get("links", {}).get(p, "")).startswith("http") for p in platforms_of(e))))]
-    eh = [e for e in eps.values() if e["series"] == "every_how"]
+    try:
+        from autopilot.pipeline import SERIES
+        paused = {k for k, v in SERIES.items() if v.get("paused")}
+    except Exception:
+        paused = set()
+    stuck = [r for r in stuck if eps[r]["series"] not in paused]
+    eh = [e for e in eps.values() if e["series"] == "every_how" and "every_how" not in paused]
     eh_age = min(hours_since(e["created"]) for e in eh) if eh else None
     print(f"newest Imagine You episode is {age:.1f} h old; stuck approved: {stuck or 'none'}")
 

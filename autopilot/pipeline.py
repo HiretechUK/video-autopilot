@@ -28,7 +28,10 @@ SERIES = {"imagine_you": {"prefix": "IY", "name": "Imagine You", "builder": "eng
           # Every How (Haseeb, 1 Nov 2026): a 5-7 minute explainer every day. Rendering takes ~15 min, so each
           # render is stored once as a release asset (named by a hash of the script) and reused for posting.
           "every_how": {"prefix": "EH", "name": "Every How", "builder": "engine/build_everyhow.py",
-                        "release": "everyhow-episodes", "every_days": 1}}
+                        "release": "everyhow-episodes", "every_days": 1,
+                        # Haseeb, 1 Nov 2026: hold until the channel's email, YouTube and social accounts exist.
+                        # While paused: no automatic episodes and no posting (manual make/resend still work).
+                        "paused": True}}
 RELEASE = "https://github.com/HiretechUK/video-autopilot/releases/download/paws-episodes/"
 
 HOW_TO = """How to reply (just reply to this email):
@@ -176,6 +179,9 @@ def dupcheck(series: str):
 
 
 def make(series: str, scheduled: bool = False):
+    if SERIES[series].get("paused") and scheduled:
+        print(f"{series} is paused (pipeline.SERIES); no automatic episode")
+        return
     st = load()
     eps = [e for e in st["episodes"].values() if e["series"] == series]
     # Every make (scheduled, watchdog or manual) only runs if the last episode is due, so two runs can never
@@ -262,6 +268,9 @@ def publish_queue(st):
             rec["status"] = "approved"
             rec["approved"] = rec["post_after"]
         if rec["status"] not in ("approved", "partly_published"):
+            continue
+        if SERIES.get(rec["series"], {}).get("paused"):
+            print(f"{ref}: {rec['series']} is paused, not posting yet")
             continue
         links = rec.get("links", {})
         if all(str(links.get(p, "")).startswith("http") for p in platforms(rec["series"])):
