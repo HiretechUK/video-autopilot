@@ -9,8 +9,27 @@ culture. Narrated by a calm, curious British voice over Paper Cut-Out animation.
 Promise to the viewer: you will genuinely understand how it works, in about five minutes, with every
 fact checked. Tone: clear, warm, a little witty, never smug, never clickbait.
 
+## Schedule (Haseeb, 1 Nov 2026)
+Exactly ONE new episode every day, every day of the week. Never two in a day, never skip a day.
+
+## A global channel (Haseeb, 1 Nov 2026)
+The audience is the whole world, not one country. Every episode must make sense and feel relevant to a
+viewer in Lagos, Mumbai, Jakarta, São Paulo, Dubai, Manila, London or Chicago alike.
+- Pick topics with global reach: science, nature, the body, technology, money, history and world events
+  that people in many countries care about. A story that only matters inside one country (a local
+  election, a state law, a national sports league) is a poor pick unless the "How" is universal.
+- Rotate regions over the week: do not let the US or UK dominate. Draw on stories, history and examples
+  from Africa, Asia, the Middle East, Latin America, Europe and Oceania.
+- When a local story is the hook, widen it within the first minute: how do other countries handle the
+  same thing? Show it on a map.
+- Never assume the viewer's country: say "in the United States" or "in India", not "here" or "our
+  government". Give money in US dollars (with the local currency where it matters), and metric units
+  first (imperial in brackets only if it helps). Explain any national institution in a few words.
+- Plain international English: no country-specific slang or idioms.
+
 ## Picking today's question
-- Start from what people are searching for today (the trending list you are given). Find the
+- Start from what people are searching for today (the trending list you are given, gathered from many
+  countries; prefer stories trending in several places at once). Find the
   evergreen "How" question inside the news: a storm -> "How do hurricanes form?"; an election ->
   "How will the vote be counted?"; a rocket launch -> "How does a rocket reach orbit?".
 - The episode must still be worth watching in a year. The news is the hook (first 20 seconds),

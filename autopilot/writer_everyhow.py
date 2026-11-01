@@ -41,7 +41,8 @@ def trending(today: dt.date | None = None) -> list[str]:
     import requests
     today = today or dt.date.today()
     out = []
-    for geo in ("GB", "US"):
+    # a spread of countries, so the channel stays global (Haseeb, 1 Nov 2026)
+    for geo in ("US", "GB", "IN", "NG", "BR", "ID", "PH", "AE", "ZA", "AU", "CA", "MX"):
         try:
             r = requests.get(f"https://trends.google.com/trending/rss?geo={geo}", headers=UA, timeout=30)
             root = ET.fromstring(r.content)
@@ -50,6 +51,8 @@ def trending(today: dt.date | None = None) -> list[str]:
                 news = [n.findtext("{https://trends.google.com/trending/rss}news_item_title") or ""
                         for n in it.findall("{https://trends.google.com/trending/rss}news_item")][:1]
                 out.append(f"[Google Trends {geo}] {t}" + (f" -- {news[0]}" if news and news[0] else ""))
+                if sum(1 for o in out if o.startswith(f"[Google Trends {geo}]")) >= 8:
+                    break
         except Exception as e:
             print("trends", geo, "failed:", e)
     y = today - dt.timedelta(days=1)
@@ -64,7 +67,7 @@ def trending(today: dt.date | None = None) -> list[str]:
                 break
         except Exception as e:
             print("wikipedia most-read failed:", url, e)
-    return out[:70]
+    return out[:130]
 
 
 # ------------------------------------------------------------------ Claude with web search
