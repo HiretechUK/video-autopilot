@@ -55,15 +55,41 @@ def fetch(series: str, eps: dict) -> dict:
                 ids[v] = (ref, plat)
     keys = list(ids)
     for i in range(0, len(keys), 50):
-        r = requests.get(f"{API}/videos", params={"part": "statistics,contentDetails", "id": ",".join(keys[i:i + 50])},
+        r = requests.get(f"{API}/videos", params={"part": "statistics,contentDetails,status", "id": ",".join(keys[i:i + 50])},
                          headers=h, timeout=30).json()
         for it in r.get("items", []):
             ref, plat = ids[it["id"]]
             s = it.get("statistics", {})
             out["videos"][f"{ref}:{plat}"] = {"id": it["id"], "views": int(s.get("viewCount", 0)), "likes": int(s.get("likeCount", 0)),
                                              "comments": int(s.get("commentCount", 0)), "duration": it["contentDetails"].get("duration")}
+            out["videos"][f"{ref}:{plat}"]["problems"] = health(series, it)
+    for v, (ref, plat) in ids.items():  # asked for but YouTube did not return it = deleted or removed
+        if f"{ref}:{plat}" not in out["videos"]:
+            out["videos"][f"{ref}:{plat}"] = {"id": v, "views": 0, "likes": 0, "comments": 0, "duration": None,
+                                             "problems": ["missing on YouTube (removed or deleted)"]}
     out["deep"] = deep(h, [v for v, (r, p) in ids.items()])
     return out
+
+
+def health(series: str, it: dict) -> list[str]:
+    """Anything YouTube has done to a live video that Haseeb would want to know about."""
+    st, cd, p = it.get("status", {}), it.get("contentDetails", {}), []
+    if st.get("uploadStatus") in ("rejected", "failed", "deleted"):
+        p.append(f"upload {st['uploadStatus']}" + (f" ({st.get('rejectionReason') or st.get('failureReason')})"
+                                                     if st.get("rejectionReason") or st.get("failureReason") else ""))
+    if st.get("privacyStatus") and st["privacyStatus"] != "public":
+        p.append(f"not public (now {st['privacyStatus']})")
+    kids = st.get("madeForKids")
+    if kids is not None and kids != (series == "paws_claws"):
+        p.append("marked made for kids" if kids else "NOT marked made for kids")
+    if cd.get("contentRating", {}).get("ytRating") == "ytAgeRestricted":
+        p.append("age-restricted")
+    blocked = cd.get("regionRestriction", {}).get("blocked")
+    if blocked:
+        p.append(f"blocked in {len(blocked)} countries (often a copyright claim)")
+    if st.get("embeddable") is False:
+        p.append("embedding turned off")
+    return p
 
 
 def deep(h: dict, video_ids: list[str]) -> dict:
@@ -174,6 +200,12 @@ def main():
                                  if "averageViewPercentage" in dp else "")
                               + (f", still watching at 10/50/90%: {dp['kept_10']}/{dp['kept_50']}/{dp['kept_90']}" if "kept_10" in dp else "")
                               + (f", +{dp['subscribersGained']} subs" if dp.get("subscribersGained") else ""))
+        probs = [(k.split(":")[0], k.split(":")[1], v["problems"]) for k, v in data["videos"].items() if v.get("problems")]
+        if probs:
+            for ref, plat, pr in probs:
+                report.append(f"- VIDEO PROBLEM: {ref} ({'Short' if plat == 'youtube_short' else 'video'}): {'; '.join(pr)}")
+        elif data["videos"]:
+            report.append(f"- Video health: all {len(data['videos'])} live videos OK (public, not restricted, not blocked)")
         if not data.get("deep"):
             report.append("- Watch-time data: none yet (YouTube publishes it 1-2 days after a video goes live)")
         if data.get("deep", {}).get("error"):
