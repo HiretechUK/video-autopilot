@@ -1,0 +1,39 @@
+name: Channel analyst
+
+# Daily: reads each YouTube channel's numbers, writes autopilot/analyst_report.md for the CEO agent and (weekly, or after
+# 3+ new episodes) rewrites autopilot/lessons_<series>.md, which the script writers apply to every new episode.
+on:
+  schedule:
+    - cron: "23 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: channel-analyst
+  cancel-in-progress: false
+
+jobs:
+  analyse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q anthropic requests cryptography
+      - name: Analyse channels
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          TOKEN_PASSPHRASE: ${{ secrets.TOKEN_PASSPHRASE }}
+        run: python -m autopilot.analyst
+      - name: Save
+        run: |
+          git config user.name "channel-analyst"
+          git config user.email "actions@users.noreply.github.com"
+          git add autopilot/analytics.json autopilot/analyst_report.md autopilot/lessons_*.md 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "analyst: daily channel numbers and lessons" && git pull --rebase --autostash && git push)
