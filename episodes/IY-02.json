@@ -1,0 +1,250 @@
+{
+ "id": "blackout-thirty-days",
+ "title": "Imagine you wake up and the power is out for thirty days",
+ "description": "Imagine you wake up in a city with no power, no signal, and no help coming. Fill the tub, avoid indoor fires, and ration every can. On day thirty, a single window lights up across the street. Would you cross the street or stay hidden?",
+ "tags": [
+  "blackout",
+  "survival",
+  "power outage",
+  "what would you do",
+  "apocalypse",
+  "city survival",
+  "imagine you",
+  "shorts"
+ ],
+ "series": "SURVIVE #02",
+ "voice": "am_michael",
+ "speed": 1.05,
+ "costume": "cap",
+ "hud": [
+  "DAY 1 \u00b7 02:07 AM",
+  "\u25cf POWER: OFF",
+  "FOOD: THREE DAYS"
+ ],
+ "scenes": [
+  {
+   "bg": "city_night",
+   "pose": "sit",
+   "poses": [
+    "sit",
+    "shock",
+    "stand"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "dark",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "DAY 1 \u00b7 02:07 AM",
+    "\u25cf POWER: OFF",
+    "FOOD: THREE DAYS"
+   ],
+   "mood": "tense",
+   "narration": "Imagine you wake up at two in the morning, and the whole city has gone dark. No hum. No streetlights. Nothing.",
+   "highlight": [
+    "dark"
+   ]
+  },
+  {
+   "bg": "city_night",
+   "pose": "phone",
+   "poses": [
+    "phone",
+    "shock",
+    "think"
+   ],
+   "x": 0.45,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.15
+   },
+   "mood": "whisper",
+   "narration": "No traffic. No sirens. [pause] Your phone? No signal.",
+   "highlight": [
+    "No signal"
+   ]
+  },
+  {
+   "bg": "city_night",
+   "pose": "run",
+   "poses": [
+    "run",
+    "kneel",
+    "build"
+   ],
+   "x": 0.7,
+   "move_to": 0.35,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.12
+   },
+   "hud": [
+    "DAY 1 \u00b7 06:30 AM",
+    "\u25cf WATER: STILL FLOWING",
+    "TAPS: DYING"
+   ],
+   "rule": {
+    "n": 1,
+    "text": "FILL THE TUB",
+    "sub": "WATER PUMPS STOP"
+   },
+   "mood": "urgent",
+   "narration": "Rule one. Fill every tub and pot with water now. Pumps need power, and soon your taps run dry.",
+   "highlight": [
+    "water"
+   ]
+  },
+  {
+   "bg": "supermarket",
+   "pose": "walk",
+   "poses": [
+    "walk",
+    "reach",
+    "carry"
+   ],
+   "x": 0.25,
+   "move_to": 0.65,
+   "props": [
+    "crate"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "DAY 3 \u00b7 11:00 AM",
+    "\u25cf FRIDGES: WARM",
+    "FOOD: ONE WEEK"
+   ],
+   "mood": "calm",
+   "narration": "Day three. The supermarket is silent. Fridge food spoils in about four hours, so you take cans, rice, and anything dry.",
+   "highlight": [
+    "four hours"
+   ]
+  },
+  {
+   "bg": "city_night",
+   "pose": "build",
+   "poses": [
+    "build",
+    "shiver",
+    "sit"
+   ],
+   "x": 0.4,
+   "props": [
+    "fire"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 9 \u00b7 09:40 PM",
+    "\u25cf TEMP: FALLING",
+    "FOOD: FOUR DAYS"
+   ],
+   "rule": {
+    "n": 2,
+    "text": "BURN OUTSIDE",
+    "sub": "CARBON MONOXIDE"
+   },
+   "mood": "urgent",
+   "narration": "Rule two. Cook and burn only outside. Grills and generators inside release carbon monoxide, which you cannot see or smell.",
+   "highlight": [
+    "outside",
+    "carbon monoxide"
+   ]
+  },
+  {
+   "bg": "city_night",
+   "pose": "sit",
+   "poses": [
+    "sit",
+    "think",
+    "shiver"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "dark",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "DAY 21 \u00b7 08:15 PM",
+    "\u25cf WATER: BOILED",
+    "FOOD: FOUR DAYS"
+   ],
+   "mood": "tense",
+   "narration": "Day twenty-one. Your water is boiled. Your cans are almost gone. And the city is still... silent.",
+   "highlight": [
+    "silent"
+   ]
+  },
+  {
+   "bg": "city_night",
+   "pose": "lookout",
+   "poses": [
+    "lookout",
+    "shock",
+    "point"
+   ],
+   "x": 0.35,
+   "props": [],
+   "fx": "window",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.25
+   },
+   "hud": [
+    "DAY 30 \u00b7 11:40 PM",
+    "\u25cf SIGNAL: ONE LIGHT",
+    "FOOD: FOUR DAYS"
+   ],
+   "mood": "whisper",
+   "narration": "Then, one window... lit up. Across the dark street. Someone else is out there.",
+   "highlight": [
+    "window"
+   ]
+  },
+  {
+   "bg": "city_night",
+   "pose": "think",
+   "poses": [
+    "think",
+    "lookout",
+    "crouch"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "window",
+   "cam": {
+    "z0": 1.1,
+    "z1": 1.2
+   },
+   "mood": "tense",
+   "narration": "Four days of food. That light is help... or a trap. Cross the street, or stay hidden? Comment A or B. And follow, to find out what happens next.",
+   "highlight": [
+    "help",
+    "trap"
+   ],
+   "choice": {
+    "q": "WHAT DO YOU DO?",
+    "options": [
+     "A \u00b7 CROSS THE STREET",
+     "B \u00b7 STAY HIDDEN"
+    ]
+   },
+   "hold_after": 3.2
+  }
+ ]
+}
