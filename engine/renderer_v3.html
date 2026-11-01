@@ -85,6 +85,23 @@ function checker(a, b, n = 8) {
   for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) { g.fillStyle = (i + j) % 2 ? a : b; g.fillRect(i * 256 / n, j * 256 / n, 256 / n, 256 / n); }
   const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.SRGBColorSpace; return t;
 }
+const TEXC = {};
+function paint(kind, hex, rep = [1, 1]) {
+  const key = kind + hex + rep.join('x'); if (TEXC[key]) return TEXC[key];
+  const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d'), r = rnd(hex % 9973 + kind.length * 31);
+  const col = new THREE.Color(hex), sh = (k) => `rgb(${col.r * 255 * k | 0},${col.g * 255 * k | 0},${col.b * 255 * k | 0})`;
+  g.fillStyle = sh(1); g.fillRect(0, 0, 256, 256);
+  for (let i = 0; i < 260; i++) { g.fillStyle = sh(.9 + r() * .2); g.globalAlpha = .35; g.fillRect(r() * 256, r() * 256, 6 + r() * 26, 4 + r() * 14); }
+  g.globalAlpha = 1;
+  if (kind === 'brick') { g.fillStyle = sh(.72); for (let y = 0; y < 256; y += 16) { g.fillRect(0, y, 256, 2.5); for (let x = (y / 16) % 2 ? 0 : 16; x < 256; x += 32) g.fillRect(x, y, 2.5, 16); } }
+  if (kind === 'plaster') { for (let i = 0; i < 40; i++) { g.fillStyle = sh(.82 + r() * .1); g.globalAlpha = .25; g.beginPath(); g.ellipse(r() * 256, r() * 256, 10 + r() * 30, 6 + r() * 18, r() * 3, 0, 7); g.fill(); } g.globalAlpha = 1; }
+  if (kind === 'paving') { g.fillStyle = sh(.78); for (let y = 0; y < 256; y += 64) g.fillRect(0, y, 256, 3); for (let x = 0; x < 256; x += 64) g.fillRect(x, 0, 3, 256); }
+  if (kind === 'asphalt') { for (let i = 0; i < 900; i++) { g.fillStyle = r() < .5 ? sh(.8) : sh(1.2); g.fillRect(r() * 256, r() * 256, 1.5, 1.5); } }
+  if (kind === 'wood') { g.fillStyle = sh(.7); for (let y = 0; y < 256; y += 32) g.fillRect(0, y, 256, 2.5); for (let i = 0; i < 60; i++) { g.fillStyle = sh(.85); g.fillRect(r() * 256, r() * 256, 30 + r() * 60, 1); } }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(...rep); t.anisotropy = 4;
+  return (TEXC[key] = t);
+}
+const pmat = (kind, hex, rep, o = {}) => new THREE.MeshStandardMaterial({ map: paint(kind, hex, rep), roughness: .9, flatShading: false, ...o });
 function stars(n, seed, col = 0xdfe6ff) {
   const r = rnd(seed), p = [];
   for (let i = 0; i < n; i++) { const a = r() * Math.PI * 2, e = .15 + r() * 1.2; p.push(80 * Math.cos(a) * Math.cos(e), 80 * Math.sin(e), 80 * Math.sin(a) * Math.cos(e)); }
@@ -116,17 +133,18 @@ const SETS = {
     root.add(sky([[0, '#140b2e'], [.45, '#2d2468'], [1, '#5a4a8f']]), stars(260, 7), moon(-20, 40, -60));
     const hemi = new THREE.HemisphereLight(0x6f6ad0, 0x2a1838, .45); root.add(hemi);
     const moonKey = keyLight(0x9fb0ff, .55, [-6, 12, 8]); root.add(moonKey);
-    root.add(box(40, .16, 4.6, mat(0x9a8f9a), 0, .02, -.3, false));           // pavement
+    root.add(box(40, .16, 4.6, pmat('paving', 0x9a8f9a, [20, 2.3]), 0, .02, -.3, false));           // pavement
     root.add(box(40, .2, .25, mat(0x6f6670), 0, .06, 2.0, false));             // kerb
-    root.add(box(40, .1, 10, mat(0x3a3a52), 0, -.05, 7, false));               // road (towards camera)
+    root.add(box(40, .1, 10, pmat('asphalt', 0x3a3a52, [12, 3]), 0, -.05, 7, false));               // road (towards camera)
     for (let i = -18; i < 18; i += 2.2) root.add(box(1, .02, .15, glow(0xd9c36a, .25), i, .01, 6, false));
     for (let i = -18; i < 18; i += 1.2) root.add(box(.02, .17, 4.6, mat(0x857a86), i, .03, -.3, false));   // paving joints
     const windows = [], cols = [0xd8644a, 0xb87a4e, 0x5f8a9a, 0x8a5e91, 0xc98d3a, 0x4f8a7a, 0xc75b7a], awn = [0xe8384f, 0x2f8f6a, 0x3b6fd9, 0xf2b631, 0x8a4fd0];
     let xi = -15;
     while (xi < 15) {
       const w = 2.6 + r() * 1.4, h = 4.8 + r() * 4, c = cols[Math.floor(r() * cols.length)], cx = xi + w / 2, fz = -2.6;
-      root.add(box(w, h, 3, mat(c), cx, h / 2, fz - 1.5));
+      root.add(box(w, h, 3, pmat(r() < .5 ? 'brick' : 'plaster', c, [w / 2.5, h / 2.5]), cx, h / 2, fz - 1.5));
       root.add(box(w + .1, .22, 3.1, mat(0x2a2230), cx, h + .1, fz - 1.5));
+      root.add(box(w + .06, .12, .2, mat(0x3a2a33), cx, 3.2, fz + .05));   // cornice between shop and flats
       // shop window + door + awning + sign
       const shop = new THREE.MeshStandardMaterial({ color: 0x332a20, emissive: 0xffb45a, emissiveIntensity: 1.1, roughness: 1 });
       const sw = new THREE.Mesh(new THREE.PlaneGeometry(w * .55, 1.3), shop); sw.position.set(cx - w * .12, 1.15, fz + .02); root.add(sw);
@@ -137,6 +155,7 @@ const SETS = {
       for (let fy = 3.6; fy < h - .5; fy += 1.35) for (let fx = xi + .5; fx < xi + w - .4; fx += .95) {
         const m = new THREE.MeshStandardMaterial({ color: 0x1a1f33, emissive: 0xffa53a, emissiveIntensity: 0, roughness: 1 });
         const p = new THREE.Mesh(new THREE.PlaneGeometry(.45, .62), m); p.position.set(fx + .25, fy, fz + .02); root.add(p);
+        root.add(box(.58, .07, .12, mat(0xe8dccb), fx + .25, fy - .35, fz + .06, false), box(.58, .05, .05, mat(0x2a2230), fx + .25, fy + .33, fz + .04, false));
         windows.push({ m, on: r() < .55, ph: r() * 6, id: windows.length, pos: p.position.clone() });
       }
       xi += w + .08;
@@ -392,7 +411,11 @@ function drawHero(t, pose, mood, facing) {
   hx.strokeStyle = INK; hx.lineWidth = 6; hx.strokeRect(196, 520 + breath, 48, 40); hx.strokeRect(268, 520 + breath, 48, 40);
   // head
   const hy0 = 245 + breath * 1.2, R = 150;
-  hx.fillStyle = SKIN; hx.strokeStyle = INK; hx.lineWidth = 13; hx.beginPath(); hx.arc(256, hy0, R, 0, 7); hx.fill(); hx.stroke();
+  const bean = () => { hx.beginPath(); hx.moveTo(256, hy0 - R * .96); hx.bezierCurveTo(256 + R * .78, hy0 - R * .98, 256 + R * 1.1, hy0 - R * .35, 256 + R * 1.04, hy0 + R * .15);
+    hx.bezierCurveTo(256 + R * .98, hy0 + R * .72, 256 + R * .5, hy0 + R * .92, 256, hy0 + R * .9); hx.bezierCurveTo(256 - R * .5, hy0 + R * .92, 256 - R * .98, hy0 + R * .72, 256 - R * 1.04, hy0 + R * .15);
+    hx.bezierCurveTo(256 - R * 1.1, hy0 - R * .35, 256 - R * .78, hy0 - R * .98, 256, hy0 - R * .96); hx.closePath(); };
+  hx.fillStyle = SKIN; hx.strokeStyle = INK; hx.lineWidth = 12; bean(); hx.fill(); hx.stroke();
+  hx.save(); bean(); hx.clip(); hx.lineWidth = 30; hx.beginPath(); hx.arc(256, hy0 - R * .25, R * 1.12, .35, Math.PI - .35); hx.stroke(); hx.restore();
   // cap (the brand: red cap)
   hx.fillStyle = CAP; hx.beginPath(); hx.arc(256, hy0 - 18, R - 4, Math.PI * 1.04, Math.PI * 1.96); hx.closePath(); hx.fill(); hx.stroke();
   hx.fillStyle = CAP2; hx.beginPath(); hx.ellipse(380, hy0 - 30, 95, 22, -.05, 0, 7); hx.fill(); hx.stroke();
@@ -467,6 +490,9 @@ function buildWorld(bg) {
   scene3.fog = set.root.fog || null; curBg = bg; props = [];
 }
 const scene3 = new THREE.Scene(); scene3.add(hero, blob);
+const fg = new THREE.Group(); scene3.add(fg);
+{ const pole = cyl(.06, .07, 3.2, mat(0x2a2a33), 0, 1.6, 0, 8); const sign = box(.5, .5, .05, mat(0xd8382f), 0, 2.1, .05); const bin = cyl(.3, .26, .85, mat(0x3f6a4a), .55, .43, .2, 12);
+  fg.add(pole, sign, bin); fg.visible = false; }
 let propKey = '';
 function setProps(s) {
   const key = curBg + '|' + (s.props || []).join(',');
@@ -552,6 +578,10 @@ window.renderAt = (t) => {
   for (let i = 0; i < 6; i++) { camera.lookAt(lk); camera.updateMatrixWorld(); const v = headP.clone().project(camera);
     if (Math.abs(v.x) <= .55 && v.y > .12 && v.y < .8) break; lk.lerp(headP.clone().add(new THREE.Vector3(0, -.45, 0)), .35); }
   camera.lookAt(lk); camera.rotateZ(roll);
+  // foreground framing (reference: a near object in about 1/3 of shots); only outdoors, never on the reveal
+  fg.visible = (shot.n % 3 === 1) && ['medium', 'low', 'wide'].includes(shot.type) && !['supermarket', 'bunker'].includes(s.bg);
+  if (fg.visible) { const dir = new THREE.Vector3().subVectors(hp, camera.position).setY(0).normalize(), side = new THREE.Vector3(-dir.z, 0, dir.x);
+    fg.position.copy(camera.position).addScaledVector(dir, 1.1).addScaledVector(side, -shot.side * .75); fg.position.y = 0; }
   hero.rotation.y = Math.atan2(camera.position.x - hp.x, camera.position.z - hp.z);   // billboard faces camera
   camera.layers.set(0); gl.setRenderTarget(rt); gl.render(scene3, camera); gl.setRenderTarget(null);
   post.uniforms.dof.value = { close: 15, medium: 10, low: 8, reveal: 0, wide: 0 }[shot.type] ?? 0;
