@@ -2,8 +2,13 @@ name: Video autopilot
 
 on:
   schedule:
-    - cron: "13 6 * * *"     # daily check; a new Imagine You episode is made every 2nd day (EPISODE_EVERY_DAYS), emailed for approval
-    - cron: "23 17 * * *"    # daily: read approval replies, revise or post
+    # GitHub can delay or drop scheduled runs, so there are 4 a day. Every scheduled run reads
+    # approval replies, posts approved episodes, then makes a new Imagine You episode only if the
+    # last one is due (every 2nd day, EPISODE_EVERY_DAYS). Extra runs never make doubles.
+    - cron: "13 6 * * *"
+    - cron: "37 11 * * *"
+    - cron: "23 17 * * *"
+    - cron: "41 19 * * *"
   workflow_dispatch:
     inputs:
       cmd:
@@ -59,9 +64,14 @@ jobs:
         run: |
           CMD="${{ github.event.inputs.cmd }}"
           if [ -z "$CMD" ]; then
-            if [ "${{ github.event.schedule }}" = "13 6 * * *" ]; then CMD=make; else CMD=check; fi
+            # scheduled run: replies + posting first, then make an episode if one is due (age-checked)
+            rc=0
+            python -m autopilot.pipeline check || rc=1
+            python -m autopilot.pipeline make imagine_you || rc=1
+            exit $rc
+          else
+            python -m autopilot.pipeline $CMD ${{ github.event.inputs.series || 'imagine_you' }}
           fi
-          python -m autopilot.pipeline $CMD ${{ github.event.inputs.series || 'imagine_you' }}
       - name: Save state
         if: always()
         run: |
