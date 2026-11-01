@@ -63,11 +63,18 @@
    "series": "paws_claws",
    "number": 1,
    "title": "Meet the Paws & Claws Club! | Sing-Along Song for Kids",
-   "status": "scheduled",
+   "status": "published",
    "version": 1,
    "file": "episodes/PC-01.json",
    "created": "2026-11-01T16:37:52.102735+00:00",
-   "post_after": "2026-11-01T19:57:53.403080+00:00"
+   "post_after": "2026-11-01T19:57:53.403080+00:00",
+   "approved": "2026-11-01T19:57:53.403080+00:00",
+   "links": {
+    "youtube": "https://youtube.com/watch?v=tOKfsqphH0I",
+    "thumbnail": "failed: YouTube won't accept custom thumbnails on this channel until it is verified by phone: sign in to the channel's account, open youtube.com/verify and enter the code it texts you. ({\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set ",
+    "instagram": "not connected yet",
+    "facebook": "not connected yet"
+   }
   },
   "PC-02": {
    "series": "paws_claws",
