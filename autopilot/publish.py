@@ -9,6 +9,9 @@ ACCOUNTS = {  # series -> account key per platform
     "imagine_you": {"youtube": "imagine_you", "instagram": "imagine_you", "tiktok": "imagine_you", "made_for_kids": False,
                     "hashtags": "#Shorts #survival #whatwouldyoudo #imagineyou",
                     "ig_hashtags": "#survival #whatwouldyoudo #stranded #survivaltips #imagineyou"},
+    "paws_claws": {"youtube": "paws_claws", "instagram": "paws_claws", "tiktok": "paws_claws", "made_for_kids": True,
+                   "hashtags": "#nurseryrhymes #kidssongs #toddlers #singalong #pawsandclawsclub",
+                   "ig_hashtags": "#kidssongs #nurseryrhymes #toddleractivities #preschool #singalong #pawsandclawsclub"},
 }
 
 
@@ -29,10 +32,13 @@ def publish(series: str, ep: dict, video: str, done: dict | None = None) -> dict
     cfg = ACCOUNTS[series]
     done = dict(done or {})
     desc = ep.get("description", "")
-    _run(done, "youtube", lambda: youtube.upload(cfg["youtube"], video, ep["title"], f"{desc}\n\n{cfg['hashtags']}",
+    full = short = video
+    if isinstance(video, dict):  # premade series: long episode to YouTube, vertical cut to Reels
+        full, short = video["full"], video["short"]
+    _run(done, "youtube", lambda: youtube.upload(cfg["youtube"], full, ep["title"], f"{desc}\n\n{cfg['hashtags']}",
                                                  ep.get("tags", []), cfg["made_for_kids"]))
-    caption = f"{ep['title']}.\n\n{desc} Comment A or B.\n\n{cfg['ig_hashtags']}"
-    _run(done, "instagram", lambda: instagram.upload(cfg["instagram"], video, caption, os.path.basename(video)))
-    _run(done, "facebook", lambda: facebook.upload(cfg["instagram"], video, caption, os.path.basename(video)))
+    caption = ep.get("caption") or f"{ep['title']}.\n\n{desc} Comment A or B.\n\n{cfg['ig_hashtags']}"
+    _run(done, "instagram", lambda: instagram.upload(cfg["instagram"], short, caption, os.path.basename(short)))
+    _run(done, "facebook", lambda: facebook.upload(cfg["instagram"], short, caption, os.path.basename(short)))
     # TikTok is posted by the VPS poster (vps/ttposter.py); tiktok.upload (inbox drafts) stays as a fallback.
     return done

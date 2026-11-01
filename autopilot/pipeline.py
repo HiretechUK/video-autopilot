@@ -21,7 +21,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE = os.path.join(ROOT, "autopilot", "state.json")
 EPDIR = os.path.join(ROOT, "episodes")
 OUT = os.path.join(ROOT, "out")
-SERIES = {"imagine_you": {"prefix": "IY", "name": "Imagine You", "builder": "engine/build_short_v2.py"}}
+SERIES = {"imagine_you": {"prefix": "IY", "name": "Imagine You", "builder": "engine/build_short_v2.py"},
+          # Paws & Claws episodes are made ahead in a batch (Higgsfield + ACE-Step) and stored as release assets;
+          # each one goes live on its post_after date (Haseeb, 1 Nov: make them all at once, post periodically).
+          "paws_claws": {"prefix": "PC", "name": "Paws & Claws Club", "premade": True}}
+RELEASE = "https://github.com/HiretechUK/video-autopilot/releases/download/paws-episodes/"
 
 HOW_TO = """How to reply (just reply to this email):
   approved            -> it gets posted
@@ -41,7 +45,24 @@ def save(st):
     json.dump(st, open(STATE, "w"), indent=1)
 
 
-def render(series: str, ep_path: str) -> str:
+def fetch(name: str) -> str:
+    """Download a premade episode file from the paws-episodes release (cached in out/)."""
+    import requests
+    os.makedirs(OUT, exist_ok=True)
+    dst = os.path.join(OUT, name)
+    if not os.path.exists(dst):
+        with requests.get(RELEASE + name, stream=True, timeout=600) as r:
+            r.raise_for_status()
+            with open(dst, "wb") as f:
+                for chunk in r.iter_content(1 << 20):
+                    f.write(chunk)
+    return dst
+
+
+def render(series: str, ep_path: str):
+    if SERIES[series].get("premade"):  # full episode for YouTube, vertical cut for Reels/TikTok
+        ep = json.load(open(ep_path))
+        return {"full": fetch(ep["video"]), "short": fetch(ep["short"])}
     os.makedirs(OUT, exist_ok=True)
     out = os.path.join(OUT, os.path.basename(ep_path).replace(".json", ".mp4"))
     subprocess.run([sys.executable, os.path.join(ROOT, SERIES[series]["builder"]), ep_path, out], check=True)
@@ -128,6 +149,9 @@ def publish_queue(st):
     """Post every approved episode that is not yet live on all platforms (oldest first). Safe to rerun."""
     from . import publish
     for ref, rec in sorted(st["episodes"].items(), key=lambda kv: kv[1].get("approved", "")):
+        if rec["status"] == "scheduled" and datetime.now(timezone.utc) >= datetime.fromisoformat(rec["post_after"]):
+            rec["status"] = "approved"
+            rec["approved"] = rec["post_after"]
         if rec["status"] not in ("approved", "partly_published"):
             continue
         links = rec.get("links", {})

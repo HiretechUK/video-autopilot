@@ -102,4 +102,4 @@ def upload(account: str, video: str, title: str, description: str, tags: list[st
         u = requests.put(r.headers["Location"], data=f, headers={"Content-Type": "video/mp4"}, timeout=1800)
     u.raise_for_status()
     vid = u.json()["id"]
-    return f"https://youtube.com/shorts/{vid}"
+    return f"https://youtube.com/watch?v={vid}"
