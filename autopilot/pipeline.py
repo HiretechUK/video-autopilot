@@ -200,7 +200,7 @@ def publish_queue(st):
         before = dict(links)
         links = publish.publish(rec["series"], ep, render(rec["series"], path), links)
         rec["links"] = links
-        live = {k: v for k, v in links.items() if str(v).startswith("http")}
+        live = {k: v for k, v in links.items() if k in PLATFORMS and str(v).startswith("http")}  # TikTok is tracked separately
         rec["status"] = "published" if len(live) == len(PLATFORMS) else ("partly_published" if live else "approved")
         save(st)
         new = {k: v for k, v in live.items() if before.get(k) != v}
