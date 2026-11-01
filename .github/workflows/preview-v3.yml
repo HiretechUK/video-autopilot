@@ -1,0 +1,48 @@
+name: Imagine You v3 preview
+
+# Renders one existing episode script with the v3 look (2D characters in 3D sets) and uploads it to the
+# "previews" release, so it can be reviewed before the autopilot switches to v3. Posts nothing.
+on:
+  workflow_dispatch:
+    inputs:
+      episode:
+        description: "episode file to render, e.g. episodes/IY-02.json"
+        default: episodes/IY-02.json
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-inter fonts-dejavu-core ffmpeg
+      - name: Python packages
+        run: pip install -q kokoro-onnx soundfile playwright && python -m playwright install --with-deps chromium
+      - name: Voice model cache
+        uses: actions/cache@v4
+        with:
+          path: engine/models
+          key: kokoro-v1.0
+      - name: Voice model
+        run: |
+          mkdir -p engine/models && cd engine/models
+          [ -f kokoro-v1.0.onnx ] || curl -sSL -o kokoro-v1.0.onnx https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+          [ -f voices-v1.0.bin ] || curl -sSL -o voices-v1.0.bin https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
+      - name: Render
+        run: |
+          ref=$(basename "${{ github.event.inputs.episode }}" .json)
+          python engine/build_short_v3.py "${{ github.event.inputs.episode }}" "out/${ref}-v3.mp4"
+          echo "REF=$ref" >> $GITHUB_ENV
+      - name: Upload preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view previews >/dev/null 2>&1 || gh release create previews --title "Previews (not posted)" --notes "Test renders for review. Nothing here is posted."
+          gh release upload previews "out/${REF}-v3.mp4" --clobber
