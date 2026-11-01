@@ -58,6 +58,7 @@ def main():
     ap.add_argument("--fps", type=int, default=30)
     a = ap.parse_args()
     ep = json.load(open(a.episode))
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
         print("voice…", flush=True)
         clips = v1.tts_scenes(ep, a.models)

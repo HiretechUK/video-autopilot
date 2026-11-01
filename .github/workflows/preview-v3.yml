@@ -38,6 +38,7 @@ jobs:
       - name: Render
         run: |
           ref=$(basename "${{ github.event.inputs.episode }}" .json)
+          mkdir -p out
           python engine/build_short_v3.py "${{ github.event.inputs.episode }}" "out/${ref}-v3.mp4"
           echo "REF=$ref" >> $GITHUB_ENV
       - name: Upload preview
