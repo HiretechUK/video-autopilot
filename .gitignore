@@ -1,2 +1,3 @@
 dist/
 paws-work/
+__pycache__/

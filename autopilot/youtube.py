@@ -87,9 +87,10 @@ def _access(account: str) -> tuple[str, dict]:
     return t["access_token"], rec
 
 
-def upload(account: str, video: str, title: str, description: str, tags: list[str], made_for_kids: bool) -> str:
+def upload(account: str, video: str, title: str, description: str, tags: list[str], made_for_kids: bool,
+           category: str = "24") -> str:
     at, rec = _access(account)
-    meta = {"snippet": {"title": title[:100], "description": description[:4900], "tags": tags[:15], "categoryId": "24"},
+    meta = {"snippet": {"title": title[:100], "description": description[:4900], "tags": tags[:15], "categoryId": category},
             "status": {"privacyStatus": "public", "selfDeclaredMadeForKids": made_for_kids,
                        "containsSyntheticMedia": True}}
     r = requests.post("https://www.googleapis.com/upload/youtube/v3/videos",

@@ -22,7 +22,8 @@ APP_ID = "1140868964998355"  # Meta app "Series Autopilot" (not a secret)
 SCOPE = "instagram_basic,instagram_content_publish,pages_show_list,pages_read_engagement,pages_manage_posts,business_management"
 PAGES_BASE = "https://hiretechuk.github.io/video-autopilot"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-HANDLES = {"imagine_you": "imagineyouseries", "paws_claws": "pawsclawsclubkids"}
+HANDLES = {"imagine_you": "imagineyouseries", "paws_claws": "pawsclawsclubkids",
+           "every_how": os.environ.get("EVERYHOW_IG_HANDLE", "everyhow")}
 
 
 def _secret(name: str) -> str:

@@ -102,6 +102,9 @@ def _extract(text: str) -> dict:
 
 def write_episode(series: str, number: int, recent: list[str], lessons: str = "", notes: str = "",
                   previous: dict | None = None) -> dict:
+    if series == "every_how":  # long-form explainers: own writer with trend picking, research and fact-check
+        from . import writer_everyhow
+        return writer_everyhow.write(number, recent, lessons, notes, previous)
     bible = open(os.path.join(HERE, f"bible_{series}.md")).read()
     system = bible + "\n\n" + SCHEMA
     user = f"Write episode number {number}.\nRecent episodes (do not repeat these scenarios): {', '.join(recent) or 'none'}.\n"

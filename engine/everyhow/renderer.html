@@ -1,0 +1,378 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Kalam;font-weight:700;src:url(fonts/kalam-latin-700-normal.woff2)}
+@font-face{font-family:Hand;font-weight:400;src:url(fonts/patrick-hand-latin-400-normal.woff2)}
+body{margin:0;background:#000}</style></head><body>
+<script src="assets.js"></script>
+<script>
+/* Every How renderer: Paper Cut-Out style.
+   setup(timeline) then draw(t) per frame. timeline = {duration, vertical, title, scenes:[{start,end,narration,visual,heading,idx}]}
+   Scenes are built from a fixed kit of visual types (see KIT) that the writer fills with parameters, so any subject
+   can be shown without new drawing code. Every look decision lives here; build_everyhow.py only does sound and video. */
+const W = 1920, H = 1080;
+let TL, OUT, octx, ctx, VERT = false, boil = 0;
+const C = { bg: ['#EDE3D1', '#DCE7E1', '#F2DDCC', '#DCE1EC', '#EFE6C9', '#E6DCEC'], ink: '#2D261F', light: '#FBF6EC',
+  accents: ['#D8613C', '#4F8FA8', '#80AE5C', '#E3A33B', '#8C6BA8', '#2E6F78', '#C9474F', '#5E8C4A'],
+  land: '#C9BBA0', water: '#9FC3CF', track: '#D9CDB8', shadow: 'rgba(60,40,15,0.33)' };
+
+// ---------------------------------------------------------------- utilities
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, p) => a + (b - a) * p;
+const hash = n => { const s = Math.sin(n * 12.9898 + 78.233) * 43758.5453; return s - Math.floor(s); };
+const hstr = s => { let h = 7; for (const ch of String(s)) h = (h * 31 + ch.charCodeAt(0)) % 100003; return h; };
+const eOut = p => 1 - Math.pow(1 - clamp(p), 3);
+const eBack = p => { p = clamp(p); const c = 1.5; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+const eIO = p => { p = clamp(p); return p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; };
+const ein = (lt, at, dur = 0.5, f = eOut) => f(clamp((lt - at) / dur));
+const accent = key => C.accents[hstr(key) % C.accents.length];
+
+let fibre;
+function rng(s) { return () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function makeFibre() {
+  const t = document.createElement('canvas'); t.width = t.height = 512; const g = t.getContext('2d'), r = rng(42);
+  g.fillStyle = '#fff'; g.fillRect(0, 0, 512, 512);
+  for (let i = 0; i < 9000; i++) { const v = 200 + r() * 55 | 0; g.fillStyle = `rgba(${v},${v - 8},${v - 20},${0.25 + r() * 0.3})`; g.fillRect(r() * 512, r() * 512, 1 + r() * 2, 1 + r() * 2); }
+  g.strokeStyle = 'rgba(120,100,70,0.12)';
+  for (let i = 0; i < 260; i++) { const x = r() * 512, y = r() * 512, a = r() * 6.3, l = 6 + r() * 22; g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l); g.stroke(); }
+  fibre = ctx.createPattern(t, 'repeat');
+}
+
+// ---------------------------------------------------------------- paths (Path2D, slightly torn edges that "boil")
+const ROUGH = 0.03;
+function circle(x, y, r, seed = x + y) {
+  const p = new Path2D(), n = 48;
+  for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2, rr = r * (1 + ROUGH * (hash(seed + i * 7.1 + boil * 13.7) - 0.5));
+    i ? p.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr) : p.moveTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); }
+  p.closePath(); return p;
+}
+function rect(x, y, w, h, rad = 0) {
+  const p = new Path2D(), j = 5, o = k => (hash(k + boil * 3.7 + x * .01) - 0.5) * j;
+  if (rad) { p.roundRect(x + o(1), y + o(2), w, h, rad); return p; }
+  p.moveTo(x + o(1), y + o(2)); p.lineTo(x + w + o(3), y + o(4)); p.lineTo(x + w + o(5), y + h + o(6)); p.lineTo(x + o(7), y + h + o(8)); p.closePath(); return p;
+}
+function blob(x, y, r, seed, wob = 0.3, n = 9) {
+  const p = new Path2D(), pts = [];
+  for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2, rr = r * (1 - wob / 2 + wob * hash(seed + i * 3.3)) * (1 + ROUGH * (hash(seed + i + boil * 5.1) - .5)); pts.push([x + Math.cos(a) * rr, y + Math.sin(a) * rr]); }
+  p.moveTo((pts[0][0] + pts[n - 1][0]) / 2, (pts[0][1] + pts[n - 1][1]) / 2);
+  for (let i = 0; i < n; i++) { const a = pts[i], b = pts[(i + 1) % n]; p.quadraticCurveTo(a[0], a[1], (a[0] + b[0]) / 2, (a[1] + b[1]) / 2); }
+  p.closePath(); return p;
+}
+function poly(pts) { const p = new Path2D(); pts.forEach((q, i) => i ? p.lineTo(q[0], q[1]) : p.moveTo(q[0], q[1])); p.closePath(); return p; }
+const ICACHE = {};
+function iconName(n) { n = String(n || '').toLowerCase().trim().replace(/[\s_]+/g, '-'); return ICONS[n] ? n : (ICONS[n + 's'] ? n + 's' : 'question'); }
+function icon(name, cx, cy, size, rot = 0) {
+  const n = iconName(name); ICACHE[n] = ICACHE[n] || new Path2D(ICONS[n]);
+  const p = new Path2D(); p.addPath(ICACHE[n], new DOMMatrix().translate(cx, cy).rotate(rot).scale(size / 256).translate(-128, -128)); return p;
+}
+
+// ---------------------------------------------------------------- paint
+function fill(path, color, a = 1, shadow = true) {
+  if (a <= 0.01) return;
+  ctx.save(); ctx.globalAlpha *= a;
+  if (shadow) { ctx.shadowColor = C.shadow; ctx.shadowOffsetX = 5; ctx.shadowOffsetY = 8; ctx.shadowBlur = 12; }
+  ctx.fillStyle = color; ctx.fill(path); ctx.restore();
+  ctx.save(); ctx.globalAlpha *= a * 0.55; ctx.clip(path); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = fibre; ctx.fillRect(0, 0, W, H); ctx.restore();
+}
+function stroke(path, color, w, a = 1) {
+  if (a <= 0.01) return;
+  ctx.save(); ctx.globalAlpha *= a; ctx.lineWidth = w; ctx.lineCap = ctx.lineJoin = 'round';
+  ctx.shadowColor = C.shadow; ctx.shadowOffsetX = 3; ctx.shadowOffsetY = 5; ctx.shadowBlur = 8; ctx.strokeStyle = color; ctx.stroke(path); ctx.restore();
+}
+function font(size, head) { return `${head ? 700 : 400} ${size}px ${head ? 'Kalam' : 'Hand'}`; }
+function text(s, x, y, size, o = {}) {
+  if ((o.a ?? 1) <= 0.01 || s == null) return;
+  ctx.save(); ctx.globalAlpha *= (o.a ?? 1); ctx.font = font(size, o.head); ctx.textAlign = o.align || 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = o.color || C.ink; if (o.shadow !== false) { ctx.shadowColor = 'rgba(60,40,15,0.22)'; ctx.shadowOffsetY = 3; ctx.shadowBlur = 4; }
+  ctx.fillText(String(s), x, y); ctx.restore();
+}
+function wrap(s, size, maxW, head) {
+  ctx.save(); ctx.font = font(size, head); const words = String(s || '').split(/\s+/), lines = []; let cur = '';
+  for (const w of words) { const t = cur ? cur + ' ' + w : w; if (ctx.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t; }
+  if (cur) lines.push(cur); ctx.restore(); return lines;
+}
+function para(s, x, y, size, maxW, o = {}) { // fits text: shrinks until it is at most o.max lines
+  let sz = size, lines = wrap(s, sz, maxW, o.head);
+  while (lines.length > (o.max || 3) && sz > 26) { sz -= 4; lines = wrap(s, sz, maxW, o.head); }
+  const lh = sz * 1.18, y0 = y - (lines.length - 1) * lh / 2 * (o.valign === 'top' ? 0 : 1);
+  lines.forEach((l, i) => text(l, x, y0 + i * lh, sz, o)); return lines.length * lh;
+}
+function textW(s, size, head) { ctx.save(); ctx.font = font(size, head); const w = ctx.measureText(String(s)).width; ctx.restore(); return w; }
+function chip(s, x, y, size, color, a = 1) {
+  const w = textW(s, size, true) + size * 1.2; fill(rect(x - w / 2, y - size * .85, w, size * 1.7, size * .85), color, a);
+  text(s, x, y + size * .05, size, { head: true, color: C.light, a });
+}
+function arrow(x1, y1, x2, y2, color, w = 9, a = 1) {
+  const ang = Math.atan2(y2 - y1, x2 - x1), h = w * 3.2, p = new Path2D();
+  p.moveTo(x1, y1); p.lineTo(x2 - Math.cos(ang) * h * .6, y2 - Math.sin(ang) * h * .6); stroke(p, color, w, a);
+  fill(poly([[x2, y2], [x2 - Math.cos(ang - .45) * h, y2 - Math.sin(ang - .45) * h], [x2 - Math.cos(ang + .45) * h, y2 - Math.sin(ang + .45) * h]]), color, a);
+}
+const num = v => { const m = String(v).match(/-?[\d,.]+/); return m ? parseFloat(m[0].replace(/,/g, '')) : NaN; };
+function countUp(v, p) { // "20%" -> counts 0..20 keeping prefix/suffix and decimals
+  const s = String(v), m = s.match(/-?[\d,]*\.?\d+/); if (!m) return s;
+  const target = parseFloat(m[0].replace(/,/g, '')), dec = (m[0].split('.')[1] || '').length, cur = target * p;
+  const out = dec ? cur.toFixed(dec) : Math.round(cur).toLocaleString('en-GB');
+  return s.slice(0, m.index) + out + s.slice(m.index + m[0].length);
+}
+
+// ---------------------------------------------------------------- scene timing helpers
+// Items appear spread across the narration, or at the word given as item.cue.
+function cueTimes(sc, items) {
+  const words = sc.narration.toLowerCase().split(/\s+/), d = sc.end - sc.start, n = items.length;
+  return items.map((it, i) => {
+    if (it && it.cue) { const k = words.findIndex(w => w.includes(String(it.cue).toLowerCase().split(/\s+/)[0])); if (k >= 0) return 0.15 + d * k / words.length; }
+    return 0.25 + (d * 0.78) * i / Math.max(1, n);
+  });
+}
+
+// ---------------------------------------------------------------- background
+function background(sc, lt) {
+  const bg = C.bg[(sc.section || 0) % C.bg.length]; ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+  ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = .55; ctx.fillStyle = fibre; ctx.fillRect(0, 0, W, H); ctx.restore();
+  const s = (sc.section || 0) * 17 + 3, drift = lt * 6;
+  for (let k = 0; k < 2; k++) { // two layers of torn paper hills along the bottom, a different skyline per section
+    const p = new Path2D(), base = 900 + k * 70, col = k ? shade(bg, -0.10) : shade(bg, -0.05);
+    p.moveTo(-40, H + 40); for (let x = -40; x <= W + 80; x += 60) p.lineTo(x - drift * (k + 1) % 60, base - 70 * hash(s + k * 9 + Math.floor((x + drift * (k + 1)) / 60)) - 30 * Math.sin(x / 300 + s));
+    p.lineTo(W + 80, H + 40); p.closePath(); fill(p, col, 1, true);
+  }
+  for (let i = 0; i < 5; i++) { // paper confetti
+    const x = hash(s + i * 4.1) * W, y = 120 + hash(s + i * 2.7) * 640, r = 10 + hash(s + i) * 16;
+    fill(blob(x + Math.sin(lt * .5 + i) * 10, y + Math.cos(lt * .4 + i) * 8, r, s + i, .5, 6), shade(bg, -0.14), 0.8);
+  }
+}
+function shade(hex, f) {
+  const n = parseInt(hex.slice(1), 16); let r = n >> 16, g = n >> 8 & 255, b = n & 255;
+  const m = v => Math.round(clamp(f < 0 ? v * (1 + f) : v + (255 - v) * f, 0, 255));
+  return '#' + [m(r), m(g), m(b)].map(v => v.toString(16).padStart(2, '0')).join('');
+}
+
+// ---------------------------------------------------------------- the kit
+const MID = 470; // vertical centre of the content area (captions live below ~880)
+const KIT = {
+  title(v, sc, lt) {
+    const ic = v.icon ? iconName(v.icon) : null, col = accent(v.text);
+    if (ic) fill(icon(ic, W / 2, MID - 170 + Math.sin(lt * 1.4) * 8, 260 * ein(lt, 0, .6, eBack), Math.sin(lt) * 3), col);
+    const lines = wrap(v.text, 92, 1500, true), lh = 104, h = lines.length * lh + 70, y = ic ? MID + 60 : MID - h / 2 + 20;
+    const a = ein(lt, .15, .5, eBack), w = Math.max(...lines.map(l => textW(l, 92, true))) + 140;
+    ctx.save(); ctx.translate(W / 2, y + h / 2); ctx.scale(a, a); ctx.rotate(-0.012); ctx.translate(-W / 2, -(y + h / 2));
+    fill(rect(W / 2 - w / 2, y, w, h), C.light);
+    lines.forEach((l, i) => text(l, W / 2, y + 35 + lh * (i + .5), 92, { head: true }));
+    ctx.restore();
+    if (v.sub) para(v.sub, W / 2, y + h + 70, 50, 1400, { a: ein(lt, .8, .5), max: 2 });
+  },
+  hero(v, sc, lt) {
+    const col = v.color || accent(v.icon + v.label), s = ein(lt, 0, .7, eBack);
+    fill(circle(560, MID, 300 * s, 5), shade(col, .55));
+    fill(icon(v.icon, 560, MID + Math.sin(lt * 1.3) * 10, 380 * s, Math.sin(lt * .9) * 4), col);
+    para(v.label, 1340, MID - 60, 84, 820, { head: true, a: ein(lt, .4, .5), max: 3 });
+    if (v.sub) para(v.sub, 1340, MID + 130, 50, 780, { a: ein(lt, 1.1, .5), max: 3 });
+  },
+  compare(v, sc, lt) {
+    const L = v.left || {}, R = v.right || {}, t = cueTimes(sc, [L, R]);
+    [[L, 500, t[0]], [R, 1420, t[1]]].forEach(([it, x, at], k) => {
+      const s = ein(lt, at, .6, eBack), col = it.color || C.accents[k ? 1 : 0];
+      ctx.save(); ctx.translate(x, MID); ctx.rotate((k ? 1 : -1) * 0.02); ctx.translate(-x, -MID);
+      fill(rect(x - 330, MID - 300, 660, 600 * s), C.light, s);
+      fill(icon(it.icon, x, MID - 120, 230 * s), col);
+      para(it.label, x, MID + 70, 60, 580, { head: true, a: s, max: 2 });
+      if (it.value) text(countUp(it.value, ein(lt, at + .3, 1.2)), x, MID + 200, 70, { head: true, color: col, a: s });
+      ctx.restore();
+    });
+    const vs = ein(lt, Math.min(t[0], t[1]) + .3, .5, eBack);
+    fill(circle(W / 2, MID, 80 * vs, 3), C.ink, vs); text(v.vs || 'vs', W / 2, MID + 4, 64, { head: true, color: C.light, a: vs });
+  },
+  list(v, sc, lt) {
+    const items = (v.items || []).slice(0, 5), t = cueTimes(sc, items), n = items.length, gap = Math.min(150, 640 / n), y0 = MID - gap * (n - 1) / 2;
+    if (v.heading) text(v.heading, W / 2, y0 - gap * .9 - 20, 64, { head: true, a: ein(lt, 0, .4) });
+    items.forEach((it, i) => {
+      const a = ein(lt, t[i], .45), y = y0 + i * gap, x = 330 + (1 - a) * -120, col = accent(it.icon + i);
+      fill(circle(x, y, 62 * a, i), shade(col, .55), a); fill(icon(it.icon, x, y, 86 * a), col, a);
+      para(it.text, x + 110, y, 58, 1300, { align: 'left', a, max: 1 });
+    });
+  },
+  flow(v, sc, lt) {
+    const st = (v.steps || []).slice(0, 5), n = st.length, t = cueTimes(sc, st), sp = Math.min(420, 1560 / n), x0 = W / 2 - sp * (n - 1) / 2;
+    st.forEach((s, i) => {
+      const a = ein(lt, t[i], .5, eBack), x = x0 + i * sp, col = accent(s.icon + i), r = Math.min(130, sp * .32);
+      fill(circle(x, MID - 40, r * a, i * 3), C.light, a); fill(icon(s.icon, x, MID - 40, r * 1.25 * a), col, a);
+      para(s.label, x, MID + r + 70, 50, sp - 40, { head: true, a, max: 2 });
+      if (i) { const p = ein(lt, t[i] - .1, .4); if (p > 0) arrow(x - sp + r + 20, MID - 40, x - sp + r + 20 + (sp - 2 * r - 40) * p, MID - 40, C.ink, 9, p); }
+    });
+  },
+  cycle(v, sc, lt) {
+    const st = (v.steps || []).slice(0, 5), n = st.length, t = cueTimes(sc, st), cx = W / 2, cy = MID, R = 300, rx = 520;
+    if (v.center) para(v.center, cx, cy, 58, 420, { head: true, a: ein(lt, 0, .5), max: 2 });
+    st.forEach((s, i) => {
+      const ang = -Math.PI / 2 + i / n * Math.PI * 2, x = cx + Math.cos(ang) * rx, y = cy + Math.sin(ang) * R * .95, a = ein(lt, t[i], .5, eBack), col = accent(s.icon + i);
+      fill(circle(x, y, 95 * a, i), C.light, a); fill(icon(s.icon, x, y - 8, 110 * a), col, a);
+      text(s.label, x, y + 130, 44, { head: true, a });
+      const a2 = ang + Math.PI / n, p = ein(lt, t[i] + .3, .5);
+      if (p > 0) { // small arrow along the loop, between this step and the next
+        const ax = cx + Math.cos(a2) * rx, ay = cy + Math.sin(a2) * R * .95, tx = -Math.sin(a2) * rx, ty = Math.cos(a2) * R, tl = Math.hypot(tx, ty) / 45;
+        arrow(ax - tx / tl, ay - ty / tl, ax + tx / tl, ay + ty / tl, C.ink, 8, p); }
+    });
+  },
+  timeline(v, sc, lt) {
+    const ev = (v.events || []).slice(0, 6), n = ev.length, t = cueTimes(sc, ev), x0 = 220, x1 = 1700, y = MID;
+    const p = ein(lt, 0, Math.max(.6, (t[n - 1] || 1) + .4), eIO), line = new Path2D(); line.moveTo(x0, y); line.lineTo(x0 + (x1 - x0) * p, y); stroke(line, C.ink, 10);
+    ev.forEach((e, i) => {
+      const x = n === 1 ? (x0 + x1) / 2 : x0 + (x1 - x0) * i / (n - 1), a = ein(lt, t[i], .5, eBack), col = accent(String(e.year) + i), up = i % 2 === 0;
+      fill(circle(x, y, 26 * a, i), col, a);
+      text(e.year, x, up ? y - 90 : y + 90, 62, { head: true, color: col, a });
+      if (e.icon) fill(icon(e.icon, x, up ? y - 190 : y + 190, 100 * a), col, a);
+      para(e.label, x, up ? y + 95 : y - 95, 42, Math.min(330, (x1 - x0) / Math.max(1, n - 1) - 20) + (n < 3 ? 300 : 0), { a, max: 3 });
+    });
+  },
+  stat(v, sc, lt) {
+    const col = v.color || accent(v.label), frac = v.fraction != null ? clamp(+v.fraction) : null, p = ein(lt, .2, 1.6, eIO);
+    const cx = frac != null || v.icon ? 600 : W / 2;
+    if (frac != null) {
+      const tr = new Path2D(); tr.arc(cx, MID, 250, 0, Math.PI * 2); stroke(tr, C.track, 80, ein(lt, 0, .4));
+      if (frac * p > .002) { const ar = new Path2D(); ar.arc(cx, MID, 250, -Math.PI / 2, -Math.PI / 2 + frac * p * Math.PI * 2); stroke(ar, col, 80); }
+      if (v.icon) fill(icon(v.icon, cx, MID, 200 * ein(lt, 0, .6, eBack)), col);
+    } else if (v.icon) { fill(circle(cx, MID, 260 * ein(lt, 0, .6, eBack), 2), shade(col, .55)); fill(icon(v.icon, cx, MID, 300 * ein(lt, 0, .6, eBack)), col); }
+    const tx = cx === W / 2 ? W / 2 : 1320;
+    text(countUp(v.value, p), tx, MID - 70, 190, { head: true, color: col, a: ein(lt, .1, .4) });
+    para(v.label, tx, MID + 120, 54, cx === W / 2 ? 1400 : 860, { a: ein(lt, .8, .5), max: 3 });
+  },
+  bars(v, sc, lt) {
+    const it = (v.items || []).slice(0, 6), n = it.length, t = cueTimes(sc, it), mx = Math.max(...it.map(b => num(b.value)).filter(x => !isNaN(x)), 1);
+    const bw = Math.min(200, 1300 / n), sp = 1400 / n, x0 = W / 2 - sp * (n - 1) / 2, base = 780, top = 210;
+    if (v.title) text(v.title, W / 2, 130, 60, { head: true, a: ein(lt, 0, .4) });
+    const ax = new Path2D(); ax.moveTo(x0 - sp / 2, base); ax.lineTo(x0 + sp * (n - .5), base); stroke(ax, C.ink, 6, ein(lt, 0, .4));
+    it.forEach((b, i) => {
+      const x = x0 + i * sp, p = ein(lt, t[i], .9, eOut), h = (base - top - 80) * (num(b.value) / mx || 0) * p, col = b.color || accent(b.label + i);
+      if (h > 1) fill(rect(x - bw / 2, base - h, bw, h), col);
+      text(countUp(b.value, p) + (v.unit || ''), x, base - h - 42, 50, { head: true, a: p });
+      para(b.label, x, base + 50, 40, sp - 20, { a: ein(lt, t[i], .3), max: 2 });
+    });
+  },
+  map(v, sc, lt) { const map = KIT.map;
+    const hi = (v.countries || []).map(country).filter(Boolean), t = cueTimes(sc, hi.map(() => ({})));
+    let box = [0, 0, 1, .52];
+    if (hi.length && v.zoom !== 'world') { const b = hi.map(c => WORLD[c].box); box = [Math.min(...b.map(q => q[0])), Math.min(...b.map(q => q[1])), Math.max(...b.map(q => q[2])), Math.max(...b.map(q => q[3]))];
+      const cxb = (box[0] + box[2]) / 2, cyb = (box[1] + box[3]) / 2; let bw = Math.max(box[2] - box[0], .12) * 1.9, bh = Math.max(box[3] - box[1], .07) * 1.9;
+      if (bw / bh > 1700 / 720) bh = bw * 720 / 1700; else bw = bh * 1700 / 720; box = [cxb - bw / 2, cyb - bh / 2, cxb + bw / 2, cyb + bh / 2]; }
+    const z = ein(lt, .1, 1.6, eIO), full = [-.02, -.04, 1.02, .56], bx = full.map((f, i) => lerp(f, box[i], z));
+    const sx = 1700 / (bx[2] - bx[0]), sy = 760 / (bx[3] - bx[1]), s = Math.min(sx, sy), ox = W / 2 - (bx[0] + bx[2]) / 2 * s, oy = 450 - (bx[1] + bx[3]) / 2 * s;
+    fill(rect(60, 70, W - 120, 790, 18), C.water, 1);
+    ctx.save(); ctx.clip(rect(60, 70, W - 120, 790, 18));
+    const land = new Path2D();
+    for (const n in WORLD) for (const r of WORLD[n].rings) { r.forEach((q, i) => i ? land.lineTo(ox + q[0] * s, oy + q[1] * s) : land.moveTo(ox + q[0] * s, oy + q[1] * s)); land.closePath(); }
+    ctx.save(); ctx.shadowColor = C.shadow; ctx.shadowOffsetY = 6; ctx.shadowBlur = 8; ctx.fillStyle = C.land; ctx.fill(land); ctx.restore();
+    ctx.lineWidth = 1.2; ctx.strokeStyle = 'rgba(80,60,40,.35)'; ctx.stroke(land);
+    hi.forEach((c, i) => {
+      const a = ein(lt, Math.max(t[i], .9 + i * .25), .4), p = new Path2D(), col = v.color || C.accents[i % C.accents.length];
+      for (const r of WORLD[c].rings) { r.forEach((q, j) => j ? p.lineTo(ox + q[0] * s, oy + q[1] * s) : p.moveTo(ox + q[0] * s, oy + q[1] * s)); p.closePath(); }
+      fill(p, col, a);
+      if (v.labels !== false) { // label only when it fits and does not sit on an earlier label
+        const b = WORLD[c].box, lx = ox + (b[0] + b[2]) / 2 * s, ly = oy + (b[1] + b[3]) / 2 * s, nm = v.names?.[i] || c, sz = hi.length > 3 ? 32 : 40;
+        const clash = (map._lab = i ? map._lab : []).some(([x, y, w]) => Math.abs(x - lx) < (w + textW(nm, sz, true)) / 2 + 10 && Math.abs(y - ly) < sz * 1.1);
+        if (!clash && (b[2] - b[0]) * s > 50) { map._lab.push([lx, ly, textW(nm, sz, true)]); text(nm, lx, ly, sz, { head: true, color: C.ink, a }); } }
+    });
+    ctx.restore();
+    if (v.label) chip(v.label, W / 2, 140, 52, C.ink, ein(lt, 1.2, .5, eBack));
+  },
+  quote(v, sc, lt) {
+    const a = ein(lt, 0, .6, eBack);
+    ctx.save(); ctx.translate(W / 2, MID); ctx.rotate(-0.015); ctx.scale(a, a); ctx.translate(-W / 2, -MID);
+    fill(rect(260, MID - 300, 1400, 560), C.light);
+    text('“', 360, MID - 210, 220, { head: true, color: accent(v.who || 'q') });
+    para(v.text, W / 2, MID - 20, 64, 1150, { max: 5 });
+    if (v.who) text('— ' + v.who, 1560, MID + 200, 46, { align: 'right', head: true, a: ein(lt, .8, .5) });
+    ctx.restore();
+  },
+  zoom(v, sc, lt) {
+    const z = ein(lt, .4, 1.6, eIO), col = accent(v.icon), col2 = accent(v.inner_icon + 'z');
+    ctx.save(); ctx.translate(W / 2, MID); ctx.scale(1 + z * 5, 1 + z * 5); ctx.translate(-W / 2, -MID);
+    fill(icon(v.icon, W / 2, MID, 420), col, 1 - z * .9); ctx.restore();
+    text(v.label, W / 2, 170, 64, { head: true, a: 1 - z });
+    const s = ein(lt, 1.3, .6, eBack);
+    fill(circle(W / 2, MID, 330 * s, 8), C.light, s); fill(icon(v.inner_icon, W / 2, MID, 380 * s), col2, s);
+    if (v.inner_label) chip(v.inner_label, W / 2, MID + 350, 52, col2, ein(lt, 1.8, .5, eBack));
+  },
+  crowd(v, sc, lt) {
+    const n = Math.min(100, Math.max(4, +v.count || 50)), k = Math.min(n, Math.max(0, +v.highlight || 0)), cols = n > 50 ? 20 : n > 20 ? 10 : 6;
+    const rows = Math.ceil(n / cols), size = Math.min(80, 1500 / cols, 600 / rows), x0 = W / 2 - (cols - 1) * size / 2, y0 = 160 + (600 - rows * size) / 2;
+    for (let i = 0; i < n; i++) {
+      const a = ein(lt, i * 0.6 / n, .3, eBack), on = i < k && lt > 1.2, x = x0 + (i % cols) * size, y = y0 + Math.floor(i / cols) * size;
+      fill(icon(v.icon || 'person', x, y, size * .95 * a), on ? accent(v.label || 'c') : '#9C8E78', a, false);
+    }
+    if (v.label) para(v.label, W / 2, 820, 60, 1500, { head: true, a: ein(lt, 1.2, .5), max: 1 });
+  },
+  question(v, sc, lt) {
+    const a = ein(lt, 0, .6, eBack), col = accent(v.text);
+    for (let i = 0; i < 3; i++) fill(blob(300 + i * 660, 220 + hash(i) * 500, 70 + 30 * hash(i + 3), i * 9, .6, 6), shade(col, .45 + i * .1), a * .9);
+    fill(icon('question', 1620, 260 + Math.sin(lt * 2) * 12, 200 * a, 12), col, a);
+    para(v.text, W / 2, MID, 96, 1450, { head: true, a, max: 3 });
+  },
+};
+const ALIASES = { 'usa': 'United States of America', 'united states': 'United States of America', 'us': 'United States of America', 'uk': 'United Kingdom', 'britain': 'United Kingdom', 'great britain': 'United Kingdom', 'england': 'United Kingdom', 'russia': 'Russia', 'south korea': 'South Korea', 'north korea': 'North Korea', 'uae': 'United Arab Emirates', 'czech republic': 'Czechia', 'ivory coast': "Côte d'Ivoire", 'drc': 'Dem. Rep. Congo', 'congo': 'Congo', 'bosnia': 'Bosnia and Herz.' };
+function country(n) { if (!n) return null; if (WORLD[n]) return n; const k = String(n).toLowerCase().trim(); if (ALIASES[k] && WORLD[ALIASES[k]]) return ALIASES[k];
+  return Object.keys(WORLD).find(c => c.toLowerCase() === k) || Object.keys(WORLD).find(c => c.toLowerCase().startsWith(k)) || null; }
+KIT.end = (v, sc, lt) => {
+  const a = ein(lt, 0, .6, eBack);
+  fill(icon('question', W / 2, 300 + Math.sin(lt * 1.5) * 8, 220 * a, -8), C.accents[0], a);
+  text('Every How', W / 2, 520, 140, { head: true, a });
+  para(v.text || 'A new question, every day.', W / 2, 650, 56, 1300, { a: ein(lt, .5, .5), max: 2 });
+  chip('Subscribe', W / 2, 780, 56, C.accents[6], ein(lt, 1.0, .5, eBack));
+};
+
+// ---------------------------------------------------------------- captions, chrome, transitions
+function captions(t, cw, by) {
+  const sc = TL.scenes.find(s => t >= s.start - .1 && t <= s.end + .25); if (!sc || !sc.narration) return;
+  const size = VERT ? 62 : 42, maxW = VERT ? 960 : 1500, words = sc.narration.split(/\s+/);
+  ctx.save(); ctx.font = font(size); const sp = ctx.measureText(' ').width; const lines = [[]]; let w = 0;
+  words.forEach((wd, i) => { const ww = ctx.measureText(wd).width; if (w + ww > maxW && lines.at(-1).length) { lines.push([]); w = 0; } lines.at(-1).push([wd, ww, i]); w += ww + sp; }); ctx.restore();
+  const lh = size * 1.25, boxH = lines.length * lh + 28, y = by - boxH, bw = Math.max(...lines.map(l => l.reduce((a, x) => a + x[1] + sp, -sp))) + 60;
+  const a = clamp((t - sc.start + .1) / .2) * clamp((sc.end + .25 - t) / .2), shown = (t - sc.start) / Math.max(.1, sc.end - sc.start);
+  fill(rect(cw / 2 - bw / 2, y, bw, boxH, 20), C.light, a * .94);
+  lines.forEach((l, li) => { let x = cw / 2 - l.reduce((q, z) => q + z[1] + sp, -sp) / 2;
+    l.forEach(([wd, ww, i]) => { text(wd, x, y + 14 + lh * (li + .5), size, { align: 'left', a: a * ((i + .5) / words.length <= shown + .08 ? 1 : .35), shadow: false }); x += ww + sp; }); });
+}
+function chrome(sc, t) {
+  if (sc.visual?.type === 'end') return;
+  const p = clamp(t / TL.duration), bar = new Path2D(); bar.moveTo(40, 30); bar.lineTo(40 + (W - 80) * p, 30); stroke(bar, shade(C.bg[(sc.section || 0) % C.bg.length], -0.3), 8, .9);
+  if (sc.heading && !VERT) text(sc.heading, 70, 78, 40, { align: 'left', head: true, a: .75 });
+  if (!VERT) text('Every How', W - 70, 78, 40, { align: 'right', head: true, a: .5 });
+}
+function drawScene(sc, t) {
+  const lt = t - sc.start + .15;
+  background(sc, lt);
+  const v = sc.visual || { type: 'question', text: '' }, fn = KIT[v.type] || KIT.question;
+  ctx.save(); fn(v, sc, lt); ctx.restore();
+  chrome(sc, t);
+}
+function frame169(t) {
+  const i = Math.max(0, TL.scenes.findIndex(s => t < s.end2)), sc = TL.scenes[i === -1 ? TL.scenes.length - 1 : i], prev = TL.scenes[i - 1];
+  const tr = .5, p = prev ? clamp((t - sc.start2) / tr) : 1;
+  if (p < 1) { drawScene(prev, Math.min(t, prev.end2)); } else { drawScene(sc, t); return; }
+  const dir = sc.idx % 3, e = eIO(p); // a fresh sheet of paper slides in over the last one
+  ctx.save(); ctx.shadowColor = 'rgba(40,25,10,.45)'; ctx.shadowBlur = 40; ctx.shadowOffsetX = dir === 0 ? -20 : 0; ctx.shadowOffsetY = dir === 2 ? -20 : 0;
+  const [dx, dy] = dir === 0 ? [(1 - e) * W, 0] : dir === 1 ? [-(1 - e) * W, 0] : [0, (1 - e) * H];
+  ctx.fillStyle = '#000'; ctx.fillRect(dx, dy, W, H); ctx.restore();
+  ctx.save(); ctx.beginPath(); ctx.rect(dx, dy, W, H); ctx.clip(); ctx.translate(dx, dy); drawScene(sc, t); ctx.restore();
+}
+
+window.setup = async tl => {
+  TL = tl; VERT = !!tl.vertical;
+  TL.scenes.forEach((s, i) => { s.idx = i; s.start2 = i ? s.start - .25 : 0; });
+  TL.scenes.forEach((s, i) => { s.end2 = TL.scenes[i + 1] ? TL.scenes[i + 1].start2 : TL.duration + 1; });
+  OUT = document.createElement('canvas'); OUT.width = VERT ? 1080 : W; OUT.height = VERT ? 1920 : H; document.body.appendChild(OUT); octx = OUT.getContext('2d');
+  const work = VERT ? Object.assign(document.createElement('canvas'), { width: W, height: H }) : OUT; ctx = work.getContext('2d'); window._work = work;
+  await Promise.all(['700 40px Kalam', '400 40px Hand'].map(f => document.fonts.load(f)));
+  makeFibre();
+};
+window.draw = t => {
+  boil = Math.floor(t * 8);
+  if (!VERT) { ctx.setTransform(1, 0, 0, 1, 0, 0); frame169(t); captions(t, W, H - 30); return; }
+  // vertical cut: the 16:9 picture in the middle, title above, big captions below
+  ctx.setTransform(1, 0, 0, 1, 0, 0); frame169(t);
+  const work = window._work, real = ctx; ctx = octx; ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.fillStyle = C.bg[0]; ctx.fillRect(0, 0, 1080, 1920); ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = .55; ctx.fillStyle = fibre; ctx.fillRect(0, 0, 1080, 1920); ctx.restore();
+  text('Every How', 540, 150, 54, { head: true, a: .6 });
+  para(TL.title, 540, 330, 82, 960, { head: true, max: 3 });
+  ctx.save(); ctx.shadowColor = C.shadow; ctx.shadowOffsetY = 10; ctx.shadowBlur = 20; ctx.drawImage(work, 0, 0, W, H, 0, 560, 1080, 608); ctx.restore();
+  captions(t, 1080, 1560);
+  if (t > TL.duration - 4) chip('Full video on YouTube', 540, 1700, 50, C.accents[6], ein(t - (TL.duration - 4), 0, .5, eBack));
+  ctx = real;
+};
+</script></body></html>

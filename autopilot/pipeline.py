@@ -24,7 +24,11 @@ OUT = os.path.join(ROOT, "out")
 SERIES = {"imagine_you": {"prefix": "IY", "name": "Imagine You", "builder": "engine/build_short_v2.py"},
           # Paws & Claws episodes are made ahead in a batch (Higgsfield + ACE-Step) and stored as release assets;
           # each one goes live on its post_after date (Haseeb, 1 Nov: make them all at once, post periodically).
-          "paws_claws": {"prefix": "PC", "name": "Paws & Claws Club", "premade": True}}
+          "paws_claws": {"prefix": "PC", "name": "Paws & Claws Club", "premade": True},
+          # Every How (Haseeb, 1 Nov 2026): a 5-7 minute explainer every day. Rendering takes ~15 min, so each
+          # render is stored once as a release asset (named by a hash of the script) and reused for posting.
+          "every_how": {"prefix": "EH", "name": "Every How", "builder": "engine/build_everyhow.py",
+                        "release": "everyhow-episodes", "every_days": 1}}
 RELEASE = "https://github.com/HiretechUK/video-autopilot/releases/download/paws-episodes/"
 
 HOW_TO = """How to reply (just reply to this email):
@@ -59,7 +63,48 @@ def fetch(name: str) -> str:
     return dst
 
 
+def _script_hash(ep_path: str) -> str:
+    import hashlib
+    ep = json.load(open(ep_path))
+    core = {k: ep.get(k) for k in ("title", "sections", "short")}
+    return hashlib.sha1(json.dumps(core, sort_keys=True).encode()).hexdigest()[:8]
+
+
+def _render_cached(series: str, ep_path: str) -> dict:
+    """Full video + vertical cut + timeline, fetched from the series release if this exact script was rendered
+    before, otherwise built and uploaded there. Revisions change the script, so they get a fresh render."""
+    import requests
+    tag = SERIES[series]["release"]
+    ref = os.path.basename(ep_path).replace(".json", "")
+    stem = f"{ref}-{_script_hash(ep_path)}"
+    names = {"full": f"{stem}.mp4", "short": f"{stem}_short.mp4", "timeline": f"{stem}.timeline.json"}
+    os.makedirs(OUT, exist_ok=True)
+    paths = {k: os.path.join(OUT, n) for k, n in names.items()}
+    base = f"https://github.com/HiretechUK/video-autopilot/releases/download/{tag}/"
+    if not all(os.path.exists(p) for p in paths.values()):
+        try:
+            for k, n in names.items():
+                with requests.get(base + n, stream=True, timeout=600) as r:
+                    r.raise_for_status()
+                    with open(paths[k], "wb") as f:
+                        for chunk in r.iter_content(1 << 20):
+                            f.write(chunk)
+            print("reusing render", stem)
+        except Exception:
+            subprocess.run([sys.executable, os.path.join(ROOT, SERIES[series]["builder"]), ep_path, paths["full"],
+                            "--short", paths["short"]], check=True)
+            gh = lambda *a: subprocess.run(["gh", *a, "-R", "HiretechUK/video-autopilot"], check=False)
+            if gh("release", "view", tag).returncode:
+                gh("release", "create", tag, "--title", f"{SERIES[series]['name']} episodes",
+                   "--notes", "Rendered episodes (made by the autopilot; reused when posting).")
+            gh("release", "upload", tag, *paths.values(), "--clobber")
+    paths["url"] = base + names["full"]
+    return paths
+
+
 def render(series: str, ep_path: str):
+    if SERIES[series].get("release"):
+        return _render_cached(series, ep_path)
     if SERIES[series].get("premade"):  # full episode for YouTube, vertical cut for Reels/TikTok
         ep = json.load(open(ep_path))
         return {"full": fetch(ep["video"]), "short": fetch(ep["short"])}
@@ -70,12 +115,31 @@ def render(series: str, ep_path: str):
 
 
 def script_text(ep: dict) -> str:
-    return "\n".join(f"{i}. {s['narration'].replace('[pause] ', '… ')}" for i, s in enumerate(ep["scenes"], 1))
+    scenes = ep.get("scenes") or [s for sec in ep.get("sections", []) for s in sec["scenes"]]
+    return "\n".join(f"{i}. {s['narration'].replace('[pause] ', '… ')}" for i, s in enumerate(scenes, 1))
 
 
-def email_for_approval(ref: str, rec: dict, ep: dict, video: str):
+def email_for_approval(ref: str, rec: dict, ep: dict, video):
     v = rec.get("version", 1)
     subject = f"{SERIES[rec['series']]['name']} #{rec['number']:02d} for approval{' (v' + str(v) + ')' if v > 1 else ''} [{ref}]"
+    if rec["series"] == "every_how":
+        mins = ""
+        try:
+            mins = f" ({json.load(open(video['timeline']))['duration'] / 60:.1f} min)"
+        except Exception:
+            pass
+        ad = ep.get("ad_safety") or {}
+        fc = ep.get("factcheck") or {}
+        flag = "YELLOW: may get limited ads. " if ad.get("rating") == "yellow" else ""
+        body = (f"{ep['title']}{mins}\n\n{flag}Ad safety: {ad.get('rating', '?')} ({ad.get('reason', '')})\n"
+                f"Fact-check: {'passed' if fc.get('ok') else 'see notes below'}. {fc.get('summary', '')}\n" +
+                "".join(f"  - scene {i.get('scene')}: {i.get('problem')} (fix: {i.get('fix')})\n" for i in fc.get("open_issues", [])) +
+                f"\nWatch the full episode: {video['url']}\nThe vertical cut (Reels/TikTok/Shorts) is attached.\n\n"
+                f"{ep.get('description', '')}\n\nSources:\n" +
+                "".join(f"  - {s.get('title')}: {s.get('url')}\n" for s in ep.get("sources", [])) +
+                f"\nScript:\n{script_text(ep)}\n\n{HOW_TO.replace('make the hook scarier and change the ending to a nuclear bunker', 'shorter intro, and add a map of where it happened')}")
+        mailer.send(subject, body, [video["short"]])
+        return
     body = (f"{ep['title']}\n\n{ep.get('description', '')}\n\nScript:\n{script_text(ep)}\n\n"
             f"The video is attached.\n\n{HOW_TO}")
     mailer.send(subject, body, [video])
@@ -119,8 +183,10 @@ def make(series: str, scheduled: bool = False):
     if os.environ.get("FORCE_MAKE", "").lower() not in ("yes", "1", "true") and eps:
         last = max(datetime.fromisoformat(e["created"]) for e in eps)
         age_h = (datetime.now(timezone.utc) - last).total_seconds() / 3600
-        if age_h < EVERY_DAYS * 24 - 12:  # 12 h slack: runs are daily, so this never makes two in a row
-            print(f"last {series} episode is {age_h:.0f} h old; next one is due after {EVERY_DAYS * 24 - 12:.0f} h")
+        every = SERIES[series].get("every_days", EVERY_DAYS)
+        due = every * 24 - min(12, every * 6)  # slack: 12 h for every 2nd day, 6 h for daily; never two in a row
+        if age_h < due:
+            print(f"last {series} episode is {age_h:.0f} h old; next one is due after {due:.0f} h")
             return
     number = max([e["number"] for e in eps] or [0]) + 1
     titles = [e["title"] for e in sorted(eps, key=lambda e: e["number"])]
@@ -181,6 +247,11 @@ def check():
 
 
 PLATFORMS = ("youtube", "instagram", "facebook")  # TikTok: posted by the VPS (vps/ttposter.py)
+SERIES_PLATFORMS = {"every_how": ("youtube", "youtube_short", "instagram", "facebook")}
+
+
+def platforms(series: str):
+    return SERIES_PLATFORMS.get(series, PLATFORMS)
 
 
 def publish_queue(st):
@@ -193,15 +264,16 @@ def publish_queue(st):
         if rec["status"] not in ("approved", "partly_published"):
             continue
         links = rec.get("links", {})
-        if all(str(links.get(p, "")).startswith("http") for p in PLATFORMS):
+        if all(str(links.get(p, "")).startswith("http") for p in platforms(rec["series"])):
             continue
         path = os.path.join(ROOT, rec["file"])
         ep = json.load(open(path))
         before = dict(links)
         links = publish.publish(rec["series"], ep, render(rec["series"], path), links)
         rec["links"] = links
-        live = {k: v for k, v in links.items() if k in PLATFORMS and str(v).startswith("http")}  # TikTok is tracked separately
-        rec["status"] = "published" if len(live) == len(PLATFORMS) else ("partly_published" if live else "approved")
+        pl = platforms(rec["series"])
+        live = {k: v for k, v in links.items() if k in pl and str(v).startswith("http")}  # TikTok is tracked separately
+        rec["status"] = "published" if len(live) == len(pl) else ("partly_published" if live else "approved")
         save(st)
         new = {k: v for k, v in live.items() if before.get(k) != v}
         if new:
@@ -230,5 +302,10 @@ if __name__ == "__main__":
         dupcheck(arg)
     elif cmd == "publish":
         publish_queue(load())
+    elif cmd == "resend":  # email an existing pending episode for approval again: series=<REF>, e.g. EH-01
+        st = load()
+        rec = st["episodes"][arg]
+        p = os.path.join(ROOT, rec["file"])
+        email_for_approval(arg, rec, json.load(open(p)), render(rec["series"], p))
     else:
         check()

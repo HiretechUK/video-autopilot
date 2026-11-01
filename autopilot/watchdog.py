@@ -23,6 +23,8 @@ PARTIAL_H = 1       # posted on some platforms, failed on others: retry quickly
 ALERT_H = 60        # episode not made at all
 POST_ALERT_H = 12   # still not on YouTube/Instagram/Facebook after ~10 hourly retries
 COOLDOWN_MIN = 50
+EH_OVERDUE_H = 30   # Every How: one a day; scheduled runs make it after 18 h
+EH_ALERT_H = 48
 
 
 def gh(*args):
@@ -43,9 +45,9 @@ def autopilot_busy():
     return None
 
 
-def dispatch(cmd):
-    gh("workflow", "run", "video.yml", "--ref", "main", "-f", f"cmd={cmd}", "-f", "series=imagine_you")
-    print(f"started Video autopilot: {cmd}")
+def dispatch(cmd, series="imagine_you"):
+    gh("workflow", "run", "video.yml", "--ref", "main", "-f", f"cmd={cmd}", "-f", f"series={series}")
+    print(f"started Video autopilot: {cmd} {series}")
 
 
 def alert(subject, body):
@@ -63,14 +65,26 @@ def main():
     iy = [e for e in eps.values() if e["series"] == "imagine_you"]
     age = min(hours_since(e["created"]) for e in iy) if iy else 999
     # approved but not posted anywhere yet, or posted on some platforms but failed on others
-    platforms = ("youtube", "instagram", "facebook")  # same as pipeline.PLATFORMS (TikTok is separate)
+    def platforms_of(e):  # same as pipeline.platforms() (TikTok is separate)
+        return ("youtube", "youtube_short", "instagram", "facebook") if e["series"] == "every_how" else ("youtube", "instagram", "facebook")
     stuck = [r for r, e in eps.items() if e.get("approved") and (
         (e["status"] == "approved" and hours_since(e["approved"]) > STUCK_H) or
         (e["status"] == "partly_published" and hours_since(e["approved"]) > PARTIAL_H and
-         not all(str(e.get("links", {}).get(p, "")).startswith("http") for p in platforms)))]
+         not all(str(e.get("links", {}).get(p, "")).startswith("http") for p in platforms_of(e))))]
+    eh = [e for e in eps.values() if e["series"] == "every_how"]
+    eh_age = min(hours_since(e["created"]) for e in eh) if eh else None
     print(f"newest Imagine You episode is {age:.1f} h old; stuck approved: {stuck or 'none'}")
 
     action = "make" if age > OVERDUE_H else ("check" if stuck else None)
+    series = "imagine_you"
+    # Every How is daily: overdue after 30 h (made only once the series has its first episode)
+    if not action and eh_age is not None and eh_age > EH_OVERDUE_H:
+        action, series = "make", "every_how"
+        print(f"newest Every How episode is {eh_age:.1f} h old")
+    if eh_age is not None and EH_ALERT_H <= eh_age < EH_ALERT_H + 2:
+        alert("Every How episode is overdue",
+              f"The newest Every How episode is {eh_age:.0f} hours old and the watchdog's retries have not made a new one. "
+              f"Runs: https://github.com/{REPO}/actions/workflows/video.yml")
     if not action:
         print("all on schedule")
         return
@@ -78,7 +92,7 @@ def main():
     if busy:
         print(f"{action} needed but {busy}; will look again next hour")
     else:
-        dispatch(action)
+        dispatch(action, series)
 
     if ALERT_H <= age < ALERT_H + 2:
         alert("Imagine You episode is overdue",
@@ -88,7 +102,7 @@ def main():
         e = eps[ref]
         h = hours_since(e["approved"])
         if POST_ALERT_H <= h < POST_ALERT_H + 2:
-            missing = {p: str(e.get("links", {}).get(p, "not posted yet")) for p in platforms
+            missing = {p: str(e.get("links", {}).get(p, "not posted yet")) for p in platforms_of(e)
                        if not str(e.get("links", {}).get(p, "")).startswith("http")}
             alert(f"{ref} still not on {', '.join(missing)} after {h:.0f} h of retries",
                   f"{e['title']} [{ref}] was approved {h:.0f} hours ago. The watchdog has re-tried posting every "

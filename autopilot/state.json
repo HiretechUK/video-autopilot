@@ -30,6 +30,15 @@
     "instagram": "https://www.instagram.com/reel/DfM4fUotxR7/",
     "facebook": "https://www.facebook.com/reel/1474396317944732"
    }
+  },
+  "EH-01": {
+   "series": "every_how",
+   "number": 1,
+   "title": "How Did Daylight Saving Time Start?",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/EH-01.json",
+   "created": "2026-11-01T14:55:53.955607+00:00"
   }
  },
  "seen": [

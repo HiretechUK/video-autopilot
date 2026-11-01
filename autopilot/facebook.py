@@ -6,6 +6,7 @@ more: python -m autopilot.pipeline connect_instagram imagine_you
 """
 from __future__ import annotations
 
+import os
 import time
 
 import requests
@@ -50,5 +51,37 @@ def find_existing(account: str, title: str) -> str | None:
                             access_token=tok).get("data", []):
         if (v.get("description") or "").strip().lower().startswith(want):
             link = v.get("permalink_url") or f"/reel/{v['id']}"
+            return link if link.startswith("http") else f"https://www.facebook.com{link}"
+    return None
+
+
+GV = "https://graph-video.facebook.com/v23.0"
+
+
+def upload_video(account: str, video: str, title: str, description: str) -> str:
+    """Long-form (16:9) Page video, for series whose full episode goes to Facebook (Every How)."""
+    rec = tokens.get("instagram", account)
+    if not rec or not rec.get("page_id"):
+        raise LookupError("not connected")
+    tok, page = rec["page_token"], rec["page_id"]
+    with open(video, "rb") as f:
+        r = requests.post(f"{GV}/{page}/videos", data={"title": title[:250], "description": description[:5000],
+                                                         "published": "true", "access_token": tok},
+                          files={"source": (os.path.basename(video), f, "video/mp4")}, timeout=1800).json()
+    if "id" not in r:
+        raise RuntimeError(f"Facebook video upload failed: {r}")
+    return f"https://www.facebook.com/{page}/videos/{r['id']}"
+
+
+def find_existing_video(account: str, title: str) -> str | None:
+    """Duplicate guard for long-form Page videos (matched on the video title)."""
+    rec = tokens.get("instagram", account)
+    if not rec or not rec.get("page_id"):
+        raise LookupError("not connected")
+    tok, page = rec["page_token"], rec["page_id"]
+    want = title[:250].strip().lower()
+    for v in instagram._get(f"{page}/videos", fields="title,permalink_url", limit=50, access_token=tok).get("data", []):
+        if (v.get("title") or "").strip().lower() == want:
+            link = v.get("permalink_url") or f"/{page}/videos/{v['id']}"
             return link if link.startswith("http") else f"https://www.facebook.com{link}"
     return None

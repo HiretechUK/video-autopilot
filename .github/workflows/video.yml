@@ -15,7 +15,7 @@ on:
         description: "make, check, publish, dupcheck, connect_youtube, connect_instagram or connect_tiktok"
         default: make
       series:
-        description: "series to make"
+        description: "series to make (imagine_you, every_how)"
         default: imagine_you
       force:
         description: "make an extra episode even if one is not due yet (yes/no)"
@@ -65,6 +65,7 @@ jobs:
           TT_CLIENT_KEY: ${{ secrets.TT_CLIENT_KEY }}
           TT_CLIENT_SECRET: ${{ secrets.TT_CLIENT_SECRET }}
           FORCE_MAKE: ${{ github.event.inputs.force }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           CMD="${{ github.event.inputs.cmd }}"
           if [ -z "$CMD" ]; then
@@ -73,6 +74,8 @@ jobs:
             python -m autopilot.pipeline check || rc=1
             # one automatic retry if making the episode fails (e.g. a flaky API call)
             python -m autopilot.pipeline make imagine_you || { echo "make failed, retrying in 90s"; sleep 90; python -m autopilot.pipeline make imagine_you; } || rc=1
+            # Every How: one a day (due-checked, so 4 runs a day never make two)
+            python -m autopilot.pipeline make every_how || { echo "Every How make failed, retrying in 90s"; sleep 90; python -m autopilot.pipeline make every_how; } || rc=1
             exit $rc
           else
             python -m autopilot.pipeline $CMD ${{ github.event.inputs.series || 'imagine_you' }}
