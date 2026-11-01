@@ -42,7 +42,7 @@ def autopilot_busy():
 
 
 def dispatch(cmd):
-    gh("workflow", "run", "video.yml", "-f", f"cmd={cmd}", "-f", "series=imagine_you")
+    gh("workflow", "run", "video.yml", "--ref", "main", "-f", f"cmd={cmd}", "-f", "series=imagine_you")
     print(f"started Video autopilot: {cmd}")
 
 
