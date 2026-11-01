@@ -346,6 +346,30 @@ if __name__ == "__main__":
         dupcheck(arg)
     elif cmd == "publish":
         publish_queue(load())
+    elif cmd == "replace":  # Every How: re-render a published episode, make the new copy public, old copy private
+        from . import publish, youtube
+        st = load()
+        rec = st["episodes"][arg]
+        p = os.path.join(ROOT, rec["file"])
+        ep = json.load(open(p))
+        old = dict(rec.get("private") or {})
+        rec["version"] = rec.get("version", 1) + 1
+        rec.pop("private", None)
+        stage(arg, rec, ep, p)
+        rec["private"]["superseded"] = [v for v in (old.get("full"), old.get("short")) if v] + old.get("superseded", [])
+        save(st)
+        if rec["status"] in ("published", "partly_published", "approved"):
+            links = publish.publish_every_how(rec["private"], {})
+            rec["links"] = links
+            if all(str(links.get(k, "")).startswith("http") for k in ("youtube", "youtube_short")):
+                for vid in (old.get("full"), old.get("short")):
+                    if vid:
+                        youtube.set_privacy(publish.ACCOUNTS["every_how"]["youtube"], vid, "private")
+                rec["status"] = "published"
+            save(st)
+            mailer.send(f"Replaced: {ep['title']} [{arg}]", "A sharper copy is now public:\n" +
+                        "\n".join(f"  {k}: {v}" for k, v in links.items()) +
+                        f"\n\nThe old copies are now private (not deleted): {', '.join(rec['private']['superseded'])}.")
     elif cmd == "resend":  # email an existing pending episode for approval again: series=<REF>, e.g. EH-01
         st = load()
         rec = st["episodes"][arg]

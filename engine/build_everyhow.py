@@ -167,16 +167,16 @@ def render_frames(timeline, wav, out, fps, workers, size):
         a, b = k * chunk, min(total, (k + 1) * chunk)
         seg = os.path.join(tmp, f"part{k}.mp4")
         ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", str(fps), "-c:v", "mjpeg",
-                               "-i", "-", "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p",
+                               "-i", "-", "-c:v", "libx264", "-preset", "fast", "-crf", "16", "-tune", "animation", "-pix_fmt", "yuv420p",
                                "-s", f"{w}x{h}", seg], stdin=subprocess.PIPE)
         with sync_playwright() as p:
             br = p.chromium.launch()
-            pg = br.new_page(viewport={"width": 1920, "height": 1080})
+            pg = br.new_page(viewport={"width": 1920, "height": 1080})  # canvas renders at 2560x1440 (renderer S=4/3)
             pg.on("pageerror", lambda e: print("PAGE ERROR", e, file=sys.stderr))
             pg.goto("file://" + os.path.join(KIT, "renderer.html"))
             pg.evaluate("tl => setup(tl)", timeline)
             for i in range(a, b):
-                b64 = pg.evaluate("t => { draw(t); return document.querySelector('canvas').toDataURL('image/jpeg', 0.92).split(',')[1]; }", i / fps)
+                b64 = pg.evaluate("t => { draw(t); return document.querySelector('canvas').toDataURL('image/jpeg', 0.96).split(',')[1]; }", i / fps)
                 ff.stdin.write(base64.b64decode(b64))
                 if (i - a) % 900 == 0:
                     print(f"  worker {k}: frame {i - a}/{b - a}", flush=True)
@@ -215,7 +215,7 @@ def build(ep_path, out, short_out=None, models=None, fps=30, workers=2):
     wav = out.replace(".mp4", ".wav")
     mix_audio(voice, dur, [s["start"] - 0.25 for s in tl[1:]], wav, seed)
     print(f"{ep['title']}: {len(scenes)} scenes, {dur / 60:.1f} min")
-    render_frames(timeline, wav, out, fps, workers, (1920, 1080))
+    render_frames(timeline, wav, out, fps, workers, (2560, 1440))
     os.remove(wav)
     json.dump(timeline, open(out.replace(".mp4", ".timeline.json"), "w"))
 
@@ -229,7 +229,7 @@ def build(ep_path, out, short_out=None, models=None, fps=30, workers=2):
         swav = short_out.replace(".mp4", ".wav")
         mix_audio(svoice, sdur, [s["start"] - 0.25 for s in stl[1:]], swav, seed + 1)
         print(f"short: {len(sub)} scenes, {sdur:.0f} s")
-        render_frames(stimeline, swav, short_out, fps, workers, (1080, 1920))
+        render_frames(stimeline, swav, short_out, fps, workers, (1440, 2560))
         os.remove(swav)
     return out
 
