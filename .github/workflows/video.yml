@@ -67,7 +67,8 @@ jobs:
             # scheduled run: replies + posting first, then make an episode if one is due (age-checked)
             rc=0
             python -m autopilot.pipeline check || rc=1
-            python -m autopilot.pipeline make imagine_you || rc=1
+            # one automatic retry if making the episode fails (e.g. a flaky API call)
+            python -m autopilot.pipeline make imagine_you || { echo "make failed, retrying in 90s"; sleep 90; python -m autopilot.pipeline make imagine_you; } || rc=1
             exit $rc
           else
             python -m autopilot.pipeline $CMD ${{ github.event.inputs.series || 'imagine_you' }}
