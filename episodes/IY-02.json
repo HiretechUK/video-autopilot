@@ -17,8 +17,8 @@
  "speed": 1.05,
  "costume": "cap",
  "hud": [
-  "DAY 1 \u00b7 02:07 AM",
-  "\u25cf POWER: OFF",
+  "DAY 1 · 02:07 AM",
+  "● POWER: OFF",
   "FOOD: THREE DAYS"
  ],
  "scenes": [
@@ -38,8 +38,8 @@
     "z1": 1.1
    },
    "hud": [
-    "DAY 1 \u00b7 02:07 AM",
-    "\u25cf POWER: OFF",
+    "DAY 1 · 02:07 AM",
+    "● POWER: OFF",
     "FOOD: THREE DAYS"
    ],
    "mood": "tense",
@@ -86,8 +86,8 @@
     "z1": 1.12
    },
    "hud": [
-    "DAY 1 \u00b7 06:30 AM",
-    "\u25cf WATER: STILL FLOWING",
+    "DAY 1 · 06:30 AM",
+    "● WATER: STILL FLOWING",
     "TAPS: DYING"
    ],
    "rule": {
@@ -120,8 +120,8 @@
     "z1": 1.1
    },
    "hud": [
-    "DAY 3 \u00b7 11:00 AM",
-    "\u25cf FRIDGES: WARM",
+    "DAY 3 · 11:00 AM",
+    "● FRIDGES: WARM",
     "FOOD: ONE WEEK"
    ],
    "mood": "calm",
@@ -148,8 +148,8 @@
     "z1": 1.2
    },
    "hud": [
-    "DAY 9 \u00b7 09:40 PM",
-    "\u25cf TEMP: FALLING",
+    "DAY 9 · 09:40 PM",
+    "● TEMP: FALLING",
     "FOOD: FOUR DAYS"
    ],
    "rule": {
@@ -180,8 +180,8 @@
     "z1": 1.1
    },
    "hud": [
-    "DAY 21 \u00b7 08:15 PM",
-    "\u25cf WATER: BOILED",
+    "DAY 21 · 08:15 PM",
+    "● WATER: BOILED",
     "FOOD: FOUR DAYS"
    ],
    "mood": "tense",
@@ -206,8 +206,8 @@
     "z1": 1.25
    },
    "hud": [
-    "DAY 30 \u00b7 11:40 PM",
-    "\u25cf SIGNAL: ONE LIGHT",
+    "DAY 30 · 11:40 PM",
+    "● SIGNAL: ONE LIGHT",
     "FOOD: FOUR DAYS"
    ],
    "mood": "whisper",
@@ -240,11 +240,16 @@
    "choice": {
     "q": "WHAT DO YOU DO?",
     "options": [
-     "A \u00b7 CROSS THE STREET",
-     "B \u00b7 STAY HIDDEN"
+     "A · CROSS THE STREET",
+     "B · STAY HIDDEN"
     ]
    },
    "hold_after": 3.2
   }
- ]
+ ],
+ "thumb": {
+  "text": "No power for 30 days",
+  "highlight": "30",
+  "at": 26.0
+ }
 }

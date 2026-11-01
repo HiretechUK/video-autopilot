@@ -2,79 +2,619 @@
  "title": "How Did Daylight Saving Time Start?",
  "question": "How did daylight saving time start, and why can't we stop changing the clocks?",
  "description": "Clocks across America fell back this weekend, months after the House voted to make daylight saving time permanent. So how did the world end up changing its clocks twice a year? From Benjamin Franklin's joke and a New Zealand bug collector to a London builder and the First World War, here's how daylight saving time began, what it really saves, and why it's so hard to stop. Lighter mornings or lighter evenings: which would you keep?",
- "tags": ["daylight saving time", "clocks fall back", "history of daylight saving", "Sunshine Protection Act", "William Willett", "time change", "how did", "explained", "history", "every how"],
- "ad_safety": {"rating": "green", "reason": "History and policy explainer; both sides of the current debate presented."},
+ "tags": [
+  "daylight saving time",
+  "clocks fall back",
+  "history of daylight saving",
+  "Sunshine Protection Act",
+  "William Willett",
+  "time change",
+  "how did",
+  "explained",
+  "history",
+  "every how"
+ ],
+ "ad_safety": {
+  "rating": "green",
+  "reason": "History and policy explainer; both sides of the current debate presented."
+ },
  "sources": [
-  {"title": "Franklin Institute: Did Ben Franklin invent daylight saving time?", "url": "https://www.fi.edu/benjamin-franklin/daylight-savings-time"},
-  {"title": "Western Front Association: The changing of the clocks and the First World War", "url": "https://www.westernfrontassociation.com/world-war-i-articles/2020/october/spring-forward-fall-back-the-changing-of-the-clocks-and-the-first-world-war/"},
-  {"title": "House Energy & Commerce: House passes legislation to make daylight saving time permanent (14 July 2026)", "url": "https://energycommerce.house.gov/posts/house-passes-legislation-to-make-daylight-saving-time-permanent"},
-  {"title": "Sleep Foundation: Latest updates on daylight saving time in 2026", "url": "https://www.sleepfoundation.org/sleep-news/latest-updates-daylight-saving-time-legislation-change"},
-  {"title": "AP via PBS NewsHour: Senate is skeptical about making daylight saving time permanent (29 Oct 2026)", "url": "https://www.pbs.org/newshour/politics/senate-is-skeptical-about-making-daylight-saving-time-permanent-despite-trumps-pressure"},
-  {"title": "US Department of Energy: Impact of extended daylight saving time on national energy consumption (2008)", "url": "https://www1.eere.energy.gov/analysis/pdfs/epact_sec_110_edst_report_to_congress_2008.pdf"},
-  {"title": "American Academy of Sleep Medicine position on daylight saving time (2020)", "url": "https://www.technologynetworks.com/proteomics/news/abolish-daylight-savings-time-say-sleep-academics-339168"},
-  {"title": "timeanddate.com: Daylight saving time statistics", "url": "https://www.timeanddate.com/time/dst/statistics.html"},
-  {"title": "Wikipedia: Sunshine Protection Act (Uniform Time Act, 1974 experiment)", "url": "https://en.wikipedia.org/wiki/Sunshine_Protection_Act"}
+  {
+   "title": "Franklin Institute: Did Ben Franklin invent daylight saving time?",
+   "url": "https://www.fi.edu/benjamin-franklin/daylight-savings-time"
+  },
+  {
+   "title": "Western Front Association: The changing of the clocks and the First World War",
+   "url": "https://www.westernfrontassociation.com/world-war-i-articles/2020/october/spring-forward-fall-back-the-changing-of-the-clocks-and-the-first-world-war/"
+  },
+  {
+   "title": "House Energy & Commerce: House passes legislation to make daylight saving time permanent (14 July 2026)",
+   "url": "https://energycommerce.house.gov/posts/house-passes-legislation-to-make-daylight-saving-time-permanent"
+  },
+  {
+   "title": "Sleep Foundation: Latest updates on daylight saving time in 2026",
+   "url": "https://www.sleepfoundation.org/sleep-news/latest-updates-daylight-saving-time-legislation-change"
+  },
+  {
+   "title": "AP via PBS NewsHour: Senate is skeptical about making daylight saving time permanent (29 Oct 2026)",
+   "url": "https://www.pbs.org/newshour/politics/senate-is-skeptical-about-making-daylight-saving-time-permanent-despite-trumps-pressure"
+  },
+  {
+   "title": "US Department of Energy: Impact of extended daylight saving time on national energy consumption (2008)",
+   "url": "https://www1.eere.energy.gov/analysis/pdfs/epact_sec_110_edst_report_to_congress_2008.pdf"
+  },
+  {
+   "title": "American Academy of Sleep Medicine position on daylight saving time (2020)",
+   "url": "https://www.technologynetworks.com/proteomics/news/abolish-daylight-savings-time-say-sleep-academics-339168"
+  },
+  {
+   "title": "timeanddate.com: Daylight saving time statistics",
+   "url": "https://www.timeanddate.com/time/dst/statistics.html"
+  },
+  {
+   "title": "Wikipedia: Sunshine Protection Act (Uniform Time Act, 1974 experiment)",
+   "url": "https://en.wikipedia.org/wiki/Sunshine_Protection_Act"
+  }
  ],
  "sections": [
-  {"heading": "", "scenes": [
-   {"narration": "Last night, clocks across America fell back an hour. Most of Europe did the same a week earlier.", "visual": {"type": "title", "text": "How did daylight saving time start?", "icon": "clock-counter-clockwise"}},
-   {"narration": "And this year, it nearly didn't happen. In July, the US House of Representatives voted to make daylight saving time permanent.", "visual": {"type": "stat", "value": "308 to 117", "label": "House vote to make daylight saving time permanent, July 2026", "icon": "gavel"}},
-   {"narration": "So how did so much of the world end up moving its clocks twice a year? And why is it so hard to stop?", "visual": {"type": "question", "text": "Why do we change the clocks at all?"}}
-  ]},
-  {"heading": "A joke and a bug collector", "scenes": [
-   {"narration": "The story usually starts with Benjamin Franklin. In 1784, living in Paris, he wrote a letter to a newspaper about the cost of candles.", "visual": {"type": "hero", "icon": "newspaper", "label": "Benjamin Franklin, 1784", "sub": "A letter to the Journal de Paris"}},
-   {"narration": "His plan? Tax every window shutter, ration candles, and ring church bells, or even fire cannons, at sunrise to get people out of bed.", "visual": {"type": "list", "items": [{"icon": "window", "text": "Tax every window shutter", "cue": "shutter"}, {"icon": "fire", "text": "Ration the candles", "cue": "ration"}, {"icon": "bell", "text": "Ring bells, fire cannons at dawn", "cue": "bells"}]}},
-   {"narration": "It was a joke. Franklin never suggested changing the clocks at all.", "visual": {"type": "question", "text": "It was a joke."}},
-   {"narration": "The first serious proposal came in 1895, from George Hudson, a New Zealand insect collector who wanted more daylight after work to hunt for bugs.", "visual": {"type": "hero", "icon": "bug", "label": "George Hudson, 1895", "sub": "A New Zealand insect collector"}},
-   {"narration": "He suggested moving the clocks forward by two whole hours in summer. Hardly anyone took him seriously.", "visual": {"type": "map", "countries": ["New Zealand"], "label": "The first real proposal: 1895"}}
-  ]},
-  {"heading": "The builder", "scenes": [
-   {"narration": "Then came William Willett, a London builder. Out riding early one summer morning, he noticed how many houses still had their blinds down.", "visual": {"type": "hero", "icon": "horse", "label": "William Willett", "sub": "A London builder who hated wasted mornings"}},
-   {"narration": "In 1907, he paid to publish a pamphlet with a blunt title: The Waste of Daylight.", "visual": {"type": "hero", "icon": "book-open", "label": "The Waste of Daylight", "sub": "Published at his own expense, 1907"}},
-   {"narration": "His plan was oddly precise. Move the clocks forward eighty minutes in April, in four steps of twenty minutes, then back again in September.", "visual": {"type": "flow", "steps": [{"icon": "clock-clockwise", "label": "April: forward 80 minutes", "cue": "april"}, {"icon": "sun", "label": "Lighter summer evenings", "cue": "steps"}, {"icon": "clock-counter-clockwise", "label": "September: back again", "cue": "september"}]}},
-   {"narration": "He spent years lobbying Parliament. It never became law in his lifetime. Willett died in 1915.", "visual": {"type": "timeline", "events": [{"year": "1895", "label": "Hudson's proposal", "icon": "bug"}, {"year": "1907", "label": "Willett's pamphlet", "icon": "book-open"}, {"year": "1915", "label": "Willett dies, still no law", "icon": "hourglass"}]}}
-  ]},
-  {"heading": "War", "scenes": [
-   {"narration": "A year later, war did what campaigning couldn't.", "visual": {"type": "question", "text": "Then came the war."}},
-   {"narration": "On the thirtieth of April, 1916, Germany and Austria-Hungary put their clocks forward, to save coal for the war effort.", "visual": {"type": "map", "countries": ["Germany", "Austria", "Hungary", "Czechia"], "labels": false, "label": "First to switch: 30 April 1916"}},
-   {"narration": "Lighter evenings meant fewer lamps lit, and fewer lamps meant less coal burned. Coal was what the war ran on.", "visual": {"type": "flow", "steps": [{"icon": "sun-horizon", "label": "Lighter evenings"}, {"icon": "lightbulb", "label": "Fewer lamps lit"}, {"icon": "factory", "label": "Coal saved for the war"}]}},
-   {"narration": "Britain followed within weeks. Parliament passed the bill on the seventeenth of May, and the clocks went forward four days later.", "visual": {"type": "timeline", "events": [{"year": "30 Apr", "label": "Germany switches", "icon": "flag"}, {"year": "17 May", "label": "Britain passes the bill", "icon": "scroll"}, {"year": "21 May", "label": "British clocks go forward", "icon": "clock-clockwise"}]}},
-   {"narration": "The United States joined in 1918, then scrapped it nationally straight after the war, after strong opposition, especially from farmers.", "visual": {"type": "map", "countries": ["United States of America"], "label": "1918: the US joins, then quits"}}
-  ]},
-  {"heading": "America's muddle", "scenes": [
-   {"narration": "For decades after that, American cities and states set their own rules, and the time could change from one town to the next.", "visual": {"type": "hero", "icon": "train", "label": "A patchwork of clocks", "sub": "Cities and states set their own rules"}},
-   {"narration": "In 1966, the Uniform Time Act brought order: one national schedule, though states were allowed to opt out.", "visual": {"type": "hero", "icon": "scales", "label": "Uniform Time Act, 1966", "sub": "One schedule. States may opt out."}},
-   {"narration": "That's why Hawaii and most of Arizona never change their clocks at all.", "visual": {"type": "list", "items": [{"icon": "sun", "text": "Hawaii: no clock changes"}, {"icon": "sun-horizon", "text": "Most of Arizona: no clock changes"}]}},
-   {"narration": "In 1974, during an oil crisis, America even tried daylight saving time all year round.", "visual": {"type": "hero", "icon": "gas-pump", "label": "1974: all year round", "sub": "An experiment during the oil crisis"}},
-   {"narration": "It was popular, until winter came and children were walking to school in the dark. Congress ended the experiment early, that October.", "visual": {"type": "hero", "icon": "student", "label": "Dark winter mornings", "sub": "Experiment ended early, October 1974"}}
-  ]},
-  {"heading": "Does it save energy?", "scenes": [
-   {"narration": "So does changing the clocks actually save energy? That was always the promise.", "visual": {"type": "question", "text": "Does it actually save energy?"}},
-   {"narration": "When America lengthened daylight saving time in 2007, the Department of Energy measured what happened.", "visual": {"type": "hero", "icon": "lightning", "label": "US Department of Energy", "sub": "Report to Congress, 2008"}},
-   {"narration": "It found a saving of about half a percent of electricity on each extra day. Across the whole year, that came to about three hundredths of one percent.", "visual": {"type": "bars", "title": "Electricity saved by the longer daylight saving period", "unit": "%", "items": [{"label": "On each extra day", "value": "0.5", "cue": "half"}, {"label": "Across the whole year", "value": "0.03", "cue": "whole"}]}},
-   {"narration": "A real saving, but a tiny one.", "visual": {"type": "stat", "value": "0.03%", "label": "of a year's US electricity", "icon": "plug"}}
-  ]},
-  {"heading": "Your body clock", "scenes": [
-   {"narration": "Sleep doctors say the switch itself has a cost, because your body runs on its own clock.", "visual": {"type": "zoom", "icon": "person", "label": "You", "inner_icon": "brain", "inner_label": "Your body clock"}},
-   {"narration": "The American Academy of Sleep Medicine says traffic deaths rise by as much as six percent in the first few days after clocks spring forward.", "visual": {"type": "stat", "value": "6%", "label": "rise in traffic deaths in the days after the spring change", "icon": "car"}},
-   {"narration": "So the academy wants the changes to stop, and standard time kept all year, because morning light keeps the body clock in step.", "visual": {"type": "hero", "icon": "alarm", "label": "Sleep doctors' pick", "sub": "Permanent standard time"}}
-  ]},
-  {"heading": "Why can't we stop?", "scenes": [
-   {"narration": "Here's the catch. Most people want the changing to stop. They just can't agree which time to keep.", "visual": {"type": "compare", "left": {"icon": "sun-horizon", "label": "Permanent daylight time", "value": "Lighter evenings"}, "right": {"icon": "sun", "label": "Permanent standard time", "value": "Lighter mornings"}}},
-   {"narration": "The House bill picks daylight time. Supporters, including President Trump, want more light in the evening, after work and school.", "visual": {"type": "hero", "icon": "sun-horizon", "label": "For: lighter evenings", "sub": "More daylight after work and school"}},
-   {"narration": "Critics in the Senate warn that in parts of the country, winter sunrise would come after nine in the morning, with children heading to school in the dark.", "visual": {"type": "hero", "icon": "moon-stars", "label": "Against: dark mornings", "sub": "Winter sunrise after 9am in some places"}},
-   {"narration": "As of this weekend, the bill is stuck in the Senate. So the clocks changed again.", "visual": {"type": "hero", "icon": "hourglass", "label": "Stuck in the Senate", "sub": "So the clocks fell back again"}}
-  ]},
-  {"heading": "The rest of the world", "scenes": [
-   {"narration": "America isn't alone. Seventy countries still change their clocks, and seventy three others tried it, then gave up.", "visual": {"type": "bars", "title": "Countries and daylight saving time, 2026", "items": [{"label": "Still change clocks", "value": "70", "cue": "seventy"}, {"label": "Tried it, then stopped", "value": "73", "cue": "tried"}]}},
-   {"narration": "In 2019, the European Parliament voted to end clock changes too. But Europe still changes them, because countries couldn't agree on which time to keep.", "visual": {"type": "map", "countries": ["Germany", "France", "Spain", "Italy", "Poland", "Netherlands", "Sweden", "Finland", "Portugal", "Greece", "Romania", "Ireland", "Belgium", "Austria", "Czechia", "Hungary", "Denmark"], "labels": false, "label": "Voted to stop in 2019. Still changing."}},
-   {"narration": "And near the equator, most countries never bothered. Daylight there barely changes through the year.", "visual": {"type": "hero", "icon": "globe", "label": "Near the equator", "sub": "Days stay close to 12 hours all year"}}
-  ]},
-  {"heading": "So, how did it start?", "scenes": [
-   {"narration": "So daylight saving time began as a joke, became a bug collector's dream, a builder's crusade, and then a wartime way to save coal.", "visual": {"type": "timeline", "events": [{"year": "1784", "label": "Franklin's joke", "icon": "newspaper"}, {"year": "1895", "label": "Hudson's idea", "icon": "bug"}, {"year": "1907", "label": "Willett's crusade", "icon": "horse"}, {"year": "1916", "label": "War makes it real", "icon": "factory"}]}},
-   {"narration": "More than a century later, we're still changing the clocks, mostly because we can't agree on how to stop.", "visual": {"type": "question", "text": "We still can't agree how to stop."}},
-   {"narration": "So which would you keep: lighter mornings, or lighter evenings? Tell us in the comments.", "visual": {"type": "compare", "left": {"icon": "sun", "label": "Lighter mornings"}, "right": {"icon": "sun-horizon", "label": "Lighter evenings"}, "vs": "or"}}
-  ]}
+  {
+   "heading": "",
+   "scenes": [
+    {
+     "narration": "Last night, clocks across America fell back an hour. Most of Europe did the same a week earlier.",
+     "visual": {
+      "type": "title",
+      "text": "How did daylight saving time start?",
+      "icon": "clock-counter-clockwise"
+     }
+    },
+    {
+     "narration": "And this year, it nearly didn't happen. In July, the US House of Representatives voted to make daylight saving time permanent.",
+     "visual": {
+      "type": "stat",
+      "value": "308 to 117",
+      "label": "House vote to make daylight saving time permanent, July 2026",
+      "icon": "gavel"
+     }
+    },
+    {
+     "narration": "So how did so much of the world end up moving its clocks twice a year? And why is it so hard to stop?",
+     "visual": {
+      "type": "question",
+      "text": "Why do we change the clocks at all?"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "A joke and a bug collector",
+   "scenes": [
+    {
+     "narration": "The story usually starts with Benjamin Franklin. In 1784, living in Paris, he wrote a letter to a newspaper about the cost of candles.",
+     "visual": {
+      "type": "hero",
+      "icon": "newspaper",
+      "label": "Benjamin Franklin, 1784",
+      "sub": "A letter to the Journal de Paris"
+     }
+    },
+    {
+     "narration": "His plan? Tax every window shutter, ration candles, and ring church bells, or even fire cannons, at sunrise to get people out of bed.",
+     "visual": {
+      "type": "list",
+      "items": [
+       {
+        "icon": "window",
+        "text": "Tax every window shutter",
+        "cue": "shutter"
+       },
+       {
+        "icon": "fire",
+        "text": "Ration the candles",
+        "cue": "ration"
+       },
+       {
+        "icon": "bell",
+        "text": "Ring bells, fire cannons at dawn",
+        "cue": "bells"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "It was a joke. Franklin never suggested changing the clocks at all.",
+     "visual": {
+      "type": "question",
+      "text": "It was a joke."
+     }
+    },
+    {
+     "narration": "The first serious proposal came in 1895, from George Hudson, a New Zealand insect collector who wanted more daylight after work to hunt for bugs.",
+     "visual": {
+      "type": "hero",
+      "icon": "bug",
+      "label": "George Hudson, 1895",
+      "sub": "A New Zealand insect collector"
+     }
+    },
+    {
+     "narration": "He suggested moving the clocks forward by two whole hours in summer. Hardly anyone took him seriously.",
+     "visual": {
+      "type": "map",
+      "countries": [
+       "New Zealand"
+      ],
+      "label": "The first real proposal: 1895"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The builder",
+   "scenes": [
+    {
+     "narration": "Then came William Willett, a London builder. Out riding early one summer morning, he noticed how many houses still had their blinds down.",
+     "visual": {
+      "type": "hero",
+      "icon": "horse",
+      "label": "William Willett",
+      "sub": "A London builder who hated wasted mornings"
+     }
+    },
+    {
+     "narration": "In 1907, he paid to publish a pamphlet with a blunt title: The Waste of Daylight.",
+     "visual": {
+      "type": "hero",
+      "icon": "book-open",
+      "label": "The Waste of Daylight",
+      "sub": "Published at his own expense, 1907"
+     }
+    },
+    {
+     "narration": "His plan was oddly precise. Move the clocks forward eighty minutes in April, in four steps of twenty minutes, then back again in September.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "clock-clockwise",
+        "label": "April: forward 80 minutes",
+        "cue": "april"
+       },
+       {
+        "icon": "sun",
+        "label": "Lighter summer evenings",
+        "cue": "steps"
+       },
+       {
+        "icon": "clock-counter-clockwise",
+        "label": "September: back again",
+        "cue": "september"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "He spent years lobbying Parliament. It never became law in his lifetime. Willett died in 1915.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "1895",
+        "label": "Hudson's proposal",
+        "icon": "bug"
+       },
+       {
+        "year": "1907",
+        "label": "Willett's pamphlet",
+        "icon": "book-open"
+       },
+       {
+        "year": "1915",
+        "label": "Willett dies, still no law",
+        "icon": "hourglass"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "heading": "War",
+   "scenes": [
+    {
+     "narration": "A year later, war did what campaigning couldn't.",
+     "visual": {
+      "type": "question",
+      "text": "Then came the war."
+     }
+    },
+    {
+     "narration": "On the thirtieth of April, 1916, Germany and Austria-Hungary put their clocks forward, to save coal for the war effort.",
+     "visual": {
+      "type": "map",
+      "countries": [
+       "Germany",
+       "Austria",
+       "Hungary",
+       "Czechia"
+      ],
+      "labels": false,
+      "label": "First to switch: 30 April 1916"
+     }
+    },
+    {
+     "narration": "Lighter evenings meant fewer lamps lit, and fewer lamps meant less coal burned. Coal was what the war ran on.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "sun-horizon",
+        "label": "Lighter evenings"
+       },
+       {
+        "icon": "lightbulb",
+        "label": "Fewer lamps lit"
+       },
+       {
+        "icon": "factory",
+        "label": "Coal saved for the war"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Britain followed within weeks. Parliament passed the bill on the seventeenth of May, and the clocks went forward four days later.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "30 Apr",
+        "label": "Germany switches",
+        "icon": "flag"
+       },
+       {
+        "year": "17 May",
+        "label": "Britain passes the bill",
+        "icon": "scroll"
+       },
+       {
+        "year": "21 May",
+        "label": "British clocks go forward",
+        "icon": "clock-clockwise"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "The United States joined in 1918, then scrapped it nationally straight after the war, after strong opposition, especially from farmers.",
+     "visual": {
+      "type": "map",
+      "countries": [
+       "United States of America"
+      ],
+      "label": "1918: the US joins, then quits"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "America's muddle",
+   "scenes": [
+    {
+     "narration": "For decades after that, American cities and states set their own rules, and the time could change from one town to the next.",
+     "visual": {
+      "type": "hero",
+      "icon": "train",
+      "label": "A patchwork of clocks",
+      "sub": "Cities and states set their own rules"
+     }
+    },
+    {
+     "narration": "In 1966, the Uniform Time Act brought order: one national schedule, though states were allowed to opt out.",
+     "visual": {
+      "type": "hero",
+      "icon": "scales",
+      "label": "Uniform Time Act, 1966",
+      "sub": "One schedule. States may opt out."
+     }
+    },
+    {
+     "narration": "That's why Hawaii and most of Arizona never change their clocks at all.",
+     "visual": {
+      "type": "list",
+      "items": [
+       {
+        "icon": "sun",
+        "text": "Hawaii: no clock changes"
+       },
+       {
+        "icon": "sun-horizon",
+        "text": "Most of Arizona: no clock changes"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "In 1974, during an oil crisis, America even tried daylight saving time all year round.",
+     "visual": {
+      "type": "hero",
+      "icon": "gas-pump",
+      "label": "1974: all year round",
+      "sub": "An experiment during the oil crisis"
+     }
+    },
+    {
+     "narration": "It was popular, until winter came and children were walking to school in the dark. Congress ended the experiment early, that October.",
+     "visual": {
+      "type": "hero",
+      "icon": "student",
+      "label": "Dark winter mornings",
+      "sub": "Experiment ended early, October 1974"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Does it save energy?",
+   "scenes": [
+    {
+     "narration": "So does changing the clocks actually save energy? That was always the promise.",
+     "visual": {
+      "type": "question",
+      "text": "Does it actually save energy?"
+     }
+    },
+    {
+     "narration": "When America lengthened daylight saving time in 2007, the Department of Energy measured what happened.",
+     "visual": {
+      "type": "hero",
+      "icon": "lightning",
+      "label": "US Department of Energy",
+      "sub": "Report to Congress, 2008"
+     }
+    },
+    {
+     "narration": "It found a saving of about half a percent of electricity on each extra day. Across the whole year, that came to about three hundredths of one percent.",
+     "visual": {
+      "type": "bars",
+      "title": "Electricity saved by the longer daylight saving period",
+      "unit": "%",
+      "items": [
+       {
+        "label": "On each extra day",
+        "value": "0.5",
+        "cue": "half"
+       },
+       {
+        "label": "Across the whole year",
+        "value": "0.03",
+        "cue": "whole"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "A real saving, but a tiny one.",
+     "visual": {
+      "type": "stat",
+      "value": "0.03%",
+      "label": "of a year's US electricity",
+      "icon": "plug"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Your body clock",
+   "scenes": [
+    {
+     "narration": "Sleep doctors say the switch itself has a cost, because your body runs on its own clock.",
+     "visual": {
+      "type": "zoom",
+      "icon": "person",
+      "label": "You",
+      "inner_icon": "brain",
+      "inner_label": "Your body clock"
+     }
+    },
+    {
+     "narration": "The American Academy of Sleep Medicine says traffic deaths rise by as much as six percent in the first few days after clocks spring forward.",
+     "visual": {
+      "type": "stat",
+      "value": "6%",
+      "label": "rise in traffic deaths in the days after the spring change",
+      "icon": "car"
+     }
+    },
+    {
+     "narration": "So the academy wants the changes to stop, and standard time kept all year, because morning light keeps the body clock in step.",
+     "visual": {
+      "type": "hero",
+      "icon": "alarm",
+      "label": "Sleep doctors' pick",
+      "sub": "Permanent standard time"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Why can't we stop?",
+   "scenes": [
+    {
+     "narration": "Here's the catch. Most people want the changing to stop. They just can't agree which time to keep.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "sun-horizon",
+       "label": "Permanent daylight time",
+       "value": "Lighter evenings"
+      },
+      "right": {
+       "icon": "sun",
+       "label": "Permanent standard time",
+       "value": "Lighter mornings"
+      }
+     }
+    },
+    {
+     "narration": "The House bill picks daylight time. Supporters, including President Trump, want more light in the evening, after work and school.",
+     "visual": {
+      "type": "hero",
+      "icon": "sun-horizon",
+      "label": "For: lighter evenings",
+      "sub": "More daylight after work and school"
+     }
+    },
+    {
+     "narration": "Critics in the Senate warn that in parts of the country, winter sunrise would come after nine in the morning, with children heading to school in the dark.",
+     "visual": {
+      "type": "hero",
+      "icon": "moon-stars",
+      "label": "Against: dark mornings",
+      "sub": "Winter sunrise after 9am in some places"
+     }
+    },
+    {
+     "narration": "As of this weekend, the bill is stuck in the Senate. So the clocks changed again.",
+     "visual": {
+      "type": "hero",
+      "icon": "hourglass",
+      "label": "Stuck in the Senate",
+      "sub": "So the clocks fell back again"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The rest of the world",
+   "scenes": [
+    {
+     "narration": "America isn't alone. Seventy countries still change their clocks, and seventy three others tried it, then gave up.",
+     "visual": {
+      "type": "bars",
+      "title": "Countries and daylight saving time, 2026",
+      "items": [
+       {
+        "label": "Still change clocks",
+        "value": "70",
+        "cue": "seventy"
+       },
+       {
+        "label": "Tried it, then stopped",
+        "value": "73",
+        "cue": "tried"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "In 2019, the European Parliament voted to end clock changes too. But Europe still changes them, because countries couldn't agree on which time to keep.",
+     "visual": {
+      "type": "map",
+      "countries": [
+       "Germany",
+       "France",
+       "Spain",
+       "Italy",
+       "Poland",
+       "Netherlands",
+       "Sweden",
+       "Finland",
+       "Portugal",
+       "Greece",
+       "Romania",
+       "Ireland",
+       "Belgium",
+       "Austria",
+       "Czechia",
+       "Hungary",
+       "Denmark"
+      ],
+      "labels": false,
+      "label": "Voted to stop in 2019. Still changing."
+     }
+    },
+    {
+     "narration": "And near the equator, most countries never bothered. Daylight there barely changes through the year.",
+     "visual": {
+      "type": "hero",
+      "icon": "globe",
+      "label": "Near the equator",
+      "sub": "Days stay close to 12 hours all year"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "So, how did it start?",
+   "scenes": [
+    {
+     "narration": "So daylight saving time began as a joke, became a bug collector's dream, a builder's crusade, and then a wartime way to save coal.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "1784",
+        "label": "Franklin's joke",
+        "icon": "newspaper"
+       },
+       {
+        "year": "1895",
+        "label": "Hudson's idea",
+        "icon": "bug"
+       },
+       {
+        "year": "1907",
+        "label": "Willett's crusade",
+        "icon": "horse"
+       },
+       {
+        "year": "1916",
+        "label": "War makes it real",
+        "icon": "factory"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "More than a century later, we're still changing the clocks, mostly because we can't agree on how to stop.",
+     "visual": {
+      "type": "question",
+      "text": "We still can't agree how to stop."
+     }
+    },
+    {
+     "narration": "So which would you keep: lighter mornings, or lighter evenings? Tell us in the comments.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "sun",
+       "label": "Lighter mornings"
+      },
+      "right": {
+       "icon": "sun-horizon",
+       "label": "Lighter evenings"
+      },
+      "vs": "or"
+     }
+    }
+   ]
+  }
  ],
- "short": {"scenes": [2, 4, 5, 7, 14, 30], "outro": "That's how daylight saving time started. The full story is on Every How."}
+ "short": {
+  "scenes": [
+   2,
+   4,
+   5,
+   7,
+   14,
+   30
+  ],
+  "outro": "That's how daylight saving time started. The full story is on Every How."
+ },
+ "thumb": {
+  "text": "Why do the clocks still change?",
+  "highlight": "clocks",
+  "icon": "clock-counter-clockwise"
+ }
 }

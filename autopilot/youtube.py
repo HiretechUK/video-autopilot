@@ -115,6 +115,21 @@ def upload(account: str, video: str, title: str, description: str, tags: list[st
     return f"https://youtube.com/watch?v={vid}"
 
 
+def set_thumbnail(account: str, video_id: str, image: str) -> str:
+    """Upload a custom thumbnail. YouTube only allows this on channels verified by phone (youtube.com/verify)."""
+    at, _ = _access(account)
+    with open(image, "rb") as f:
+        r = requests.post("https://www.googleapis.com/upload/youtube/v3/thumbnails/set",
+                          params={"videoId": video_id, "uploadType": "media"},
+                          headers={"Authorization": f"Bearer {at}", "Content-Type": "image/jpeg"}, data=f, timeout=120)
+    if r.status_code == 403:
+        raise RuntimeError("YouTube won't accept custom thumbnails on this channel until it is verified by phone: "
+                           "sign in to the channel's account, open youtube.com/verify and enter the code it texts you. "
+                           f"({r.text[:160]})")
+    r.raise_for_status()
+    return "set"
+
+
 def set_privacy(account: str, video_id: str, privacy: str = "public") -> str:
     """Change an uploaded video's privacy (Every How: private for review, public once approved)."""
     at, _ = _access(account)

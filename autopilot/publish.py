@@ -40,6 +40,24 @@ def _run(done: dict, platform: str, fn, find=None):
         done[platform] = f"failed: {e}"[:300]
 
 
+def add_thumbnail(done: dict, series: str, ep: dict, video: str | None, link_key: str = "youtube"):
+    """Give the YouTube video its custom thumbnail once (Haseeb, 1 Nov 2026). Never blocks posting."""
+    link = str(done.get(link_key, ""))
+    if not link.startswith("http") or done.get("thumbnail") == "set":
+        return
+    import tempfile
+    from . import thumbs, youtube
+    vid = link.rstrip("/").rsplit("=", 1)[-1].rsplit("/", 1)[-1]
+    try:
+        out = os.path.join(tempfile.mkdtemp(), "thumb.jpg")
+        thumbs.make(series, ep, video, out)
+        done["thumbnail"] = youtube.set_thumbnail(ACCOUNTS[series]["youtube"], vid, out)
+        print(f"thumbnail set on {vid}")
+    except Exception as e:
+        traceback.print_exc()
+        done["thumbnail"] = f"failed: {e}"[:300]
+
+
 def chapters(timeline_path: str) -> str:
     """YouTube chapters from the section starts (needs 3+ chapters, first at 0:00, each 10 s or longer)."""
     import json
@@ -82,10 +100,12 @@ def stage_every_how(ep: dict, video: dict) -> dict:
     long_desc, _ = descriptions(ep, video.get("timeline", ""))
     full = youtube.upload(cfg["youtube"], video["full"], ep["title"], long_desc, ep.get("tags", []), False,
                           category="27", privacy="private").rsplit("=", 1)[-1]
+    th = {"youtube": f"https://youtube.com/watch?v={full}"}
+    add_thumbnail(th, "every_how", ep, video["full"])  # on the private copy too, so Haseeb reviews it
     _, short_desc = descriptions(ep, video.get("timeline", ""), f"https://youtube.com/watch?v={full}")
     short = youtube.upload(cfg["youtube"], video["short"], f"{ep['title'][:88]} #Shorts", short_desc,
                            ep.get("tags", []), False, category="27", privacy="private").rsplit("=", 1)[-1]
-    return {"full": full, "short": short}
+    return {"full": full, "short": short, "thumbnail": th.get("thumbnail", "")}
 
 
 def publish_every_how(private: dict, done: dict) -> dict:
@@ -110,6 +130,7 @@ def publish(series: str, ep: dict, video: str, done: dict | None = None) -> dict
     _run(done, "youtube", lambda: youtube.upload(cfg["youtube"], full, ep["title"], f"{desc}\n\n{cfg['hashtags']}",
                                                  ep.get("tags", []), cfg["made_for_kids"]),
          lambda: youtube.find_existing(cfg["youtube"], ep["title"]))
+    add_thumbnail(done, series, ep, full)
     caption = ep.get("caption") or f"{ep['title']}.\n\n{desc} Comment A or B.\n\n{cfg['ig_hashtags']}"
     _run(done, "instagram", lambda: instagram.upload(cfg["instagram"], short, caption, os.path.basename(short)),
          lambda: instagram.find_existing(cfg["instagram"], ep["title"]))

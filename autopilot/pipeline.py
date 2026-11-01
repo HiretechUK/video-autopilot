@@ -405,6 +405,26 @@ if __name__ == "__main__":
             mailer.send(f"Replaced: {ep['title']} [{arg}]", "A sharper copy is now public:\n" +
                         "\n".join(f"  {k}: {v}" for k, v in links.items()) +
                         f"\n\nThe old copies are now private (not deleted): {', '.join(rec['private']['superseded'])}.")
+    elif cmd == "thumbs":  # (re)make custom thumbnails for live videos: series=all, a series name, or a ref
+        from . import publish, youtube
+        st = load()
+        for ref, rec in st["episodes"].items():
+            if arg not in ("all", rec["series"], ref):
+                continue
+            links = rec.get("links", {})
+            if not str(links.get("youtube", "")).startswith("http"):
+                continue
+            ep = json.load(open(os.path.join(ROOT, rec["file"])))
+            video = None
+            if rec["series"] == "imagine_you":
+                video = f"https://hiretechuk.github.io/video-autopilot/media/{ref}.mp4"
+            elif rec["series"] == "paws_claws":
+                video = f"https://github.com/{os.environ.get('GITHUB_REPOSITORY', 'HiretechUK/video-autopilot')}/releases/download/paws-episodes/{ep['video']}"
+            links.pop("thumbnail", None)
+            publish.add_thumbnail(links, rec["series"], ep, video)
+            rec["links"] = links
+            print(ref, "thumbnail:", links.get("thumbnail"))
+            save(st)
     elif cmd == "resend":  # email an existing pending episode for approval again: series=<REF>, e.g. EH-01
         st = load()
         rec = st["episodes"][arg]

@@ -17,8 +17,8 @@
  "speed": 1.05,
  "costume": "cap",
  "hud": [
-  "DAY 1 \u00b7 06:10 AM",
-  "\u25cf STRANDED",
+  "DAY 1 · 06:10 AM",
+  "● STRANDED",
   "WATER: 0 BOTTLES"
  ],
  "scenes": [
@@ -39,8 +39,8 @@
     "z1": 1.1
    },
    "hud": [
-    "DAY 1 \u00b7 06:10 AM",
-    "\u25cf STRANDED",
+    "DAY 1 · 06:10 AM",
+    "● STRANDED",
     "WATER: 0 BOTTLES"
    ],
    "mood": "tense",
@@ -66,8 +66,8 @@
     "z1": 1.15
    },
    "hud": [
-    "DAY 1 \u00b7 09:30 AM",
-    "\u25cf NO SIGNAL",
+    "DAY 1 · 09:30 AM",
+    "● NO SIGNAL",
     "THIRST: RISING"
    ],
    "mood": "calm",
@@ -92,8 +92,8 @@
     "z1": 1.12
    },
    "hud": [
-    "DAY 1 \u00b7 12:00 PM",
-    "\u25cf SUN OVERHEAD",
+    "DAY 1 · 12:00 PM",
+    "● SUN OVERHEAD",
     "THIRST: HIGH"
    ],
    "rule": {
@@ -125,8 +125,8 @@
     "z1": 1.2
    },
    "hud": [
-    "DAY 2 \u00b7 07:45 AM",
-    "\u25cf RAIN",
+    "DAY 2 · 07:45 AM",
+    "● RAIN",
     "WATER: ONE LEAF"
    ],
    "mood": "calm",
@@ -154,8 +154,8 @@
     "z1": 1.15
    },
    "hud": [
-    "DAY 3 \u00b7 05:20 PM",
-    "\u25cf BUILDING FIRES",
+    "DAY 3 · 05:20 PM",
+    "● BUILDING FIRES",
     "FIRES: THREE"
    ],
    "rule": {
@@ -188,8 +188,8 @@
     "z1": 1.25
    },
    "hud": [
-    "DAY 4 \u00b7 11:40 PM",
-    "\u25cf A LIGHT AT SEA",
+    "DAY 4 · 11:40 PM",
+    "● A LIGHT AT SEA",
     "DISTANCE: FAR"
    ],
    "mood": "whisper",
@@ -217,8 +217,8 @@
     "z1": 1.2
    },
    "hud": [
-    "DAY 4 \u00b7 11:55 PM",
-    "\u25cf SHIP LEAVING",
+    "DAY 4 · 11:55 PM",
+    "● SHIP LEAVING",
     "HOPE: FADING"
    ],
    "mood": "reveal",
@@ -245,8 +245,8 @@
     "z1": 1.1
    },
    "hud": [
-    "DAY 5 \u00b7 06:00 AM",
-    "\u25cf DECISION TIME",
+    "DAY 5 · 06:00 AM",
+    "● DECISION TIME",
     "WATER: NEARLY GONE"
    ],
    "mood": "tense",
@@ -258,11 +258,16 @@
    "choice": {
     "q": "WHAT DO YOU DO?",
     "options": [
-     "A \u00b7 STAY AND SIGNAL",
-     "B \u00b7 CLIMB INLAND"
+     "A · STAY AND SIGNAL",
+     "B · CLIMB INLAND"
     ]
    },
    "hold_after": 3.2
   }
- ]
+ ],
+ "thumb": {
+  "text": "Stranded with no help coming",
+  "highlight": "no",
+  "at": 14.0
+ }
 }
