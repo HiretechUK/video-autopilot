@@ -97,10 +97,10 @@ def _access(account: str) -> tuple[str, dict]:
 
 
 def upload(account: str, video: str, title: str, description: str, tags: list[str], made_for_kids: bool,
-           category: str = "24") -> str:
+           category: str = "24", privacy: str = "public") -> str:
     at, rec = _access(account)
     meta = {"snippet": {"title": title[:100], "description": description[:4900], "tags": tags[:15], "categoryId": category},
-            "status": {"privacyStatus": "public", "selfDeclaredMadeForKids": made_for_kids,
+            "status": {"privacyStatus": privacy, "selfDeclaredMadeForKids": made_for_kids,
                        "containsSyntheticMedia": True}}
     r = requests.post("https://www.googleapis.com/upload/youtube/v3/videos",
                       params={"uploadType": "resumable", "part": "snippet,status"},
@@ -113,6 +113,24 @@ def upload(account: str, video: str, title: str, description: str, tags: list[st
     u.raise_for_status()
     vid = u.json()["id"]
     return f"https://youtube.com/watch?v={vid}"
+
+
+def set_privacy(account: str, video_id: str, privacy: str = "public") -> str:
+    """Change an uploaded video's privacy (Every How: private for review, public once approved)."""
+    at, _ = _access(account)
+    h = {"Authorization": f"Bearer {at}"}
+    cur = requests.get(f"{API}/videos", params={"part": "status", "id": video_id}, headers=h, timeout=30)
+    cur.raise_for_status()
+    items = cur.json().get("items", [])
+    if not items:
+        raise RuntimeError(f"video {video_id} not found on the channel")
+    status = items[0]["status"]
+    if status.get("privacyStatus") != privacy:
+        status["privacyStatus"] = privacy
+        r = requests.put(f"{API}/videos", params={"part": "status"}, headers=h,
+                         json={"id": video_id, "status": status}, timeout=30)
+        r.raise_for_status()
+    return f"https://youtube.com/watch?v={video_id}"
 
 
 def find_existing(account: str, title: str) -> str | None:

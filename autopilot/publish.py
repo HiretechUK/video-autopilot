@@ -63,28 +63,37 @@ def chapters(timeline_path: str) -> str:
     return "\n".join(f"{t // 60}:{t % 60:02d} {h}" for t, h in marks)
 
 
-def publish_every_how(ep: dict, video: dict, done: dict) -> dict:
-    from . import facebook, instagram, youtube
+def descriptions(ep: dict, timeline_path: str, full_url: str = "") -> tuple[str, str]:
     cfg = ACCOUNTS["every_how"]
     srcs = "\n".join(f"- {s.get('title')}: {s.get('url')}" for s in ep.get("sources", []))
-    chap = chapters(video.get("timeline", ""))
+    chap = chapters(timeline_path)
     long_desc = (f"{ep.get('description', '')}\n\n" + (f"Chapters\n{chap}\n\n" if chap else "") +
                  f"Sources\n{srcs}\n\n{cfg['hashtags']}")[:4900]
-    _run(done, "youtube", lambda: youtube.upload(cfg["youtube"], video["full"], ep["title"], long_desc,
-                                                 ep.get("tags", []), False, category="27"),
-         lambda: youtube.find_existing(cfg["youtube"], ep["title"]))
-    short_title = f"{ep['title'][:88]} #Shorts"
-    full_link = done.get("youtube", "")
-    short_desc = (f"{ep.get('description', '')}\n\n" + (f"Full video: {full_link}\n\n" if str(full_link).startswith("http") else "") +
-                  "#Shorts #EveryHow #explained")
-    _run(done, "youtube_short", lambda: youtube.upload(cfg["youtube"], video["short"], short_title, short_desc,
-                                                       ep.get("tags", []), False, category="27"),
-         lambda: youtube.find_existing(cfg["youtube"], short_title))
-    caption = (f"{ep['title']}\n\n{ep.get('description', '')}\n\nFull video on YouTube: Every How\n\n{cfg['ig_hashtags']}")
-    _run(done, "instagram", lambda: instagram.upload(cfg["instagram"], video["short"], caption, os.path.basename(video["short"])),
-         lambda: instagram.find_existing(cfg["instagram"], ep["title"]))
-    _run(done, "facebook", lambda: facebook.upload_video(cfg["instagram"], video["full"], ep["title"], long_desc),
-         lambda: facebook.find_existing_video(cfg["instagram"], ep["title"]))
+    short_desc = (f"{ep.get('description', '')}\n\n" + (f"Full video: {full_url}\n\n" if full_url else "") +
+                  "#Shorts #EveryHow #explained")[:4900]
+    return long_desc, short_desc
+
+
+def stage_every_how(ep: dict, video: dict) -> dict:
+    """Upload the full episode and the vertical cut to YouTube as PRIVATE videos for Haseeb to review.
+    Returns {"full": id, "short": id}. Nothing is public until publish_every_how flips them."""
+    from . import youtube
+    cfg = ACCOUNTS["every_how"]
+    long_desc, _ = descriptions(ep, video.get("timeline", ""))
+    full = youtube.upload(cfg["youtube"], video["full"], ep["title"], long_desc, ep.get("tags", []), False,
+                          category="27", privacy="private").rsplit("=", 1)[-1]
+    _, short_desc = descriptions(ep, video.get("timeline", ""), f"https://youtube.com/watch?v={full}")
+    short = youtube.upload(cfg["youtube"], video["short"], f"{ep['title'][:88]} #Shorts", short_desc,
+                           ep.get("tags", []), False, category="27", privacy="private").rsplit("=", 1)[-1]
+    return {"full": full, "short": short}
+
+
+def publish_every_how(private: dict, done: dict) -> dict:
+    """Approved: make the reviewed private videos public (full first, so the Short's link works)."""
+    from . import youtube
+    cfg = ACCOUNTS["every_how"]
+    _run(done, "youtube", lambda: youtube.set_privacy(cfg["youtube"], private["full"], "public"))
+    _run(done, "youtube_short", lambda: youtube.set_privacy(cfg["youtube"], private["short"], "public"))
     return done
 
 
@@ -92,7 +101,7 @@ def publish(series: str, ep: dict, video: str, done: dict | None = None) -> dict
     from . import facebook, instagram, youtube
     cfg = ACCOUNTS[series]
     if series == "every_how":
-        return publish_every_how(ep, video, dict(done or {}))
+        raise RuntimeError("Every How publishes via publish_every_how (private review videos), not publish()")
     done = dict(done or {})
     desc = ep.get("description", "")
     full = short = video

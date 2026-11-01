@@ -25,13 +25,12 @@ SERIES = {"imagine_you": {"prefix": "IY", "name": "Imagine You", "builder": "eng
           # Paws & Claws episodes are made ahead in a batch (Higgsfield + ACE-Step) and stored as release assets;
           # each one goes live on its post_after date (Haseeb, 1 Nov: make them all at once, post periodically).
           "paws_claws": {"prefix": "PC", "name": "Paws & Claws Club", "premade": True},
-          # Every How (Haseeb, 1 Nov 2026): a 5-7 minute explainer every day. Rendering takes ~15 min, so each
-          # render is stored once as a release asset (named by a hash of the script) and reused for posting.
+          # Every How (Haseeb, 1 Nov 2026): a 5-7 minute explainer every day, YouTube only (full video + Short).
+          # Each version is uploaded to YouTube as PRIVATE for review; "approved" flips both videos to public.
           "every_how": {"prefix": "EH", "name": "Every How", "builder": "engine/build_everyhow.py",
-                        "release": "everyhow-episodes", "every_days": 1,
-                        # Haseeb, 1 Nov 2026: hold until the channel's email, YouTube and social accounts exist.
-                        # While paused: no automatic episodes and no posting (manual make/resend still work).
-                        "paused": True}}
+                        "staged": True, "every_days": 1,
+                        # set True to stop automatic episodes and posting (manual make/resend still work)
+                        "paused": False}}
 RELEASE = "https://github.com/HiretechUK/video-autopilot/releases/download/paws-episodes/"
 
 HOW_TO = """How to reply (just reply to this email):
@@ -108,6 +107,12 @@ def _render_cached(series: str, ep_path: str) -> dict:
 def render(series: str, ep_path: str):
     if SERIES[series].get("release"):
         return _render_cached(series, ep_path)
+    if SERIES[series].get("staged"):  # full episode + vertical cut + timeline
+        os.makedirs(OUT, exist_ok=True)
+        stem = os.path.join(OUT, os.path.basename(ep_path).replace(".json", ""))
+        subprocess.run([sys.executable, os.path.join(ROOT, SERIES[series]["builder"]), ep_path, stem + ".mp4",
+                        "--short", stem + "_short.mp4"], check=True)
+        return {"full": stem + ".mp4", "short": stem + "_short.mp4", "timeline": stem + ".timeline.json"}
     if SERIES[series].get("premade"):  # full episode for YouTube, vertical cut for Reels/TikTok
         ep = json.load(open(ep_path))
         return {"full": fetch(ep["video"]), "short": fetch(ep["short"])}
@@ -122,26 +127,44 @@ def script_text(ep: dict) -> str:
     return "\n".join(f"{i}. {s['narration'].replace('[pause] ', '… ')}" for i, s in enumerate(scenes, 1))
 
 
+def stage(ref: str, rec: dict, ep: dict, path: str) -> dict:
+    """Every How: render this version and upload it to YouTube as private videos (once per version)."""
+    from . import publish
+    pv = rec.get("private") or {}
+    if pv.get("version") == rec.get("version", 1) and pv.get("full") and pv.get("short"):
+        return pv
+    video = render(rec["series"], path)
+    ids = publish.stage_every_how(ep, video)
+    mins = None
+    try:
+        mins = round(json.load(open(video["timeline"]))["duration"] / 60, 1)
+    except Exception:
+        pass
+    old = [v for v in (pv.get("full"), pv.get("short")) if v]
+    rec["private"] = dict(ids, version=rec.get("version", 1), minutes=mins, superseded=rec.get("private", {}).get("superseded", []) + old)
+    return rec["private"]
+
+
 def email_for_approval(ref: str, rec: dict, ep: dict, video):
     v = rec.get("version", 1)
     subject = f"{SERIES[rec['series']]['name']} #{rec['number']:02d} for approval{' (v' + str(v) + ')' if v > 1 else ''} [{ref}]"
-    if rec["series"] == "every_how":
-        mins = ""
-        try:
-            mins = f" ({json.load(open(video['timeline']))['duration'] / 60:.1f} min)"
-        except Exception:
-            pass
+    if rec["series"] == "every_how":  # `video` is rec["private"]: the private YouTube review copies
+        mins = f" ({video['minutes']} min)" if video.get("minutes") else ""
         ad = ep.get("ad_safety") or {}
         fc = ep.get("factcheck") or {}
         flag = "YELLOW: may get limited ads. " if ad.get("rating") == "yellow" else ""
         body = (f"{ep['title']}{mins}\n\n{flag}Ad safety: {ad.get('rating', '?')} ({ad.get('reason', '')})\n"
                 f"Fact-check: {'passed' if fc.get('ok') else 'see notes below'}. {fc.get('summary', '')}\n" +
                 "".join(f"  - scene {i.get('scene')}: {i.get('problem')} (fix: {i.get('fix')})\n" for i in fc.get("open_issues", [])) +
-                f"\nWatch the full episode: {video['url']}\nThe vertical cut (Reels/TikTok/Shorts) is attached.\n\n"
+                f"\nWatch it on YouTube (private until you approve; open while signed in to the Every How account):\n"
+                f"  Full episode: https://youtube.com/watch?v={video['full']}\n"
+                f"  Short: https://youtube.com/shorts/{video['short']}\n"
+                + (f"  (Older versions stay private: {', '.join(video.get('superseded', []))}. Delete them in YouTube Studio if you like.)\n"
+                   if video.get("superseded") else "") + "\n"
                 f"{ep.get('description', '')}\n\nSources:\n" +
                 "".join(f"  - {s.get('title')}: {s.get('url')}\n" for s in ep.get("sources", [])) +
-                f"\nScript:\n{script_text(ep)}\n\n{HOW_TO.replace('make the hook scarier and change the ending to a nuclear bunker', 'shorter intro, and add a map of where it happened')}")
-        mailer.send(subject, body, [video["short"]])
+                f"\nScript:\n{script_text(ep)}\n\n{HOW_TO.replace('it gets posted', 'both videos go public on YouTube').replace('make the hook scarier and change the ending to a nuclear bunker', 'shorter intro, and add a map of where it happened')}")
+        mailer.send(subject, body)
         return
     body = (f"{ep['title']}\n\n{ep.get('description', '')}\n\nScript:\n{script_text(ep)}\n\n"
             f"The video is attached.\n\n{HOW_TO}")
@@ -212,10 +235,15 @@ def make(series: str, scheduled: bool = False):
     os.makedirs(EPDIR, exist_ok=True)
     path = os.path.join(EPDIR, f"{ref}.json")
     json.dump(ep, open(path, "w"), indent=1)
-    video = render(series, path)
     rec = {"series": series, "number": number, "title": ep["title"], "status": "pending", "version": 1,
            "file": os.path.relpath(path, ROOT), "created": datetime.now(timezone.utc).isoformat()}
-    st["episodes"][ref] = rec
+    if SERIES[series].get("staged"):
+        st["episodes"][ref] = rec
+        save(st)  # recorded first, so a failed upload can never lead to a second episode being made
+        video = stage(ref, rec, ep, path)
+    else:
+        video = render(series, path)
+        st["episodes"][ref] = rec
     save(st)
     email_for_approval(ref, rec, ep, video)
     print("sent", ref, ep["title"])
@@ -244,7 +272,8 @@ def check():
                 json.dump(new, open(path, "w"), indent=1)
                 rec["version"] = rec.get("version", 1) + 1
                 rec["title"] = new["title"]
-                email_for_approval(ref, rec, new, render(rec["series"], path))
+                video = stage(ref, rec, new, path) if SERIES[rec["series"]].get("staged") else render(rec["series"], path)
+                email_for_approval(ref, rec, new, video)
         except Exception:
             traceback.print_exc()
             mailer.send(f"Problem with {ref}", f"Your reply was:\n{text}\n\nError:\n{traceback.format_exc()[-2000:]}")
@@ -253,7 +282,7 @@ def check():
 
 
 PLATFORMS = ("youtube", "instagram", "facebook")  # TikTok: posted by the VPS (vps/ttposter.py)
-SERIES_PLATFORMS = {"every_how": ("youtube", "youtube_short", "instagram", "facebook")}
+SERIES_PLATFORMS = {"every_how": ("youtube", "youtube_short")}  # Haseeb, 1 Nov 2026: YouTube only for now
 
 
 def platforms(series: str):
@@ -278,7 +307,13 @@ def publish_queue(st):
         path = os.path.join(ROOT, rec["file"])
         ep = json.load(open(path))
         before = dict(links)
-        links = publish.publish(rec["series"], ep, render(rec["series"], path), links)
+        if SERIES[rec["series"]].get("staged"):
+            if not (rec.get("private") or {}).get("full"):
+                stage(ref, rec, ep, path)  # approved before a review copy existed: make one now
+                save(st)
+            links = publish.publish_every_how(rec["private"], links)
+        else:
+            links = publish.publish(rec["series"], ep, render(rec["series"], path), links)
         rec["links"] = links
         pl = platforms(rec["series"])
         live = {k: v for k, v in links.items() if k in pl and str(v).startswith("http")}  # TikTok is tracked separately
@@ -315,6 +350,13 @@ if __name__ == "__main__":
         st = load()
         rec = st["episodes"][arg]
         p = os.path.join(ROOT, rec["file"])
-        email_for_approval(arg, rec, json.load(open(p)), render(rec["series"], p))
+        ep = json.load(open(p))
+        if SERIES[rec["series"]].get("staged"):
+            video = stage(arg, rec, ep, p)
+            save(st)
+        else:
+            video = render(rec["series"], p)
+        email_for_approval(arg, rec, ep, video)
+        save(st)
     else:
         check()

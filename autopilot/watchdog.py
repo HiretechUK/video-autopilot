@@ -66,7 +66,7 @@ def main():
     age = min(hours_since(e["created"]) for e in iy) if iy else 999
     # approved but not posted anywhere yet, or posted on some platforms but failed on others
     def platforms_of(e):  # same as pipeline.platforms() (TikTok is separate)
-        return ("youtube", "youtube_short", "instagram", "facebook") if e["series"] == "every_how" else ("youtube", "instagram", "facebook")
+        return ("youtube", "youtube_short") if e["series"] == "every_how" else ("youtube", "instagram", "facebook")
     stuck = [r for r, e in eps.items() if e.get("approved") and (
         (e["status"] == "approved" and hours_since(e["approved"]) > STUCK_H) or
         (e["status"] == "partly_published" and hours_since(e["approved"]) > PARTIAL_H and
