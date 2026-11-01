@@ -56,6 +56,15 @@ def add_thumbnail(done: dict, series: str, ep: dict, video: str | None, link_key
     except Exception as e:
         traceback.print_exc()
         done["thumbnail"] = f"failed: {e}"[:300]
+        if "verified by phone" in str(e):
+            try:
+                from . import mailer
+                mailer.send(f"Turn on custom thumbnails: {series.replace('_', ' ').title()} channel",
+                            f"The video went live, but YouTube refused its custom thumbnail:\n\n{e}\n\n"
+                            f"Once the channel is verified, run Video autopilot with cmd thumbs and series {series} "
+                            "and every live video gets its thumbnail.")
+            except Exception:
+                traceback.print_exc()
 
 
 def chapters(timeline_path: str) -> str:
