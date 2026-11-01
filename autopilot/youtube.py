@@ -29,9 +29,9 @@ def _client():
     return cid, sec
 
 
-# Google account to sign in with, per series. Imagine You lives on a brand account under Haseeb's own Gmail;
-# Every How has its own Gmail (Haseeb, 1 Nov 2026).
-SIGN_IN = {"every_how": "harry.taroles@gmail.com"}
+# Google account to sign in with, per series, when a channel has its own Gmail. Imagine You and Every How are both
+# brand accounts under Haseeb's own Gmail (Haseeb, 1 Nov 2026), so neither is listed.
+SIGN_IN: dict[str, str] = {}
 
 
 def connect(account: str, channel_name: str) -> str:
