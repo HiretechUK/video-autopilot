@@ -103,3 +103,20 @@ def upload(account: str, video: str, title: str, description: str, tags: list[st
     u.raise_for_status()
     vid = u.json()["id"]
     return f"https://youtube.com/watch?v={vid}"
+
+
+def find_existing(account: str, title: str) -> str | None:
+    """Return the link of a video on this channel that already has this title (duplicate guard)."""
+    at, _ = _access(account)
+    h = {"Authorization": f"Bearer {at}"}
+    ch = requests.get(f"{API}/channels", params={"part": "contentDetails", "mine": "true"}, headers=h, timeout=30)
+    ch.raise_for_status()
+    uploads = ch.json()["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
+    r = requests.get(f"{API}/playlistItems", params={"part": "snippet", "playlistId": uploads, "maxResults": 50},
+                     headers=h, timeout=30)
+    r.raise_for_status()
+    want = title[:100].strip().lower()
+    for it in r.json().get("items", []):
+        if it["snippet"]["title"].strip().lower() == want:
+            return f"https://youtube.com/watch?v={it['snippet']['resourceId']['videoId']}"
+    return None

@@ -15,10 +15,20 @@ ACCOUNTS = {  # series -> account key per platform
 }
 
 
-def _run(done: dict, platform: str, fn):
+def _run(done: dict, platform: str, fn, find=None):
+    """Post to one platform, unless it is already there. `find` looks on the platform itself for a post with
+    this episode's title first, so a post that went live during a run that later failed is recorded, never
+    posted twice (Haseeb, 1 Nov 2026: no duplicates, ever). If that check itself fails, nothing is posted
+    and the platform is retried on the next run."""
     if str(done.get(platform, "")).startswith("http"):
         return
     try:
+        if find:
+            existing = find()
+            if existing:
+                print(f"{platform}: already posted, recording {existing}")
+                done[platform] = existing
+                return
         done[platform] = fn()
     except LookupError:
         done[platform] = "not connected yet"
@@ -36,9 +46,12 @@ def publish(series: str, ep: dict, video: str, done: dict | None = None) -> dict
     if isinstance(video, dict):  # premade series: long episode to YouTube, vertical cut to Reels
         full, short = video["full"], video["short"]
     _run(done, "youtube", lambda: youtube.upload(cfg["youtube"], full, ep["title"], f"{desc}\n\n{cfg['hashtags']}",
-                                                 ep.get("tags", []), cfg["made_for_kids"]))
+                                                 ep.get("tags", []), cfg["made_for_kids"]),
+         lambda: youtube.find_existing(cfg["youtube"], ep["title"]))
     caption = ep.get("caption") or f"{ep['title']}.\n\n{desc} Comment A or B.\n\n{cfg['ig_hashtags']}"
-    _run(done, "instagram", lambda: instagram.upload(cfg["instagram"], short, caption, os.path.basename(short)))
-    _run(done, "facebook", lambda: facebook.upload(cfg["instagram"], short, caption, os.path.basename(short)))
+    _run(done, "instagram", lambda: instagram.upload(cfg["instagram"], short, caption, os.path.basename(short)),
+         lambda: instagram.find_existing(cfg["instagram"], ep["title"]))
+    _run(done, "facebook", lambda: facebook.upload(cfg["instagram"], short, caption, os.path.basename(short)),
+         lambda: facebook.find_existing(cfg["instagram"], ep["title"]))
     # TikTok is posted by the VPS poster (vps/ttposter.py); tiktok.upload (inbox drafts) stays as a fallback.
     return done

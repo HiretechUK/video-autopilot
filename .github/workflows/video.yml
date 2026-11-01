@@ -12,11 +12,14 @@ on:
   workflow_dispatch:
     inputs:
       cmd:
-        description: "make, check, publish, connect_youtube, connect_instagram or connect_tiktok"
+        description: "make, check, publish, dupcheck, connect_youtube, connect_instagram or connect_tiktok"
         default: make
       series:
         description: "series to make"
         default: imagine_you
+      force:
+        description: "make an extra episode even if one is not due yet (yes/no)"
+        default: "no"
 
 permissions:
   contents: write
@@ -61,6 +64,7 @@ jobs:
           IG_USER_TOKEN: ${{ secrets.IG_USER_TOKEN }}
           TT_CLIENT_KEY: ${{ secrets.TT_CLIENT_KEY }}
           TT_CLIENT_SECRET: ${{ secrets.TT_CLIENT_SECRET }}
+          FORCE_MAKE: ${{ github.event.inputs.force }}
         run: |
           CMD="${{ github.event.inputs.cmd }}"
           if [ -z "$CMD" ]; then

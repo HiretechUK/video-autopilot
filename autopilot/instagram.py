@@ -148,3 +148,16 @@ def upload(account: str, video: str, caption: str, name: str) -> str:
         raise RuntimeError("Instagram took too long to process the video")
     mid = _post(f"{ig}/media_publish", creation_id=c, access_token=tok)["id"]
     return _get(mid, fields="permalink", access_token=tok).get("permalink") or f"https://www.instagram.com/{rec['username']}/"
+
+
+def find_existing(account: str, title: str) -> str | None:
+    """Return the permalink of a Reel already posted with this title (duplicate guard)."""
+    rec = tokens.get("instagram", account)
+    if not rec:
+        raise LookupError("not connected")
+    tok, ig = rec["page_token"], rec["ig_user_id"]
+    want = title.strip().lower()
+    for m in _get(f"{ig}/media", fields="caption,permalink", limit=50, access_token=tok).get("data", []):
+        if (m.get("caption") or "").strip().lower().startswith(want):
+            return m.get("permalink") or f"https://www.instagram.com/{rec['username']}/"
+    return None

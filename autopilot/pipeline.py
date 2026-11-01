@@ -84,20 +84,58 @@ def email_for_approval(ref: str, rec: dict, ep: dict, video: str):
 EVERY_DAYS = float(os.environ.get("EPISODE_EVERY_DAYS", "2"))  # Haseeb, 31 Oct: an episode every 2nd day
 
 
+def _similar(title: str, titles: list[str], cutoff: float = 0.85) -> str | None:
+    """Return an earlier title that is (nearly) the same story as `title`, if any."""
+    import difflib
+    t = title.strip().lower()
+    for old in titles:
+        if difflib.SequenceMatcher(None, t, old.strip().lower()).ratio() >= cutoff:
+            return old
+    return None
+
+
+def dupcheck(series: str):
+    """Read-only test of the duplicate guards: look up each posted episode on every platform."""
+    from . import facebook, instagram, youtube
+    from .publish import ACCOUNTS
+    cfg = ACCOUNTS[series]
+    for ref, rec in load()["episodes"].items():
+        if rec["series"] != series or not rec.get("links"):
+            continue
+        for name, fn in (("youtube", lambda: youtube.find_existing(cfg["youtube"], rec["title"])),
+                         ("instagram", lambda: instagram.find_existing(cfg["instagram"], rec["title"])),
+                         ("facebook", lambda: facebook.find_existing(cfg["instagram"], rec["title"]))):
+            try:
+                print(f"{ref} {name}: found {fn()}  (state has {rec['links'].get(name)})")
+            except Exception as e:
+                print(f"{ref} {name}: CHECK FAILED {e!r}")
+
+
 def make(series: str, scheduled: bool = False):
     st = load()
     eps = [e for e in st["episodes"].values() if e["series"] == series]
-    if scheduled and eps:  # the schedule fires daily; only make one if the last is at least EVERY_DAYS old
+    # Every make (scheduled, watchdog or manual) only runs if the last episode is due, so two runs can never
+    # create two episodes. A deliberate extra episode needs the workflow input force=yes.
+    if os.environ.get("FORCE_MAKE", "").lower() not in ("yes", "1", "true") and eps:
         last = max(datetime.fromisoformat(e["created"]) for e in eps)
         age_h = (datetime.now(timezone.utc) - last).total_seconds() / 3600
         if age_h < EVERY_DAYS * 24 - 12:  # 12 h slack: runs are daily, so this never makes two in a row
             print(f"last {series} episode is {age_h:.0f} h old; next one is due after {EVERY_DAYS * 24 - 12:.0f} h")
             return
     number = max([e["number"] for e in eps] or [0]) + 1
-    recent = [e["title"] for e in sorted(eps, key=lambda e: e["number"])[-12:]]
+    titles = [e["title"] for e in sorted(eps, key=lambda e: e["number"])]
+    recent = titles[-40:]
     lessons = open(os.path.join(ROOT, "autopilot", f"lessons_{series}.md")).read() \
         if os.path.exists(os.path.join(ROOT, "autopilot", f"lessons_{series}.md")) else ""
     ep = writer.write_episode(series, number, recent, lessons)
+    clash = _similar(ep["title"], titles)
+    if clash:  # never make the same story twice: rewrite once, then refuse
+        print(f"title too close to an earlier episode ({clash}); rewriting")
+        ep = writer.write_episode(series, number, recent, lessons,
+                                  notes=f"Your first idea was too close to an earlier episode: '{clash}'. Pick a clearly different scenario.")
+        clash = _similar(ep["title"], titles)
+        if clash:
+            raise RuntimeError(f"new episode is a near-duplicate of '{clash}', not made; will retry next run")
     ref = f"{SERIES[series]['prefix']}-{number:02d}"
     os.makedirs(EPDIR, exist_ok=True)
     path = os.path.join(EPDIR, f"{ref}.json")
@@ -188,6 +226,8 @@ if __name__ == "__main__":
         make(arg, scheduled=os.environ.get("GITHUB_EVENT_NAME") == "schedule")
     elif cmd.startswith("connect_"):
         connect(cmd.split("_", 1)[1], arg)
+    elif cmd == "dupcheck":
+        dupcheck(arg)
     elif cmd == "publish":
         publish_queue(load())
     else:

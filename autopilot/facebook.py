@@ -37,3 +37,18 @@ def upload(account: str, video: str, description: str, name: str) -> str:
             raise RuntimeError(f"Facebook rejected the video: {st}")
         time.sleep(10)
     return f"https://www.facebook.com/reel/{vid}"
+
+
+def find_existing(account: str, title: str) -> str | None:
+    """Return the link of a Page Reel already posted with this title (duplicate guard)."""
+    rec = tokens.get("instagram", account)
+    if not rec or not rec.get("page_id"):
+        raise LookupError("not connected")
+    tok, page = rec["page_token"], rec["page_id"]
+    want = title.strip().lower()
+    for v in instagram._get(f"{page}/video_reels", fields="description,permalink_url", limit=50,
+                            access_token=tok).get("data", []):
+        if (v.get("description") or "").strip().lower().startswith(want):
+            link = v.get("permalink_url") or f"/reel/{v['id']}"
+            return link if link.startswith("http") else f"https://www.facebook.com{link}"
+    return None
