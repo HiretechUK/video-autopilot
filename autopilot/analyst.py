@@ -79,7 +79,10 @@ def write_lessons(series: str, rows: list[dict]) -> str:
                       for r in rows)
     system = ("You are a YouTube growth analyst for a small automated channel. Be concrete and honest. Small numbers are "
               "normal for a new channel: compare episodes with each other, normalise for hours live, and say when the data is "
-              "too thin to conclude anything.")
+              "too thin to conclude anything. Never suggest anything that breaks the channel's fixed rules below; work within them.")
+    rb = os.path.join(ROOT, "autopilot", f"RULEBOOK_{series}.md")
+    if os.path.exists(rb):
+        system += "\n\nFIXED RULES:\n" + open(rb).read()
     user = (f"Channel: {SERIES[series]}. Episodes (oldest first):\n{table}\n\n"
             "Write the lessons file the script writer will read before every new episode. Markdown, max 12 bullets, in three "
             "sections: '## Keep doing' (what the better performers share: topic, hook, title wording, length), '## Stop or change' "
@@ -123,8 +126,9 @@ def main():
         if rows:
             best = max(rows, key=lambda r: r["views"] / max(r["age_h"], 6))
             worst = min(rows, key=lambda r: r["views"] / max(r["age_h"], 6))
-            report.append(f"- Episodes live: {len(rows)}; best per hour live: {best['ref']} ({best['views']} views); "
-                          f"weakest: {worst['ref']} ({worst['views']} views)")
+            report.append(f"- Episodes live: {len(rows)}; strongest: {best['ref']} "
+                          f"({best['views'] / max(best['age_h'], 6):.0f} views/hour live); weakest: {worst['ref']} "
+                          f"({worst['views'] / max(worst['age_h'], 6):.0f} views/hour live)")
             for r in rows[-5:]:
                 report.append(f"  - {r['ref']} {r['title'][:60]}: {r['views']} views, {r['likes']} likes, {r['comments']} comments"
                               + (f", Short {r['short_views']} views" if r["short_views"] is not None else ""))
