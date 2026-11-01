@@ -31,7 +31,7 @@ def _client():
 
 # Google account to sign in with, per series, when a channel lives on its own Gmail. Imagine You is a brand account
 # under Haseeb's own Gmail; Every How's channel ("Every How Channel") is on harry.taroles@gmail.com (1 Nov 2026).
-SIGN_IN = {"every_how": "harry.taroles@gmail.com"}
+SIGN_IN = {"every_how": "harry.taroles@gmail.com", "paws_claws": "pawsandclawsclubkids@gmail.com"}
 
 
 def connect(account: str, channel_name: str) -> str:
