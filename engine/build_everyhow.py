@@ -22,12 +22,42 @@ END_CARD = 4.5
 
 
 # ------------------------------------------------------------------ voice
+_ONES = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split()
+_TENS = "_ _ twenty thirty forty fifty sixty seventy eighty ninety".split()
+
+
+def _two(n):
+    return _ONES[n] if n < 20 else _TENS[n // 10] + ("-" + _ONES[n % 10] if n % 10 else "")
+
+
+def say_year(y: int) -> str:
+    """1784 -> seventeen eighty-four, 1907 -> nineteen oh seven, 1900 -> nineteen hundred,
+    2007 -> two thousand and seven, 2000 -> two thousand, 2026 -> twenty twenty-six."""
+    hi, lo = divmod(y, 100)
+    if 2000 <= y <= 2009:
+        return "two thousand" + (f" and {_ONES[lo]}" if lo else "")
+    if lo == 0:
+        return f"{_two(hi)} hundred"
+    return f"{_two(hi)} {'oh ' + _ONES[lo] if lo < 10 else _two(lo)}"
+
+
+def spoken(text: str) -> str:
+    """What the voice should say: four-digit years read the way people say them (Kokoro reads '1784' as
+    'one thousand seven hundred...'). Captions keep the digits. Leaves amounts like '$1,500', '1500 km'
+    alone only when they are clearly not years (comma-separated, decimals, or followed by %)."""
+    import re
+    def rep(m):
+        y = int(m.group(0))
+        return say_year(y) if 1100 <= y <= 2099 else m.group(0)
+    return re.sub(r"(?<![\d,.$£€])\b(1[1-9]\d\d|20\d\d)\b(?!%|[,.]\d)(?!\s*(?:km|kg|miles|metres|meters|people|tonnes|tons|feet|ft|m)\b)", rep, text)
+
+
 def voice_scenes(texts, models):
     from kokoro_onnx import Kokoro
     k = Kokoro(os.path.join(models, "kokoro-v1.0.onnx"), os.path.join(models, "voices-v1.0.bin"))
     out = []
     for t in texts:
-        a, sr = k.create(t, voice=VOICE, speed=SPEED, lang=LANG)
+        a, sr = k.create(spoken(t), voice=VOICE, speed=SPEED, lang=LANG)
         assert sr == SR, sr
         out.append(np.asarray(a, dtype=np.float32))
     return out
