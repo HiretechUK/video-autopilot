@@ -22,7 +22,7 @@ def render_video(tl, wav, out_mp4, fps):
     n = int(tl["duration"] * fps)
     enc = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", str(fps),
                             "-c:v", "mjpeg", "-i", "-", "-i", wav, "-af", "apad", "-t", f"{n / fps:.3f}", "-c:v", "libx264",
-                            "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
+                            "-preset", "medium", "-crf", "23", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
                             "-movflags", "+faststart", out_mp4], stdin=subprocess.PIPE)
     with sync_playwright() as p:
         kw = {"args": CHROME_ARGS}

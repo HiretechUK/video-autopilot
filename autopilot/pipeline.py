@@ -21,7 +21,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE = os.path.join(ROOT, "autopilot", "state.json")
 EPDIR = os.path.join(ROOT, "episodes")
 OUT = os.path.join(ROOT, "out")
-SERIES = {"imagine_you": {"prefix": "IY", "name": "Imagine You", "builder": "engine/build_short_v2.py"},
+SERIES = {"imagine_you": {"prefix": "IY", "name": "Imagine You", "builder": "engine/build_short_v3.py",
+                          # v3 = 2D characters in 3D sets (RULEBOOK_imagine_you.md); a render takes ~40 min, so each
+                          # script is rendered once and kept in this release for posting
+                          "cache": "imagineyou-renders"},
           # Paws & Claws episodes are made ahead in a batch (Higgsfield + ACE-Step) and stored as release assets;
           # each one goes live on its post_after date (Haseeb, 1 Nov: make them all at once, post periodically).
           "paws_claws": {"prefix": "PC", "name": "Paws & Claws Club", "premade": True},
@@ -104,6 +107,35 @@ def _render_cached(series: str, ep_path: str) -> dict:
     return paths
 
 
+def _render_one_cached(series: str, ep_path: str) -> str:
+    """One video per script version: reuse it from the series' cache release, else render and upload it."""
+    import requests
+    tag = SERIES[series]["cache"]
+    name = f"{os.path.basename(ep_path).replace('.json', '')}-{_script_hash(ep_path)}.mp4"
+    os.makedirs(OUT, exist_ok=True)
+    out = os.path.join(OUT, name)
+    if os.path.exists(out):
+        return out
+    try:
+        with requests.get(f"https://github.com/HiretechUK/video-autopilot/releases/download/{tag}/{name}", stream=True, timeout=600) as r:
+            r.raise_for_status()
+            with open(out + ".part", "wb") as f:
+                for chunk in r.iter_content(1 << 20):
+                    f.write(chunk)
+        os.replace(out + ".part", out)
+        print("reusing render", name)
+        return out
+    except Exception:
+        pass
+    subprocess.run([sys.executable, os.path.join(ROOT, SERIES[series]["builder"]), ep_path, out], check=True)
+    gh = lambda *a: subprocess.run(["gh", *a, "-R", "HiretechUK/video-autopilot"], check=False)
+    if gh("release", "view", tag).returncode:
+        gh("release", "create", tag, "--title", f"{SERIES[series]['name']} renders",
+           "--notes", "Rendered episodes (made by the autopilot; reused when posting).")
+    gh("release", "upload", tag, out, "--clobber")
+    return out
+
+
 def render(series: str, ep_path: str):
     if SERIES[series].get("release"):
         return _render_cached(series, ep_path)
@@ -116,6 +148,8 @@ def render(series: str, ep_path: str):
     if SERIES[series].get("premade"):  # full episode for YouTube, vertical cut for Reels/TikTok
         ep = json.load(open(ep_path))
         return {"full": fetch(ep["video"]), "short": fetch(ep["short"])}
+    if SERIES[series].get("cache"):
+        return _render_one_cached(series, ep_path)
     os.makedirs(OUT, exist_ok=True)
     out = os.path.join(OUT, os.path.basename(ep_path).replace(".json", ".mp4"))
     subprocess.run([sys.executable, os.path.join(ROOT, SERIES[series]["builder"]), ep_path, out], check=True)
