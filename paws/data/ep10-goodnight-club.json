@@ -1,0 +1,244 @@
+{
+ "ep": "ep10-goodnight-club",
+ "mp3": "songs/ep10-goodnight-club.mp3",
+ "dur": 171.0,
+ "score": 1.0,
+ "clarity": 0.928,
+ "sections": [
+  [
+   "intro",
+   0.0
+  ],
+  [
+   "chorus",
+   6.75
+  ],
+  [
+   "verse0",
+   18.75
+  ],
+  [
+   "chorus",
+   37.75
+  ],
+  [
+   "verse1",
+   49.75
+  ],
+  [
+   "chorus",
+   68.75
+  ],
+  [
+   "verse2",
+   79.75
+  ],
+  [
+   "chorus",
+   99.75
+  ],
+  [
+   "verse3",
+   111.75
+  ],
+  [
+   "bridge",
+   130.75
+  ],
+  [
+   "chorus",
+   140.75
+  ],
+  [
+   "chorus",
+   150.75
+  ],
+  [
+   "outro",
+   161.75
+  ]
+ ],
+ "gens": {
+  "intro0": {
+   "still": "group",
+   "a": 0.0,
+   "b": 6.75,
+   "kind": "intro",
+   "part": 0
+  },
+  "chorus0": {
+   "still": "group",
+   "a": 6.75,
+   "b": 18.75,
+   "kind": "chorus",
+   "part": 0,
+   "nparts": 1
+  },
+  "verse00": {
+   "still": "rory",
+   "a": 18.75,
+   "b": 28.25,
+   "kind": "verse0",
+   "part": 0
+  },
+  "verse01": {
+   "still": "rory",
+   "a": 28.25,
+   "b": 37.75,
+   "kind": "verse0",
+   "part": 1
+  },
+  "verse10": {
+   "still": "ziggy",
+   "a": 49.75,
+   "b": 59.25,
+   "kind": "verse1",
+   "part": 0
+  },
+  "verse11": {
+   "still": "ziggy",
+   "a": 59.25,
+   "b": 68.75,
+   "kind": "verse1",
+   "part": 1
+  },
+  "verse20": {
+   "still": "waffles",
+   "a": 79.75,
+   "b": 89.75,
+   "kind": "verse2",
+   "part": 0
+  },
+  "verse21": {
+   "still": "waffles",
+   "a": 89.75,
+   "b": 99.75,
+   "kind": "verse2",
+   "part": 1
+  },
+  "verse30": {
+   "still": "pebble",
+   "a": 111.75,
+   "b": 121.25,
+   "kind": "verse3",
+   "part": 0
+  },
+  "verse31": {
+   "still": "pebble",
+   "a": 121.25,
+   "b": 130.75,
+   "kind": "verse3",
+   "part": 1
+  },
+  "bridge0": {
+   "still": "bridge",
+   "a": 130.75,
+   "b": 140.75,
+   "kind": "bridge",
+   "part": 0
+  }
+ },
+ "timeline": [
+  {
+   "gen": "intro0",
+   "a": 0.0,
+   "b": 6.75
+  },
+  {
+   "gen": "chorus0",
+   "a": 6.75,
+   "b": 18.75
+  },
+  {
+   "gen": "verse00",
+   "a": 18.75,
+   "b": 28.25
+  },
+  {
+   "gen": "verse01",
+   "a": 28.25,
+   "b": 37.75
+  },
+  {
+   "gen": "chorus0",
+   "a": 37.75,
+   "b": 49.75
+  },
+  {
+   "gen": "verse10",
+   "a": 49.75,
+   "b": 59.25
+  },
+  {
+   "gen": "verse11",
+   "a": 59.25,
+   "b": 68.75
+  },
+  {
+   "gen": "chorus0",
+   "a": 68.75,
+   "b": 79.75
+  },
+  {
+   "gen": "verse20",
+   "a": 79.75,
+   "b": 89.75
+  },
+  {
+   "gen": "verse21",
+   "a": 89.75,
+   "b": 99.75
+  },
+  {
+   "gen": "chorus0",
+   "a": 99.75,
+   "b": 111.75
+  },
+  {
+   "gen": "verse30",
+   "a": 111.75,
+   "b": 121.25
+  },
+  {
+   "gen": "verse31",
+   "a": 121.25,
+   "b": 130.75
+  },
+  {
+   "gen": "bridge0",
+   "a": 130.75,
+   "b": 140.75
+  },
+  {
+   "gen": "chorus0",
+   "a": 140.75,
+   "b": 150.75
+  },
+  {
+   "gen": "chorus0",
+   "a": 150.75,
+   "b": 161.75
+  },
+  {
+   "gen": "intro0",
+   "a": 161.75,
+   "b": 171.0,
+   "base": 161.75
+  }
+ ],
+ "est_credits": 109,
+ "clips": {
+  "intro0": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_032009_5b826ba9-8a53-4800-8ebf-9038555a99ca.mp4",
+  "chorus0": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_032009_4f5c8c52-eb4c-45f0-897c-425397d854c3.mp4",
+  "verse00": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_032009_57b91a9b-1609-40dd-b700-f83423d88ff2.mp4",
+  "verse01": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_032950_13e1293f-7224-47e8-ac1f-18fc4f841e3a.mp4",
+  "verse10": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_032950_2877670d-c487-4962-9a8d-08ab7860f0b6.mp4",
+  "verse11": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_032950_54b66bd3-bdb5-437d-a103-57e5451638ce.mp4",
+  "verse20": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_032951_91612515-b409-4523-8e94-c67490d2f1a3.mp4",
+  "verse21": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_032950_4a96ff0a-3c3b-4bcf-b556-64fcede970b7.mp4",
+  "verse30": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_032951_3ae0e9b7-e850-4dc8-8d98-e715e05a3fe7.mp4",
+  "verse31": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_033916_9a871214-5aa0-4f56-a329-8a7154c38adf.mp4",
+  "bridge0": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_032950_3f47d107-4f6c-4d75-b7b3-5fde2292c4f2.mp4"
+ },
+ "ref": "PC-10"
+}

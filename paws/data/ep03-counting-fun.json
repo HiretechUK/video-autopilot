@@ -1,0 +1,296 @@
+{
+ "ep": "ep03-counting-fun",
+ "mp3": "songs/ep03-counting-fun.mp3",
+ "dur": 197.18,
+ "score": 1.0,
+ "clarity": 1.0,
+ "sections": [
+  [
+   "intro",
+   0.0
+  ],
+  [
+   "chorus",
+   8.17
+  ],
+  [
+   "verse0",
+   24.13
+  ],
+  [
+   "chorus",
+   40.53
+  ],
+  [
+   "verse1",
+   57.05
+  ],
+  [
+   "chorus",
+   73.29
+  ],
+  [
+   "verse2",
+   89.91
+  ],
+  [
+   "chorus",
+   106.15
+  ],
+  [
+   "verse3",
+   122.81
+  ],
+  [
+   "bridge",
+   138.93
+  ],
+  [
+   "chorus",
+   155.77
+  ],
+  [
+   "chorus",
+   171.83
+  ],
+  [
+   "outro",
+   187.93
+  ]
+ ],
+ "gens": {
+  "intro0": {
+   "still": "group",
+   "a": 0.0,
+   "b": 8.17,
+   "kind": "intro",
+   "part": 0
+  },
+  "chorus0": {
+   "still": "group",
+   "a": 8.17,
+   "b": 16.15,
+   "kind": "chorus",
+   "part": 0,
+   "nparts": 2
+  },
+  "chorus1": {
+   "still": "group",
+   "a": 16.15,
+   "b": 24.129999999999995,
+   "kind": "chorus",
+   "part": 1,
+   "nparts": 2
+  },
+  "verse00": {
+   "still": "rory",
+   "a": 24.129999999999995,
+   "b": 32.33,
+   "kind": "verse0",
+   "part": 0
+  },
+  "verse01": {
+   "still": "rory",
+   "a": 32.33,
+   "b": 40.529999999999994,
+   "kind": "verse0",
+   "part": 1
+  },
+  "verse10": {
+   "still": "ziggy",
+   "a": 57.05,
+   "b": 65.16999999999999,
+   "kind": "verse1",
+   "part": 0
+  },
+  "verse11": {
+   "still": "ziggy",
+   "a": 65.16999999999999,
+   "b": 73.28999999999999,
+   "kind": "verse1",
+   "part": 1
+  },
+  "verse20": {
+   "still": "waffles",
+   "a": 89.91,
+   "b": 98.03,
+   "kind": "verse2",
+   "part": 0
+  },
+  "verse21": {
+   "still": "waffles",
+   "a": 98.03,
+   "b": 106.15,
+   "kind": "verse2",
+   "part": 1
+  },
+  "verse30": {
+   "still": "pebble",
+   "a": 122.80999999999997,
+   "b": 130.87,
+   "kind": "verse3",
+   "part": 0
+  },
+  "verse31": {
+   "still": "pebble",
+   "a": 130.87,
+   "b": 138.93,
+   "kind": "verse3",
+   "part": 1
+  },
+  "bridge0": {
+   "still": "bridge",
+   "a": 138.93,
+   "b": 147.35000000000002,
+   "kind": "bridge",
+   "part": 0
+  },
+  "bridge1": {
+   "still": "bridge",
+   "a": 147.35000000000002,
+   "b": 155.77,
+   "kind": "bridge",
+   "part": 1
+  }
+ },
+ "timeline": [
+  {
+   "gen": "intro0",
+   "a": 0.0,
+   "b": 8.17
+  },
+  {
+   "gen": "chorus0",
+   "a": 8.17,
+   "b": 16.15
+  },
+  {
+   "gen": "chorus1",
+   "a": 16.15,
+   "b": 24.129999999999995
+  },
+  {
+   "gen": "verse00",
+   "a": 24.129999999999995,
+   "b": 32.33
+  },
+  {
+   "gen": "verse01",
+   "a": 32.33,
+   "b": 40.529999999999994
+  },
+  {
+   "gen": "chorus0",
+   "a": 40.529999999999994,
+   "b": 48.78999999999999
+  },
+  {
+   "gen": "chorus1",
+   "a": 48.78999999999999,
+   "b": 57.04999999999999
+  },
+  {
+   "gen": "verse10",
+   "a": 57.05,
+   "b": 65.16999999999999
+  },
+  {
+   "gen": "verse11",
+   "a": 65.16999999999999,
+   "b": 73.28999999999999
+  },
+  {
+   "gen": "chorus0",
+   "a": 73.28999999999999,
+   "b": 81.6
+  },
+  {
+   "gen": "chorus1",
+   "a": 81.6,
+   "b": 89.91
+  },
+  {
+   "gen": "verse20",
+   "a": 89.91,
+   "b": 98.03
+  },
+  {
+   "gen": "verse21",
+   "a": 98.03,
+   "b": 106.15
+  },
+  {
+   "gen": "chorus0",
+   "a": 106.15,
+   "b": 114.47999999999999
+  },
+  {
+   "gen": "chorus1",
+   "a": 114.47999999999999,
+   "b": 122.80999999999997
+  },
+  {
+   "gen": "verse30",
+   "a": 122.80999999999997,
+   "b": 130.87
+  },
+  {
+   "gen": "verse31",
+   "a": 130.87,
+   "b": 138.93
+  },
+  {
+   "gen": "bridge0",
+   "a": 138.93,
+   "b": 147.35000000000002
+  },
+  {
+   "gen": "bridge1",
+   "a": 147.35000000000002,
+   "b": 155.77
+  },
+  {
+   "gen": "chorus0",
+   "a": 155.77,
+   "b": 163.8
+  },
+  {
+   "gen": "chorus1",
+   "a": 163.8,
+   "b": 171.83
+  },
+  {
+   "gen": "chorus0",
+   "a": 171.83,
+   "b": 179.88
+  },
+  {
+   "gen": "chorus1",
+   "a": 179.88,
+   "b": 187.92999999999998
+  },
+  {
+   "gen": "intro0",
+   "a": 187.93,
+   "b": 197.18,
+   "base": 187.93
+  }
+ ],
+ "est_credits": 115,
+ "clips": {
+  "intro0": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_012406_1e6e7701-e31c-4103-a0fa-84cc8cffc1fd.mp4",
+  "chorus0": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_012407_365b1dd1-3d07-46a3-8c50-2ebd61273501.mp4",
+  "chorus1": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_012406_0fb8fc15-f851-45a4-a251-252050122003.mp4",
+  "verse00": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_012406_ce44f655-fac3-468c-9373-1d2d2dbc0450.mp4",
+  "verse01": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_012406_2fb4978e-b415-4f15-b932-299a30522ca9.mp4",
+  "verse10": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_013359_4f92f891-6398-4d21-bc2b-f648b0fa0730.mp4",
+  "verse11": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_013359_afdb6f3a-aa1a-40dc-99e5-36261d3395ca.mp4",
+  "verse20": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_013359_4ca6be43-d8c9-4b2c-9a94-69e3e5aef79d.mp4",
+  "verse21": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_013359_48fc69ef-140a-44aa-aaff-22ed30e257f7.mp4",
+  "verse30": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_013359_bb8bc1c1-8104-4b36-93ec-51303134e9fc.mp4",
+  "verse31": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_013359_75575e3a-f1e2-4b39-bd09-07c804667e65.mp4",
+  "bridge0": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_011416_4ba2212e-74c0-4a10-8f1b-48afac0af5af.mp4",
+  "bridge1": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_012406_d70817a5-52e8-4c2b-aa1a-e438faa4965c.mp4"
+ },
+ "ref": "PC-03"
+}

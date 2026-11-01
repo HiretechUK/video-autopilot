@@ -1,0 +1,296 @@
+{
+ "ep": "ep02-rainbow-colours",
+ "mp3": "songs/ep02-rainbow-colours.mp3",
+ "dur": 207.9,
+ "score": 1.0,
+ "clarity": 0.96,
+ "sections": [
+  [
+   "intro",
+   0.0
+  ],
+  [
+   "chorus",
+   8.07
+  ],
+  [
+   "verse0",
+   25.91
+  ],
+  [
+   "chorus",
+   43.23
+  ],
+  [
+   "verse1",
+   61.97
+  ],
+  [
+   "chorus",
+   78.15
+  ],
+  [
+   "verse2",
+   96.71
+  ],
+  [
+   "chorus",
+   113.37
+  ],
+  [
+   "verse3",
+   131.41
+  ],
+  [
+   "bridge",
+   148.67
+  ],
+  [
+   "chorus",
+   164.51
+  ],
+  [
+   "chorus",
+   180.85
+  ],
+  [
+   "outro",
+   198.65
+  ]
+ ],
+ "gens": {
+  "intro0": {
+   "still": "group",
+   "a": 0.0,
+   "b": 8.07,
+   "kind": "intro",
+   "part": 0
+  },
+  "chorus0": {
+   "still": "group",
+   "a": 8.07,
+   "b": 16.990000000000002,
+   "kind": "chorus",
+   "part": 0,
+   "nparts": 2
+  },
+  "chorus1": {
+   "still": "group",
+   "a": 16.990000000000002,
+   "b": 25.91,
+   "kind": "chorus",
+   "part": 1,
+   "nparts": 2
+  },
+  "verse00": {
+   "still": "rory",
+   "a": 25.91,
+   "b": 34.57,
+   "kind": "verse0",
+   "part": 0
+  },
+  "verse01": {
+   "still": "rory",
+   "a": 34.57,
+   "b": 43.23,
+   "kind": "verse0",
+   "part": 1
+  },
+  "verse10": {
+   "still": "ziggy",
+   "a": 61.97,
+   "b": 70.06,
+   "kind": "verse1",
+   "part": 0
+  },
+  "verse11": {
+   "still": "ziggy",
+   "a": 70.06,
+   "b": 78.14999999999999,
+   "kind": "verse1",
+   "part": 1
+  },
+  "verse20": {
+   "still": "waffles",
+   "a": 96.71,
+   "b": 105.03999999999999,
+   "kind": "verse2",
+   "part": 0
+  },
+  "verse21": {
+   "still": "waffles",
+   "a": 105.03999999999999,
+   "b": 113.37,
+   "kind": "verse2",
+   "part": 1
+  },
+  "verse30": {
+   "still": "pebble",
+   "a": 131.41,
+   "b": 140.04,
+   "kind": "verse3",
+   "part": 0
+  },
+  "verse31": {
+   "still": "pebble",
+   "a": 140.04,
+   "b": 148.67,
+   "kind": "verse3",
+   "part": 1
+  },
+  "bridge0": {
+   "still": "bridge",
+   "a": 148.67,
+   "b": 156.58999999999997,
+   "kind": "bridge",
+   "part": 0
+  },
+  "bridge1": {
+   "still": "bridge",
+   "a": 156.58999999999997,
+   "b": 164.51,
+   "kind": "bridge",
+   "part": 1
+  }
+ },
+ "timeline": [
+  {
+   "gen": "intro0",
+   "a": 0.0,
+   "b": 8.07
+  },
+  {
+   "gen": "chorus0",
+   "a": 8.07,
+   "b": 16.990000000000002
+  },
+  {
+   "gen": "chorus1",
+   "a": 16.990000000000002,
+   "b": 25.91
+  },
+  {
+   "gen": "verse00",
+   "a": 25.91,
+   "b": 34.57
+  },
+  {
+   "gen": "verse01",
+   "a": 34.57,
+   "b": 43.23
+  },
+  {
+   "gen": "chorus0",
+   "a": 43.23,
+   "b": 52.6
+  },
+  {
+   "gen": "chorus1",
+   "a": 52.6,
+   "b": 61.97
+  },
+  {
+   "gen": "verse10",
+   "a": 61.97,
+   "b": 70.06
+  },
+  {
+   "gen": "verse11",
+   "a": 70.06,
+   "b": 78.14999999999999
+  },
+  {
+   "gen": "chorus0",
+   "a": 78.14999999999999,
+   "b": 87.42999999999999
+  },
+  {
+   "gen": "chorus1",
+   "a": 87.42999999999999,
+   "b": 96.71
+  },
+  {
+   "gen": "verse20",
+   "a": 96.71,
+   "b": 105.03999999999999
+  },
+  {
+   "gen": "verse21",
+   "a": 105.03999999999999,
+   "b": 113.37
+  },
+  {
+   "gen": "chorus0",
+   "a": 113.37,
+   "b": 122.39
+  },
+  {
+   "gen": "chorus1",
+   "a": 122.39,
+   "b": 131.41
+  },
+  {
+   "gen": "verse30",
+   "a": 131.41,
+   "b": 140.04
+  },
+  {
+   "gen": "verse31",
+   "a": 140.04,
+   "b": 148.67
+  },
+  {
+   "gen": "bridge0",
+   "a": 148.67,
+   "b": 156.58999999999997
+  },
+  {
+   "gen": "bridge1",
+   "a": 156.58999999999997,
+   "b": 164.51
+  },
+  {
+   "gen": "chorus0",
+   "a": 164.51,
+   "b": 172.68
+  },
+  {
+   "gen": "chorus1",
+   "a": 172.68,
+   "b": 180.85
+  },
+  {
+   "gen": "chorus0",
+   "a": 180.85,
+   "b": 189.75
+  },
+  {
+   "gen": "chorus1",
+   "a": 189.75,
+   "b": 198.65
+  },
+  {
+   "gen": "intro0",
+   "a": 198.65,
+   "b": 207.9,
+   "base": 198.65
+  }
+ ],
+ "est_credits": 115,
+ "clips": {
+  "intro0": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_010744_00713a5d-da91-4337-a8f7-9567712a815d.mp4",
+  "chorus0": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_010744_0215d2f9-04be-47f8-8f2c-3d02d0390c94.mp4",
+  "chorus1": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_010744_9181a894-ee2f-44ea-aff5-24ec70e86faf.mp4",
+  "verse00": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_010744_c5a4cd73-c4df-457d-998b-ba65d35a59da.mp4",
+  "verse01": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_010744_827da3fb-1ac2-4abf-861a-f0146201e713.mp4",
+  "verse10": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_011416_a3ab3889-6035-4600-8834-dc263a98addc.mp4",
+  "verse11": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_011416_dc126a32-e3a0-4217-8e44-654d9b2e445f.mp4",
+  "verse20": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_011416_9d5bbd8d-d863-4725-8b27-656f123a2b57.mp4",
+  "verse21": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_011416_53d22d64-9797-46b9-8a61-c24c12b4fff6.mp4",
+  "verse30": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_011416_20472e44-93ae-4190-a11d-f6ba09bd8f81.mp4",
+  "verse31": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_011416_0c3eac02-b63e-41bf-861d-bf8a3d321418.mp4",
+  "bridge0": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_010745_e8ca505e-637c-4f1a-810d-b5d3f95022f9.mp4",
+  "bridge1": "https://d8j0ntlcm91z4.cloudfront.net/user_3IlxJAo6zJLtMSF8r5mGyQmUxPS/hf_20261101_010744_c37e073d-6d1c-45b6-a2e7-145b375ac3f0.mp4"
+ },
+ "ref": "PC-02"
+}
