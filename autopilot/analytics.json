@@ -273,6 +273,66 @@
      "deep": {}
     }
    }
+  },
+  {
+   "at": "2026-11-01T19:24:05.522377+00:00",
+   "series": {
+    "imagine_you": {
+     "channel": "Imagine You",
+     "subscribers": 4,
+     "channel_views": 1642,
+     "videos": {
+      "IY-01:youtube": {
+       "id": "d-OCr2W4klA",
+       "views": 1232,
+       "likes": 11,
+       "comments": 2,
+       "duration": "PT52S",
+       "problems": []
+      },
+      "IY-02:youtube": {
+       "id": "MPu00hbAaWw",
+       "views": 996,
+       "likes": 22,
+       "comments": 3,
+       "duration": "PT1M1S",
+       "problems": []
+      }
+     },
+     "deep": {}
+    },
+    "every_how": {
+     "channel": "Every How",
+     "subscribers": 1,
+     "channel_views": 0,
+     "videos": {
+      "EH-01:youtube": {
+       "id": "efmYR44H1QU",
+       "views": 2,
+       "likes": 0,
+       "comments": 0,
+       "duration": "PT4M43S",
+       "problems": []
+      },
+      "EH-01:youtube_short": {
+       "id": "sJYE5bGNISA",
+       "views": 80,
+       "likes": 2,
+       "comments": 0,
+       "duration": "PT56S",
+       "problems": []
+      }
+     },
+     "deep": {}
+    },
+    "paws_claws": {
+     "channel": "Paws & Claws Club",
+     "subscribers": 0,
+     "channel_views": 0,
+     "videos": {},
+     "deep": {}
+    }
+   }
   }
  ],
  "lessons": {
