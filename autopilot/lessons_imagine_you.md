@@ -1,11 +1,12 @@
 <!-- written by the channel analyst 2026-11-01 -->
+*Data is early: 2 episodes and about 1,970 views in total. Treat everything below as a hypothesis, not a finding.*
+
 ## Keep doing
-- **Keep the "Imagine you wake up…" title frame and second-person hook** (IY-01, IY-02). Both use it, so it can't explain the gap between them. Treat it as the baseline format until there's evidence against it.
-- **Lean toward familiar, at-home scenarios with a concrete number** (IY-02). "Power is out for thirty days" had 741 views in 4 h (~185/h) and a 3.1% like rate. IY-01 (deserted island) had 1,231 views in 51 h (~24/h average) and a 0.8% like rate. Early views per hour overstate the long-run rate, but the like rate is more comparable, and IY-02's is about 4x higher. With only 23 vs 10 likes, treat this as a hint, not a finding.
+- **Everyday, practical survival scenarios (IY-02).** The power-outage episode has 741 views after 4 h (about 185 views/h), against 1,231 after 51 h for IY-01 (about 24 views/h). Its like rate is also higher (3.1% vs 0.8%), and it has more comments (3 vs 2). The gap in views/h is exaggerated because the first hours of any upload are the busiest. Still, a topic with a concrete household mechanism (water, food, heat) is the better lead than a remote one (the island in IY-01), so keep leaning that way.
 
 ## Stop or change
-- **Don't conclude that the island topic is weak, and don't drop it yet** (IY-01). It has a 51 h head start, and we don't know whether the gap comes from topic, title number, upload timing or thumbnail. Just avoid making more exotic-survival episodes the default until a second data point exists.
-- **Add a closing question that invites a comment** (IY-01, IY-02). Comments were 2 and 3, which is too few to learn from. Ask one specific, answerable question at the end (e.g. "What's the first thing you'd do on day one?") and see if comment counts move.
+- **Scenario-statement titles (IY-01, IY-02).** Both titles are "Imagine you wake up…" and name no hidden mechanism or loophole. That goes against the curiosity-gap rule (rule 2), and neither title has been tested against the better style. Stop using "Imagine you wake up…" as the title. Save it for the spoken hook.
 
 ## Try next
-- **Test one variable at a time:** make the next episode another everyday-world disruption with a specific duration (e.g. "…and the internet is gone for fourteen days"). If it performs like IY-02, the "familiar scenario + number" idea gains support. Compare at the same hours live (check at 4 h and again at 48 h), not at raw totals.
+- **Title test on the same topic family (IY-02 vs next).** Make the next household-disaster episode a curiosity-gap title, e.g. "Why You Should Fill Your Bathtub the Second the Power Dies" style. Keep the script structure the same so the title is the main thing that changes. Compare views at the same age (4 h, 24 h) against IY-02, not total views.
+- **Second home-scenario episode (water cut, winter heating failure, or similar).** If it matches or beats IY-02 at the same age, that supports "everyday scenarios beat remote ones". If it falls well short, the IY-02 result was probably noise or a one-off.
