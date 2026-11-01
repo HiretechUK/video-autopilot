@@ -78,6 +78,7 @@ def deep(h: dict, video_ids: list[str]) -> dict:
         r = requests.get(YTA, params=q, headers=h, timeout=30)
         if r.status_code != 200:
             return {"error": f"{r.status_code} {r.text[:200]}"}
+        print("analytics:", r.status_code, r.text[:400], flush=True)
         cols = [c["name"] for c in r.json().get("columnHeaders", [])]
         for row in r.json().get("rows", []):
             d = dict(zip(cols, row))
@@ -174,6 +175,8 @@ def main():
                                  if "averageViewPercentage" in dp else "")
                               + (f", still watching at 10/50/90%: {dp['kept_10']}/{dp['kept_50']}/{dp['kept_90']}" if "kept_10" in dp else "")
                               + (f", +{dp['subscribersGained']} subs" if dp.get("subscribersGained") else ""))
+        if not data.get("deep"):
+            report.append("- Watch-time data: none yet (YouTube publishes it 1-2 days after a video goes live)")
         if data.get("deep", {}).get("error"):
             report.append(f"- Watch-time data not available: {data['deep']['error'][:160]}")
         if rows and lessons_due(series, hist, eps):
