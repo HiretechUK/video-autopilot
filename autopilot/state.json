@@ -35,7 +35,7 @@
    "series": "every_how",
    "number": 1,
    "title": "How Did Daylight Saving Time Start?",
-   "status": "pending",
+   "status": "approved",
    "version": 1,
    "file": "episodes/EH-01.json",
    "created": "2026-11-01T14:55:53.955607+00:00",
@@ -45,7 +45,9 @@
     "version": 1,
     "minutes": 4.7,
     "superseded": []
-   }
+   },
+   "approved": "2026-11-01T16:05:31.170327+00:00",
+   "approved_by": "Haseeb in chat, 1 Nov 2026"
   }
  },
  "seen": [
