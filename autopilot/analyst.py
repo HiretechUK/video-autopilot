@@ -78,7 +78,7 @@ def deep(h: dict, video_ids: list[str]) -> dict:
         r = requests.get(YTA, params=q, headers=h, timeout=30)
         if r.status_code != 200:
             return {"error": f"{r.status_code} {r.text[:200]}"}
-        print("analytics:", r.status_code, r.text[:400], flush=True)
+        print("analytics:", r.status_code, json.dumps(r.json())[:600], flush=True)
         cols = [c["name"] for c in r.json().get("columnHeaders", [])]
         for row in r.json().get("rows", []):
             d = dict(zip(cols, row))
