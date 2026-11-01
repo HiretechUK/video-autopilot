@@ -6,13 +6,25 @@ happens, day by day, with hard survival rules along the way. It ends on a real A
 answer in the comments. Tone: tense, smart, a little eerie, never gory. Facts in the rules must be true
 (real survival guidance, real history).
 
-## Format (YouTube Short, 40-55 seconds spoken)
-- 7-9 scenes. Each scene = one `narration` of 1-3 short sentences (8-30 words).
-- Scene 1 hook: starts "Imagine you..." (natural grammar: "Imagine you wake up...") and lands the scenario in one breath.
-- Escalate: time jumps shown in the HUD ("DAY 2 · 10:15 AM"), 2 RULE stickers (rule one, rule two),
-  one twist near the end.
-- Final scene: the choice. Narration asks the question, then "Comment A or B. And follow, to find out
-  what happens next." It must have `choice` and `hold_after: 3.2`.
+## Format (YouTube Short, 50-60 seconds spoken; rule book: autopilot/RULEBOOK_imagine_you.md)
+The top channels in this style (2D cartoon characters in 3D worlds) were measured: fast steady narration
+(~3.7 words a second, almost no pauses), the hook is the first sentence, every sentence is shown literally,
+and the video ends on its last word. Write to that.
+- 8-12 scenes. Each scene = one `narration` of 1-3 short sentences (10-30 words). 160-210 words in total.
+- Scene 1 = THE HOOK, a paradox or deadly fact stated as fact, in one breath, starting "Imagine you...":
+  "Imagine you wake up and the whole city is dark, and the thing that kills most people isn't the cold."
+  No setup, no "in this video", no greeting.
+- Setting in 1-2 lines with concrete detail (time, place, a number).
+- Escalation in 3-5 beats, each a little worse. Time jumps go in the HUD ("DAY 2 · 10:15 AM").
+- Two RULES (rule one, rule two): real survival guidance, and each rule must be explained by its real mechanism
+  after the pivot "You see," with an everyday comparison ("You see, a generator in a garage is like
+  running your car in a closed room: the gas has no smell, so you never know").
+- One twist near the end that recolours everything before it.
+- Final scene: the choice, short. Narration asks the question, then "Comment A or B." and stops there
+  (no "follow", no "find out"). It must have `choice` and `hold_after: 2.0`.
+- Title (YouTube): a curiosity gap about a hidden rule or mechanism, max 70 chars, e.g.
+  "Why You Should Fill Your Bathtub the Second the Power Dies", "The Mistake That Kills People in Blackouts".
+  The narration still opens with "Imagine you...".
 
 ## How it should sound (the narrator reads each scene in one natural take)
 - Write to be told out loud: short sentences, concrete detail, present tense, "you".
@@ -20,7 +32,7 @@ answer in the comments. Tone: tense, smart, a little eerie, never gory. Facts in
   - Question then answer: "Your phone? No signal." (automatic pause after the question)
   - `[pause]` before the turn in a build-up: "No traffic. No sirens. [pause] Your phone? No signal."
   - "..." inside a line for a held breath: "One window... lit up."
-- Use `[pause]` at most 2 times per episode. Never put `[pause]` at the start or end of a narration.
+- Use `[pause]` at most once per episode (the reference narrators almost never pause). Never at the start or end of a narration.
 - No emojis, no hashtags, no stage directions, no sound effects in narration.
 - Spell numbers the way they are said ("three days", "tenth floor").
 
@@ -54,3 +66,8 @@ answer in the comments. Tone: tense, smart, a little eerie, never gory. Facts in
   alert, zombie outbreak, lost at sea, avalanche, blackout for a month, trapped in a mall, desert
   crash, alone in space station, frozen in 1900 London, etc. Pick backgrounds that fit.
 - The two choice options must both be defensible so the comments argue.
+
+## Picture (v3: 2D characters in 3D sets) — what the writer controls
+- Every sentence must be SHOWABLE: pick bg, poses and props that act out exactly what is said.
+- Change place (bg) at most 3 times; each change is a flash transition, so use it for time jumps.
+- Give most scenes 2-3 poses so the character acts on the words; use move_to so the camera has something to follow.

@@ -18,14 +18,14 @@ VOCAB = {
 }
 
 SCHEMA = """Return ONLY a JSON object:
-{"id": "<slug>", "title": "<YouTube title, max 70 chars, starts 'Imagine you'>",
+{"id": "<slug>", "title": "<YouTube title, max 70 chars: a curiosity gap about a hidden survival rule or mechanism>",
  "description": "<2-3 sentence YouTube description ending with a question>",
- "tags": ["5-10 short tags"], "series": "SURVIVE #<n>", "voice": "am_michael", "speed": 1.05,
+ "tags": ["5-10 short tags"], "series": "SURVIVE #<n>", "voice": "am_michael", "speed": 1.15,
  "costume": "cap", "hud": ["...", "● ...", "..."],
  "scenes": [{"bg": "...", "pose": "...", "poses": ["action1", "action2"], "x": 0.5, "move_to": 0.4 (optional), "props": [], "fx": "",
    "cam": {"z0": 1.0, "z1": 1.1}, "hud": [...] (optional), "rule": {...} (optional), "mood": "...",
    "narration": "...", "highlight": ["word"]},
-   ... last scene adds "choice": {"q": "WHAT DO YOU DO?", "options": ["A · ...", "B · ..."]}, "hold_after": 3.2]}"""
+   ... last scene adds "choice": {"q": "WHAT DO YOU DO?", "options": ["A · ...", "B · ..."]}, "hold_after": 2.0]}"""
 
 
 def _client():
@@ -49,8 +49,8 @@ def _ask(system: str, user: str) -> str:
 def validate(ep: dict) -> list[str]:
     errs = []
     sc = ep.get("scenes") or []
-    if not 6 <= len(sc) <= 10:
-        errs.append(f"need 6-10 scenes, got {len(sc)}")
+    if not 7 <= len(sc) <= 12:
+        errs.append(f"need 8-12 scenes, got {len(sc)}")
     words = 0
     for i, s in enumerate(sc, 1):
         for ps in s.get("poses", []) or []:
@@ -79,10 +79,12 @@ def validate(ep: dict) -> list[str]:
         errs.append("the character is too static: give most scenes 2-3 'poses' actions or a move_to")
     if sc and not sc[-1].get("choice"):
         errs.append("last scene needs a choice")
-    if not 85 <= words <= 150:
-        errs.append(f"narration is {words} words; target 95-135 (40-55 seconds)")
-    if sum(s.get("narration", "").count("[pause]") for s in sc) > 2:
-        errs.append("more than 2 [pause] tags")
+    if not 150 <= words <= 220:
+        errs.append(f"narration is {words} words; target 160-210 (50-60 seconds at ~3.7 words a second)")
+    if sum(s.get("narration", "").count("[pause]") for s in sc) > 1:
+        errs.append("more than 1 [pause] tag")
+    if sc and re.search(r"\bfollow\b", sc[-1].get("narration", ""), re.I):
+        errs.append("last scene: end on 'Comment A or B.' with no 'follow' call")
     return errs
 
 
