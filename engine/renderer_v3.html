@@ -344,7 +344,7 @@ function makeProp(name, r) {
 
 // ---------------------------------------------------------------- the 2D hero (drawn every frame onto a billboard)
 // Big round head, bean torso, stick limbs, thick ink outline: the look that carries Rick's Clips.
-const HC = document.createElement('canvas'); HC.width = 512; HC.height = 1024; const hx = HC.getContext('2d');
+const HC = document.createElement('canvas'); HC.width = 512; HC.height = 1024; let hx = HC.getContext('2d');
 const heroTex = new THREE.CanvasTexture(HC); heroTex.colorSpace = THREE.SRGBColorSpace; heroTex.anisotropy = 4;
 const HERO_H = 2.0;  // world units (the head is ~45% of it, like the reference)
 const hero = new THREE.Mesh(new THREE.PlaneGeometry(HERO_H / 2, HERO_H), new THREE.MeshLambertMaterial({ map: heroTex, emissive: 0xffffff, emissiveMap: heroTex, emissiveIntensity: .55, transparent: true, alphaTest: .45, side: THREE.DoubleSide }));
@@ -352,7 +352,48 @@ hero.geometry.translate(0, HERO_H / 2, 0); hero.castShadow = true; hero.layers.s
 hero.customDepthMaterial = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking, map: heroTex, alphaTest: .45 });
 const blob = new THREE.Mesh(new THREE.CircleGeometry(.42, 24), new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: .32, depthWrite: false }));
 blob.rotation.x = -Math.PI / 2; blob.scale.set(1, .45, 1); blob.layers.set(1);
-const SKIN = '#f6ecdc', SHIRT = '#e8762e', SHIRT2 = '#c95f1f', PANTS = '#2f3f5a', CAP = '#d6332f', CAP2 = '#a92723';
+let SKIN = '#f6ecdc', SHIRT = '#e8762e', SHIRT2 = '#c95f1f', PANTS = '#2f3f5a', CAP = '#d6332f', CAP2 = '#a92723', HAT = 'cap', POCKETS = true, CUR_TEX = null;
+// supporting cast (the reference's scenes have 2-3 characters reacting to each other); YOU keep the red cap
+const ROLES = {
+  neighbour: { shirt: '#5f8a4e', shirt2: '#4a6e3c', hat: 'hair', hair: '#b9b4ad' },
+  stranger: { shirt: '#5b4a8a', shirt2: '#47396e', hat: 'hood', hair: '#3d3266' },
+  rescuer: { shirt: '#f2c12e', shirt2: '#d9a514', hat: 'helmet', hair: '#f4f4f4' },
+  soldier: { shirt: '#5d6b3a', shirt2: '#4a5630', hat: 'helmet', hair: '#4f5a33' },
+  doctor: { shirt: '#f1f1f1', shirt2: '#cfd6dc', hat: 'hair', hair: '#3a2a22' },
+  kid: { shirt: '#3b8fd9', shirt2: '#2f74b3', hat: 'hair', hair: '#5a3a22', scale: .72 },
+  shopkeeper: { shirt: '#c0392b', shirt2: '#9b2d22', hat: 'beanie', hair: '#2f3f5a' },
+  survivor: { shirt: '#8a5a3a', shirt2: '#6e4630', hat: 'hair', hair: '#2a1d16' },
+};
+function drawHat(hy0, R) {
+  if (HAT === 'cap') {
+    hx.fillStyle = CAP; hx.beginPath(); hx.arc(256, hy0 - 18, R - 4, Math.PI * 1.04, Math.PI * 1.96); hx.closePath(); hx.fill(); hx.stroke();
+    hx.fillStyle = CAP2; hx.beginPath(); hx.ellipse(380, hy0 - 30, 95, 22, -.05, 0, 7); hx.fill(); hx.stroke();
+    hx.fillStyle = '#fff'; hx.beginPath(); hx.arc(256, hy0 - 128, 12, 0, 7); hx.fill(); hx.lineWidth = 6; hx.stroke(); return;
+  }
+  hx.fillStyle = CAP; hx.lineWidth = 12;
+  if (HAT === 'hair') { hx.beginPath(); hx.moveTo(256 - R * .98, hy0 - R * .05); hx.bezierCurveTo(256 - R * 1.05, hy0 - R * 1.15, 256 + R * 1.05, hy0 - R * 1.15, 256 + R * .98, hy0 - R * .05);
+    hx.bezierCurveTo(256 + R * .5, hy0 - R * .55, 256 - R * .2, hy0 - R * .35, 256 - R * .98, hy0 - R * .05); hx.closePath(); hx.fill(); hx.stroke(); }
+  else if (HAT === 'beanie') { hx.beginPath(); hx.arc(256, hy0 - 22, R - 2, Math.PI * 1.02, Math.PI * 1.98); hx.closePath(); hx.fill(); hx.stroke();
+    hx.fillStyle = CAP2; hx.fillRect(256 - R * .98, hy0 - 40, R * 1.96, 30); hx.strokeRect(256 - R * .98, hy0 - 40, R * 1.96, 30); }
+  else if (HAT === 'hood') { hx.beginPath(); hx.arc(256, hy0 + 10, R + 18, Math.PI * .92, Math.PI * 2.08); hx.lineTo(256 + R * .78, hy0 + R * .2); hx.quadraticCurveTo(256, hy0 - R * .55, 256 - R * .78, hy0 + R * .2); hx.closePath(); hx.fill(); hx.stroke(); }
+  else if (HAT === 'helmet') { hx.beginPath(); hx.arc(256, hy0 - 10, R + 6, Math.PI * 1.0, Math.PI * 2.0); hx.closePath(); hx.fill(); hx.stroke();
+    hx.fillStyle = CAP2; hx.fillRect(256 - R - 16, hy0 - 22, R * 2 + 32, 22); hx.strokeRect(256 - R - 16, hy0 - 22, R * 2 + 32, 22); }
+}
+function makeCastCard() {
+  const c = document.createElement('canvas'); c.width = 512; c.height = 1024;
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(HERO_H / 2, HERO_H), new THREE.MeshLambertMaterial({ map: tex, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: .55, transparent: true, alphaTest: .45, side: THREE.DoubleSide }));
+  m.geometry.translate(0, HERO_H / 2, 0); m.castShadow = true; m.layers.set(1);
+  m.customDepthMaterial = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking, map: tex, alphaTest: .45 });
+  const sh = new THREE.Mesh(new THREE.CircleGeometry(.42, 24), new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: .3, depthWrite: false }));
+  sh.rotation.x = -Math.PI / 2; sh.scale.set(1, .45, 1); sh.layers.set(1); m.visible = sh.visible = false;
+  return { ctx: c.getContext('2d'), tex, m, sh };
+}
+function drawCast(card, role, t, pose, mood, facing) {
+  const save = [hx, SHIRT, SHIRT2, CAP, CAP2, HAT, POCKETS, CUR_TEX], r = ROLES[role] || ROLES.survivor;
+  hx = card.ctx; SHIRT = r.shirt; SHIRT2 = r.shirt2; CAP = r.hair; CAP2 = r.shirt2; HAT = r.hat; POCKETS = false; CUR_TEX = card.tex;
+  try { drawHero(t, pose, mood, facing); } finally { [hx, SHIRT, SHIRT2, CAP, CAP2, HAT, POCKETS, CUR_TEX] = save; }
+}
 
 function limb(x1, y1, x2, y2, w = 15) { hx.lineCap = 'round'; hx.strokeStyle = INK; hx.lineWidth = w; hx.beginPath(); hx.moveTo(x1, y1); hx.lineTo(x2, y2); hx.stroke(); }
 function arm(sx, sy, a1, a2, len = 120, hand = null) {    // shoulder angle a1, elbow bend a2 (radians, 0 = straight down)
@@ -407,8 +448,9 @@ function drawHero(t, pose, mood, facing) {
   // bean torso (survival vest)
   hx.fillStyle = SHIRT; hx.strokeStyle = INK; hx.lineWidth = 12;
   hx.beginPath(); hx.moveTo(170, 460 + breath); hx.bezierCurveTo(165, 380 + breath, 347, 380 + breath, 342, 460 + breath); hx.lineTo(352, 690); hx.bezierCurveTo(352, 735, 160, 735, 160, 690); hx.closePath(); hx.fill(); hx.stroke();
-  hx.fillStyle = SHIRT2; hx.fillRect(250, 420 + breath, 12, 290); hx.fillStyle = '#3c4a5a'; hx.fillRect(196, 520 + breath, 48, 40); hx.fillRect(268, 520 + breath, 48, 40);
-  hx.strokeStyle = INK; hx.lineWidth = 6; hx.strokeRect(196, 520 + breath, 48, 40); hx.strokeRect(268, 520 + breath, 48, 40);
+  hx.fillStyle = SHIRT2; hx.fillRect(250, 420 + breath, 12, 290);
+  if (POCKETS) { hx.fillStyle = '#3c4a5a'; hx.fillRect(196, 520 + breath, 48, 40); hx.fillRect(268, 520 + breath, 48, 40);
+  hx.strokeStyle = INK; hx.lineWidth = 6; hx.strokeRect(196, 520 + breath, 48, 40); hx.strokeRect(268, 520 + breath, 48, 40); }
   // head
   const hy0 = 245 + breath * 1.2, R = 150;
   const bean = () => { hx.beginPath(); hx.moveTo(256, hy0 - R * .96); hx.bezierCurveTo(256 + R * .78, hy0 - R * .98, 256 + R * 1.1, hy0 - R * .35, 256 + R * 1.04, hy0 + R * .15);
@@ -416,10 +458,8 @@ function drawHero(t, pose, mood, facing) {
     hx.bezierCurveTo(256 - R * 1.1, hy0 - R * .35, 256 - R * .78, hy0 - R * .98, 256, hy0 - R * .96); hx.closePath(); };
   hx.fillStyle = SKIN; hx.strokeStyle = INK; hx.lineWidth = 12; bean(); hx.fill(); hx.stroke();
   hx.save(); bean(); hx.clip(); hx.lineWidth = 30; hx.beginPath(); hx.arc(256, hy0 - R * .25, R * 1.12, .35, Math.PI - .35); hx.stroke(); hx.restore();
-  // cap (the brand: red cap)
-  hx.fillStyle = CAP; hx.beginPath(); hx.arc(256, hy0 - 18, R - 4, Math.PI * 1.04, Math.PI * 1.96); hx.closePath(); hx.fill(); hx.stroke();
-  hx.fillStyle = CAP2; hx.beginPath(); hx.ellipse(380, hy0 - 30, 95, 22, -.05, 0, 7); hx.fill(); hx.stroke();
-  hx.fillStyle = '#fff'; hx.beginPath(); hx.arc(256, hy0 - 128, 12, 0, 7); hx.fill(); hx.lineWidth = 6; hx.stroke();
+  // headwear: YOU's red cap is the brand; the cast get hair, hoods, helmets or beanies
+  drawHat(hy0, R);
   // face
   const face = P.face || ({ calm: 'calm', warm: 'smile', tense: 'tense', whisper: 'worry', urgent: 'urgent', reveal: 'shock' })[mood] || 'calm';
   const bp = (t + 0.37) % 1.43; const blink = bp < 4 / 30;
@@ -447,7 +487,7 @@ function drawHero(t, pose, mood, facing) {
   arm(256 - 88, 440 + breath, P.arms[1][0], P.arms[1][1], 120, hand);
   if (P.carry) { hx.fillStyle = '#9a6a3a'; hx.strokeStyle = INK; hx.lineWidth = 9; hx.fillRect(176, 520, 160, 120); hx.strokeRect(176, 520, 160, 120); }
   hx.restore(); hx.restore();
-  heroTex.needsUpdate = true;
+  (CUR_TEX || heroTex).needsUpdate = true;
 }
 
 // ---------------------------------------------------------------- timeline, shots, camera
@@ -491,6 +531,7 @@ function buildWorld(bg) {
 }
 const scene3 = new THREE.Scene(); scene3.add(hero, blob);
 const fg = new THREE.Group(); scene3.add(fg);
+const CAST = [makeCastCard(), makeCastCard(), makeCastCard()]; CAST.forEach(c => scene3.add(c.m, c.sh));
 { const pole = cyl(.06, .07, 3.2, mat(0x2a2a33), 0, 1.6, 0, 8); const sign = box(.5, .5, .05, mat(0xd8382f), 0, 2.1, .05); const bin = cyl(.3, .26, .85, mat(0x3f6a4a), .55, .43, .2, 12);
   fg.add(pole, sign, bin); fg.visible = false; }
 let propKey = '';
@@ -562,13 +603,25 @@ window.renderAt = (t) => {
   const facing = s.move_to != null ? Math.sign((s.move_to - (s.x ?? .5)) || 1) : 1;
   drawHero(t, pose, s.mood, facing);
   hero.position.copy(hp); blob.position.set(hp.x, .02, hp.z);
+  const cast = (s.cast || []).slice(0, 3);
+  CAST.forEach((c, i) => {
+    const spec = cast[i]; c.m.visible = c.sh.visible = !!spec; if (!spec) return;
+    const side = (spec.x ?? (i % 2 ? .25 : .75)) >= .5 ? 1 : -1, cx = hp.x + side * (1.0 + .45 * Math.floor(i / 2)), cz = -.3 - i * .25, sc = (ROLES[spec.role] || {}).scale || 1;
+    const cposes = spec.poses && spec.poses.length ? spec.poses : [spec.pose || 'stand'];
+    const cp = cposes[Math.min(cposes.length - 1, Math.floor(k * cposes.length))];
+    drawCast(c, spec.role, t + i * 1.7, cp, spec.mood || 'calm', Math.sign(hp.x - cx) || 1);
+    c.m.position.set(cx, 0, cz); c.m.scale.setScalar(sc); c.sh.position.set(cx, .02, cz); c.sh.scale.set(sc, .45 * sc, sc);
+  });
   const shi = Math.max(0, TL._shots.findIndex(sh => t >= sh.t0 && t < sh.t1)); const shot = TL._shots[shi] || TL._shots[TL._shots.length - 1];
-  const c = cameraFor(shot, hp, t, set); let roll = shot.roll;
+  const castN = (s.cast || []).length, castMid = castN ? (s.cast || []).slice(0, 3).reduce((m, sp, i) => m + ((sp.x ?? (i % 2 ? .25 : .75)) >= .5 ? 1 : -1), 0) / Math.min(castN, 3) * .5 : 0;
+  const shotFor = sh => castN && sh.type === 'close' && TL.scenes[sh.si] === s ? { ...sh, type: 'medium' } : sh;   // a two-shot instead of a close-up
+  const aim = hp.clone().add(new THREE.Vector3(castMid, 0, 0));
+  const c = cameraFor(shotFor(shot), aim, t, set); let roll = shot.roll;
   // smootherstep glide of ~23 frames from the previous framing (measured: ease in-out, never a snap); hard cut only on a place change
   const prev = TL._shots[shi - 1], G = 23 / 30;
   if (prev && prev.bg === shot.bg && t < shot.t0 + G) {
     const a = (x => x * x * x * (x * (x * 6 - 15) + 10))(clamp((t - shot.t0) / G, 0, 1));
-    const pc = cameraFor({ ...prev, t1: prev.t1 }, hp, t, set);
+    const pc = cameraFor(shotFor({ ...prev, t1: prev.t1 }), aim, t, set);
     c.pos.lerpVectors(pc.pos, c.pos, a); c.look.lerpVectors(pc.look, c.look, a); roll = lerp(prev.roll, shot.roll, a);
   }
   if (s.fx === 'shake') { c.pos.x += Math.sin(t * 50) * .04; c.pos.y += Math.cos(t * 43) * .03; }
@@ -583,6 +636,7 @@ window.renderAt = (t) => {
   if (fg.visible) { const dir = new THREE.Vector3().subVectors(hp, camera.position).setY(0).normalize(), side = new THREE.Vector3(-dir.z, 0, dir.x);
     fg.position.copy(camera.position).addScaledVector(dir, 1.1).addScaledVector(side, -shot.side * .75); fg.position.y = 0; }
   hero.rotation.y = Math.atan2(camera.position.x - hp.x, camera.position.z - hp.z);   // billboard faces camera
+  CAST.forEach(c => { if (c.m.visible) c.m.rotation.y = Math.atan2(camera.position.x - c.m.position.x, camera.position.z - c.m.position.z); });
   camera.layers.set(0); gl.setRenderTarget(rt); gl.render(scene3, camera); gl.setRenderTarget(null);
   post.uniforms.dof.value = { close: 15, medium: 10, low: 8, reveal: 0, wide: 0 }[shot.type] ?? 0;
   post.uniforms.focus.value = camera.position.distanceTo(hp) * .98;
