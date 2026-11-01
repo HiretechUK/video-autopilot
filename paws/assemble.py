@@ -13,10 +13,28 @@ def run(cmd):
     subprocess.run(cmd, check=True)
 
 
-def piece(src, start_in_clip, dur, out, vertical=False):
+_LEAD = {}
+
+
+def lead_of(src, cap=0.35):
+    """Seconds of near-still ease-in at the start of a generated clip (the model starts from the still image)."""
+    if src not in _LEAD:
+        import numpy as np
+        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-t", "1.2", "-i", src, "-vf", "scale=160:90,format=gray",
+                              "-f", "rawvideo", "-"], capture_output=True).stdout
+        f = np.frombuffer(raw, np.uint8).reshape(-1, 90, 160).astype(float)
+        d = [np.abs(f[i] - f[i - 1]).mean() for i in range(1, len(f))]
+        k = next((i for i, x in enumerate(d) if x > 1.5), len(d))
+        _LEAD[src] = min(cap, k / FPS)
+    return _LEAD[src]
+
+
+def piece(src, start_in_clip, dur, out, vertical=False, cap=0.35):
     """Take `dur` seconds of a clip from start_in_clip, stretching slightly or holding the last frame if the clip is short."""
     probe = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", src],
                                  capture_output=True, text=True).stdout.strip() or 0)
+    if start_in_clip < 0.05:  # a cut into the start of a clip: skip its still ease-in so the cut never looks frozen
+        start_in_clip = lead_of(src, cap)
     avail = max(0.1, probe - start_in_clip)
     speed = 1.0
     if avail < dur:
@@ -57,7 +75,9 @@ def build(ep, timeline, mp3, out, vertical=False, t0=0.0, t1=None):
         d = round((b - a) * FPS) / FPS
         if d < 1.0 / FPS:  # sliver shorter than a frame
             continue
-        piece(f"clips/{ep}/{seg['gen']}.mp4", inclip, d, str(f), vertical)
+        # solo verses are close-up singing: trim little so lips stay in sync; group shots can lose more
+        cap = 0.35 if seg["gen"].startswith("verse") else 0.9
+        piece(f"clips/{ep}/{seg['gen']}.mp4", inclip, d, str(f), vertical, cap)
         parts.append(f)
     lst = work / "list.txt"
     lst.write_text("".join(f"file '{p.resolve()}'\n" for p in parts))
