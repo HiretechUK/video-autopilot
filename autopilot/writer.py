@@ -116,8 +116,16 @@ def write_episode(series: str, number: int, recent: list[str], lessons: str = ""
     user = f"Write episode number {number}.\nRecent episodes (do not repeat these scenarios): {', '.join(recent) or 'none'}.\n"
     if lessons:
         user += f"\nWhat has performed well or badly so far (apply it):\n{lessons}\n"
+    if series == "imagine_you":
+        user += ("\nSHOW EVERYTHING (rule 7): the viewer must SEE what each narration line says, using only that scene's bg, "
+                 "props and poses. The engine can only draw the listed sets and props, so never narrate a beat they cannot "
+                 "show (no tailpipes, headlights, farmhouses, car interiors, other people unless listed). If a beat is "
+                 "essential, change the beat to something the sets can show. Keep the place consistent with the story "
+                 "(a roadside blizzard is 'snow', not 'forest_night'), and match the pose to the action described.\n")
     if previous is not None:
-        user += ("\nRevise this episode according to Haseeb's notes. Keep everything he did not ask to change.\n"
+        user += ("\nRevise this episode according to Haseeb's notes. Keep everything he did not ask to change. "
+                 "If his notes are about the pictures or scenes, you MUST change the scenes (bg, props, poses) and/or the "
+                 "narration so every scene literally shows its line; returning the same scenes is a failure.\n"
                  f"Notes: {notes}\nCurrent episode JSON:\n{json.dumps(previous)}\n")
     errs = []
     for attempt in range(4):

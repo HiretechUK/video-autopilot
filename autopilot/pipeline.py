@@ -51,6 +51,8 @@ AUTO_APPROVE_H = 6  # Haseeb, 2 Nov 2026: if he hasn't replied in 6 h and the ep
 def auto_ok(rec: dict, ep: dict) -> bool:
     """May this episode go out without Haseeb's reply? Every How: green ad safety and a clean fact-check.
     Imagine You: made by the autopilot, so it already passed the due check and the near-duplicate story check."""
+    if rec.get("version", 1) > 1:  # Haseeb asked for changes: only his explicit "approved" can post it
+        return False
     if rec["series"] == "every_how":
         fc = ep.get("factcheck") or {}
         return (ep.get("ad_safety") or {}).get("rating") == "green" and bool(fc.get("ok")) and not fc.get("open_issues")
@@ -84,7 +86,9 @@ def fetch(name: str) -> str:
 def _script_hash(ep_path: str) -> str:
     import hashlib
     ep = json.load(open(ep_path))
-    core = {k: ep.get(k) for k in ("title", "sections", "short")}
+    # 2 Nov 2026: this hashed only title/sections/short, so an Imagine You revision (same title, new scenes)
+    # reused the old render and Haseeb got the same video back. Hash everything that changes the picture or voice.
+    core = {k: ep.get(k) for k in ("title", "sections", "short", "scenes", "voice", "speed", "costume", "hud")}
     return hashlib.sha1(json.dumps(core, sort_keys=True).encode()).hexdigest()[:8]
 
 
@@ -308,6 +312,8 @@ def check():
         st["seen"].append(mid)
         rec = st["episodes"][ref]
         action, notes = mailer.parse(text)
+        if action == "change":
+            rec.setdefault("notes", []).append(notes[:2000])
         path = os.path.join(ROOT, rec["file"])
         ep = json.load(open(path))
         try:
@@ -472,6 +478,21 @@ if __name__ == "__main__":
                 print(label, "->", json.dumps(fn())[:700])
             except Exception as e:
                 print(label, "FAILED:", e)
+    elif cmd == "revise":  # rewrite + re-render a pending episode with notes from episodes/<REF>.notes.txt; series=<REF>
+        st = load()
+        rec = st["episodes"][arg]
+        p = os.path.join(ROOT, rec["file"])
+        notes = open(os.path.join(ROOT, "episodes", f"{arg}.notes.txt")).read().strip()
+        rec.setdefault("notes", []).append(notes[:2000])
+        new = writer.write_episode(rec["series"], rec["number"], [], "", notes=notes, previous=json.load(open(p)))
+        json.dump(new, open(p, "w"), indent=1)
+        rec["version"] = rec.get("version", 1) + 1
+        rec["title"] = new["title"]
+        rec["status"] = "pending"
+        save(st)
+        video = stage(arg, rec, new, p) if SERIES[rec["series"]].get("staged") else render(rec["series"], p)
+        email_for_approval(arg, rec, new, video)
+        save(st)
     elif cmd == "resend":  # email an existing pending episode for approval again: series=<REF>, e.g. EH-01
         st = load()
         rec = st["episodes"][arg]
