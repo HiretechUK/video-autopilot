@@ -1,0 +1,624 @@
+{
+ "title": "How Does a Cyclone Form, and Who Gives It a Name?",
+ "question": "How does a tropical cyclone form, and who decides what it is called?",
+ "description": "A cyclone named Murasu is closing in on India's south-east coast, and the same kind of storm is called a hurricane or a typhoon elsewhere. In about five minutes, see how warm seawater becomes a spinning storm, why it turns the way it does, and how thirteen countries share one list of storm names. Every fact is checked against official weather agencies. Should storm names come from one shared international list, or should each country name the storms that hit it? Tell us in the comments.",
+ "tags": [
+  "how do cyclones form",
+  "tropical cyclone explained",
+  "hurricane vs typhoon vs cyclone",
+  "how are storms named",
+  "Cyclone Murasu",
+  "Bay of Bengal cyclone",
+  "Coriolis effect",
+  "wind shear",
+  "WMO storm names",
+  "weather explained",
+  "how hurricanes form",
+  "ocean heat engine"
+ ],
+ "ad_safety": {
+  "rating": "green",
+  "reason": "Educational weather explainer with no victim focus. The storm is approaching, not a tragedy, and the script gives no casualty details."
+ },
+ "sources": [
+  {
+   "title": "NOAA National Ocean Service: How do hurricanes form?",
+   "url": "https://oceanservice.noaa.gov/facts/how-hurricanes-form.html"
+  },
+  {
+   "title": "PBS NOVA: How Do Hurricanes Form?",
+   "url": "https://www.pbs.org/wgbh/nova/article/how-do-hurricanes-form/"
+  },
+  {
+   "title": "NOAA National Hurricane Center: Mariner's Guide to Hurricanes",
+   "url": "https://www.nhc.noaa.gov/marinersguide.pdf"
+  },
+  {
+   "title": "WMO Community: Tropical Cyclone Naming",
+   "url": "https://community.wmo.int/site/knowledge-hub/programmes-and-initiatives/tropical-cyclone-programme-tcp/tropical-cyclone-naming"
+  },
+  {
+   "title": "India Meteorological Department: New list of tropical cyclone names, North Indian Ocean (2020)",
+   "url": "https://internal.imd.gov.in/press_release/20200428_pr_788.pdf"
+  },
+  {
+   "title": "Cyclone Murasu (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Cyclone_Murasu"
+  },
+  {
+   "title": "The Week: Cyclone Murasu approaches Andhra Pradesh, Odisha, Tamil Nadu on alert (2 November 2026)",
+   "url": "https://www.theweek.in/news/india/2026/11/02/cyclone-murasu-approaches-andhra-pradesh-odisha-tamil-nadu-on-alert.html"
+  },
+  {
+   "title": "ScienceDirect (Earth-Science Reviews): review of North Indian Ocean tropical cyclones",
+   "url": "https://www.sciencedirect.com/science/article/abs/pii/S0012825222000514"
+  },
+  {
+   "title": "AP7AM: Deep depression in Bay of Bengal intensifies into cyclone Murasu",
+   "url": "https://www.ap7am.com/en/138617/amp/deep-depression-in-bay-of-bengal-intensifies-into-cyclone-murasu"
+  },
+  {
+   "title": "Daily Pioneer: Depression over Bay of Bengal may intensify into cyclone Murasu",
+   "url": "https://dailypioneer.com/amp/story/india/depression-over-bay-of-bengal-may-intensify-into-cyclone-murasu-andhra-coast-on-alert"
+  },
+  {
+   "title": "North Indian Ocean tropical cyclone (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/North_Indian_Ocean_tropical_cyclone"
+  },
+  {
+   "title": "Yale Climate Connections: WMO, Atlantic hurricanes no longer to receive Greek alphabet names",
+   "url": "https://yaleclimateconnections.org/2021/03/wmo-atlantic-hurricanes-no-longer-to-receive-names-from-greek-alphabet/"
+  },
+  {
+   "title": "WMO: Hurricane Committee retires names and ends use of Greek alphabet",
+   "url": "https://wmo.int/media/news/wmo-hurricane-committee-retires-tropical-cyclone-names-and-ends-use-of-greek-alphabet"
+  },
+  {
+   "title": "List of retired Atlantic hurricane names (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/List_of_retired_Atlantic_hurricane_names"
+  }
+ ],
+ "sections": [
+  {
+   "heading": "",
+   "scenes": [
+    {
+     "narration": "A cyclone named Murasu is approaching India's south-east coast, and is expected to cross the Andhra Pradesh coast in the night of the second to the third of November. How does a cyclone form?",
+     "visual": {
+      "type": "title",
+      "text": "How does a cyclone form, and who names it?",
+      "icon": "hurricane",
+      "sub": "Cyclone Murasu, Bay of Bengal"
+     }
+    },
+    {
+     "narration": "The same engine drives hurricanes in the Atlantic and typhoons in the Pacific. Today you will see how warm seawater becomes a spinning storm, and who decides what it is called.",
+     "visual": {
+      "type": "hero",
+      "icon": "hurricane",
+      "label": "Cyclone Murasu",
+      "sub": "Bay of Bengal, early November"
+     }
+    },
+    {
+     "narration": "In about five minutes, you will understand the ingredients, the spin, and the surprisingly international system of storm names.",
+     "visual": {
+      "type": "question",
+      "text": "How does a calm sea become a storm?"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "One storm, many names",
+   "scenes": [
+    {
+     "narration": "Scientists call them all tropical cyclones. They are called hurricanes in the Atlantic and eastern Pacific, typhoons in the western Pacific, and cyclones in the Indian Ocean.",
+     "visual": {
+      "type": "map",
+      "countries": [
+       "United States of America",
+       "Mexico",
+       "Philippines",
+       "Japan",
+       "China",
+       "India",
+       "Bangladesh",
+       "Madagascar",
+       "Australia"
+      ],
+      "label": "Same storm, different names"
+     }
+    },
+    {
+     "narration": "Same physics, three words. Which one you use depends on which part of the world the storm is born in.",
+     "visual": {
+      "type": "list",
+      "heading": "Three names",
+      "items": [
+       {
+        "icon": "hurricane",
+        "text": "Hurricane: Atlantic, eastern Pacific",
+        "cue": "hurricane"
+       },
+       {
+        "icon": "wind",
+        "text": "Typhoon: western Pacific",
+        "cue": "typhoon"
+       },
+       {
+        "icon": "waves",
+        "text": "Cyclone: Indian Ocean",
+        "cue": "cyclone"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "The North Indian Ocean is the least active official basin, producing only about six to seven percent of the world's tropical cyclones. Yet it has its own busy seasons.",
+     "visual": {
+      "type": "stat",
+      "value": "6\u20137%",
+      "label": "of the world's tropical cyclones form here",
+      "icon": "globe",
+      "fraction": 0.065
+     }
+    },
+    {
+     "narration": "Storms there tend to form between April and June, and again between October and December, so a cyclone in early November is not out of season.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "Apr\u2013Jun",
+        "label": "First busy window",
+        "icon": "sun"
+       },
+       {
+        "year": "Oct\u2013Dec",
+        "label": "Second busy window",
+        "icon": "cloud-rain"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The warm-water engine",
+   "scenes": [
+    {
+     "narration": "Everything starts with warm water. The sea needs to be at least twenty-six and a half degrees Celsius, and that warmth must reach about fifty metres down.",
+     "visual": {
+      "type": "hero",
+      "icon": "thermometer-hot",
+      "label": "26.5\u00b0C or warmer",
+      "sub": "sea water, about 50 m deep"
+     }
+    },
+    {
+     "narration": "Warm water evaporates, and the moist air rises. High up it cools, the vapour condenses into cloud, and that condensation releases heat.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "drop-half",
+        "label": "Water evaporates",
+        "cue": "evaporates"
+       },
+       {
+        "icon": "arrow-up",
+        "label": "Moist air rises",
+        "cue": "rises"
+       },
+       {
+        "icon": "cloud",
+        "label": "Vapour condenses",
+        "cue": "condenses"
+       },
+       {
+        "icon": "fire-simple",
+        "label": "Heat released",
+        "cue": "heat"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "That released heat keeps the air rising. In effect, the storm is a heat engine, running on the gap between the warm sea and the cold air far above.",
+     "visual": {
+      "type": "zoom",
+      "icon": "hurricane",
+      "label": "A tropical cyclone",
+      "inner_icon": "engine",
+      "inner_label": "A heat engine"
+     }
+    },
+    {
+     "narration": "As air rises, pressure at the surface falls, and surrounding air rushes in. That new air warms, gathers moisture and rises too, so the loop feeds itself.",
+     "visual": {
+      "type": "cycle",
+      "center": "Self-feeding loop",
+      "steps": [
+       {
+        "icon": "arrow-up",
+        "label": "Air rises",
+        "cue": "rises"
+       },
+       {
+        "icon": "gauge",
+        "label": "Pressure drops",
+        "cue": "falls"
+       },
+       {
+        "icon": "wind",
+        "label": "Air rushes in",
+        "cue": "rushes"
+       },
+       {
+        "icon": "drop",
+        "label": "Gathers moisture",
+        "cue": "moisture"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "A heap of rising air is not yet a spinning storm. So why does a cyclone rotate?",
+     "visual": {
+      "type": "question",
+      "text": "So why does it spin?"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Why it spins",
+   "scenes": [
+    {
+     "narration": "The answer is the spin of the Earth. Moving air is deflected sideways: to the right in the Northern Hemisphere and to the left in the Southern.",
+     "visual": {
+      "type": "hero",
+      "icon": "globe-hemisphere-east",
+      "label": "Earth's rotation",
+      "sub": "deflects moving air sideways"
+     }
+    },
+    {
+     "narration": "So low pressure spins counterclockwise north of the equator and clockwise south of it. A storm over the Bay of Bengal turns counterclockwise; one off Madagascar turns clockwise.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "arrow-counter-clockwise",
+       "label": "Northern Hemisphere",
+       "value": "Counterclockwise"
+      },
+      "right": {
+       "icon": "arrow-clockwise",
+       "label": "Southern Hemisphere",
+       "value": "Clockwise"
+      },
+      "vs": "vs"
+     }
+    },
+    {
+     "narration": "Near the equator this effect is too weak, so tropical cyclones rarely form within about five degrees of latitude of it. Most form roughly between 5 and 20 degrees from the equator.",
+     "visual": {
+      "type": "stat",
+      "value": "5\u00b0",
+      "label": "latitude: storms rarely form closer to the equator",
+      "icon": "compass"
+     }
+    },
+    {
+     "narration": "So the recipe has four parts: warm water, thunderstorms, a little spin from the Earth, and winds that do not change much with height.",
+     "visual": {
+      "type": "list",
+      "heading": "The recipe",
+      "items": [
+       {
+        "icon": "thermometer-hot",
+        "text": "Warm sea, 26.5\u00b0C or more",
+        "cue": "warm"
+       },
+       {
+        "icon": "cloud-lightning",
+        "text": "Thunderstorms",
+        "cue": "thunderstorms"
+       },
+       {
+        "icon": "globe",
+        "text": "Spin from the Earth",
+        "cue": "spin"
+       },
+       {
+        "icon": "wind",
+        "text": "Low wind shear",
+        "cue": "winds"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "That last part matters. Strong winds high up can rip a storm's structure apart, and even when every ingredient is present, a storm does not always develop.",
+     "visual": {
+      "type": "hero",
+      "icon": "wind",
+      "label": "Wind shear",
+      "sub": "strong upper winds tear storms apart"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Inside the storm",
+   "scenes": [
+    {
+     "narration": "As a storm strengthens, an opening forms at its centre, called the eye. It is ringed by the eyewall, where much of the storm's heat is released.",
+     "visual": {
+      "type": "zoom",
+      "icon": "hurricane",
+      "label": "A mature storm",
+      "inner_icon": "eye",
+      "inner_label": "The eye and eyewall"
+     }
+    },
+    {
+     "narration": "Satellite images of Murasu showed clear spiral bands of cloud, the visible sign of a storm that has organised itself.",
+     "visual": {
+      "type": "hero",
+      "icon": "cloud",
+      "label": "Spiral cloud bands",
+      "sub": "seen on Murasu satellite images"
+     }
+    },
+    {
+     "narration": "India's weather office grades storms in steps. Murasu began as a low-pressure area, reached deep depression on 1 November, became a named cyclonic storm, and is now severe; higher grades are very severe, extremely severe and super cyclonic.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "cloud",
+        "label": "Depression",
+        "cue": "low-pressure"
+       },
+       {
+        "icon": "cloud-rain",
+        "label": "Deep depression",
+        "cue": "deep"
+       },
+       {
+        "icon": "wind",
+        "label": "Cyclonic storm",
+        "cue": "cyclonic"
+       },
+       {
+        "icon": "hurricane",
+        "label": "Severe cyclonic storm",
+        "cue": "severe"
+       },
+       {
+        "icon": "warning",
+        "label": "Very severe and above",
+        "cue": "very"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "India's weather office now forecasts landfall winds of 100 to 110 kilometres an hour, gusting to 120. That is still expected to be weaker than last week's Cyclone Arnab, which hit with about 125 to 135 kilometres an hour.",
+     "visual": {
+      "type": "stat",
+      "value": "100\u2013110 km/h",
+      "label": "forecast landfall winds, gusts to 120",
+      "icon": "gauge"
+     }
+    },
+    {
+     "narration": "A storm keeps strengthening only while it has warm water to feed on. Over cooler water, evaporation falls and the storm weakens.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "thermometer-hot",
+       "label": "Warm sea",
+       "value": "Storm strengthens"
+      },
+      "right": {
+       "icon": "thermometer-cold",
+       "label": "Cooler water",
+       "value": "Storm weakens"
+      },
+      "vs": "vs"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Who picks the name",
+   "scenes": [
+    {
+     "narration": "Now to the names. Naming began so storms could be identified quickly in warnings, because names are far easier to remember than numbers and technical terms.",
+     "visual": {
+      "type": "hero",
+      "icon": "megaphone",
+      "label": "Why name storms?",
+      "sub": "quick, clear warnings"
+     }
+    },
+    {
+     "narration": "Atlantic storms have been named from lists since 1953. The North Indian Ocean began naming in 2004, and a new list of names was adopted in 2020.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "1953",
+        "label": "Atlantic lists begin",
+        "icon": "list"
+       },
+       {
+        "year": "2004",
+        "label": "North Indian Ocean starts naming",
+        "icon": "map-pin"
+       },
+       {
+        "year": "2020",
+        "label": "New Indian Ocean list adopted",
+        "icon": "list-plus"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "In the North Indian Ocean, thirteen countries, from Bangladesh to Yemen, each contributed names to one shared list. Murasu is India's contribution.",
+     "visual": {
+      "type": "map",
+      "countries": [
+       "Bangladesh",
+       "India",
+       "Iran",
+       "Myanmar",
+       "Oman",
+       "Pakistan",
+       "Qatar",
+       "Saudi Arabia",
+       "Sri Lanka",
+       "Thailand",
+       "United Arab Emirates",
+       "Yemen"
+      ],
+      "label": "13 countries, one list"
+     }
+    },
+    {
+     "narration": "Names are taken in order. When a storm reaches roughly sixty-two kilometres an hour, the regional weather centre in New Delhi gives it the next name on the list.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "list-numbers",
+        "label": "Shared list in order",
+        "cue": "order"
+       },
+       {
+        "icon": "wind",
+        "label": "Storm reaches naming strength",
+        "cue": "kilometres"
+       },
+       {
+        "icon": "map-pin",
+        "label": "New Delhi centre names it",
+        "cue": "New"
+       },
+       {
+        "icon": "arrow-right",
+        "label": "Next name on the list",
+        "cue": "next"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "That list holds one hundred and sixty-nine names, thirteen from each member country, and names in this region are not repeated.",
+     "visual": {
+      "type": "stat",
+      "value": "169",
+      "label": "names on the Indian Ocean list",
+      "icon": "list-numbers"
+     }
+    },
+    {
+     "narration": "Crucially, the name is not chosen afresh by the country the storm hits. It simply comes next from the approved list.",
+     "visual": {
+      "type": "hero",
+      "icon": "list-checks",
+      "label": "Pre-approved list",
+      "sub": "not picked by the country hit"
+     }
+    },
+    {
+     "narration": "Elsewhere, a storm that is especially deadly or costly can have its name retired for good. In the Atlantic, one hundred names have been retired as of 2026.",
+     "visual": {
+      "type": "stat",
+      "value": "100",
+      "label": "Atlantic names retired as of 2026",
+      "icon": "archive"
+     }
+    },
+    {
+     "narration": "Atlantic lists repeat every six years unless a name is retired. Until 1979 they held only women's names, and since then they have mixed men's and women's names.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "calendar",
+       "label": "1953 to 1978",
+       "value": "Women's names only"
+      },
+      "right": {
+       "icon": "calendar-check",
+       "label": "From 1979",
+       "value": "Men's and women's names"
+      },
+      "vs": "then"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Recap",
+   "scenes": [
+    {
+     "narration": "In one breath: warm seawater feeds rising, moist air, the Earth's rotation spins it into a storm, and a shared list of names helps warnings travel fast.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "thermometer-hot",
+        "label": "Warm sea",
+        "cue": "warm"
+       },
+       {
+        "icon": "arrow-up",
+        "label": "Rising moist air",
+        "cue": "rising"
+       },
+       {
+        "icon": "arrows-clockwise",
+        "label": "Earth's spin",
+        "cue": "rotation"
+       },
+       {
+        "icon": "list-numbers",
+        "label": "Name from a list",
+        "cue": "names"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Here is a question for you. Should storm names come from one shared international list, as now, or should each country name the storms that strike it? Tell us in the comments.",
+     "visual": {
+      "type": "question",
+      "text": "One shared list of storm names, or each country's own?"
+     }
+    }
+   ]
+  }
+ ],
+ "short": {
+  "scenes": [
+   1,
+   2,
+   8,
+   9,
+   13,
+   25
+  ],
+  "outro": "Watch the full episode to see how a cyclone gets its spin, its strength and its name."
+ },
+ "factcheck": {
+  "ok": true,
+  "summary": "Every claim checked against sources holds up, so I found no factual errors. The Murasu details match IMD-based reports: landfall expected on the night of 2\u20133 November, a 100\u2013110 km/h forecast gusting to 120, and deep depression on 1 November. The Arnab landfall figures (125\u2013135 km/h), the 169-name NIO list, and the 100 retired Atlantic names also check out. Scenes 1, 19, 20 and 21 are tied to a forecast issued on 2 November, so if the video publishes after Murasu's landfall, put them in the past tense and say 'as of 2 November'. Also keep 'last week's Arnab' only while it is still true.",
+  "open_issues": []
+ },
+ "series": "EVERY HOW #02"
+}

@@ -172,10 +172,33 @@
    "number": 3,
    "title": "Why a Snow-Blocked Tailpipe Can Kill You Before the Cold Does",
    "status": "pending",
-   "version": 2,
+   "version": 3,
    "file": "episodes/IY-03.json",
    "created": "2026-11-02T14:42:07.216696+00:00",
-   "emailed_at": "2026-11-02T15:45:27.092940+00:00"
+   "emailed_at": "2026-11-02T16:43:22.198167+00:00",
+   "notes": [
+    "Haseeb's notes (reply to v1, 2 Nov): \"The scenes don't match the script. You need to redo this.\"\nWhat he means, concretely: v1 and v2 narrate things the pictures never show. Scenes 4-7 put a roadside blizzard in \"forest_night\", show digging out the tailpipe as the \"build\" pose, and the narration mentions headlights passing and a farmhouse 60 steps away that are never on screen. Rewrite the episode so EVERY scene literally shows its narration with the available sets, props and poses: stay in the \"snow\" set (the car prop beside the character) for the whole roadside story, use poses that match each action (crouch or kneel by the car to clear snow, sit to wait, shiver in the cold, lookout to watch, signal or wave to get attention), and change any beat that cannot be drawn (for example, drop the passing headlights and the farmhouse, and build the twist from what is on screen). Keep the topic and the two true rules: stay with the car in a whiteout, and clear the tailpipe before running the engine because of carbon monoxide."
+   ],
+   "notes_files_done": [
+    "703a41d2fa"
+   ]
+  },
+  "EH-02": {
+   "series": "every_how",
+   "number": 2,
+   "title": "How Does a Cyclone Form, and Who Gives It a Name?",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/EH-02.json",
+   "created": "2026-11-02T16:49:24.865936+00:00",
+   "private": {
+    "full": "BaFrYFKrtJ8",
+    "short": "xP7RDl7jFsY",
+    "thumbnail": "set",
+    "version": 1,
+    "minutes": 5.2,
+    "superseded": []
+   }
   }
  },
  "seen": [

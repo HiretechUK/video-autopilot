@@ -30,8 +30,8 @@
     "walk",
     "shock"
    ],
-   "x": 0.4,
-   "move_to": 0.7,
+   "x": 0.35,
+   "move_to": 0.65,
    "props": [
     "car"
    ],
@@ -56,8 +56,8 @@
    "pose": "stand",
    "poses": [
     "stand",
-    "shock",
-    "phone"
+    "phone",
+    "shock"
    ],
    "x": 0.4,
    "move_to": 0.5,
@@ -99,20 +99,21 @@
     "sub": "SEARCHERS SEE CARS"
    },
    "mood": "calm",
-   "narration": "Rule one: stay with the car. You see, in a whiteout you have no line to follow, so people drift in circles. A car is easy to spot. You aren't.",
+   "narration": "Rule one: stay with the car. You see, in a whiteout you have no line to follow, so people walk in circles. Searchers look for cars, not people.",
    "highlight": [
     "circles"
    ]
   },
   {
-   "bg": "forest_night",
+   "bg": "snow",
    "pose": "shiver",
    "poses": [
     "shiver",
-    "kneel",
-    "sit"
+    "crouch",
+    "kneel"
    ],
    "x": 0.55,
+   "move_to": 0.45,
    "props": [
     "car"
    ],
@@ -132,21 +133,20 @@
     "sub": "10 MIN PER HOUR"
    },
    "mood": "urgent",
-   "narration": "Night. Minus fifteen. Gas at half. Rule two: run the engine ten minutes an hour, after digging out the tailpipe.",
+   "narration": "Night. Minus fifteen. Rule two: dig the snow from behind the car before you run the engine.",
    "highlight": [
-    "tailpipe"
+    "dig"
    ]
   },
   {
-   "bg": "forest_night",
-   "pose": "kneel",
+   "bg": "snow",
+   "pose": "sit",
    "poses": [
-    "kneel",
+    "sit",
     "think",
-    "sit"
+    "cower"
    ],
-   "x": 0.4,
-   "move_to": 0.5,
+   "x": 0.5,
    "props": [
     "car"
    ],
@@ -156,20 +156,21 @@
     "z1": 1.2
    },
    "mood": "whisper",
-   "narration": "You see, a buried tailpipe is like a chimney with the flue shut. Exhaust has nowhere to go, so carbon monoxide seeps in. No smell. You just get sleepy.",
+   "narration": "You see, a buried tailpipe is like a chimney with the flue shut. The exhaust has nowhere to go, so carbon monoxide seeps in. No smell. You just get sleepy.",
    "highlight": [
     "carbon monoxide"
    ]
   },
   {
-   "bg": "forest_night",
-   "pose": "build",
+   "bg": "snow",
+   "pose": "crouch",
    "poses": [
-    "build",
+    "crouch",
     "sit",
     "shiver"
    ],
-   "x": 0.5,
+   "x": 0.4,
+   "move_to": 0.5,
    "props": [
     "car"
    ],
@@ -184,33 +185,9 @@
     "GAS: QUARTER TANK"
    ],
    "mood": "tense",
-   "narration": "Hour after hour: dig, start, warm, stop. Fingers numb. At three in the morning, the needle hits a quarter.",
+   "narration": "Hour after hour: dig, start, warm, stop. Fingers numb. By three in the morning, the gas needle sits at a quarter.",
    "highlight": [
     "quarter"
-   ]
-  },
-  {
-   "bg": "forest_night",
-   "pose": "lookout",
-   "poses": [
-    "lookout",
-    "wave",
-    "shock"
-   ],
-   "x": 0.35,
-   "move_to": 0.55,
-   "props": [
-    "car"
-   ],
-   "fx": "flash",
-   "cam": {
-    "z0": 1.05,
-    "z1": 1.2
-   },
-   "mood": "urgent",
-   "narration": "Then an engine. Headlights slide past in the white... and keep going. They never saw you.",
-   "highlight": [
-    "never saw you"
    ]
   },
   {
@@ -219,15 +196,17 @@
    "poses": [
     "stand",
     "lookout",
-    "point"
+    "reach"
    ],
-   "x": 0.5,
+   "x": 0.35,
+   "move_to": 0.55,
    "props": [
-    "car"
+    "car",
+    "radio"
    ],
-   "fx": "",
+   "fx": "flash",
    "cam": {
-    "z0": 1.0,
+    "z0": 1.05,
     "z1": 1.2
    },
    "hud": [
@@ -236,9 +215,9 @@
     "GAS: QUARTER TANK"
    ],
    "mood": "reveal",
-   "narration": "Dawn. The wind dies. The snow stops. [pause] Sixty steps behind your car stands a farmhouse. It was there all night.",
+   "narration": "Dawn. The wind dies. The snow stops. [pause] Then the radio crackles.",
    "highlight": [
-    "farmhouse"
+    "radio"
    ]
   },
   {
@@ -247,34 +226,36 @@
    "poses": [
     "lookout",
     "shock",
-    "think"
+    "signal"
    ],
-   "x": 0.45,
+   "x": 0.5,
    "props": [
-    "car"
+    "car",
+    "radio"
    ],
    "fx": "",
    "cam": {
-    "z0": 1.1,
+    "z0": 1.0,
     "z1": 1.2
    },
-   "mood": "whisper",
-   "narration": "No smoke. No lights. Gray clouds are stacking up again, and your needle sits at a quarter.",
+   "mood": "reveal",
+   "narration": "Crews knew where your phone last pinged. They waited all night for the storm to break. Plows reach you at noon.",
    "highlight": [
-    "No smoke"
+    "Plows"
    ]
   },
   {
    "bg": "snow",
-   "pose": "point",
+   "pose": "sit",
    "poses": [
-    "point",
+    "sit",
     "think",
-    "stand"
+    "lookout"
    ],
    "x": 0.5,
    "props": [
-    "car"
+    "car",
+    "radio"
    ],
    "fx": "",
    "cam": {
@@ -282,15 +263,15 @@
     "z1": 1.15
    },
    "mood": "tense",
-   "narration": "Sixty steps to a maybe, or a car you know. Walk to the farmhouse, or stay put? Comment A or B.",
+   "narration": "A second storm hits in two hours, and the needle sits at a quarter. Burn gas for heat now, or save it? Comment A or B.",
    "highlight": [
     "Comment A or B"
    ],
    "choice": {
     "q": "WHAT DO YOU DO?",
     "options": [
-     "A \u00b7 WALK TO THE FARMHOUSE",
-     "B \u00b7 STAY IN THE CAR"
+     "A \u00b7 BURN GAS FOR HEAT NOW",
+     "B \u00b7 SAVE IT FOR THE STORM"
     ]
    },
    "hold_after": 2.0
