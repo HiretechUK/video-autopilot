@@ -200,7 +200,8 @@ def email_for_approval(ref: str, rec: dict, ep: dict, video):
     rec["emailed_at"] = datetime.now(timezone.utc).isoformat()
     auto = (f"If you don't reply within {AUTO_APPROVE_H} hours it goes out automatically (it passed every check). "
             "Reply skip or with notes to stop that.\n\n") if auto_ok(rec, ep) else \
-        "This one needs your reply before it goes out (it did not pass every automatic check).\n\n"
+        ("This is a revised version, so it only goes out when you reply approved.\n\n" if rec.get("version", 1) > 1 else
+         "This one needs your reply before it goes out (it did not pass every automatic check).\n\n")
     v = rec.get("version", 1)
     subject = f"{SERIES[rec['series']]['name']} #{rec['number']:02d} for approval{' (v' + str(v) + ')' if v > 1 else ''} [{ref}]"
     if rec["series"] == "every_how":  # `video` is rec["private"]: the private YouTube review copies
@@ -222,7 +223,10 @@ def email_for_approval(ref: str, rec: dict, ep: dict, video):
         mailer.send(subject, auto + body)
         return
     body = auto + (f"{ep['title']}\n\n{ep.get('description', '')}\n\nScript:\n{script_text(ep)}\n\n"
-            f"The video is attached.\n\n{HOW_TO}")
+            f"The video is attached (a smaller preview copy if the full one is too big for email).\n"
+            + (f"Full quality: https://github.com/HiretechUK/video-autopilot/releases/download/"
+               f"{SERIES[rec['series']].get('cache') or SERIES[rec['series']].get('release')}/{os.path.basename(video)}\n"
+               if isinstance(video, str) else "") + f"\n{HOW_TO}")
     mailer.send(subject, body, [video])
 
 

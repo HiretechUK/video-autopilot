@@ -19,14 +19,30 @@ def _creds():
     return u, p
 
 
+def _preview(path: str) -> str | None:
+    import subprocess
+    out = path.replace(".mp4", "_preview.mp4")
+    for crf in (28, 32, 36):
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-vf", "scale=-2:1280", "-c:v", "libx264",
+                        "-preset", "veryfast", "-crf", str(crf), "-c:a", "aac", "-b:a", "96k", out], check=False)
+        if os.path.exists(out) and os.path.getsize(out) <= 22 * 1024 * 1024:
+            return out
+    print(f"could not shrink {path} for email", flush=True)
+    return None
+
+
 def send(subject: str, body: str, attachments: list[str] | None = None) -> None:
     u, p = _creds()
     m = EmailMessage()
     m["From"], m["To"], m["Subject"] = u, TO, subject
     m.set_content(body)
     for path in attachments or []:
-        if os.path.getsize(path) > 24 * 1024 * 1024:
-            continue  # Gmail limit; the body says where to find it instead
+        if os.path.getsize(path) > 22 * 1024 * 1024:
+            # 2 Nov 2026: a 25 MB render was silently dropped (Gmail's limit is 25 MB including encoding), so
+            # Haseeb got "The video is attached" with no video. Attach a smaller preview copy instead.
+            path = _preview(path)
+            if not path:
+                continue
         with open(path, "rb") as f:
             m.add_attachment(f.read(), maintype="video", subtype="mp4", filename=os.path.basename(path))
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
