@@ -1,0 +1,18 @@
+name: Tests
+# Every code change must pass these before it is trusted (Haseeb, 2 Nov 2026: too many bugs reached him).
+on:
+  push:
+    paths: ["autopilot/**", "engine/**", "tests/unit/**", ".github/workflows/**"]
+  workflow_dispatch:
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get install -y -qq ffmpeg >/dev/null
+      - run: pip install -q pytest anthropic requests cryptography
+      - run: python -m pytest -q tests/unit
