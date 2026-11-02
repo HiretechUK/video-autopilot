@@ -47,7 +47,7 @@ def autopilot_busy():
 
 def dispatch(cmd, series="imagine_you"):
     if cmd == "run":  # the full scheduled path: check (replies, auto-approvals, posting) + make whatever is due
-        gh("workflow", "run", "video.yml", "--ref", "main", "-f", "cmd=", "-f", f"series={series}")
+        gh("workflow", "run", "video.yml", "--ref", "main", "-f", "cmd=auto", "-f", f"series={series}")
         print("started Video autopilot: full run")
         return
     gh("workflow", "run", "video.yml", "--ref", "main", "-f", f"cmd={cmd}", "-f", f"series={series}")

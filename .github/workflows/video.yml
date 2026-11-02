@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
     inputs:
       cmd:
-        description: "make, check, publish, dupcheck, connect_youtube, connect_instagram or connect_tiktok"
+        description: "auto (full run: replies, posting, make every series that is due), make, check, publish, dupcheck, connect_youtube, connect_instagram or connect_tiktok"
         default: make
       series:
         description: "series to make (imagine_you, every_how)"
@@ -68,7 +68,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           CMD="${{ github.event.inputs.cmd }}"
-          if [ -z "$CMD" ]; then
+          # "auto" = the full scheduled path. (An empty cmd from a dispatch becomes the default "make", so the
+          # watchdog must send "auto"; 2 Nov 2026 a full run only made Imagine You because of this.)
+          if [ -z "$CMD" ] || [ "$CMD" = "auto" ]; then
             # scheduled run: replies + posting first, then make an episode if one is due (age-checked)
             rc=0
             python -m autopilot.pipeline check || rc=1
