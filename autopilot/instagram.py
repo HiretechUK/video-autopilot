@@ -49,6 +49,12 @@ def _post(path: str, **data) -> dict:
 
 def connect(account: str, name: str) -> str:
     handle = HANDLES[account]
+    saved = (tokens.get("facebook_user", "haseeb") or {}).get("token")
+    if saved:
+        try:
+            return _finish(account, handle, saved, exchange=False)
+        except RuntimeError as e:
+            print(f"saved Facebook login not usable for @{handle} ({e}); asking for a new login", flush=True)
     pasted = (os.environ.get("IG_USER_TOKEN") or "").strip()
     if pasted:
         try:
@@ -87,10 +93,13 @@ def _device_login(account: str, name: str, handle: str) -> str:
     return user_token
 
 
-def _finish(account: str, handle: str, user_token: str) -> str:
+def _finish(account: str, handle: str, user_token: str, exchange: bool = True) -> str:
     # Long-lived user token -> Page tokens derived from it do not expire.
-    long = _get("oauth/access_token", grant_type="fb_exchange_token", client_id=APP_ID,
-                client_secret=_secret("FB_APP_SECRET"), fb_exchange_token=user_token)["access_token"]
+    long = user_token if not exchange else _get(
+        "oauth/access_token", grant_type="fb_exchange_token", client_id=APP_ID,
+        client_secret=_secret("FB_APP_SECRET"), fb_exchange_token=user_token)["access_token"]
+    if exchange:  # keep the login (60 days) so adding another account later needs no new code
+        tokens.put("facebook_user", "haseeb", {"token": long})
     fields = "name,access_token,instagram_business_account{id,username}"
     pages = list(_get("me/accounts", access_token=long, fields=fields).get("data", []))
     # Pages owned by a business portfolio (e.g. a new Page created inside one) are not in me/accounts
@@ -108,6 +117,22 @@ def _finish(account: str, handle: str, user_token: str) -> str:
                     print(f"business {b.get('name')} {edge}: {e}", flush=True)
     except Exception as e:
         print(f"could not list businesses: {e}", flush=True)
+    # The exact Pages the login was granted (Facebook Login for Business lists them per permission).
+    try:
+        dbg = _get("debug_token", input_token=long, access_token=f"{APP_ID}|{_secret('FB_APP_SECRET')}")["data"]
+        ids = {t for g in dbg.get("granular_scopes", []) if g.get("scope", "").startswith("pages_")
+               for t in g.get("target_ids", [])}
+        print(f"pages granted to the app: {sorted(ids)}", flush=True)
+        for pid in ids:
+            if all(x["id"] != pid for x in pages):
+                try:
+                    pages.append(_get(pid, access_token=long, fields="id," + fields))
+                except Exception as e:
+                    print(f"page {pid}: {e}", flush=True)
+    except Exception as e:
+        print(f"could not read granted pages: {e}", flush=True)
+    print("pages seen: " + "; ".join(f"{p.get('name')} -> {(p.get('instagram_business_account') or {}).get('username')}"
+                                     for p in pages), flush=True)
     found = []
     for p in pages:
         ig = p.get("instagram_business_account") or {}
