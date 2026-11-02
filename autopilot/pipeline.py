@@ -360,6 +360,9 @@ def publish_queue(st):
         if rec["status"] == "scheduled" and datetime.now(timezone.utc) >= datetime.fromisoformat(rec["post_after"]):
             rec["status"] = "approved"
             rec["approved"] = rec["post_after"]
+        if rec["status"] == "published" and not all(str(rec.get("links", {}).get(p, "")).startswith("http")
+                                                    for p in platforms(rec["series"])):
+            rec["status"] = "partly_published"  # a platform was added later (e.g. Paws & Claws Instagram, 2 Nov)
         if rec["status"] not in ("approved", "partly_published"):
             continue
         if SERIES.get(rec["series"], {}).get("paused"):
