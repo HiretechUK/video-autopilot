@@ -171,7 +171,7 @@
    "series": "imagine_you",
    "number": 3,
    "title": "Why a Snow-Blocked Tailpipe Can Kill You Before the Cold Does",
-   "status": "pending",
+   "status": "published",
    "version": 3,
    "file": "episodes/IY-03.json",
    "created": "2026-11-02T14:42:07.216696+00:00",
@@ -181,30 +181,48 @@
    ],
    "notes_files_done": [
     "703a41d2fa"
-   ]
+   ],
+   "approved": "2026-11-02T17:50:46.704081+00:00",
+   "links": {
+    "youtube": "https://youtube.com/watch?v=VQhguRtVFIQ",
+    "thumbnail": "failed: No module named 'PIL'",
+    "instagram": "https://www.instagram.com/reel/DfP4zlKyPFp/",
+    "facebook": "https://www.facebook.com/reel/1646310033696643"
+   }
   },
   "EH-02": {
    "series": "every_how",
    "number": 2,
    "title": "How Does a Cyclone Form, and Who Gives It a Name?",
    "status": "pending",
-   "version": 1,
+   "version": 2,
    "file": "episodes/EH-02.json",
    "created": "2026-11-02T16:49:24.865936+00:00",
    "private": {
-    "full": "BaFrYFKrtJ8",
-    "short": "xP7RDl7jFsY",
+    "full": "v2WcidFjRE4",
+    "short": "aOQyVHj2nXE",
     "thumbnail": "set",
-    "version": 1,
-    "minutes": 5.2,
-    "superseded": []
-   }
+    "version": 2,
+    "minutes": 5.3,
+    "superseded": [
+     "BaFrYFKrtJ8",
+     "xP7RDl7jFsY"
+    ]
+   },
+   "notes": [
+    "Haseeb's notes (2 Nov, 18:21 Oslo): fix the dated lines so the episode stays correct after Cyclone Murasu makes landfall (expected the night of 2-3 November) and for as long as it is on YouTube.\n- Do not describe Murasu as \"approaching\", \"closing in\", \"now severe\" or with a \"now forecasts\" wording. Use the past tense and anchor every Murasu fact to a date: e.g. \"In early November 2026, Cyclone Murasu formed in the Bay of Bengal...\" and \"As of 2 November, India's weather office forecast landfall winds of 100 to 110 km/h, gusting to 120.\"\n- Replace \"last week's Cyclone Arnab\" with a dated phrase (e.g. \"Cyclone Arnab in late October 2026\") and keep its figures.\n- Update the title, description and opening lines the same way (no \"is closing in\"). The hook can still open on Murasu as a recent storm.\n- Keep everything else (structure, explanations, sources, length). Re-check any changed fact."
+   ],
+   "notes_files_done": [
+    "c39992e033"
+   ],
+   "emailed_at": "2026-11-02T17:50:21.866601+00:00"
   }
  },
  "seen": [
   "<AM9P194MB14596CF9145AF72C0A01C706A66D2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
   "<AM9P194MB1459C14F4427A440940A7E7AA66D2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
   "<AM9P194MB14598A77709262A9EDF78ECAA66B2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
-  "<AM9P194MB1459EA7C0CD75490EF436449A66A2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>"
+  "<AM9P194MB1459EA7C0CD75490EF436449A66A2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
+  "<AM9P194MB14592DDB872E36278672CE70A66A2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>"
  ]
 }

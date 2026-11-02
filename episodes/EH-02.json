@@ -1,7 +1,7 @@
 {
  "title": "How Does a Cyclone Form, and Who Gives It a Name?",
  "question": "How does a tropical cyclone form, and who decides what it is called?",
- "description": "A cyclone named Murasu is closing in on India's south-east coast, and the same kind of storm is called a hurricane or a typhoon elsewhere. In about five minutes, see how warm seawater becomes a spinning storm, why it turns the way it does, and how thirteen countries share one list of storm names. Every fact is checked against official weather agencies. Should storm names come from one shared international list, or should each country name the storms that hit it? Tell us in the comments.",
+ "description": "In early November 2026, a cyclone named Murasu formed in the Bay of Bengal and was forecast to reach India's south-east coast. The same kind of storm is called a hurricane or a typhoon elsewhere. In about five minutes, see how warm seawater becomes a spinning storm, why it turns the way it does, and how thirteen countries share one list of storm names. Every fact is checked against official weather agencies. Should storm names come from one shared international list, or should each country name the storms that hit it? Tell us in the comments.",
  "tags": [
   "how do cyclones form",
   "tropical cyclone explained",
@@ -18,7 +18,7 @@
  ],
  "ad_safety": {
   "rating": "green",
-  "reason": "Educational weather explainer with no victim focus. The storm is approaching, not a tragedy, and the script gives no casualty details."
+  "reason": "Educational weather explainer with no victim focus. Murasu and Arnab appear only as dated, factual examples, and the script gives no casualty details."
  },
  "sources": [
   {
@@ -50,8 +50,28 @@
    "url": "https://www.theweek.in/news/india/2026/11/02/cyclone-murasu-approaches-andhra-pradesh-odisha-tamil-nadu-on-alert.html"
   },
   {
-   "title": "ScienceDirect (Earth-Science Reviews): review of North Indian Ocean tropical cyclones",
-   "url": "https://www.sciencedirect.com/science/article/abs/pii/S0012825222000514"
+   "title": "ETV Bharat: Deep depression intensifies into Cyclone Murasu (1 November 2026, quoting IMD)",
+   "url": "https://www.etvbharat.com/en/bharat/deep-depression-intensifies-into-severe-cyclone-murasu-imd-issues-yellow-alert-for-coastal-andhra-enn26110102434"
+  },
+  {
+   "title": "Weathernews: Severe Cyclonic Storm Murasu, landfall expected late 2 November (IMD / RSMC New Delhi)",
+   "url": "https://sea.weathernews.com/resources/202611/286"
+  },
+  {
+   "title": "Vajiram & Ravi: Cyclone Murasu 2026 tracker",
+   "url": "https://vajiramandravi.com/current-affairs/cyclone-murasu-2026/"
+  },
+  {
+   "title": "BigHaat: Cyclone Murasu 2026, landfall forecast and states on alert",
+   "url": "https://www.bighaat.com/kisan-vedika/blogs/cyclone-murasu-landfall-states-on-alert"
+  },
+  {
+   "title": "BigHaat: Cyclone Arnab 2026, landfall, path and wind speed",
+   "url": "https://www.bighaat.com/kisan-vedika/blogs/cyclone-arnab-2026-landfall-path-wind-speed"
+  },
+  {
+   "title": "Al Jazeera: Cyclone Arnab makes landfall in India's Andhra Pradesh (28 October 2026)",
+   "url": "https://www.aljazeera.com/news/2026/10/28/cyclone-arnab-makes-landfall-in-indias-andhra-pradesh"
   },
   {
    "title": "AP7AM: Deep depression in Bay of Bengal intensifies into cyclone Murasu",
@@ -60,6 +80,10 @@
   {
    "title": "Daily Pioneer: Depression over Bay of Bengal may intensify into cyclone Murasu",
    "url": "https://dailypioneer.com/amp/story/india/depression-over-bay-of-bengal-may-intensify-into-cyclone-murasu-andhra-coast-on-alert"
+  },
+  {
+   "title": "ScienceDirect (Earth-Science Reviews): review of North Indian Ocean tropical cyclones",
+   "url": "https://www.sciencedirect.com/science/article/abs/pii/S0012825222000514"
   },
   {
    "title": "North Indian Ocean tropical cyclone (Wikipedia)",
@@ -83,12 +107,12 @@
    "heading": "",
    "scenes": [
     {
-     "narration": "A cyclone named Murasu is approaching India's south-east coast, and is expected to cross the Andhra Pradesh coast in the night of the second to the third of November. How does a cyclone form?",
+     "narration": "In early November 2026, a storm over the Bay of Bengal became Cyclone Murasu, named on 1 November. As of 2 November, India's weather office expected landfall in Andhra Pradesh that night. How does a cyclone form?",
      "visual": {
       "type": "title",
       "text": "How does a cyclone form, and who names it?",
       "icon": "hurricane",
-      "sub": "Cyclone Murasu, Bay of Bengal"
+      "sub": "Cyclone Murasu, Bay of Bengal, November 2026"
      }
     },
     {
@@ -97,7 +121,7 @@
       "type": "hero",
       "icon": "hurricane",
       "label": "Cyclone Murasu",
-      "sub": "Bay of Bengal, early November"
+      "sub": "Bay of Bengal, early November 2026"
      }
     },
     {
@@ -364,7 +388,7 @@
      }
     },
     {
-     "narration": "Satellite images of Murasu showed clear spiral bands of cloud, the visible sign of a storm that has organised itself.",
+     "narration": "Satellite images of Murasu in early November 2026 showed clear spiral bands of cloud, the visible sign of a storm that had organised itself.",
      "visual": {
       "type": "hero",
       "icon": "cloud",
@@ -373,7 +397,7 @@
      }
     },
     {
-     "narration": "India's weather office grades storms in steps. Murasu began as a low-pressure area, reached deep depression on 1 November, became a named cyclonic storm, and is now severe; higher grades are very severe, extremely severe and super cyclonic.",
+     "narration": "India's weather office grades storms in steps. Murasu began as a low-pressure area, became a deep depression on 1 November, a named cyclonic storm that day, and severe on 2 November. Higher grades: very severe, extremely severe, super cyclonic.",
      "visual": {
       "type": "flow",
       "steps": [
@@ -406,11 +430,11 @@
      }
     },
     {
-     "narration": "India's weather office now forecasts landfall winds of 100 to 110 kilometres an hour, gusting to 120. That is still expected to be weaker than last week's Cyclone Arnab, which hit with about 125 to 135 kilometres an hour.",
+     "narration": "As of 2 November, India's weather office forecast landfall winds of 100 to 110 kilometres an hour, gusting to 120. That was weaker than Cyclone Arnab in late October 2026, which hit with about 125 to 135 kilometres an hour.",
      "visual": {
       "type": "stat",
       "value": "100\u2013110 km/h",
-      "label": "forecast landfall winds, gusts to 120",
+      "label": "forecast on 2 November: landfall winds, gusts to 120",
       "icon": "gauge"
      }
     },
@@ -469,7 +493,7 @@
      }
     },
     {
-     "narration": "In the North Indian Ocean, thirteen countries, from Bangladesh to Yemen, each contributed names to one shared list. Murasu is India's contribution.",
+     "narration": "In the North Indian Ocean, thirteen countries, from Bangladesh to Yemen, each contributed names to one shared list. Murasu, the storm of November 2026, carries India's contribution.",
      "visual": {
       "type": "map",
       "countries": [
@@ -617,7 +641,7 @@
  },
  "factcheck": {
   "ok": true,
-  "summary": "Every claim checked against sources holds up, so I found no factual errors. The Murasu details match IMD-based reports: landfall expected on the night of 2\u20133 November, a 100\u2013110 km/h forecast gusting to 120, and deep depression on 1 November. The Arnab landfall figures (125\u2013135 km/h), the 169-name NIO list, and the 100 retired Atlantic names also check out. Scenes 1, 19, 20 and 21 are tied to a forecast issued on 2 November, so if the video publishes after Murasu's landfall, put them in the past tense and say 'as of 2 November'. Also keep 'last week's Arnab' only while it is still true.",
+  "summary": "I checked all 32 scenes against the sources and found nothing that needs correcting. The numbers, dates, names and naming rules all match, and nothing breaks advertiser-friendly rules. Narration for scenes 1 and 21 is time-sensitive ('as of 2 November'), so re-check it if the video is published after Murasu makes landfall.",
   "open_issues": []
  },
  "series": "EVERY HOW #02"
