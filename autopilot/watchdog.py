@@ -114,7 +114,12 @@ def main():
                 due.append(f"{r} scheduled to go live")
     except Exception as exc:
         print("scheduled check failed:", exc)
-    action = "run" if (due or stuck or auto_due) else None
+    # Episodes waiting for Haseeb: read his replies at least hourly (2 Nov: a reply waited for the next
+    # GitHub-scheduled run, which GitHub often drops). A check run is short and cannot make or double-post anything.
+    waiting = [r for r, e in eps.items() if e["status"] == "pending" and e["series"] not in paused]
+    action = "run" if (due or stuck or auto_due) else ("check" if waiting else None)
+    if waiting and action == "check":
+        print(f"waiting for Haseeb's reply: {waiting}; reading replies")
     series = "imagine_you"
     if due:
         print("due: " + "; ".join(due))
