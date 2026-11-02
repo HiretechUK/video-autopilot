@@ -81,7 +81,19 @@ def main():
     eh_age = min(hours_since(e["created"]) for e in eh) if eh else None
     print(f"newest Imagine You episode is {age:.1f} h old; stuck approved: {stuck or 'none'}")
 
-    action = "make" if age > OVERDUE_H else ("check" if stuck else None)
+    auto_due = []
+    try:
+        from autopilot.pipeline import AUTO_APPROVE_H, auto_ok
+        for r, e in eps.items():
+            sent = e.get("emailed_at") or e.get("created")
+            if e["status"] == "pending" and sent and hours_since(sent) > AUTO_APPROVE_H and e["series"] not in paused:
+                if auto_ok(e, json.load(open(os.path.join(ROOT, e["file"])))):
+                    auto_due.append(r)
+    except Exception as exc:
+        print("auto-approve check failed:", exc)
+    if auto_due:
+        print(f"auto-approval due: {auto_due}")
+    action = "make" if age > OVERDUE_H else ("check" if stuck or auto_due else None)
     series = "imagine_you"
     # Every How is daily: overdue after 30 h (made only once the series has its first episode)
     if not action and eh_age is not None and eh_age > EH_OVERDUE_H:

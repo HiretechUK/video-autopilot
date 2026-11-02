@@ -45,6 +45,18 @@ HOW_TO = """How to reply (just reply to this email):
 """
 
 
+AUTO_APPROVE_H = 6  # Haseeb, 2 Nov 2026: if he hasn't replied in 6 h and the episode passed every check, it goes out
+
+
+def auto_ok(rec: dict, ep: dict) -> bool:
+    """May this episode go out without Haseeb's reply? Every How: green ad safety and a clean fact-check.
+    Imagine You: made by the autopilot, so it already passed the due check and the near-duplicate story check."""
+    if rec["series"] == "every_how":
+        fc = ep.get("factcheck") or {}
+        return (ep.get("ad_safety") or {}).get("rating") == "green" and bool(fc.get("ok")) and not fc.get("open_issues")
+    return rec["series"] == "imagine_you"
+
+
 def load():
     if os.path.exists(STATE):
         return json.load(open(STATE))
@@ -181,6 +193,10 @@ def stage(ref: str, rec: dict, ep: dict, path: str) -> dict:
 
 
 def email_for_approval(ref: str, rec: dict, ep: dict, video):
+    rec["emailed_at"] = datetime.now(timezone.utc).isoformat()
+    auto = (f"If you don't reply within {AUTO_APPROVE_H} hours it goes out automatically (it passed every check). "
+            "Reply skip or with notes to stop that.\n\n") if auto_ok(rec, ep) else \
+        "This one needs your reply before it goes out (it did not pass every automatic check).\n\n"
     v = rec.get("version", 1)
     subject = f"{SERIES[rec['series']]['name']} #{rec['number']:02d} for approval{' (v' + str(v) + ')' if v > 1 else ''} [{ref}]"
     if rec["series"] == "every_how":  # `video` is rec["private"]: the private YouTube review copies
@@ -199,9 +215,9 @@ def email_for_approval(ref: str, rec: dict, ep: dict, video):
                 f"{ep.get('description', '')}\n\nSources:\n" +
                 "".join(f"  - {s.get('title')}: {s.get('url')}\n" for s in ep.get("sources", [])) +
                 f"\nScript:\n{script_text(ep)}\n\n{HOW_TO.replace('it gets posted', 'both videos go public on YouTube').replace('make the hook scarier and change the ending to a nuclear bunker', 'shorter intro, and add a map of where it happened')}")
-        mailer.send(subject, body)
+        mailer.send(subject, auto + body)
         return
-    body = (f"{ep['title']}\n\n{ep.get('description', '')}\n\nScript:\n{script_text(ep)}\n\n"
+    body = auto + (f"{ep['title']}\n\n{ep.get('description', '')}\n\nScript:\n{script_text(ep)}\n\n"
             f"The video is attached.\n\n{HOW_TO}")
     mailer.send(subject, body, [video])
 
@@ -313,6 +329,18 @@ def check():
             traceback.print_exc()
             mailer.send(f"Problem with {ref}", f"Your reply was:\n{text}\n\nError:\n{traceback.format_exc()[-2000:]}")
         save(st)
+    now = datetime.now(timezone.utc)
+    for ref, rec in st["episodes"].items():
+        sent = rec.get("emailed_at") or rec.get("created")
+        if rec["status"] != "pending" or not sent or (now - datetime.fromisoformat(sent)).total_seconds() < AUTO_APPROVE_H * 3600:
+            continue
+        ep = json.load(open(os.path.join(ROOT, rec["file"])))
+        if auto_ok(rec, ep):
+            rec["status"] = "approved"
+            rec["approved"] = now.isoformat()
+            rec["approved_by"] = f"auto: no reply in {AUTO_APPROVE_H} h, passed every check"
+            print(f"{ref}: auto-approved")
+            save(st)
     publish_queue(st)
 
 
