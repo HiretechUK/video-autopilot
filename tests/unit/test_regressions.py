@@ -125,3 +125,9 @@ def test_video_workflow_installs_every_library_the_code_imports():
             used |= {mod for mod in needs if re.search(rf"^\s*(from|import) {mod}\b", src, re.M)}
     missing = {needs[m] for m in used} - installed
     assert not missing, f"video.yml does not install: {missing}"
+
+
+def test_every_how_review_copies_watchable_by_link():
+    # Haseeb could not open private review copies on his phone (signed in to his own account)
+    src = open("autopilot/publish.py").read()
+    assert 'privacy="private"' not in src and src.count('privacy="unlisted"') >= 2

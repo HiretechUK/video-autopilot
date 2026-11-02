@@ -212,7 +212,7 @@ def email_for_approval(ref: str, rec: dict, ep: dict, video):
         body = (f"{ep['title']}{mins}\n\n{flag}Ad safety: {ad.get('rating', '?')} ({ad.get('reason', '')})\n"
                 f"Fact-check: {'passed' if fc.get('ok') else 'see notes below'}. {fc.get('summary', '')}\n" +
                 "".join(f"  - scene {i.get('scene')}: {i.get('problem')} (fix: {i.get('fix')})\n" for i in fc.get("open_issues", [])) +
-                f"\nWatch it on YouTube (private until you approve; open while signed in to the Every How account):\n"
+                f"\nWatch it on YouTube (unlisted until you approve: anyone with the link can watch, nobody else can find it; works on your phone without signing in):\n"
                 f"  Full episode: https://youtube.com/watch?v={video['full']}\n"
                 f"  Short: https://youtube.com/shorts/{video['short']}\n"
                 + (f"  (Older versions stay private: {', '.join(video.get('superseded', []))}. Delete them in YouTube Studio if you like.)\n"
@@ -516,6 +516,13 @@ if __name__ == "__main__":
                 print(label, "FAILED:", e)
     elif cmd == "revise":  # apply episodes/<REF>.notes.txt now (check() also does this on every run); series=<REF>
         print("revised" if revise_from_file(load(), arg) else "nothing to revise")
+    elif cmd == "unlist":  # make an episode's review copies watchable by link (Every How review copies were private); series=<REF>
+        from . import publish, youtube
+        rec = load()["episodes"][arg]
+        for k in ("full", "short"):
+            vid = (rec.get("private") or {}).get(k)
+            if vid:
+                print(k, vid, youtube.set_privacy(publish.ACCOUNTS["every_how"]["youtube"], vid, "unlisted"))
     elif cmd == "resend":  # email an existing pending episode for approval again: series=<REF>, e.g. EH-01
         st = load()
         rec = st["episodes"][arg]

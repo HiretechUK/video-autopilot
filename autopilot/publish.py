@@ -108,12 +108,12 @@ def stage_every_how(ep: dict, video: dict) -> dict:
     cfg = ACCOUNTS["every_how"]
     long_desc, _ = descriptions(ep, video.get("timeline", ""))
     full = youtube.upload(cfg["youtube"], video["full"], ep["title"], long_desc, ep.get("tags", []), False,
-                          category="27", privacy="private").rsplit("=", 1)[-1]
+                          category="27", privacy="unlisted").rsplit("=", 1)[-1]
     th = {"youtube": f"https://youtube.com/watch?v={full}"}
     add_thumbnail(th, "every_how", ep, video["full"])  # on the private copy too, so Haseeb reviews it
     _, short_desc = descriptions(ep, video.get("timeline", ""), f"https://youtube.com/watch?v={full}")
     short = youtube.upload(cfg["youtube"], video["short"], f"{ep['title'][:88]} #Shorts", short_desc,
-                           ep.get("tags", []), False, category="27", privacy="private").rsplit("=", 1)[-1]
+                           ep.get("tags", []), False, category="27", privacy="unlisted").rsplit("=", 1)[-1]
     return {"full": full, "short": short, "thumbnail": th.get("thumbnail", "")}
 
 
