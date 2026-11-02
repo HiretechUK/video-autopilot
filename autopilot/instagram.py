@@ -198,8 +198,8 @@ def find_existing(account: str, title: str) -> str | None:
     if not rec:
         raise LookupError("not connected")
     tok, ig = rec["page_token"], rec["ig_user_id"]
-    want = title.strip().lower()
+    want = title.split(" | ")[0].strip().lower()  # captions start with the title's first part (Paws: "Meet the ...!")
     for m in _get(f"{ig}/media", fields="caption,permalink", limit=50, access_token=tok).get("data", []):
-        if (m.get("caption") or "").strip().lower().startswith(want):
+        if want and (m.get("caption") or "").strip().lower().startswith(want):
             return m.get("permalink") or f"https://www.instagram.com/{rec['username']}/"
     return None

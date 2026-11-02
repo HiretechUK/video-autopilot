@@ -64,7 +64,7 @@
    "series": "paws_claws",
    "number": 1,
    "title": "Meet the Paws & Claws Club! | Sing-Along Song for Kids",
-   "status": "partly_published",
+   "status": "published",
    "version": 1,
    "file": "episodes/PC-01.json",
    "created": "2026-11-01T16:37:52.102735+00:00",
@@ -73,7 +73,7 @@
    "links": {
     "youtube": "https://youtube.com/watch?v=tOKfsqphH0I",
     "instagram": "https://www.instagram.com/reel/DfPhz8tDgSt/",
-    "facebook": "failed: Graph API 1051101067938305: Unsupported get request. Object with ID '1051101067938305' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api",
+    "facebook": "https://www.facebook.com/reel/1051101067938305",
     "thumbnail": "set"
    }
   },

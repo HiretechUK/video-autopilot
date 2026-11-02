@@ -31,7 +31,11 @@ def upload(account: str, video: str, description: str, name: str) -> str:
     instagram._post(f"{page}/video_reels", upload_phase="finish", video_id=vid, video_state="PUBLISHED",
                     description=description[:2200], access_token=tok)
     for _ in range(60):  # Facebook processes, then publishes (usually a minute or two)
-        st = instagram._get(vid, fields="status", access_token=tok).get("status", {})
+        try:
+            st = instagram._get(vid, fields="status", access_token=tok).get("status", {})
+        except RuntimeError as e:  # some Pages may not read the video object back; the Reel is already published
+            print(f"Facebook status check not allowed ({e}); the Reel was published", flush=True)
+            break
         if st.get("video_status") == "ready" and (st.get("publishing_phase") or {}).get("status") == "complete":
             break
         if st.get("video_status") == "error" or (st.get("processing_phase") or {}).get("status") == "error":
@@ -46,10 +50,10 @@ def find_existing(account: str, title: str) -> str | None:
     if not rec or not rec.get("page_id"):
         raise LookupError("not connected")
     tok, page = rec["page_token"], rec["page_id"]
-    want = title.strip().lower()
+    want = title.split(" | ")[0].strip().lower()  # captions start with the title's first part (Paws: "Meet the ...!")
     for v in instagram._get(f"{page}/video_reels", fields="description,permalink_url", limit=50,
                             access_token=tok).get("data", []):
-        if (v.get("description") or "").strip().lower().startswith(want):
+        if want and (v.get("description") or "").strip().lower().startswith(want):
             link = v.get("permalink_url") or f"/reel/{v['id']}"
             return link if link.startswith("http") else f"https://www.facebook.com{link}"
     return None
