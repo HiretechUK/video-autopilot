@@ -91,9 +91,25 @@ def _finish(account: str, handle: str, user_token: str) -> str:
     # Long-lived user token -> Page tokens derived from it do not expire.
     long = _get("oauth/access_token", grant_type="fb_exchange_token", client_id=APP_ID,
                 client_secret=_secret("FB_APP_SECRET"), fb_exchange_token=user_token)["access_token"]
-    pages = _get("me/accounts", access_token=long, fields="name,access_token,instagram_business_account{id,username}")
+    fields = "name,access_token,instagram_business_account{id,username}"
+    pages = list(_get("me/accounts", access_token=long, fields=fields).get("data", []))
+    # Pages owned by a business portfolio (e.g. a new Page created inside one) are not in me/accounts
+    # when access comes through the business: look there too.
+    try:
+        for b in _get("me/businesses", access_token=long, fields="id,name").get("data", []):
+            for edge in ("owned_pages", "client_pages"):
+                try:
+                    for p in _get(f"{b['id']}/{edge}", access_token=long, fields=fields).get("data", []):
+                        if not p.get("access_token"):
+                            p["access_token"] = _get(p["id"], access_token=long, fields="access_token").get("access_token")
+                        if p.get("access_token") and all(x["id"] != p["id"] for x in pages):
+                            pages.append(p)
+                except Exception as e:
+                    print(f"business {b.get('name')} {edge}: {e}", flush=True)
+    except Exception as e:
+        print(f"could not list businesses: {e}", flush=True)
     found = []
-    for p in pages.get("data", []):
+    for p in pages:
         ig = p.get("instagram_business_account") or {}
         found.append(f"{p['name']} -> @{ig.get('username', 'no Instagram linked')}")
         if ig.get("username", "").lower() == handle:
