@@ -304,8 +304,40 @@ def make(series: str, scheduled: bool = False):
     print("sent", ref, ep["title"])
 
 
+def revise_from_file(st, ref):
+    """Apply episodes/<REF>.notes.txt once (redo requested by the CEO on Haseeb's behalf). Saved in state, so ANY run
+    does it: a queued 'revise' dispatch can be cancelled by GitHub when another run is queued (2 Nov 2026)."""
+    import hashlib
+    f = os.path.join(ROOT, "episodes", f"{ref}.notes.txt")
+    rec = st["episodes"].get(ref)
+    if not rec or not os.path.exists(f) or rec["status"] != "pending":
+        return False
+    notes = open(f).read().strip()
+    key = hashlib.sha1(notes.encode()).hexdigest()[:10]
+    if key in rec.get("notes_files_done", []):
+        return False
+    p = os.path.join(ROOT, rec["file"])
+    new = writer.write_episode(rec["series"], rec["number"], [], "", notes=notes, previous=json.load(open(p)))
+    json.dump(new, open(p, "w"), indent=1)
+    rec.setdefault("notes", []).append(notes[:2000])
+    rec["version"] = rec.get("version", 1) + 1
+    rec["title"] = new["title"]
+    rec.setdefault("notes_files_done", []).append(key)
+    save(st)
+    video = stage(ref, rec, new, p) if SERIES[rec["series"]].get("staged") else render(rec["series"], p)
+    email_for_approval(ref, rec, new, video)
+    save(st)
+    return True
+
+
 def check():
     st = load()
+    for ref in [r for r, e in st["episodes"].items() if e["status"] == "pending"]:
+        try:
+            revise_from_file(st, ref)
+        except Exception:
+            traceback.print_exc()
+            mailer.send(f"Problem redoing {ref}", traceback.format_exc()[-2000:])
     pending = [r for r, e in st["episodes"].items() if e["status"] == "pending"]
     seen = set(st["seen"])
     for ref, mid, text in mailer.fetch_replies(pending, seen):
@@ -478,21 +510,8 @@ if __name__ == "__main__":
                 print(label, "->", json.dumps(fn())[:700])
             except Exception as e:
                 print(label, "FAILED:", e)
-    elif cmd == "revise":  # rewrite + re-render a pending episode with notes from episodes/<REF>.notes.txt; series=<REF>
-        st = load()
-        rec = st["episodes"][arg]
-        p = os.path.join(ROOT, rec["file"])
-        notes = open(os.path.join(ROOT, "episodes", f"{arg}.notes.txt")).read().strip()
-        rec.setdefault("notes", []).append(notes[:2000])
-        new = writer.write_episode(rec["series"], rec["number"], [], "", notes=notes, previous=json.load(open(p)))
-        json.dump(new, open(p, "w"), indent=1)
-        rec["version"] = rec.get("version", 1) + 1
-        rec["title"] = new["title"]
-        rec["status"] = "pending"
-        save(st)
-        video = stage(arg, rec, new, p) if SERIES[rec["series"]].get("staged") else render(rec["series"], p)
-        email_for_approval(arg, rec, new, video)
-        save(st)
+    elif cmd == "revise":  # apply episodes/<REF>.notes.txt now (check() also does this on every run); series=<REF>
+        print("revised" if revise_from_file(load(), arg) else "nothing to revise")
     elif cmd == "resend":  # email an existing pending episode for approval again: series=<REF>, e.g. EH-01
         st = load()
         rec = st["episodes"][arg]
