@@ -230,7 +230,14 @@ def email_for_approval(ref: str, rec: dict, ep: dict, video):
                 f"{ep.get('description', '')}\n\nSources:\n" +
                 "".join(f"  - {s.get('title')}: {s.get('url')}\n" for s in ep.get("sources", [])) +
                 f"\nScript:\n{script_text(ep)}\n\n{HOW_TO.replace('it gets posted', 'both videos go public on YouTube').replace('make the hook scarier and change the ending to a nuclear bunker', 'shorter intro, and add a map of where it happened')}")
-        mailer.send(subject, auto + body)
+        files = []
+        try:  # attach both videos (Haseeb, 2 Nov 2026: "I need the videos in the email when I approve")
+            local = _render_cached(rec["series"], os.path.join(ROOT, rec["file"]))
+            files = [local["full"], local["short"]]
+        except Exception as e:
+            print(f"could not attach Every How videos: {e}", flush=True)
+        body = body.replace("Watch it on YouTube (unlisted", "Both videos are attached (smaller preview copies). Or watch on YouTube (unlisted")
+        mailer.send(subject, auto + body, files)
         return
     body = auto + (f"{ep['title']}\n\n{ep.get('description', '')}\n\nScript:\n{script_text(ep)}\n\n"
             f"The video is attached (a smaller preview copy if the full one is too big for email).\n"

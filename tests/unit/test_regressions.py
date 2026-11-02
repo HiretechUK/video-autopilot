@@ -143,3 +143,27 @@ def test_thumbnail_backfill_finds_hashed_video_name():
     # IY-03 thumbnail retry looked for media/IY-03.mp4, but it was posted as media/IY-03-5e6ada78.mp4
     assert pipeline.hosted_name("IY-03").startswith("IY-03-") or not os.path.exists("media")
     assert pipeline.hosted_name("IY-01") == "IY-01.mp4"
+
+
+def _make(path, size, secs):
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", f"testsrc2=size={size}:rate=30",
+                    "-f", "lavfi", "-i", "sine", "-t", str(secs), "-c:v", "libx264", "-preset", "ultrafast",
+                    "-b:v", "4M", "-c:a", "aac", "-shortest", path], check=True)
+
+
+def test_approval_email_carries_both_every_how_videos(tmp_path):
+    # Haseeb: "I need the videos in the email when I approve" (Every How emails had links only)
+    full, short = str(tmp_path / "EH-99-a.mp4"), str(tmp_path / "EH-99-a_short.mp4")
+    _make(full, "2560x1440", 150)
+    _make(short, "1080x1920", 50)
+    sent = []
+    mailer.send("s", "b", [full, short], smtp=sent.append)
+    msg = sent[0]
+    atts = [p for p in msg.iter_attachments()]
+    assert len(atts) == 2
+    assert len(msg.as_bytes()) < 30 * 1024 * 1024  # fits Gmail
+
+
+def test_every_how_email_attaches_videos():
+    src = open("autopilot/pipeline.py").read()
+    assert 'mailer.send(subject, auto + body, files)' in src

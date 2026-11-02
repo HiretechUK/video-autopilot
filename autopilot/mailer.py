@@ -19,32 +19,51 @@ def _creds():
     return u, p
 
 
-def _preview(path: str) -> str | None:
+EMAIL_BUDGET = 20 * 1024 * 1024  # raw bytes of video per email (base64 adds ~37%; Gmail SMTP takes ~35 MB in total)
+
+
+def _duration(path: str) -> float:
+    import subprocess
+    out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", path],
+                         capture_output=True, text=True).stdout.strip()
+    return float(out or 0) or 60.0
+
+
+def _preview(path: str, budget: int = EMAIL_BUDGET) -> str | None:
+    """A copy that fits `budget` bytes: longest side 1280 px (720 if needed), bitrate set from the duration."""
     import subprocess
     out = path.replace(".mp4", "_preview.mp4")
-    for crf in (28, 32, 36):
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-vf", "scale=-2:1280", "-c:v", "libx264",
-                        "-preset", "veryfast", "-crf", str(crf), "-c:a", "aac", "-b:a", "96k", out], check=False)
-        if os.path.exists(out) and os.path.getsize(out) <= 22 * 1024 * 1024:
+    dur = _duration(path)
+    for longest, share in ((1280, 0.90), (720, 0.80), (540, 0.70)):
+        kbps = max(int(budget * 8 * share / dur / 1000) - 96, 150)
+        scale = f"scale='if(gt(iw,ih),{longest},-2)':'if(gt(iw,ih),-2,{longest})'"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-vf", scale, "-c:v", "libx264", "-preset",
+                        "veryfast", "-b:v", f"{kbps}k", "-maxrate", f"{kbps}k", "-bufsize", f"{2 * kbps}k",
+                        "-c:a", "aac", "-b:a", "96k", out], check=False)
+        if os.path.exists(out) and os.path.getsize(out) <= budget:
             return out
     print(f"could not shrink {path} for email", flush=True)
     return None
 
 
-def send(subject: str, body: str, attachments: list[str] | None = None) -> None:
-    u, p = _creds()
+def send(subject: str, body: str, attachments: list[str] | None = None, smtp=None) -> None:
+    u, p = _creds() if smtp is None else ("test@example.com", "")
     m = EmailMessage()
     m["From"], m["To"], m["Subject"] = u, TO, subject
     m.set_content(body)
-    for path in attachments or []:
-        if os.path.getsize(path) > 22 * 1024 * 1024:
-            # 2 Nov 2026: a 25 MB render was silently dropped (Gmail's limit is 25 MB including encoding), so
-            # Haseeb got "The video is attached" with no video. Attach a smaller preview copy instead.
-            path = _preview(path)
+    files = [a for a in (attachments or []) if a and os.path.exists(a)]
+    each = EMAIL_BUDGET // max(len(files), 1)
+    for path in files:
+        if os.path.getsize(path) > each:
+            # 2 Nov 2026: a 25 MB render was silently dropped, so Haseeb got "The video is attached" with no video.
+            # Every video he must approve is attached; too-big ones as a smaller preview copy.
+            path = _preview(path, each)
             if not path:
                 continue
         with open(path, "rb") as f:
             m.add_attachment(f.read(), maintype="video", subtype="mp4", filename=os.path.basename(path))
+    if smtp is not None:
+        return smtp(m)
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
         s.login(u, p)
         s.send_message(m)
