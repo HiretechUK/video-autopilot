@@ -27,10 +27,11 @@
    "pose": "stand",
    "poses": [
     "stand",
-    "point",
+    "walk",
     "shock"
    ],
-   "x": 0.5,
+   "x": 0.4,
+   "move_to": 0.7,
    "props": [
     "car"
    ],
@@ -52,8 +53,9 @@
   },
   {
    "bg": "snow",
-   "pose": "shock",
+   "pose": "stand",
    "poses": [
+    "stand",
     "shock",
     "phone"
    ],
@@ -75,14 +77,14 @@
   },
   {
    "bg": "snow",
-   "pose": "think",
+   "pose": "lookout",
    "poses": [
-    "think",
-    "sit",
-    "lookout"
+    "lookout",
+    "walk",
+    "sit"
    ],
    "x": 0.6,
-   "move_to": 0.45,
+   "move_to": 0.4,
    "props": [
     "car"
    ],
@@ -108,7 +110,7 @@
    "poses": [
     "shiver",
     "kneel",
-    "build"
+    "sit"
    ],
    "x": 0.55,
    "props": [
@@ -141,7 +143,7 @@
    "poses": [
     "kneel",
     "think",
-    "cower"
+    "sit"
    ],
    "x": 0.4,
    "move_to": 0.5,
@@ -164,8 +166,8 @@
    "pose": "build",
    "poses": [
     "build",
-    "shiver",
-    "sit"
+    "sit",
+    "shiver"
    ],
    "x": 0.5,
    "props": [
@@ -182,7 +184,7 @@
     "GAS: QUARTER TANK"
    ],
    "mood": "tense",
-   "narration": "Hour after hour, you dig, start, warm, stop. Fingers numb. At three in the morning, the needle hits a quarter.",
+   "narration": "Hour after hour: dig, start, warm, stop. Fingers numb. At three in the morning, the needle hits a quarter.",
    "highlight": [
     "quarter"
    ]
@@ -192,7 +194,7 @@
    "pose": "lookout",
    "poses": [
     "lookout",
-    "reach",
+    "wave",
     "shock"
    ],
    "x": 0.35,
@@ -264,10 +266,10 @@
   },
   {
    "bg": "snow",
-   "pose": "think",
+   "pose": "point",
    "poses": [
-    "think",
     "point",
+    "think",
     "stand"
    ],
    "x": 0.5,
