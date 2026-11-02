@@ -333,9 +333,90 @@
      "deep": {}
     }
    }
+  },
+  {
+   "at": "2026-11-02T00:41:13.287367+00:00",
+   "series": {
+    "imagine_you": {
+     "channel": "Imagine You",
+     "subscribers": 4,
+     "channel_views": 1642,
+     "videos": {
+      "IY-01:youtube": {
+       "id": "d-OCr2W4klA",
+       "views": 1238,
+       "likes": 11,
+       "comments": 2,
+       "duration": "PT52S",
+       "problems": []
+      },
+      "IY-02:youtube": {
+       "id": "MPu00hbAaWw",
+       "views": 1026,
+       "likes": 22,
+       "comments": 3,
+       "duration": "PT1M1S",
+       "problems": []
+      }
+     },
+     "deep": {
+      "d-OCr2W4klA": {
+       "views": 1029,
+       "estimatedMinutesWatched": 241,
+       "averageViewDuration": 23,
+       "averageViewPercentage": 45.41,
+       "subscribersGained": 1,
+       "shares": 0,
+       "kept_10": 0.94,
+       "kept_50": 0.4,
+       "kept_90": 0.25
+      }
+     }
+    },
+    "every_how": {
+     "channel": "Every How",
+     "subscribers": 1,
+     "channel_views": 0,
+     "videos": {
+      "EH-01:youtube": {
+       "id": "efmYR44H1QU",
+       "views": 4,
+       "likes": 1,
+       "comments": 0,
+       "duration": "PT4M43S",
+       "problems": []
+      },
+      "EH-01:youtube_short": {
+       "id": "sJYE5bGNISA",
+       "views": 118,
+       "likes": 3,
+       "comments": 0,
+       "duration": "PT56S",
+       "problems": []
+      }
+     },
+     "deep": {}
+    },
+    "paws_claws": {
+     "channel": "Paws & Claws Club",
+     "subscribers": 0,
+     "channel_views": 0,
+     "videos": {
+      "PC-01:youtube": {
+       "id": "tOKfsqphH0I",
+       "views": 6,
+       "likes": 2,
+       "comments": 0,
+       "duration": "PT3M19S",
+       "problems": []
+      }
+     },
+     "deep": {}
+    }
+   }
   }
  ],
  "lessons": {
-  "imagine_you": "2026-11-01T17:16:33.981693+00:00"
+  "imagine_you": "2026-11-02T00:41:13.287367+00:00"
  }
 }
