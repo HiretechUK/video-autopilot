@@ -1,0 +1,297 @@
+{
+ "id": "blizzard-stranded-car",
+ "title": "Why a Snow-Blocked Tailpipe Can Kill You Before the Cold Does",
+ "description": "You're stranded in a blizzard with half a tank of gas, and two rules decide whether you see morning. One of them is about a danger you can't smell. Would you have stayed in the car?",
+ "tags": [
+  "survival",
+  "blizzard",
+  "stranded",
+  "carbon monoxide",
+  "winter survival",
+  "car survival",
+  "imagine you",
+  "shorts"
+ ],
+ "series": "SURVIVE #03",
+ "voice": "am_michael",
+ "speed": 1.15,
+ "costume": "cap",
+ "hud": [
+  "DAY 1 \u00b7 05:40 PM",
+  "\u25cf STRANDED IN A BLIZZARD",
+  "GAS: HALF TANK"
+ ],
+ "scenes": [
+  {
+   "bg": "snow",
+   "pose": "stand",
+   "poses": [
+    "stand",
+    "point",
+    "shock"
+   ],
+   "x": 0.5,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.12
+   },
+   "hud": [
+    "DAY 1 \u00b7 05:40 PM",
+    "\u25cf STRANDED IN A BLIZZARD",
+    "GAS: HALF TANK"
+   ],
+   "mood": "tense",
+   "narration": "Imagine you're stranded in a blizzard, and the move that kills most people is the one that feels smartest: walking for help.",
+   "highlight": [
+    "walking"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "shock",
+   "poses": [
+    "shock",
+    "phone"
+   ],
+   "x": 0.4,
+   "move_to": 0.5,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.15
+   },
+   "mood": "tense",
+   "narration": "Your car slid off an empty road at dusk. Snow blows sideways. Your phone? No signal.",
+   "highlight": [
+    "No signal"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "think",
+   "poses": [
+    "think",
+    "sit",
+    "lookout"
+   ],
+   "x": 0.6,
+   "move_to": 0.45,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "rule": {
+    "n": 1,
+    "text": "STAY WITH CAR",
+    "sub": "SEARCHERS SEE CARS"
+   },
+   "mood": "calm",
+   "narration": "Rule one: stay with the car. You see, in a whiteout you have no line to follow, so people drift in circles. A car is easy to spot. You aren't.",
+   "highlight": [
+    "circles"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "shiver",
+   "poses": [
+    "shiver",
+    "kneel",
+    "build"
+   ],
+   "x": 0.55,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 1 \u00b7 09:30 PM",
+    "\u25cf MINUS FIFTEEN",
+    "GAS: HALF TANK"
+   ],
+   "rule": {
+    "n": 2,
+    "text": "CLEAR TAILPIPE",
+    "sub": "10 MIN PER HOUR"
+   },
+   "mood": "urgent",
+   "narration": "Night. Minus fifteen. Gas at half. Rule two: run the engine ten minutes an hour, after digging out the tailpipe.",
+   "highlight": [
+    "tailpipe"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "kneel",
+   "poses": [
+    "kneel",
+    "think",
+    "cower"
+   ],
+   "x": 0.4,
+   "move_to": 0.5,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.1,
+    "z1": 1.2
+   },
+   "mood": "whisper",
+   "narration": "You see, a buried tailpipe is like a chimney with the flue shut. Exhaust has nowhere to go, so carbon monoxide seeps in. No smell. You just get sleepy.",
+   "highlight": [
+    "carbon monoxide"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "build",
+   "poses": [
+    "build",
+    "shiver",
+    "sit"
+   ],
+   "x": 0.5,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.15
+   },
+   "hud": [
+    "DAY 2 \u00b7 03:00 AM",
+    "\u25cf FINGERS NUMB",
+    "GAS: QUARTER TANK"
+   ],
+   "mood": "tense",
+   "narration": "Hour after hour, you dig, start, warm, stop. Fingers numb. At three in the morning, the needle hits a quarter.",
+   "highlight": [
+    "quarter"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "lookout",
+   "poses": [
+    "lookout",
+    "reach",
+    "shock"
+   ],
+   "x": 0.35,
+   "move_to": 0.55,
+   "props": [
+    "car"
+   ],
+   "fx": "flash",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "mood": "urgent",
+   "narration": "Then an engine. Headlights slide past in the white... and keep going. They never saw you.",
+   "highlight": [
+    "never saw you"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "stand",
+   "poses": [
+    "stand",
+    "lookout",
+    "point"
+   ],
+   "x": 0.5,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 2 \u00b7 06:45 AM",
+    "\u25cf THE STORM STOPS",
+    "GAS: QUARTER TANK"
+   ],
+   "mood": "reveal",
+   "narration": "Dawn. The wind dies. The snow stops. [pause] Sixty steps behind your car stands a farmhouse. It was there all night.",
+   "highlight": [
+    "farmhouse"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "lookout",
+   "poses": [
+    "lookout",
+    "shock",
+    "think"
+   ],
+   "x": 0.45,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.1,
+    "z1": 1.2
+   },
+   "mood": "whisper",
+   "narration": "No smoke. No lights. Gray clouds are stacking up again, and your needle sits at a quarter.",
+   "highlight": [
+    "No smoke"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "think",
+   "poses": [
+    "think",
+    "point",
+    "stand"
+   ],
+   "x": 0.5,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.15
+   },
+   "mood": "tense",
+   "narration": "Sixty steps to a maybe, or a car you know. Walk to the farmhouse, or stay put? Comment A or B.",
+   "highlight": [
+    "Comment A or B"
+   ],
+   "choice": {
+    "q": "WHAT DO YOU DO?",
+    "options": [
+     "A \u00b7 WALK TO THE FARMHOUSE",
+     "B \u00b7 STAY IN THE CAR"
+    ]
+   },
+   "hold_after": 2.0
+  }
+ ]
+}

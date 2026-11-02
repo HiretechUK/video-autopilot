@@ -166,6 +166,15 @@
    "file": "episodes/PC-10.json",
    "created": "2026-11-01T16:37:52.102735+00:00",
    "post_after": "2026-11-29T16:00:00+00:00"
+  },
+  "IY-03": {
+   "series": "imagine_you",
+   "number": 3,
+   "title": "Why a Snow-Blocked Tailpipe Can Kill You Before the Cold Does",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/IY-03.json",
+   "created": "2026-11-02T14:42:07.216696+00:00"
   }
  },
  "seen": [
