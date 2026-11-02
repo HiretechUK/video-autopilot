@@ -1,0 +1,5 @@
+Haseeb's notes (2 Nov, 18:21 Oslo): fix the dated lines so the episode stays correct after Cyclone Murasu makes landfall (expected the night of 2-3 November) and for as long as it is on YouTube.
+- Do not describe Murasu as "approaching", "closing in", "now severe" or with a "now forecasts" wording. Use the past tense and anchor every Murasu fact to a date: e.g. "In early November 2026, Cyclone Murasu formed in the Bay of Bengal..." and "As of 2 November, India's weather office forecast landfall winds of 100 to 110 km/h, gusting to 120."
+- Replace "last week's Cyclone Arnab" with a dated phrase (e.g. "Cyclone Arnab in late October 2026") and keep its figures.
+- Update the title, description and opening lines the same way (no "is closing in"). The hook can still open on Murasu as a recent storm.
+- Keep everything else (structure, explanations, sources, length). Re-check any changed fact.
