@@ -457,6 +457,21 @@ if __name__ == "__main__":
             rec["links"] = links
             print(ref, "thumbnail:", links.get("thumbnail"))
             save(st)
+    elif cmd == "fbdiag":  # read-only: why can't we post to this series' Facebook Page?
+        from . import instagram, tokens
+        rec = tokens.get("instagram", arg) or {}
+        tok, page = rec.get("page_token"), rec.get("page_id")
+        print("stored page_id:", page, "ig:", rec.get("username"))
+        app = f"{instagram.APP_ID}|{instagram._secret('FB_APP_SECRET')}"
+        for label, fn in (("page token", lambda: instagram._get("debug_token", input_token=tok, access_token=app)["data"]),
+                          ("page as itself", lambda: instagram._get("me", fields="id,name", access_token=tok)),
+                          ("page object", lambda: instagram._get(page, fields="id,name,tasks", access_token=tok)),
+                          ("reels", lambda: instagram._get(f"{page}/video_reels", limit=1, access_token=tok)),
+                          ("me/reels", lambda: instagram._get("me/video_reels", limit=1, access_token=tok))):
+            try:
+                print(label, "->", json.dumps(fn())[:700])
+            except Exception as e:
+                print(label, "FAILED:", e)
     elif cmd == "resend":  # email an existing pending episode for approval again: series=<REF>, e.g. EH-01
         st = load()
         rec = st["episodes"][arg]
