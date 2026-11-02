@@ -71,7 +71,9 @@ def trending(today: dt.date | None = None) -> list[str]:
 
 
 # ------------------------------------------------------------------ Claude with web search
-def _ask(system: str, user: str, search: bool = True, max_tokens: int = 16000) -> str:
+def _ask(system: str, user: str, search: bool = True, max_tokens: int = 32000) -> str:
+    # 2 Nov 2026: all 4 tries returned no readable JSON (likely cut off at 16000 tokens or an unfinished search turn).
+    # Streams (needed for long replies), allows more tokens and room to finish searching, and logs why a reply stops.
     import anthropic
     c = anthropic.Anthropic()
     tools = [{"type": "web_search_20250305", "name": "web_search", "max_uses": MAX_SEARCHES}] if search else []
@@ -79,15 +81,19 @@ def _ask(system: str, user: str, search: bool = True, max_tokens: int = 16000) -
     for m in MODELS:
         try:
             msgs = [{"role": "user", "content": user}]
-            for _ in range(6):  # long searches may pause; send the turn back unchanged to continue
+            for _ in range(10):  # long searches may pause; send the turn back unchanged to continue
                 kw = dict(model=m, max_tokens=max_tokens, system=system, messages=msgs)
                 if tools:
                     kw["tools"] = tools
-                r = c.messages.create(**kw)
+                with c.messages.stream(**kw) as st:
+                    r = st.get_final_message()
                 if r.stop_reason != "pause_turn":
                     break
                 msgs = msgs + [{"role": "assistant", "content": r.content}]
-            return "".join(b.text for b in r.content if getattr(b, "type", "") == "text")
+            text = "".join(b.text for b in r.content if getattr(b, "type", "") == "text")
+            print(f"every_how writer: {m} stop={r.stop_reason} out_tokens={r.usage.output_tokens} text={len(text)} chars",
+                  flush=True)
+            return text
         except anthropic.NotFoundError as e:
             last = e
     raise last
@@ -263,10 +269,15 @@ def write(number: int, recent: list[str], lessons: str = "", notes: str = "", pr
 
     errs, ep = [], None
     for attempt in range(4):
+        reply = ""
         try:
-            ep = _extract(_ask(system, user))
+            reply = _ask(system, user)
+            ep = _extract(reply)
         except (ValueError, json.JSONDecodeError) as e:
-            user += f"\nYour last reply could not be parsed ({e}). Return ONLY one valid JSON object.\n"
+            print(f"every_how attempt {attempt + 1}: unreadable reply ({e}); starts {reply[:300]!r} ... ends {reply[-300:]!r}",
+                  flush=True)
+            errs = [f"reply could not be read as JSON: {e}"]
+            user += f"\nYour last reply could not be parsed ({e}). Return ONLY one valid JSON object, nothing before or after it.\n"
             continue
         errs = validate(ep)
         if errs:
