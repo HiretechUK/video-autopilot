@@ -187,7 +187,7 @@
     "youtube": "https://youtube.com/watch?v=VQhguRtVFIQ",
     "instagram": "https://www.instagram.com/reel/DfP4zlKyPFp/",
     "facebook": "https://www.facebook.com/reel/1646310033696643",
-    "thumbnail": "failed: Command '['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', 'https://hiretechuk.github.io/video-autopilot/media/IY-03.mp4']' returned non-zero exit status 1."
+    "thumbnail": "set"
    }
   },
   "EH-02": {
