@@ -22,7 +22,7 @@ STUCK_H = 3         # approved but posted nowhere
 PARTIAL_H = 1       # posted on some platforms, failed on others: retry quickly
 ALERT_H = 48        # episode not made at all
 POST_ALERT_H = 12   # still not on YouTube/Instagram/Facebook after ~10 hourly retries
-COOLDOWN_MIN = 50
+COOLDOWN_MIN = 45
 EH_OVERDUE_H = 30   # Every How: one a day; scheduled runs make it after 18 h
 EH_ALERT_H = 48
 
@@ -46,6 +46,10 @@ def autopilot_busy():
 
 
 def dispatch(cmd, series="imagine_you"):
+    if cmd == "run":  # the full scheduled path: check (replies, auto-approvals, posting) + make whatever is due
+        gh("workflow", "run", "video.yml", "--ref", "main", "-f", "cmd=", "-f", f"series={series}")
+        print("started Video autopilot: full run")
+        return
     gh("workflow", "run", "video.yml", "--ref", "main", "-f", f"cmd={cmd}", "-f", f"series={series}")
     print(f"started Video autopilot: {cmd} {series}")
 
@@ -93,12 +97,27 @@ def main():
         print("auto-approve check failed:", exc)
     if auto_due:
         print(f"auto-approval due: {auto_due}")
-    action = "make" if age > OVERDUE_H else ("check" if stuck or auto_due else None)
+    # The watchdog is the real scheduler (2 Nov 2026: GitHub dropped most of the autopilot's own scheduled runs).
+    # Whenever an episode is DUE (not only overdue), something is stuck or an auto-approval is due, it starts a
+    # full autopilot run: replies + posting, then make Imagine You and Every How if due (due-checked, so never doubles).
+    due = []
+    if age > DUE_H:
+        due.append(f"Imagine You due ({age:.0f} h since the last)")
+    if eh_age is not None and eh_age > DUE_H:
+        due.append(f"Every How due ({eh_age:.0f} h since the last)")
+    try:
+        from autopilot.pipeline import SERIES as _S
+        from datetime import datetime as _dt
+        now = _dt.now(timezone.utc)
+        for r, e in eps.items():  # Paws & Claws (or any scheduled episode) whose time has come
+            if e["status"] == "scheduled" and e.get("post_after") and _dt.fromisoformat(e["post_after"]) <= now:
+                due.append(f"{r} scheduled to go live")
+    except Exception as exc:
+        print("scheduled check failed:", exc)
+    action = "run" if (due or stuck or auto_due) else None
     series = "imagine_you"
-    # Every How is daily: overdue after 30 h (made only once the series has its first episode)
-    if not action and eh_age is not None and eh_age > EH_OVERDUE_H:
-        action, series = "make", "every_how"
-        print(f"newest Every How episode is {eh_age:.1f} h old")
+    if due:
+        print("due: " + "; ".join(due))
     if eh_age is not None and EH_ALERT_H <= eh_age < EH_ALERT_H + 2:
         alert("Every How episode is overdue",
               f"The newest Every How episode is {eh_age:.0f} hours old and the watchdog's retries have not made a new one. "

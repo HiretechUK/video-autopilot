@@ -39,8 +39,12 @@ def _ask(system: str, user: str) -> str:
     last = None
     for m in MODELS:
         try:
-            r = c.messages.create(model=m, max_tokens=4000, system=system, messages=[{"role": "user", "content": user}])
-            return "".join(b.text for b in r.content if getattr(b, "type", "") == "text")
+            # 2 Nov 2026: 4000 tokens cut episodes off mid-JSON (no closing brace -> "no JSON object") on all 4 tries.
+            r = c.messages.create(model=m, max_tokens=16000, system=system, messages=[{"role": "user", "content": user}])
+            text = "".join(b.text for b in r.content if getattr(b, "type", "") == "text")
+            if r.stop_reason == "max_tokens":
+                print(f"writer: reply from {m} hit the token limit ({len(text)} chars)", flush=True)
+            return text
         except anthropic.NotFoundError as e:
             last = e
     raise last
@@ -118,9 +122,12 @@ def write_episode(series: str, number: int, recent: list[str], lessons: str = ""
     errs = []
     for attempt in range(4):
         try:
-            ep = _extract(_ask(system, user))
+            raw = ""
+            raw = _ask(system, user)
+            ep = _extract(raw)
         except (ValueError, json.JSONDecodeError) as e:
-            errs = [f"reply was not valid JSON ({e}); return ONLY one valid JSON object, no comments"]
+            print(f"writer attempt {attempt + 1}: unreadable reply ({e}); starts: {raw[:200]!r} ... ends: {raw[-200:]!r}", flush=True)
+            errs = [f"reply was not valid JSON ({e}); return ONLY one valid JSON object, no comments, no text before or after it"]
             user += f"\nYour last reply could not be parsed: {errs[0]}\n"
             continue
         errs = validate(ep)
