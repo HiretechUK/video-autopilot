@@ -16,11 +16,11 @@ from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPO = os.environ.get("GITHUB_REPOSITORY", "HiretechUK/video-autopilot")
-DUE_H = 36          # pipeline makes an episode once the last is 36 h old
-OVERDUE_H = 40      # 4 h grace for the normal scheduled runs
+DUE_H = 18          # pipeline makes an Imagine You episode once the last is 18 h old (daily since 2 Nov 2026)
+OVERDUE_H = 30      # daily: the 4 scheduled runs should have made one by then
 STUCK_H = 3         # approved but posted nowhere
 PARTIAL_H = 1       # posted on some platforms, failed on others: retry quickly
-ALERT_H = 60        # episode not made at all
+ALERT_H = 48        # episode not made at all
 POST_ALERT_H = 12   # still not on YouTube/Instagram/Facebook after ~10 hourly retries
 COOLDOWN_MIN = 50
 EH_OVERDUE_H = 30   # Every How: one a day; scheduled runs make it after 18 h

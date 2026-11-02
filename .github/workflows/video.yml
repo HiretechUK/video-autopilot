@@ -4,7 +4,7 @@ on:
   schedule:
     # GitHub can delay or drop scheduled runs, so there are 4 a day. Every scheduled run reads
     # approval replies, posts approved episodes, then makes a new Imagine You episode only if the
-    # last one is due (every 2nd day, EPISODE_EVERY_DAYS). Extra runs never make doubles.
+    # last one is due (Imagine You and Every How: daily). Extra runs never make doubles.
     - cron: "13 6 * * *"
     - cron: "37 11 * * *"
     - cron: "23 17 * * *"
@@ -31,7 +31,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 240  # a day can need an Imagine You render (~40 min) and an Every How render in one run
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

@@ -24,7 +24,8 @@ OUT = os.path.join(ROOT, "out")
 SERIES = {"imagine_you": {"prefix": "IY", "name": "Imagine You", "builder": "engine/build_short_v3.py",
                           # v3 = 2D characters in 3D sets (RULEBOOK_imagine_you.md); a render takes ~40 min, so each
                           # script is rendered once and kept in this release for posting
-                          "cache": "imagineyou-renders"},
+                          "cache": "imagineyou-renders",
+                          "every_days": 1},  # Haseeb, 2 Nov 2026: a new Imagine You episode every day
           # Paws & Claws episodes are made ahead in a batch (Higgsfield + ACE-Step) and stored as release assets;
           # each one goes live on its post_after date (Haseeb, 1 Nov: make them all at once, post periodically).
           "paws_claws": {"prefix": "PC", "name": "Paws & Claws Club", "premade": True},
