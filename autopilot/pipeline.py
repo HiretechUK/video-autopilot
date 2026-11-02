@@ -173,6 +173,14 @@ def render(series: str, ep_path: str):
     return out
 
 
+def hosted_name(ref: str) -> str:
+    """The file posted for this episode in media/ (newer ones carry the render hash: IY-03-5e6ada78.mp4)."""
+    import glob
+    files = sorted(glob.glob(os.path.join(ROOT, "media", f"{ref}*.mp4")), key=os.path.getmtime)
+    files = [f for f in files if "_preview" not in f]
+    return os.path.basename(files[-1]) if files else f"{ref}.mp4"
+
+
 def script_text(ep: dict) -> str:
     scenes = ep.get("scenes") or [s for sec in ep.get("sections", []) for s in sec["scenes"]]
     return "\n".join(f"{i}. {s['narration'].replace('[pause] ', '… ')}" for i, s in enumerate(scenes, 1))
@@ -491,7 +499,7 @@ if __name__ == "__main__":
             ep = json.load(open(os.path.join(ROOT, rec["file"])))
             video = None
             if rec["series"] == "imagine_you":
-                video = f"https://hiretechuk.github.io/video-autopilot/media/{ref}.mp4"
+                video = f"https://hiretechuk.github.io/video-autopilot/media/{hosted_name(ref)}"
             elif rec["series"] == "paws_claws":
                 video = f"https://github.com/{os.environ.get('GITHUB_REPOSITORY', 'HiretechUK/video-autopilot')}/releases/download/paws-episodes/{ep['video']}"
             links.pop("thumbnail", None)

@@ -131,3 +131,9 @@ def test_every_how_review_copies_watchable_by_link():
     # Haseeb could not open private review copies on his phone (signed in to his own account)
     src = open("autopilot/publish.py").read()
     assert 'privacy="private"' not in src and src.count('privacy="unlisted"') >= 2
+
+
+def test_thumbnail_backfill_finds_hashed_video_name():
+    # IY-03 thumbnail retry looked for media/IY-03.mp4, but it was posted as media/IY-03-5e6ada78.mp4
+    assert pipeline.hosted_name("IY-03").startswith("IY-03-") or not os.path.exists("media")
+    assert pipeline.hosted_name("IY-01") == "IY-01.mp4"
