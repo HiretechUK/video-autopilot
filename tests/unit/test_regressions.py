@@ -109,3 +109,19 @@ def test_all_modules_import():
     import importlib
     for m in ("analyst", "publish", "instagram", "facebook", "youtube", "thumbs", "writer_everyhow"):
         importlib.import_module(f"autopilot.{m}")
+
+
+def test_video_workflow_installs_every_library_the_code_imports():
+    # IY-03 thumbnail failed: "No module named 'PIL'" (thumbs.py needs Pillow, the workflow did not install it)
+    import re
+    wf = open(".github/workflows/video.yml").read()
+    installed = set(re.search(r"pip install -q ([^\n&]+)", wf).group(1).split())
+    needs = {"PIL": "pillow", "anthropic": "anthropic", "requests": "requests", "cryptography": "cryptography",
+             "playwright": "playwright", "soundfile": "soundfile", "kokoro_onnx": "kokoro-onnx"}
+    used = set()
+    for f in os.listdir("autopilot"):
+        if f.endswith(".py"):
+            src = open(os.path.join("autopilot", f)).read()
+            used |= {mod for mod in needs if re.search(rf"^\s*(from|import) {mod}\b", src, re.M)}
+    missing = {needs[m] for m in used} - installed
+    assert not missing, f"video.yml does not install: {missing}"

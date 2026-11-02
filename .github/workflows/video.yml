@@ -40,7 +40,7 @@ jobs:
       - name: Fonts
         run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-inter fonts-dejavu-core ffmpeg
       - name: Python packages
-        run: pip install -q kokoro-onnx soundfile anthropic playwright requests cryptography && python -m playwright install --with-deps chromium
+        run: pip install -q kokoro-onnx soundfile anthropic playwright requests cryptography pillow && python -m playwright install --with-deps chromium
       - name: Voice model cache
         uses: actions/cache@v4
         with:
