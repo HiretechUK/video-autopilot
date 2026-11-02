@@ -194,7 +194,7 @@
    "series": "every_how",
    "number": 2,
    "title": "How Does a Cyclone Form, and Who Gives It a Name?",
-   "status": "pending",
+   "status": "skipped",
    "version": 2,
    "file": "episodes/EH-02.json",
    "created": "2026-11-02T16:49:24.865936+00:00",
@@ -215,7 +215,8 @@
    "notes_files_done": [
     "c39992e033"
    ],
-   "emailed_at": "2026-11-02T17:50:21.866601+00:00"
+   "emailed_at": "2026-11-02T17:50:21.866601+00:00",
+   "skipped_by": "Haseeb, 2 Nov 2026 19:40 (topic, script and video not good enough)"
   }
  },
  "seen": [
