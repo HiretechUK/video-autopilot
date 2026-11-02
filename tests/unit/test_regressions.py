@@ -52,7 +52,13 @@ def test_render_cache_changes_when_scenes_change(tmp_path):
     assert pipeline._script_hash(str(a)) != pipeline._script_hash(str(b))
 
 
-def test_revised_episode_never_auto_posts():
+def test_auto_approve_is_off_by_default(monkeypatch):
+    monkeypatch.delenv("AUTO_APPROVE", raising=False)
+    assert pipeline.auto_ok({"series": "imagine_you"}, {}) is False
+
+
+def test_revised_episode_never_auto_posts(monkeypatch):
+    monkeypatch.setenv("AUTO_APPROVE", "on")
     assert pipeline.auto_ok({"series": "imagine_you"}, {}) is True
     assert pipeline.auto_ok({"series": "imagine_you", "version": 2}, {}) is False
     green = {"ad_safety": {"rating": "green"}, "factcheck": {"ok": True}}

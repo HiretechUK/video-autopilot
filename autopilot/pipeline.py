@@ -51,6 +51,8 @@ AUTO_APPROVE_H = 6  # Haseeb, 2 Nov 2026: if he hasn't replied in 6 h and the ep
 def auto_ok(rec: dict, ep: dict) -> bool:
     """May this episode go out without Haseeb's reply? Every How: green ad safety and a clean fact-check.
     Imagine You: made by the autopilot, so it already passed the due check and the near-duplicate story check."""
+    if os.environ.get("AUTO_APPROVE", "off") != "on":  # Haseeb, 2 Nov 2026: quality not good enough, nothing posts without his "approved"
+        return False
     if rec.get("version", 1) > 1:  # Haseeb asked for changes: only his explicit "approved" can post it
         return False
     if rec["series"] == "every_how":
