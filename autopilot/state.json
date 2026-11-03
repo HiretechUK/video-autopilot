@@ -226,6 +226,23 @@
    "version": 1,
    "file": "episodes/IY-04.json",
    "created": "2026-11-03T09:32:40.745623+00:00"
+  },
+  "EH-03": {
+   "series": "every_how",
+   "number": 3,
+   "title": "How Does a Botnet Take Over Millions of Devices?",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/EH-03.json",
+   "created": "2026-11-03T11:37:36.890000+00:00",
+   "private": {
+    "full": "I5cuLt5vIBY",
+    "short": "GCKzYTNlmaI",
+    "thumbnail": "set",
+    "version": 1,
+    "minutes": 6.2,
+    "superseded": []
+   }
   }
  },
  "seen": [

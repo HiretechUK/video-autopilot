@@ -1,0 +1,683 @@
+{
+ "title": "How Does a Botnet Take Over Millions of Devices?",
+ "question": "How does a botnet take over millions of devices without their owners noticing?",
+ "description": "This week Google said it had disrupted a hidden network of more than 1.3 million devices, mostly Android TV boxes, that was working for criminals. Learn how a botnet is built, how it makes money through ad fraud and proxy services, and how investigators cut off its control. We explain it step by step with every fact checked. Who should carry more responsibility for stopping this: the companies that certify devices, or the people who buy them?",
+ "tags": [
+  "botnet",
+  "how does a botnet work",
+  "XCPE botnet",
+  "Google botnet takedown",
+  "Android TV box malware",
+  "cybersecurity explained",
+  "Mirai botnet",
+  "ad fraud",
+  "residential proxy",
+  "firmware backdoor",
+  "internet of things security",
+  "Every How"
+ ],
+ "ad_safety": {
+  "rating": "green",
+  "reason": "Educational cybersecurity explainer with no violence, no instructions for attacks, and a neutral tone that attributes claims to Google."
+ },
+ "sources": [
+  {
+   "title": "Shutting the Door on the XCPE Botnet - Google Threat Intelligence Group",
+   "url": "https://cloud.google.com/blog/topics/threat-intelligence/shutting-the-door-on-the-xcpe-botnet"
+  },
+  {
+   "title": "Google disrupts million-device XCPE Android malware botnet, bans TV box maker - BleepingComputer",
+   "url": "https://www.bleepingcomputer.com/news/security/google-disrupts-million-device-xcpe-android-malware-botnet-bans-tv-box-maker/"
+  },
+  {
+   "title": "Google disrupts XCPE botnet, bans the company behind it - Help Net Security",
+   "url": "https://www.helpnetsecurity.com/2026/11/02/xcpe-botnet-android-backdoor/"
+  },
+  {
+   "title": "Google shuts down global botnet running on certified Android devices - CyberScoop",
+   "url": "https://cyberscoop.com/google-disrupts-xcpe-botnet-videostrong-android-devices/"
+  },
+  {
+   "title": "Google Disrupts 1.3 Million-Device Android Botnet - The Hacker News",
+   "url": "https://thehackernews.com/2026/11/google-disrupts-13-million-device.html"
+  },
+  {
+   "title": "Google dismantles XCPE Botnet of 1.3 Million Android Devices - SecurityWeek",
+   "url": "https://www.securityweek.com/google-dismantles-xcpe-botnet-of-1-3-million-android-devices/"
+  },
+  {
+   "title": "Police and tech firms team up to take down XCPE botnet - Infosecurity Magazine",
+   "url": "https://www.infosecurity-magazine.com/news/police-tech-firms-team-up-to/"
+  },
+  {
+   "title": "TrendAI research helps disrupt Android TV botnet of more than 1.3 million pre-infected devices - TrendAI",
+   "url": "https://www.trendaisecurity.com/en/resources-insights/trendai-security-blog/trendaitm-research-helps-disrupt-android-tv-botnet-of-more-than-13-million-pre-infected-devices"
+  },
+  {
+   "title": "Inside XCPE: the botnet that turned 1.3M set-top boxes into proxy servers - Security Affairs",
+   "url": "https://securityaffairs.com/202323/malware/inside-xcpe-the-botnet-that-turned-1-3m-set-top-boxes-into-proxy-servers.html"
+  },
+  {
+   "title": "XCPE Android TV box botnet - DigitBin",
+   "url": "https://www.digitbin.com/xcpe-android-tv-box-botnet/"
+  },
+  {
+   "title": "Videostrong XCPE Android TV box botnet - AndroidPure",
+   "url": "https://www.androidpure.com/videostrong-xcpe-android-tv-box-botnet/"
+  },
+  {
+   "title": "Global Coalition Disables X.CPE Botnet (PRNewswire press release)",
+   "url": "https://www.kucoin.com/news/flash/global-coalition-disables-x-cpe-botnet-in-over-1-3-million-set-top-boxes-across-200-countries"
+  },
+  {
+   "title": "Mirai Botnet Malware - Check Point Software",
+   "url": "https://www.checkpoint.com/cyber-hub/network-security/what-is-iot/iot-botnet/mirai-botnet-malware/"
+  },
+  {
+   "title": "Understanding the Mirai Botnet Attack Type - Corero",
+   "url": "https://www.corero.com/mirai-botnet-ddos-attack-type/"
+  }
+ ],
+ "sections": [
+  {
+   "heading": "",
+   "scenes": [
+    {
+     "narration": "This week, Google announced it had dismantled a secret network of more than 1.3 million devices, mostly Android TV boxes, that was working for criminals. How does a botnet take over millions of devices?",
+     "visual": {
+      "type": "title",
+      "text": "How does a botnet take over millions of devices?",
+      "icon": "television-simple",
+      "sub": "The XCPE takedown explained"
+     }
+    },
+    {
+     "narration": "Owners were never asked for consent. Behind the scenes, the boxes ran hidden jobs such as ad fraud and proxy traffic.",
+     "visual": {
+      "type": "hero",
+      "icon": "television-simple",
+      "label": "A TV box in a living room",
+      "sub": "Doing secret jobs"
+     }
+    },
+    {
+     "narration": "In the next few minutes, you will see how a botnet is built, how it earns money, and how investigators switch it off.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "bug",
+        "label": "Infect",
+        "cue": "built"
+       },
+       {
+        "icon": "currency-dollar",
+        "label": "Profit",
+        "cue": "money"
+       },
+       {
+        "icon": "prohibit",
+        "label": "Switch off",
+        "cue": "off"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "heading": "What a Botnet Is",
+   "scenes": [
+    {
+     "narration": "A bot is any connected device that secretly runs software obeying someone else. A botnet is a large group of bots, all taking orders from the same controller.",
+     "visual": {
+      "type": "hero",
+      "icon": "robot",
+      "label": "Bot: a hijacked device",
+      "sub": "Botnet: many of them"
+     }
+    },
+    {
+     "narration": "The controller does not message each device by hand. Every infected device contacts a command-and-control server, often called C2, and waits there for instructions.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "user",
+        "label": "Botmaster",
+        "cue": "controller"
+       },
+       {
+        "icon": "hard-drives",
+        "label": "Control server (C2)",
+        "cue": "command-and-control"
+       },
+       {
+        "icon": "devices",
+        "label": "Infected devices",
+        "cue": "device"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "A famous example is Mirai, which emerged in 2016. It was used for huge attacks on websites, and its code was later leaked, so other criminals copied it.",
+     "visual": {
+      "type": "stat",
+      "value": "2016",
+      "label": "Mirai botnet emerges",
+      "icon": "calendar-blank"
+     }
+    },
+    {
+     "narration": "Mirai scanned the internet for devices, tried common factory usernames and passwords, and every device that let it in joined the network.",
+     "visual": {
+      "type": "list",
+      "heading": "How Mirai got in",
+      "items": [
+       {
+        "icon": "magnifying-glass",
+        "text": "Scans the internet",
+        "cue": "scanned"
+       },
+       {
+        "icon": "key",
+        "text": "Tries factory passwords",
+        "cue": "passwords"
+       },
+       {
+        "icon": "plugs-connected",
+        "text": "Device joins the botnet",
+        "cue": "joined"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "The attacks were simple in idea: thousands of devices request the same website at once, until real visitors cannot get through.",
+     "visual": {
+      "type": "crowd",
+      "count": 20,
+      "highlight": 18,
+      "label": "Bots swamp one website",
+      "icon": "robot"
+     }
+    },
+    {
+     "narration": "But what if nobody has to break in at all, because the hidden software was installed before the box even reached a shop?",
+     "visual": {
+      "type": "question",
+      "text": "What if the device arrives already infected?"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Built at the Factory",
+   "scenes": [
+    {
+     "narration": "According to Google, that is what happened with XCPE. Firmware is the built-in software a device runs from the moment it switches on, and the manufacturer writes it.",
+     "visual": {
+      "type": "hero",
+      "icon": "factory",
+      "label": "Firmware is written at the factory",
+      "sub": "Before the device is sold"
+     }
+    },
+    {
+     "narration": "Google says the maker, Videostrong Technology, based in Shenzhen, China, built a backdoor called x.cpe into many device models and brands over several years.",
+     "visual": {
+      "type": "zoom",
+      "icon": "television-simple",
+      "label": "An Android TV box",
+      "inner_icon": "bug",
+      "inner_label": "Hidden backdoor in firmware"
+     }
+    },
+    {
+     "narration": "The backdoor ran at system level, the same level as the operating system itself. If someone deletes it, reports say it reinstalls itself from another part of the device's own storage.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "app-window",
+       "label": "Ordinary app",
+       "value": "Can be deleted"
+      },
+      "right": {
+       "icon": "cpu",
+       "label": "Firmware backdoor",
+       "value": "Reinstalls itself"
+      },
+      "vs": "vs"
+     }
+    },
+    {
+     "narration": "The backdoor contacts its control servers for instructions. To install software silently, it also switches off the app checks in Google Play Protect, Android's built-in security feature, and wipes the record of user consent.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "hard-drives",
+        "label": "Asks servers for orders",
+        "cue": "contacts"
+       },
+       {
+        "icon": "shield-slash",
+        "label": "Turns off app checks",
+        "cue": "switches"
+       },
+       {
+        "icon": "download-simple",
+        "label": "Installs apps silently",
+        "cue": "install"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "More than 1.3 million devices were enrolled, mostly Android TV boxes, but also telehealth devices, karaoke machines and digital signs.",
+     "visual": {
+      "type": "stat",
+      "value": "1.3 million",
+      "label": "devices enrolled",
+      "icon": "television-simple"
+     }
+    },
+    {
+     "narration": "Google does not believe a rogue employee or a simple mistake was behind it. Its assessment is that the operation was deliberate, and run for profit.",
+     "visual": {
+      "type": "hero",
+      "icon": "scales",
+      "label": "Google's assessment: deliberate",
+      "sub": "Not an accident"
+     }
+    },
+    {
+     "narration": "TrendAI's own telemetry counted about 1.47 million devices in more than 170 countries, with the most in Malaysia, Brazil, Iraq, Mexico and Taiwan. The partners' joint press release says more than 200 countries.",
+     "visual": {
+      "type": "map",
+      "countries": [
+       "Malaysia",
+       "Brazil",
+       "Iraq",
+       "Mexico",
+       "Taiwan"
+      ],
+      "label": "Largest concentrations of infected devices",
+      "zoom": "world"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "How It Earns",
+   "scenes": [
+    {
+     "narration": "Why would a manufacturer do this to its own customers? Google says it assesses, with high confidence, that the reason was money.",
+     "visual": {
+      "type": "question",
+      "text": "Why hijack your own customers' devices?"
+     }
+    },
+    {
+     "narration": "Google says Videostrong sold access to criminal affiliates and then loaded those affiliates' malicious modules onto the infected devices.",
+     "visual": {
+      "type": "hero",
+      "icon": "handshake",
+      "label": "Access sold to affiliates",
+      "sub": "Each brings its own modules"
+     }
+    },
+    {
+     "narration": "Those modules did three main jobs: ad fraud, residential proxy services, and loading still more malware. Each one turned an ordinary gadget into a small piece of criminal infrastructure.",
+     "visual": {
+      "type": "list",
+      "heading": "Three jobs",
+      "items": [
+       {
+        "icon": "cursor-click",
+        "text": "Ad fraud",
+        "cue": "fraud"
+       },
+       {
+        "icon": "network",
+        "text": "Residential proxy",
+        "cue": "proxy"
+       },
+       {
+        "icon": "bug",
+        "text": "More malware",
+        "cue": "malware"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "In ad fraud, a hidden program loads webpages and clicks adverts that no human ever sees, so advertisers pay for attention that never existed.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "browser",
+        "label": "Hidden page loads",
+        "cue": "loads"
+       },
+       {
+        "icon": "cursor-click",
+        "label": "Fake click",
+        "cue": "clicks"
+       },
+       {
+        "icon": "currency-dollar",
+        "label": "Advertiser pays",
+        "cue": "pay"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "A residential proxy sends someone else's internet traffic out through your home connection, so websites see an ordinary household instead of the real sender.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "user",
+        "label": "Stranger's traffic",
+        "cue": "someone"
+       },
+       {
+        "icon": "house",
+        "label": "Your home connection",
+        "cue": "home"
+       },
+       {
+        "icon": "globe",
+        "label": "Website",
+        "cue": "websites"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Google found that a single infected device ran as many as three separate proxy services at once, all without the owner's knowledge.",
+     "visual": {
+      "type": "stat",
+      "value": "3",
+      "label": "proxy services on one device",
+      "icon": "network"
+     }
+    },
+    {
+     "narration": "For owners, the risk is that their home connection carries strangers' traffic, including criminal traffic, and that data on the device could be copied.",
+     "visual": {
+      "type": "hero",
+      "icon": "house",
+      "label": "Your connection, used by strangers",
+      "sub": "Data could be copied"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Pulling the Plug",
+   "scenes": [
+    {
+     "narration": "You cannot visit a million living rooms. So investigators go after the one thing every bot depends on: the servers that give the orders.",
+     "visual": {
+      "type": "question",
+      "text": "How do you stop a botnet in a million homes?"
+     }
+    },
+    {
+     "narration": "Google took legal action against the domains and servers that controlled XCPE and delivered its modules, and against the control systems of more than a dozen other malware families.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "gavel",
+        "label": "Legal action",
+        "cue": "legal"
+       },
+       {
+        "icon": "hard-drives",
+        "label": "Servers and domains taken down",
+        "cue": "servers"
+       },
+       {
+        "icon": "robot",
+        "label": "Bots lose their orders",
+        "cue": "controlled"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Those groups also spread their software by other routes, so Google expects the move to cut off access to at least 10 million additional compromised devices.",
+     "visual": {
+      "type": "stat",
+      "value": "10 million+",
+      "label": "more devices cut off",
+      "icon": "devices"
+     }
+    },
+    {
+     "narration": "Google worked with Japan's National Police Agency and several security companies, including Lumen, Human Security, Plume, Synthient and TrendAI.",
+     "visual": {
+      "type": "list",
+      "heading": "Who helped",
+      "items": [
+       {
+        "icon": "police-car",
+        "text": "Japan's National Police Agency",
+        "cue": "Police"
+       },
+       {
+        "icon": "network",
+        "text": "Network companies",
+        "cue": "Lumen"
+       },
+       {
+        "icon": "magnifying-glass",
+        "text": "Security researchers",
+        "cue": "TrendAI"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Google also ended its relationship with Videostrong. The company and any future affiliates are barred from making certified Android devices or supplying software to certified manufacturers.",
+     "visual": {
+      "type": "hero",
+      "icon": "prohibit",
+      "label": "Banned from Android certification",
+      "sub": "Including future affiliates"
+     }
+    },
+    {
+     "narration": "Google says it tightened firmware integrity checks on certified Android TV devices and changed how it reviews manufacturers, to close the testing gap that was used.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "lock-open",
+       "label": "Testing gap",
+       "value": "Used by the backdoor"
+      },
+      "right": {
+       "icon": "lock",
+       "label": "Tighter checks",
+       "value": "Firmware reviewed"
+      },
+      "vs": "now"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "What Remains",
+   "scenes": [
+    {
+     "narration": "Here is the catch. Cutting off the known servers removes the operators' current control channel, but the backdoor is still in the firmware of affected boxes, and operators have rebuilt on new infrastructure before.",
+     "visual": {
+      "type": "hero",
+      "icon": "warning",
+      "label": "The code is still on the boxes",
+      "sub": "Control is cut, not removed"
+     }
+    },
+    {
+     "narration": "TrendAI says cleanup needs vendor action, platform protection or replacing the device. Synthient advises discarding affected boxes, so owners may need to replace them.",
+     "visual": {
+      "type": "list",
+      "heading": "Cleanup options",
+      "items": [
+       {
+        "icon": "factory",
+        "text": "Vendor action",
+        "cue": "vendor"
+       },
+       {
+        "icon": "shield-check",
+        "text": "Platform protection",
+        "cue": "platform"
+       },
+       {
+        "icon": "trash",
+        "text": "Replace the device",
+        "cue": "replacing"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "The takedown happened in late October, and Google published its report on 2 November. It warns that the markets for backdoors, ad fraud and residential proxies are resilient and work as an interconnected supply chain.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "Late Oct",
+        "label": "Servers taken down",
+        "icon": "hard-drives",
+        "cue": "October"
+       },
+       {
+        "year": "2 Nov",
+        "label": "Google publishes report",
+        "icon": "article",
+        "cue": "November"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Different security firms recommend different steps. Google advises buying connected devices only from reputable manufacturers and checking its Android TV partner list.",
+     "visual": {
+      "type": "list",
+      "heading": "Google's advice",
+      "items": [
+       {
+        "icon": "seal-check",
+        "text": "Buy from reputable makers",
+        "cue": "reputable"
+       },
+       {
+        "icon": "list-checks",
+        "text": "Check the Android TV partner list",
+        "cue": "list"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Videostrong was itself a certified partner, so certification alone was no guarantee. TrendAI says companies should treat unmanaged devices on staff home networks as part of their exposure, and keep corporate access behind managed devices.",
+     "visual": {
+      "type": "hero",
+      "icon": "seal-warning",
+      "label": "Certified did not mean safe",
+      "sub": "Videostrong was a certified partner"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Recap",
+   "scenes": [
+    {
+     "narration": "In one breath: a botnet is hijacked devices obeying one server. XCPE was built in at the factory, earned from ad fraud and proxies, and disrupted by taking down its servers. The backdoor remains in the boxes.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "factory",
+        "label": "Built in",
+        "cue": "factory"
+       },
+       {
+        "icon": "currency-dollar",
+        "label": "Earns money",
+        "cue": "ad"
+       },
+       {
+        "icon": "hard-drives",
+        "label": "Servers taken down",
+        "cue": "taking"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Who should carry more responsibility for stopping this: the companies that certify devices, or the people who buy them? Tell us in the comments.",
+     "visual": {
+      "type": "question",
+      "text": "Certifiers or buyers: who is more responsible?"
+     }
+    }
+   ]
+  }
+ ],
+ "short": {
+  "scenes": [
+   1,
+   11,
+   18,
+   25,
+   30,
+   31
+  ],
+  "outro": "Watch the full episode to see how a botnet is built, how it earns money, and how it is switched off."
+ },
+ "factcheck": {
+  "ok": false,
+  "summary": "Core facts check out against Google's report and its partners' releases: 1.3M devices, Videostrong, the TrendAI figures, the actions Google took, the partner list and the three-proxy claim. Four wording fixes are needed. The main one is that scene 13 misdescribes the Play Protect/consent mechanism. The others are scene 12 (OS-level overstatement), scene 32 (timing and 'resilient') and scene 6/8 (Mirai scale and targets).",
+  "open_issues": [
+   {
+    "scene": 13,
+    "claim": "it also switches off the app checks in Google Play Protect... and wipes the record of user consent.",
+    "problem": "Google's technical write-up, as relayed by several outlets, says the backdoor sets the package_verifier_user_consent setting to -1. That turns off Play Protect's app verification. Only one secondary summary describes this as wiping consent records. As written, it implies user consent records are erased, which the primary report does not clearly say.",
+    "fix": "To install software silently, it also switches off Google Play Protect's app verification by overwriting a package-verification consent setting.",
+    "source": "https://gbhackers.com/google-dismantles-xcpe-botnet/"
+   },
+   {
+    "scene": 12,
+    "claim": "The backdoor ran at system level, the same level as the operating system itself.",
+    "problem": "Sources say x.cpe is a preloaded system app that runs with Android system privileges (android.uid.system). That is not the same as being part of the operating system or kernel. The phrasing overstates it.",
+    "fix": "The backdoor was preloaded as a system app with system-level privileges, so ordinary users cannot uninstall it.",
+    "source": "https://www.bleepingcomputer.com/news/security/google-disrupts-million-device-xcpe-android-malware-botnet-bans-tv-box-maker/"
+   },
+   {
+    "scene": 32,
+    "claim": "The takedown happened in late October... It warns that the markets for backdoors, ad fraud and residential proxies are resilient and work as an interconnected supply chain.",
+    "problem": "Google's own wording is that the takedown happened 'last week' (before the 2 November report). 'Late October' is a reasonable inference that some outlets repeat, but it is not Google's wording. Google describes the ecosystem as an interconnected supply chain and says lasting disruption needs continued effort. I found no source that uses the word 'resilient' for the markets.",
+    "fix": "Google says the takedown happened last week and published its report on 2 November. It warns that backdoor operators, ad-fraud rings and residential proxy providers work as an interconnected supply chain, and that lasting disruption needs continued effort.",
+    "source": "https://cloud.google.com/blog/topics/threat-intelligence/shutting-the-door-on-the-xcpe-botnet"
+   },
+   {
+    "scene": 6,
+    "claim": "It was used for huge attacks on websites... (Scene 8) thousands of devices request the same website at once",
+    "problem": "Mirai's best-known 2016 targets were the Krebs on Security site, the French host OVH and the DNS provider Dyn, which disrupted many sites indirectly. Mirai also involved hundreds of thousands of devices, not 'thousands'. This is simplified and understated rather than wrong.",
+    "fix": "It was used for record-breaking attacks in 2016, including on the Dyn DNS provider, which took many popular sites offline. Its code was leaked on 30 September 2016, and others copied it. Attacks use very large numbers of devices at once.",
+    "source": "https://censys.com/blog/mirai-and-its-heirs-a-decade-of-structural-neglect-in-iot-security/"
+   }
+  ]
+ },
+ "series": "EVERY HOW #03"
+}
