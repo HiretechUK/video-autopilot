@@ -217,6 +217,15 @@
    ],
    "emailed_at": "2026-11-02T17:50:21.866601+00:00",
    "skipped_by": "Haseeb, 2 Nov 2026 19:40 (topic, script and video not good enough)"
+  },
+  "IY-04": {
+   "series": "imagine_you",
+   "number": 4,
+   "title": "The Desert Mistake That Kills Before You Run Out of Water",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/IY-04.json",
+   "created": "2026-11-03T09:32:40.745623+00:00"
   }
  },
  "seen": [

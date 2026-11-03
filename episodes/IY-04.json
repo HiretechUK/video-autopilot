@@ -1,0 +1,268 @@
+{
+ "id": "desert-breakdown",
+ "title": "The Desert Mistake That Kills Before You Run Out of Water",
+ "description": "Your car dies in the desert, and two instincts could kill you faster than thirst: walking away, and hoarding your water. Then comes a twist that makes staying put a real gamble. Would you stay with the car or walk?",
+ "tags": [
+  "survival",
+  "desert",
+  "stranded",
+  "survival tips",
+  "what would you do",
+  "imagine you",
+  "car breakdown",
+  "dehydration"
+ ],
+ "series": "SURVIVE #04",
+ "voice": "am_michael",
+ "speed": 1.15,
+ "costume": "cap",
+ "hud": [
+  "DAY 1 \u00b7 12:40 PM",
+  "\u25cf ENGINE DEAD",
+  "WATER: FOUR LITERS"
+ ],
+ "scenes": [
+  {
+   "bg": "desert",
+   "pose": "stand",
+   "poses": [
+    "stand",
+    "shock"
+   ],
+   "x": 0.4,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "DAY 1 \u00b7 12:40 PM",
+    "\u25cf ENGINE DEAD",
+    "WATER: FOUR LITERS"
+   ],
+   "mood": "tense",
+   "narration": "Imagine you break down in the desert, and what kills most people isn't thirst. It's walking away from the car.",
+   "highlight": [
+    "walking away"
+   ]
+  },
+  {
+   "bg": "desert",
+   "pose": "stand",
+   "poses": [
+    "stand",
+    "phone",
+    "shock"
+   ],
+   "x": 0.45,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.15
+   },
+   "mood": "tense",
+   "narration": "Noon. A hundred and ten degrees. No traffic. No clouds. [pause] Your phone? No signal.",
+   "highlight": [
+    "No signal"
+   ]
+  },
+  {
+   "bg": "desert",
+   "pose": "point",
+   "poses": [
+    "point",
+    "walk",
+    "lookout"
+   ],
+   "x": 0.35,
+   "move_to": 0.6,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.12
+   },
+   "rule": {
+    "n": 1,
+    "text": "STAY WITH CAR",
+    "sub": "BIG = EASY TO SEE"
+   },
+   "mood": "urgent",
+   "narration": "Rule one: stay with the car. You see, a car is big shining metal searchers can spot from the air. A walking person is one ant on a parking lot.",
+   "highlight": [
+    "stay with the car"
+   ]
+  },
+  {
+   "bg": "desert",
+   "pose": "sit",
+   "poses": [
+    "sit",
+    "lookout",
+    "drink"
+   ],
+   "x": 0.55,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 1 \u00b7 03:30 PM",
+    "\u25cf WAITING IN SHADE",
+    "WATER: THREE LITERS"
+   ],
+   "mood": "tense",
+   "narration": "Hour three. You sit in the car's shadow, afraid to drink. One tiny sip an hour.",
+   "highlight": [
+    "tiny sip"
+   ]
+  },
+  {
+   "bg": "desert",
+   "pose": "think",
+   "poses": [
+    "think",
+    "sit",
+    "drink"
+   ],
+   "x": 0.5,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.15
+   },
+   "rule": {
+    "n": 2,
+    "text": "RATION SWEAT",
+    "sub": "NOT YOUR WATER"
+   },
+   "mood": "calm",
+   "narration": "Rule two: ration your sweat, not your water. You see, in dry air sweat vanishes instantly, like a bucket with a hole you can't see. So rest in shade, and drink when you're thirsty.",
+   "highlight": [
+    "sweat"
+   ]
+  },
+  {
+   "bg": "desert",
+   "pose": "shiver",
+   "poses": [
+    "shiver",
+    "cower"
+   ],
+   "x": 0.45,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 1 \u00b7 08:30 PM",
+    "\u25cf TEMPERATURE FALLING",
+    "WATER: TWO LITERS"
+   ],
+   "mood": "whisper",
+   "narration": "Evening. The heat drops fast, and the desert turns freezing. You shiver beside the car, and nobody comes.",
+   "highlight": [
+    "freezing"
+   ]
+  },
+  {
+   "bg": "desert",
+   "pose": "lookout",
+   "poses": [
+    "lookout",
+    "sit",
+    "think"
+   ],
+   "x": 0.5,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "DAY 2 \u00b7 10:00 AM",
+    "\u25cf STILL WAITING",
+    "WATER: ONE LITER"
+   ],
+   "mood": "tense",
+   "narration": "Day two. One liter left. Your lips crack. You scan the empty sky, and nothing moves.",
+   "highlight": [
+    "One liter"
+   ]
+  },
+  {
+   "bg": "desert",
+   "pose": "think",
+   "poses": [
+    "think",
+    "shock"
+   ],
+   "x": 0.5,
+   "props": [
+    "car"
+   ],
+   "fx": "flash",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.25
+   },
+   "mood": "reveal",
+   "narration": "Then it hits you. Yesterday you left the highway for a dirt shortcut, and you told no one. Nobody is searching here.",
+   "highlight": [
+    "told no one"
+   ]
+  },
+  {
+   "bg": "desert",
+   "pose": "stand",
+   "poses": [
+    "stand",
+    "point"
+   ],
+   "x": 0.4,
+   "props": [
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.12
+   },
+   "mood": "urgent",
+   "narration": "The highway is fifteen miles back. Do you stay with the car, or walk it tonight? Comment A or B.",
+   "highlight": [
+    "fifteen miles"
+   ],
+   "choice": {
+    "q": "WHAT DO YOU DO?",
+    "options": [
+     "A \u00b7 STAY WITH THE CAR",
+     "B \u00b7 WALK TO THE HIGHWAY"
+    ]
+   },
+   "hold_after": 2.0
+  }
+ ]
+}
