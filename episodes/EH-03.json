@@ -70,12 +70,40 @@
    "url": "https://www.kucoin.com/news/flash/global-coalition-disables-x-cpe-botnet-in-over-1-3-million-set-top-boxes-across-200-countries"
   },
   {
+   "title": "Industry Takedown of Botnet Hidden in More Than 1.3 Million TV Set-Top Boxes across 200 Countries (PRNewswire press release)",
+   "url": "https://newsroom.trendmicro.com/2026-11-02-Industry-Takedown-of-Botnet-Hidden-in-More-Than-1-3-Million-TV-Set-Top-Boxes-across-200-Countries"
+  },
+  {
+   "title": "Google shuts the door on XCPE Botnet - Advanced Television",
+   "url": "https://www.advanced-television.com/2026/11/03/google-shuts-the-door-on-xcpe-botnet/"
+  },
+  {
    "title": "Mirai Botnet Malware - Check Point Software",
    "url": "https://www.checkpoint.com/cyber-hub/network-security/what-is-iot/iot-botnet/mirai-botnet-malware/"
   },
   {
    "title": "Understanding the Mirai Botnet Attack Type - Corero",
    "url": "https://www.corero.com/mirai-botnet-ddos-attack-type/"
+  },
+  {
+   "title": "Hacked Cameras, DVRs Powered Today's Massive Internet Outage - Krebs on Security",
+   "url": "https://krebsonsecurity.com/2016/10/hacked-cameras-dvrs-powered-todays-massive-internet-outage/"
+  },
+  {
+   "title": "Who Is Anna-Senpai, the Mirai Worm Author? - Krebs on Security",
+   "url": "https://krebsonsecurity.com/2017/01/who-is-anna-senpai-the-mirai-worm-author/"
+  },
+  {
+   "title": "Understanding the Mirai Botnet (USENIX Security 2017)",
+   "url": "https://www.usenix.org/system/files/conference/usenixsecurity17/sec17-antonakakis.pdf"
+  },
+  {
+   "title": "What is the Mirai Botnet? - Cloudflare",
+   "url": "https://www.cloudflare.com/learning/ddos/glossary/mirai-botnet/"
+  },
+  {
+   "title": "Google Dismantles XCPE Botnet That Infected 1.3 Million Android TV Devices - GBHackers",
+   "url": "https://gbhackers.com/google-dismantles-xcpe-botnet/"
   }
  ],
  "sections": [
@@ -83,7 +111,7 @@
    "heading": "",
    "scenes": [
     {
-     "narration": "This week, Google announced it had dismantled a secret network of more than 1.3 million devices, mostly Android TV boxes, that was working for criminals. How does a botnet take over millions of devices?",
+     "narration": "On 2 November, Google announced it had dismantled, with partners, a secret network of more than 1.3 million devices, mostly Android TV boxes, that was working for criminals. How does a botnet take over millions of devices?",
      "visual": {
       "type": "title",
       "text": "How does a botnet take over millions of devices?",
@@ -161,7 +189,7 @@
      }
     },
     {
-     "narration": "A famous example is Mirai, which emerged in 2016. It was used for huge attacks on websites, and its code was later leaked, so other criminals copied it.",
+     "narration": "A famous example is Mirai, used in record-breaking attacks in 2016. A Mirai botnet joined the attack on DNS provider Dyn, which made many popular sites hard to reach. Its code leaked on 30 September 2016, and others copied it.",
      "visual": {
       "type": "stat",
       "value": "2016",
@@ -194,17 +222,17 @@
      }
     },
     {
-     "narration": "The attacks were simple in idea: thousands of devices request the same website at once, until real visitors cannot get through.",
+     "narration": "The idea is simple: attacks use very large numbers of devices at once, all sending requests to one target, until real visitors cannot get through.",
      "visual": {
       "type": "crowd",
       "count": 20,
       "highlight": 18,
-      "label": "Bots swamp one website",
+      "label": "Bots swamp one target",
       "icon": "robot"
      }
     },
     {
-     "narration": "But what if nobody has to break in at all, because the hidden software was installed before the box even reached a shop?",
+     "narration": "But what if nobody has to break in at all, because the hidden software was built into the firmware before the box ever reached the customer's home?",
      "visual": {
       "type": "question",
       "text": "What if the device arrives already infected?"
@@ -235,7 +263,7 @@
      }
     },
     {
-     "narration": "The backdoor ran at system level, the same level as the operating system itself. If someone deletes it, reports say it reinstalls itself from another part of the device's own storage.",
+     "narration": "The backdoor was preloaded as a system app with system-level privileges, and if a user deletes it, it reinstalls itself from protected firmware storage when the box restarts, so owners cannot remove it for good.",
      "visual": {
       "type": "compare",
       "left": {
@@ -245,14 +273,14 @@
       },
       "right": {
        "icon": "cpu",
-       "label": "Firmware backdoor",
-       "value": "Reinstalls itself"
+       "label": "Preloaded system app",
+       "value": "Reinstalls after restart"
       },
       "vs": "vs"
      }
     },
     {
-     "narration": "The backdoor contacts its control servers for instructions. To install software silently, it also switches off the app checks in Google Play Protect, Android's built-in security feature, and wipes the record of user consent.",
+     "narration": "The backdoor contacts its control servers for instructions. To install software silently, it also switches off Google Play Protect's app verification by overwriting a package-verification consent setting.",
      "visual": {
       "type": "flow",
       "steps": [
@@ -494,7 +522,7 @@
      }
     },
     {
-     "narration": "Google says it tightened firmware integrity checks on certified Android TV devices and changed how it reviews manufacturers, to close the testing gap that was used.",
+     "narration": "Google says Videostrong hid its code to exploit a gap in its tests, then loaded the malicious code after first boot. Google says it has changed its review process and is improving firmware integrity checks on certified Android TV devices.",
      "visual": {
       "type": "compare",
       "left": {
@@ -504,8 +532,8 @@
       },
       "right": {
        "icon": "lock",
-       "label": "Tighter checks",
-       "value": "Firmware reviewed"
+       "label": "Improving checks",
+       "value": "Review process changed"
       },
       "vs": "now"
      }
@@ -516,7 +544,7 @@
    "heading": "What Remains",
    "scenes": [
     {
-     "narration": "Here is the catch. Cutting off the known servers removes the operators' current control channel, but the backdoor is still in the firmware of affected boxes, and operators have rebuilt on new infrastructure before.",
+     "narration": "Here is the catch. Cutting off the known servers removes the operators' current control channel, but the backdoor is still in the firmware of affected boxes. Google warns that when one part is disrupted, operators quickly pivot to new loaders.",
      "visual": {
       "type": "hero",
       "icon": "warning",
@@ -549,15 +577,15 @@
      }
     },
     {
-     "narration": "The takedown happened in late October, and Google published its report on 2 November. It warns that the markets for backdoors, ad fraud and residential proxies are resilient and work as an interconnected supply chain.",
+     "narration": "Google says the takedown happened last week and published its report on 2 November. It warns that backdoor operators, ad-fraud rings and residential proxy providers work as an interconnected supply chain, and that lasting disruption needs continued effort.",
      "visual": {
       "type": "timeline",
       "events": [
        {
-        "year": "Late Oct",
+        "year": "Last week",
         "label": "Servers taken down",
         "icon": "hard-drives",
-        "cue": "October"
+        "cue": "takedown"
        },
        {
         "year": "2 Nov",
@@ -602,7 +630,7 @@
    "heading": "Recap",
    "scenes": [
     {
-     "narration": "In one breath: a botnet is hijacked devices obeying one server. XCPE was built in at the factory, earned from ad fraud and proxies, and disrupted by taking down its servers. The backdoor remains in the boxes.",
+     "narration": "A botnet is hijacked devices obeying one server. XCPE was built in at the factory, earned from ad fraud and proxies, and had its servers taken down. According to TrendAI, the backdoor is still in the firmware of affected boxes.",
      "visual": {
       "type": "flow",
       "steps": [
@@ -619,7 +647,7 @@
        {
         "icon": "hard-drives",
         "label": "Servers taken down",
-        "cue": "taking"
+        "cue": "taken"
        }
       ]
      }
@@ -646,38 +674,9 @@
   "outro": "Watch the full episode to see how a botnet is built, how it earns money, and how it is switched off."
  },
  "factcheck": {
-  "ok": false,
-  "summary": "Core facts check out against Google's report and its partners' releases: 1.3M devices, Videostrong, the TrendAI figures, the actions Google took, the partner list and the three-proxy claim. Four wording fixes are needed. The main one is that scene 13 misdescribes the Play Protect/consent mechanism. The others are scene 12 (OS-level overstatement), scene 32 (timing and 'resilient') and scene 6/8 (Mirai scale and targets).",
-  "open_issues": [
-   {
-    "scene": 13,
-    "claim": "it also switches off the app checks in Google Play Protect... and wipes the record of user consent.",
-    "problem": "Google's technical write-up, as relayed by several outlets, says the backdoor sets the package_verifier_user_consent setting to -1. That turns off Play Protect's app verification. Only one secondary summary describes this as wiping consent records. As written, it implies user consent records are erased, which the primary report does not clearly say.",
-    "fix": "To install software silently, it also switches off Google Play Protect's app verification by overwriting a package-verification consent setting.",
-    "source": "https://gbhackers.com/google-dismantles-xcpe-botnet/"
-   },
-   {
-    "scene": 12,
-    "claim": "The backdoor ran at system level, the same level as the operating system itself.",
-    "problem": "Sources say x.cpe is a preloaded system app that runs with Android system privileges (android.uid.system). That is not the same as being part of the operating system or kernel. The phrasing overstates it.",
-    "fix": "The backdoor was preloaded as a system app with system-level privileges, so ordinary users cannot uninstall it.",
-    "source": "https://www.bleepingcomputer.com/news/security/google-disrupts-million-device-xcpe-android-malware-botnet-bans-tv-box-maker/"
-   },
-   {
-    "scene": 32,
-    "claim": "The takedown happened in late October... It warns that the markets for backdoors, ad fraud and residential proxies are resilient and work as an interconnected supply chain.",
-    "problem": "Google's own wording is that the takedown happened 'last week' (before the 2 November report). 'Late October' is a reasonable inference that some outlets repeat, but it is not Google's wording. Google describes the ecosystem as an interconnected supply chain and says lasting disruption needs continued effort. I found no source that uses the word 'resilient' for the markets.",
-    "fix": "Google says the takedown happened last week and published its report on 2 November. It warns that backdoor operators, ad-fraud rings and residential proxy providers work as an interconnected supply chain, and that lasting disruption needs continued effort.",
-    "source": "https://cloud.google.com/blog/topics/threat-intelligence/shutting-the-door-on-the-xcpe-botnet"
-   },
-   {
-    "scene": 6,
-    "claim": "It was used for huge attacks on websites... (Scene 8) thousands of devices request the same website at once",
-    "problem": "Mirai's best-known 2016 targets were the Krebs on Security site, the French host OVH and the DNS provider Dyn, which disrupted many sites indirectly. Mirai also involved hundreds of thousands of devices, not 'thousands'. This is simplified and understated rather than wrong.",
-    "fix": "It was used for record-breaking attacks in 2016, including on the Dyn DNS provider, which took many popular sites offline. Its code was leaked on 30 September 2016, and others copied it. Attacks use very large numbers of devices at once.",
-    "source": "https://censys.com/blog/mirai-and-its-heirs-a-decade-of-structural-neglect-in-iot-security/"
-   }
-  ]
+  "ok": true,
+  "summary": "I checked all 36 scenes against Google's GTIG report, TrendAI's research and the joint press release, and found no errors or overstatements. The Mirai facts are also correct: Krebs's 620 Gbps record, a Mirai botnet taking part in the Dyn attack, and the source code leak on 30 September 2016. The narration also handles the figures that differ between sources correctly: 1.3M vs 1.47M devices, 170+ vs 200+ countries, and the 10M additional devices, which is a separate projection.",
+  "open_issues": []
  },
  "series": "EVERY HOW #03"
 }

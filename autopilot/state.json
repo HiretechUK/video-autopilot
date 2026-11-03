@@ -232,17 +232,27 @@
    "number": 3,
    "title": "How Does a Botnet Take Over Millions of Devices?",
    "status": "pending",
-   "version": 1,
+   "version": 2,
    "file": "episodes/EH-03.json",
    "created": "2026-11-03T11:37:36.890000+00:00",
    "private": {
-    "full": "I5cuLt5vIBY",
-    "short": "GCKzYTNlmaI",
+    "full": "Pf-3k26yFrM",
+    "short": "pOqEDzJpFFo",
     "thumbnail": "set",
-    "version": 1,
-    "minutes": 6.2,
-    "superseded": []
-   }
+    "version": 2,
+    "minutes": 6.5,
+    "superseded": [
+     "I5cuLt5vIBY",
+     "GCKzYTNlmaI"
+    ]
+   },
+   "notes": [
+    "CEO (3 Nov, on Haseeb's instruction to fix the open problems): apply every open fact-check fix listed in this episode's \"factcheck.open_issues\" exactly as written (scenes 13, 12, 32, and 6/8), using the \"fix\" wording for each. Change nothing else: same topic, structure, scenes and length. Re-check only the changed lines. The new version must have no open fact-check issues."
+   ],
+   "notes_files_done": [
+    "04fc0cc0e1"
+   ],
+   "emailed_at": "2026-11-03T21:31:08.023701+00:00"
   }
  },
  "seen": [
