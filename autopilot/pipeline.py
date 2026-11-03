@@ -211,6 +211,7 @@ def email_for_approval(ref: str, rec: dict, ep: dict, video):
     auto = (f"If you don't reply within {AUTO_APPROVE_H} hours it goes out automatically (it passed every check). "
             "Reply skip or with notes to stop that.\n\n") if auto_ok(rec, ep) else \
         ("This is a revised version, so it only goes out when you reply approved.\n\n" if rec.get("version", 1) > 1 else
+         "Nothing posts until you reply approved.\n\n" if os.environ.get("AUTO_APPROVE", "off") != "on" else
          "This one needs your reply before it goes out (it did not pass every automatic check).\n\n")
     v = rec.get("version", 1)
     subject = f"{SERIES[rec['series']]['name']} #{rec['number']:02d} for approval{' (v' + str(v) + ')' if v > 1 else ''} [{ref}]"

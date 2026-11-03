@@ -167,3 +167,23 @@ def test_approval_email_carries_both_every_how_videos(tmp_path):
 def test_every_how_email_attaches_videos():
     src = open("autopilot/pipeline.py").read()
     assert 'mailer.send(subject, auto + body, files)' in src
+
+
+def test_approval_wording_when_auto_approve_off(monkeypatch):
+    # IY-04 email said "did not pass every automatic check" only because auto-approve was off
+    monkeypatch.delenv("AUTO_APPROVE", raising=False)
+    sent = []
+    monkeypatch.setattr(pipeline.mailer, "send", lambda subj, body, *a: sent.append(body))
+    pipeline.email_for_approval("IY-99", {"series": "imagine_you", "number": 99}, {"title": "t", "scenes": []}, "IY-99.mp4")
+    assert "did not pass" not in sent[0] and "Nothing posts until you reply approved" in sent[0]
+
+
+def test_every_how_writer_has_rounds_to_clear_factcheck():
+    src = open("autopilot/writer_everyhow.py").read()
+    assert "range(6)" in src and "attempt < 5" in src
+
+
+def test_watchdog_publishes_health_for_ceo():
+    src = open("autopilot/watchdog.py").read()
+    assert "def health()" in src and '"release", "upload", "status"' in src
+    assert "contents: write" in open(".github/workflows/watchdog.yml").read()

@@ -154,5 +154,52 @@ def main():
                   f"(Video autopilot, Run workflow, cmd connect_instagram or connect_youtube). "
                   f"Runs: https://github.com/{REPO}/actions/workflows/video.yml")
 
+def health():
+    """Publish a run summary the CEO agent can read without the GitHub API (3 Nov 2026: its API calls were refused).
+    Uploaded as a release asset (no commits): releases/download/status/health.json"""
+    since = datetime.now(timezone.utc).timestamp() - 24 * 3600
+    out = {"updated": datetime.now(timezone.utc).isoformat(timespec="minutes"), "workflows": {}}
+    for wf in ("video.yml", "watchdog.yml", "analyst.yml", "tests.yml"):
+        runs = json.loads(gh("run", "list", "-w", wf, "-L", "80", "--json",
+                             "databaseId,status,conclusion,createdAt,event"))
+        recent = [r for r in runs if datetime.fromisoformat(r["createdAt"].replace("Z", "+00:00")).timestamp() >= since]
+        failed = []
+        for r in recent:
+            if r["conclusion"] == "failure":
+                step = ""
+                try:
+                    jobs = json.loads(gh("run", "view", str(r["databaseId"]), "--json", "jobs"))["jobs"]
+                    step = next((s["name"] for j in jobs for s in j.get("steps", []) if s.get("conclusion") == "failure"), "")
+                except Exception:
+                    pass
+                failed.append({"at": r["createdAt"], "id": r["databaseId"], "event": r["event"], "failed_step": step,
+                               "url": f"https://github.com/{REPO}/actions/runs/{r['databaseId']}"})
+        out["workflows"][wf] = {"runs_24h": len(recent),
+                                "succeeded_24h": sum(r["conclusion"] == "success" for r in recent),
+                                "failed_24h": failed,
+                                "last_run": runs[0]["createdAt"] if runs else None,
+                                "last_result": (runs[0]["conclusion"] or runs[0]["status"]) if runs else None}
+    try:
+        commits = json.loads(subprocess.run(["gh", "api", f"repos/{REPO}/commits?per_page=40"], capture_output=True,
+                                            text=True, check=True).stdout)
+        out["commits_24h"] = [f"{c['commit']['author']['date'][:16]} {c['commit']['author']['name']}: "
+                              f"{c['commit']['message'].splitlines()[0][:140]}" for c in commits
+                              if datetime.fromisoformat(c["commit"]["author"]["date"].replace("Z", "+00:00")).timestamp() >= since]
+    except Exception as e:
+        out["commits_24h_error"] = str(e)[:200]
+    path = os.path.join(ROOT, "health.json")
+    json.dump(out, open(path, "w"), indent=1)
+    if subprocess.run(["gh", "release", "view", "status", "-R", REPO], capture_output=True).returncode:
+        subprocess.run(["gh", "release", "create", "status", "-R", REPO, "--title", "Status",
+                        "--notes", "health.json: run summary for the CEO agent, updated hourly by the watchdog."])
+    subprocess.run(["gh", "release", "upload", "status", path, "--clobber", "-R", REPO], check=True)
+    print("health.json published")
+    return out
+
+
 if __name__ == "__main__":
     main()
+    try:
+        health()
+    except Exception as e:
+        print("health.json failed:", e)

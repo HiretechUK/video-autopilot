@@ -10,7 +10,7 @@ on:
 
 permissions:
   actions: write
-  contents: read
+  contents: write  # health.json is uploaded to the "status" release
 
 concurrency:
   group: video-watchdog

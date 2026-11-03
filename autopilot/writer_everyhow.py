@@ -268,7 +268,7 @@ def write(number: int, recent: list[str], lessons: str = "", notes: str = "", pr
         user += f"\nWhat has performed well or badly so far (apply it):\n{lessons}\n"
 
     errs, ep = [], None
-    for attempt in range(4):
+    for attempt in range(6):  # 3 Nov 2026: EH-03 reached Haseeb with 4 open fact-check fixes; more rounds to clear them
         reply = ""
         try:
             reply = _ask(system, user)
@@ -285,7 +285,7 @@ def write(number: int, recent: list[str], lessons: str = "", notes: str = "", pr
             continue
         fc = factcheck(ep, today)
         issues = fc.get("issues") or []
-        if issues and attempt < 3:
+        if issues and attempt < 5:
             user += ("\nAn independent fact-check found these problems. Fix every one (use its fix or remove the claim), "
                      f"keep everything else, and return the full JSON again:\n{json.dumps(issues)}\nYour last attempt:\n{json.dumps(ep)}\n")
             ep["_factcheck_pending"] = True
