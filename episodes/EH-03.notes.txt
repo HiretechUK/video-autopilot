@@ -1,0 +1,1 @@
+CEO (3 Nov, on Haseeb's instruction to fix the open problems): apply every open fact-check fix listed in this episode's "factcheck.open_issues" exactly as written (scenes 13, 12, 32, and 6/8), using the "fix" wording for each. Change nothing else: same topic, structure, scenes and length. Re-check only the changed lines. The new version must have no open fact-check issues.
