@@ -291,7 +291,7 @@
    "series": "every_how",
    "number": 5,
    "title": "How Will the Midterms Shape the Rest of Trump's Presidency?",
-   "status": "pending",
+   "status": "published",
    "version": 1,
    "file": "episodes/EH-05.json",
    "created": "2026-11-04T10:09:57.587+00:00",
@@ -303,17 +303,29 @@
     "minutes": 5.5,
     "superseded": []
    },
-   "emailed_at": "2026-11-04T10:26:21.180827+00:00"
+   "emailed_at": "2026-11-04T10:26:21.180827+00:00",
+   "approved": "2026-11-04T12:31:40.110446+00:00",
+   "links": {
+    "youtube": "https://youtube.com/watch?v=RstYnn3r7ds",
+    "youtube_short": "https://youtube.com/watch?v=bOQl08p6CT0"
+   }
   },
   "IY-06": {
    "series": "imagine_you",
    "number": 6,
    "title": "Why You Shouldn't Look Out the Window After a Nuclear Flash",
-   "status": "pending",
+   "status": "published",
    "version": 1,
    "file": "episodes/IY-06.json",
    "created": "2026-11-04T10:09:57.587+00:00",
-   "emailed_at": "2026-11-04T11:42:07.376017+00:00"
+   "emailed_at": "2026-11-04T11:42:07.376017+00:00",
+   "approved": "2026-11-04T12:31:41.203472+00:00",
+   "links": {
+    "youtube": "https://youtube.com/watch?v=Zpns0VrWFRA",
+    "thumbnail": "set",
+    "instagram": "https://www.instagram.com/reel/DfUd2tIhfQv/",
+    "facebook": "https://www.facebook.com/reel/4372091849787558"
+   }
   }
  },
  "seen": [
@@ -322,6 +334,8 @@
   "<AM9P194MB14598A77709262A9EDF78ECAA66B2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
   "<AM9P194MB1459EA7C0CD75490EF436449A66A2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
   "<AM9P194MB14592DDB872E36278672CE70A66A2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
-  "<AM9P194MB1459E6137FBEB168E86F38CBA6682@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>"
+  "<AM9P194MB1459E6137FBEB168E86F38CBA6682@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
+  "<CANa5RAoVso_fTCyaeG84T-zO7B2mdmo5uuauZNLWSvQn1z---w@mail.gmail.com>",
+  "<CANa5RAqDfLAjq9fKsA=B6ZnO4bp9vuJAQYpkfckqE+eD33h8BA@mail.gmail.com>"
  ]
 }
