@@ -1,0 +1,287 @@
+{
+ "id": "lost-in-woods-ground-heat",
+ "title": "Why Getting Lost in the Woods Kills You Through the Ground",
+ "description": "You're lost in a forest at dusk with a dead phone and 41 degrees coming. Two real rules decide whether you're found, and one twist explains why you never found the road. Wait in the car, or keep the fires burning?",
+ "tags": [
+  "survival",
+  "lost in the woods",
+  "hypothermia",
+  "survival tips",
+  "search and rescue",
+  "three fires signal",
+  "imagine you",
+  "wilderness survival"
+ ],
+ "series": "SURVIVE #05",
+ "voice": "am_michael",
+ "speed": 1.15,
+ "costume": "cap",
+ "hud": [
+  "06:40 PM \u00b7 DUSK",
+  "\u25cf LOST IN THE FOREST",
+  "TEMP 52\u00b0F"
+ ],
+ "scenes": [
+  {
+   "bg": "forest_night",
+   "pose": "stand",
+   "poses": [
+    "stand",
+    "lookout"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "06:40 PM \u00b7 DUSK",
+    "\u25cf LOST IN THE FOREST",
+    "TEMP 52\u00b0F"
+   ],
+   "mood": "tense",
+   "narration": "Imagine you're lost in a forest at dusk, and the thing that kills most people out there isn't an animal. It's the ground.",
+   "highlight": [
+    "ground"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "phone",
+   "poses": [
+    "phone",
+    "shock",
+    "walk"
+   ],
+   "x": 0.3,
+   "move_to": 0.6,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.15
+   },
+   "mood": "urgent",
+   "narration": "Six forty p.m. Your phone? Dead. The trail? Gone. So you do what everyone does, and walk faster.",
+   "highlight": [
+    "Dead",
+    "Gone"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "stand",
+   "poses": [
+    "stand",
+    "think"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.12
+   },
+   "rule": {
+    "n": 1,
+    "text": "STOP WALKING",
+    "sub": "SEARCH GROWS"
+   },
+   "mood": "calm",
+   "narration": "Rule one: stop walking. You see, searchers start from where you were last seen, and every step you take makes their search circle bigger.",
+   "highlight": [
+    "stop walking"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "sit",
+   "poses": [
+    "think",
+    "sit"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "mood": "tense",
+   "narration": "Stay put and you're a dot on a map. Wander, and you're a whole forest.",
+   "highlight": [
+    "dot",
+    "forest"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "shiver",
+   "poses": [
+    "sit",
+    "shiver",
+    "cower"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "09:00 PM \u00b7 NIGHT",
+    "\u25cf SITTING ON BARE DIRT",
+    "TEMP 41\u00b0F"
+   ],
+   "mood": "whisper",
+   "narration": "Nine p.m. Forty-one degrees. Your whole body starts to shake, and the cold isn't coming from the air.",
+   "highlight": [
+    "Forty-one"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "kneel",
+   "poses": [
+    "kneel",
+    "build",
+    "sit"
+   ],
+   "x": 0.4,
+   "move_to": 0.55,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.15
+   },
+   "rule": {
+    "n": 2,
+    "text": "GET OFF GROUND",
+    "sub": "SOIL STEALS HEAT"
+   },
+   "mood": "urgent",
+   "narration": "Rule two: get off the ground. You see, soil pulls heat out of your body faster than air does, like touching a metal bench instead of a wooden one.",
+   "highlight": [
+    "get off the ground"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "build",
+   "poses": [
+    "build",
+    "reach",
+    "sit"
+   ],
+   "x": 0.5,
+   "props": [
+    "fire_triangle"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.15
+   },
+   "hud": [
+    "12:00 AM \u00b7 MIDNIGHT",
+    "\u25cf THREE FIRES LIT",
+    "TEMP 36\u00b0F"
+   ],
+   "mood": "tense",
+   "narration": "Midnight. You light one fire... then two more, in a triangle. Three fires is the international signal for help.",
+   "highlight": [
+    "Three fires"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "shock",
+   "poses": [
+    "sit",
+    "lookout",
+    "shock"
+   ],
+   "x": 0.35,
+   "props": [
+    "fire_triangle",
+    "car"
+   ],
+   "fx": "flash",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "03:00 AM \u00b7 HOUR NINE",
+    "\u25cf THE TWIST",
+    "CAR: 40 STEPS AWAY"
+   ],
+   "mood": "reveal",
+   "narration": "Three a.m. Your fires flare, and you turn around. There it is: your car, forty steps away. All night, you were walking in circles.",
+   "highlight": [
+    "car",
+    "circles"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "think",
+   "poses": [
+    "think",
+    "point"
+   ],
+   "x": 0.4,
+   "props": [
+    "fire_triangle",
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "mood": "calm",
+   "narration": "It's real: with no sun or landmarks, people drift in circles without knowing. Your car was never far.",
+   "highlight": [
+    "circles"
+   ]
+  },
+  {
+   "bg": "forest_night",
+   "pose": "stand",
+   "poses": [
+    "stand",
+    "lookout",
+    "think"
+   ],
+   "x": 0.45,
+   "props": [
+    "fire_triangle",
+    "car"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.15
+   },
+   "mood": "tense",
+   "narration": "Rescue is hours away. Do you wait inside the car for shelter, or keep the fires burning so searchers spot the smoke? Comment A or B.",
+   "highlight": [
+    "car",
+    "fires"
+   ],
+   "choice": {
+    "q": "WHAT DO YOU DO?",
+    "options": [
+     "A \u00b7 WAIT IN THE CAR",
+     "B \u00b7 KEEP THE FIRES GOING"
+    ]
+   },
+   "hold_after": 2.0
+  }
+ ]
+}

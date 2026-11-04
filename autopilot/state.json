@@ -253,6 +253,15 @@
     "04fc0cc0e1"
    ],
    "emailed_at": "2026-11-03T21:31:08.023701+00:00"
+  },
+  "IY-05": {
+   "series": "imagine_you",
+   "number": 5,
+   "title": "Why Getting Lost in the Woods Kills You Through the Ground",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/IY-05.json",
+   "created": "2026-11-04T04:32:12.436667+00:00"
   }
  },
  "seen": [
