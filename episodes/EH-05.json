@@ -1,0 +1,639 @@
+{
+ "title": "How Will the Midterms Shape the Rest of Trump's Presidency?",
+ "question": "How will the 2026 midterm results shape the rest of Donald Trump's presidency?",
+ "description": "Democrats won both houses of the US Congress in the 3 November 2026 midterms. Here is what that means for vetoes, budgets, judges, investigations and executive orders over Donald Trump's final two years, with the arguments from both parties. Will divided government bring compromise or gridlock?",
+ "tags": [
+  "midterms 2026",
+  "midterm election results",
+  "Trump",
+  "Congress",
+  "divided government",
+  "Senate",
+  "House of Representatives",
+  "veto",
+  "impeachment",
+  "US politics",
+  "how it works",
+  "every how"
+ ],
+ "ad_safety": {
+  "rating": "yellow",
+  "reason": "A divisive political topic the day after an election; handled neutrally with both parties' views attributed, but it may still get limited ads."
+ },
+ "sources": [
+  {
+   "title": "NPR: Democrats win full control of Congress, ushering in a new era of divided government",
+   "url": "https://www.npr.org/2026/11/03/g-s1-149526/2026-midterms-congress-balance-of-power"
+  },
+  {
+   "title": "NBC News: Democrats win control of the House and vow to keep Trump in check",
+   "url": "https://www.nbcnews.com/politics/2026-election/democrats-house-control-midterm-election-wins-trump-check-rcna603397"
+  },
+  {
+   "title": "TIME: Democrats Win House and Senate, live election updates",
+   "url": "https://time.com/article/2026/11/03/midterm-elections-2026-key-races-live-results-polls-latest-news-updates/"
+  },
+  {
+   "title": "PBS NewsHour: Democrats take control of the Senate after winning key midterm races",
+   "url": "https://www.pbs.org/newshour/politics/democrats-take-control-of-the-senate-after-winning-key-midterm-races"
+  },
+  {
+   "title": "PBS NewsHour live updates: a look at recent midterm results",
+   "url": "https://www.pbs.org/newshour/politics/live-updates-midterm-voters-go-to-the-polls-on-election-day"
+  },
+  {
+   "title": "Reuters: US midterms 2026 live",
+   "url": "https://www.reuters.com/live/us-midterm-elections-2026-live-american-voters-cast-verdict-trump-congress-2026-11-03/"
+  },
+  {
+   "title": "US Constitution, Article I, Section 7 (veto override) and Article I, Sections 2-3 (impeachment)",
+   "url": "https://constitution.congress.gov/constitution/article-1/"
+  },
+  {
+   "title": "US Constitution, 20th and 22nd Amendments",
+   "url": "https://constitution.congress.gov/constitution/amendment-22/"
+  },
+  {
+   "title": "Encyclopaedia Britannica: Cohabitation (French politics)",
+   "url": "https://www.britannica.com/topic/cohabitation-French-politics"
+  }
+ ],
+ "sections": [
+  {
+   "heading": "",
+   "scenes": [
+    {
+     "narration": "How will the midterms shape the rest of Donald Trump's presidency? Overnight, American voters handed both houses of Congress to the opposition Democrats.",
+     "visual": {
+      "type": "title",
+      "text": "How will the midterms shape Trump's last two years?",
+      "icon": "bank",
+      "sub": "US midterms, 3 November 2026"
+     }
+    },
+    {
+     "narration": "By early Wednesday, The Associated Press tally gave Democrats the House and at least fifty-two Senate seats, plus two independents who usually vote with them.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "bank",
+       "label": "Democrats + independents",
+       "value": "54"
+      },
+      "right": {
+       "icon": "bank",
+       "label": "Republicans",
+       "value": "44"
+      },
+      "vs": "Senate seats called"
+     }
+    },
+    {
+     "narration": "So for the next two years, the president and the lawmakers who write the laws come from rival parties. Here is how that changes what Trump can and cannot do.",
+     "visual": {
+      "type": "question",
+      "text": "What can a president do without Congress?"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "What happened",
+   "scenes": [
+    {
+     "narration": "Every two years, all 435 seats in the House of Representatives and about a third of the 100 Senate seats are up for election.",
+     "visual": {
+      "type": "bars",
+      "title": "Seats on the ballot",
+      "items": [
+       {
+        "label": "House",
+        "value": 435
+       },
+       {
+        "label": "Senate total",
+        "value": 100
+       },
+       {
+        "label": "Senate up",
+        "value": 35
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Before the vote, Republicans held the Senate fifty-three to forty-seven. Democrats flipped seven seats, including Texas, Ohio, North Carolina and Maine.",
+     "visual": {
+      "type": "list",
+      "heading": "Senate seats flipped",
+      "items": [
+       {
+        "icon": "flag",
+        "text": "Texas",
+        "cue": "Texas"
+       },
+       {
+        "icon": "flag",
+        "text": "Ohio",
+        "cue": "Ohio"
+       },
+       {
+        "icon": "flag",
+        "text": "North Carolina",
+        "cue": "North"
+       },
+       {
+        "icon": "flag",
+        "text": "Maine",
+        "cue": "Maine"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "In Texas, James Talarico beat Ken Paxton, making him the first Democrat to win a statewide race there in more than thirty years.",
+     "visual": {
+      "type": "hero",
+      "icon": "star",
+      "label": "Texas Senate flips",
+      "sub": "First statewide Democratic win in 30+ years"
+     }
+    },
+    {
+     "narration": "In the House, NBC News projects Democrats will hold around 255 seats, well past the 218 needed for a majority. A few races are still being counted.",
+     "visual": {
+      "type": "stat",
+      "value": "~255",
+      "label": "Projected Democratic House seats",
+      "icon": "bank",
+      "fraction": 0.59
+     }
+    },
+    {
+     "narration": "Midterms usually punish the president's party. In 2018, during Trump's first term, Democrats gained forty House seats. In 2006, under George W. Bush, they took both chambers.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "2006",
+        "label": "Bush loses both chambers",
+        "icon": "calendar",
+        "cue": "2006"
+       },
+       {
+        "year": "2018",
+        "label": "Trump loses the House",
+        "icon": "calendar",
+        "cue": "2018"
+       },
+       {
+        "year": "2026",
+        "label": "Trump loses both",
+        "icon": "calendar-check",
+        "cue": "midterms"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Campaigns focused on the cost of living and on corruption claims, and Trump's approval rating went into election day below forty percent.",
+     "visual": {
+      "type": "stat",
+      "value": "<40%",
+      "label": "Trump approval before the vote",
+      "icon": "gauge",
+      "fraction": 0.4
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The veto wall",
+   "scenes": [
+    {
+     "narration": "The new Congress is sworn in on 3 January 2027. From then on, nothing Trump wants can become law unless both chambers pass it.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "scroll",
+        "label": "House passes",
+        "cue": "House"
+       },
+       {
+        "icon": "scroll",
+        "label": "Senate passes",
+        "cue": "Senate"
+       },
+       {
+        "icon": "pen",
+        "label": "President signs",
+        "cue": "signs"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "It works the other way too. Democrats can pass bills, but the president can veto them, and overriding a veto takes two-thirds of both chambers.",
+     "visual": {
+      "type": "crowd",
+      "count": 30,
+      "highlight": 20,
+      "label": "Two-thirds needed to override a veto",
+      "icon": "user"
+     }
+    },
+    {
+     "narration": "Democrats do not have anywhere near two-thirds. So most of their agenda, on health costs, tariffs and redistricting, is likely to stop at the president's desk.",
+     "visual": {
+      "type": "hero",
+      "icon": "prohibit",
+      "label": "Veto",
+      "sub": "Bills stop at the president's desk"
+     }
+    },
+    {
+     "narration": "Trump saw this coming. In a podcast interview the day before the vote, he said:",
+     "visual": {
+      "type": "question",
+      "text": "So what did Trump say he would do?"
+     }
+    },
+    {
+     "narration": "I'll become Mr. Veto, and then at some point we'll probably make deals.",
+     "visual": {
+      "type": "quote",
+      "text": "I'll become Mr. Veto, and then at some point we'll probably make deals.",
+      "who": "Donald Trump, Pod Force One, 2 Nov 2026"
+     }
+    },
+    {
+     "narration": "That is the usual pattern of divided government: long standoffs, then narrow deals on the few things both sides need.",
+     "visual": {
+      "type": "cycle",
+      "center": "Divided government",
+      "steps": [
+       {
+        "icon": "warning",
+        "label": "Standoff"
+       },
+       {
+        "icon": "clock",
+        "label": "Deadline"
+       },
+       {
+        "icon": "handshake",
+        "label": "Narrow deal"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Money and deadlines",
+   "scenes": [
+    {
+     "narration": "The biggest of those is money. Congress must pass twelve annual spending bills, or a deal covering them, to keep the federal government open.",
+     "visual": {
+      "type": "stat",
+      "value": "12",
+      "label": "Annual spending bills",
+      "icon": "currency-dollar"
+     }
+    },
+    {
+     "narration": "The US budget year starts on 1 October. If no spending law is signed by then, parts of the government shut down.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "1 Oct",
+        "label": "Budget year starts",
+        "icon": "calendar"
+       },
+       {
+        "year": "No deal",
+        "label": "Shutdown risk",
+        "icon": "warning"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "With a Democratic Congress and a Republican president, both sides hold a veto over the other's priorities, so every deadline becomes a bargaining chip.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "bank",
+       "label": "Congress controls spending"
+      },
+      "right": {
+       "icon": "house",
+       "label": "President signs or vetoes"
+      },
+      "vs": "vs"
+     }
+    },
+    {
+     "narration": "The national borrowing limit, the debt ceiling, was raised by five trillion dollars in July 2025, which may push that particular fight further down the road.",
+     "visual": {
+      "type": "stat",
+      "value": "$5 trillion",
+      "label": "Debt limit increase, July 2025",
+      "icon": "currency-dollar"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Judges and nominees",
+   "scenes": [
+    {
+     "narration": "The Senate has a power the House does not: it confirms judges, Cabinet members and other top officials. It takes a simple majority.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "user",
+        "label": "President nominates",
+        "cue": "nominates"
+       },
+       {
+        "icon": "gavel",
+        "label": "Senate votes",
+        "cue": "majority"
+       },
+       {
+        "icon": "seal-check",
+        "label": "Confirmed"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "With Democrats running the Senate, NPR reports, the steady confirmation of Trump-nominated judges is expected to slow sharply.",
+     "visual": {
+      "type": "hero",
+      "icon": "gavel",
+      "label": "Judicial confirmations",
+      "sub": "Expected to slow sharply"
+     }
+    },
+    {
+     "narration": "Federal judges serve for life, so every seat filled or left empty shapes American law for decades, long after this presidency ends.",
+     "visual": {
+      "type": "zoom",
+      "icon": "scales",
+      "label": "A federal court seat",
+      "inner_icon": "hourglass",
+      "inner_label": "Lifetime appointment"
+     }
+    },
+    {
+     "narration": "Any new Cabinet nominee will now need at least a handful of Democratic votes to be confirmed.",
+     "visual": {
+      "type": "crowd",
+      "count": 20,
+      "highlight": 3,
+      "label": "A handful of Democratic votes needed",
+      "icon": "user"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Investigations",
+   "scenes": [
+    {
+     "narration": "Control of the House means control of its committees, and committees can issue subpoenas: legal orders to hand over documents or testify.",
+     "visual": {
+      "type": "zoom",
+      "icon": "bank",
+      "label": "House majority",
+      "inner_icon": "magnifying-glass",
+      "inner_label": "Committees with subpoena power"
+     }
+    },
+    {
+     "narration": "Democrats say they will investigate the president's family business deals, cryptocurrency ventures, immigration enforcement and the independence of the Justice Department.",
+     "visual": {
+      "type": "list",
+      "heading": "Planned investigations",
+      "items": [
+       {
+        "icon": "currency-dollar",
+        "text": "Family business deals",
+        "cue": "business"
+       },
+       {
+        "icon": "coins",
+        "text": "Crypto ventures",
+        "cue": "cryptocurrency"
+       },
+       {
+        "icon": "police-car",
+        "text": "Immigration enforcement",
+        "cue": "immigration"
+       },
+       {
+        "icon": "scales",
+        "text": "Justice Department",
+        "cue": "Justice"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "What about impeachment? The House can impeach with a simple majority, but removing a president needs a two-thirds vote in the Senate.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "bank",
+       "label": "House: impeach",
+       "value": "50%+1"
+      },
+      "right": {
+       "icon": "gavel",
+       "label": "Senate: remove",
+       "value": "67 votes"
+      },
+      "vs": "vs"
+     }
+    },
+    {
+     "narration": "No president has ever been removed that way. House Democratic leader Hakeem Jeffries says his party has not ruled impeachment in or out.",
+     "visual": {
+      "type": "question",
+      "text": "Impeachment: ruled in or out?"
+     }
+    },
+    {
+     "narration": "Republicans see the coming investigations differently. Senate Republican leader John Thune wrote early on Wednesday:",
+     "visual": {
+      "type": "hero",
+      "icon": "megaphone",
+      "label": "The Republican view",
+      "sub": "Defend the record of the last two years"
+     }
+    },
+    {
+     "narration": "Senate Republicans will not stand idly by as the far-left, socialist wing of the Democrat Party attempts to unwind everything we've done.",
+     "visual": {
+      "type": "quote",
+      "text": "Senate Republicans will not stand idly by as the far-left, socialist wing of the Democrat Party attempts to unwind everything we've done.",
+      "who": "John Thune, Senate Republican leader, 4 Nov 2026"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Going it alone",
+   "scenes": [
+    {
+     "narration": "Blocked in Congress, presidents usually lean harder on executive orders: instructions to government agencies that do not need a vote.",
+     "visual": {
+      "type": "hero",
+      "icon": "pen",
+      "label": "Executive orders",
+      "sub": "Instructions that skip Congress"
+     }
+    },
+    {
+     "narration": "Congress can cancel an order by passing a law, but the president can veto that law too. So the real check on executive orders is usually the courts.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "pen",
+        "label": "Order signed"
+       },
+       {
+        "icon": "bank",
+        "label": "Congress objects"
+       },
+       {
+        "icon": "prohibit",
+        "label": "Veto"
+       },
+       {
+        "icon": "gavel",
+        "label": "Courts decide",
+        "cue": "courts"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Other democracies know this tension well. In France, a president facing a hostile parliament is called cohabitation, and it has happened three times since 1986.",
+     "visual": {
+      "type": "map",
+      "countries": [
+       "United States of America",
+       "France"
+      ],
+      "label": "Split power: US and France"
+     }
+    },
+    {
+     "narration": "For the rest of the world, the practical effect is that Washington's big new policies, on trade, aid or war, now need either a deal or a signature.",
+     "visual": {
+      "type": "map",
+      "countries": [
+       "United States of America"
+      ],
+      "label": "Global effects of a split Washington",
+      "zoom": "world"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The road to 2028",
+   "scenes": [
+    {
+     "narration": "Trump's second term ends on 20 January 2029, and the US Constitution bars him from a third. These two years become the opening act of 2028.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "Jan 2027",
+        "label": "New Congress sworn in",
+        "icon": "calendar"
+       },
+       {
+        "year": "Nov 2028",
+        "label": "Presidential election",
+        "icon": "flag"
+       },
+       {
+        "year": "Jan 2029",
+        "label": "Term ends",
+        "icon": "calendar-check"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Democrats will try to show they can govern. Republicans will argue that a hostile Congress is blocking the president's agenda. Voters will judge both in 2028.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "megaphone",
+       "label": "Democrats: we can deliver"
+      },
+      "right": {
+       "icon": "megaphone",
+       "label": "Republicans: they are blocking"
+      },
+      "vs": "vs"
+     }
+    },
+    {
+     "narration": "So: one election, and for the next two years the president needs his opponents for almost every new law, budget and nominee.",
+     "visual": {
+      "type": "list",
+      "heading": "Recap",
+      "items": [
+       {
+        "icon": "prohibit",
+        "text": "Vetoes and deals"
+       },
+       {
+        "icon": "currency-dollar",
+        "text": "Budget standoffs"
+       },
+       {
+        "icon": "gavel",
+        "text": "Fewer confirmations"
+       },
+       {
+        "icon": "magnifying-glass",
+        "text": "Investigations"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Here is the question for you. Will divided government force compromise, or just two years of gridlock? Tell us in the comments.",
+     "visual": {
+      "type": "question",
+      "text": "Compromise or gridlock?"
+     }
+    }
+   ]
+  }
+ ],
+ "short": {
+  "scenes": [
+   1,
+   2,
+   11,
+   14,
+   25,
+   26
+  ],
+  "outro": "For the full story of what a split Washington means for the next two years, watch the whole episode."
+ },
+ "series": "EVERY HOW #05"
+}
