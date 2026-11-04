@@ -312,7 +312,8 @@
    "status": "pending",
    "version": 1,
    "file": "episodes/IY-06.json",
-   "created": "2026-11-04T10:09:57.587+00:00"
+   "created": "2026-11-04T10:09:57.587+00:00",
+   "emailed_at": "2026-11-04T11:42:07.376017+00:00"
   }
  },
  "seen": [
