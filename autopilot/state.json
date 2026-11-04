@@ -258,10 +258,34 @@
    "series": "imagine_you",
    "number": 5,
    "title": "Why Getting Lost in the Woods Kills You Through the Ground",
-   "status": "pending",
+   "status": "published",
    "version": 1,
    "file": "episodes/IY-05.json",
-   "created": "2026-11-04T04:32:12.436667+00:00"
+   "created": "2026-11-04T04:32:12.436667+00:00",
+   "approved": "2026-11-04T06:03:36.206565+00:00",
+   "links": {
+    "youtube": "https://youtube.com/watch?v=IiNVhreNKEA",
+    "thumbnail": "set",
+    "instagram": "https://www.instagram.com/reel/DfTxZS9RKS_/",
+    "facebook": "https://www.facebook.com/reel/4642259635995832"
+   }
+  },
+  "EH-04": {
+   "series": "every_how",
+   "number": 4,
+   "title": "How Does Voyager 1 Still Phone Home From a Light-Day Away?",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/EH-04.json",
+   "created": "2026-11-04T06:15:19.402624+00:00",
+   "private": {
+    "full": "zjHZGsQPr5U",
+    "short": "tFxvb4L-SvU",
+    "thumbnail": "set",
+    "version": 1,
+    "minutes": 5.9,
+    "superseded": []
+   }
   }
  },
  "seen": [
@@ -269,6 +293,7 @@
   "<AM9P194MB1459C14F4427A440940A7E7AA66D2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
   "<AM9P194MB14598A77709262A9EDF78ECAA66B2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
   "<AM9P194MB1459EA7C0CD75490EF436449A66A2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
-  "<AM9P194MB14592DDB872E36278672CE70A66A2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>"
+  "<AM9P194MB14592DDB872E36278672CE70A66A2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
+  "<AM9P194MB1459E6137FBEB168E86F38CBA6682@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>"
  ]
 }

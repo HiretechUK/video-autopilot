@@ -1,0 +1,655 @@
+{
+ "title": "How Does Voyager 1 Still Phone Home From a Light-Day Away?",
+ "question": "How does Voyager 1 still talk to Earth from one light-day away?",
+ "description": "On 18 November 2026, a 49-year-old spacecraft is due to become the first human-made object one full light-day from Earth. It is still talking to us with a radio about as powerful as a refrigerator bulb. Find out how a whisper that faint crosses 26 billion kilometres, how giant dishes on three continents catch it, and how engineers keep the old probe alive. If NASA has to choose, should Voyager's last instruments run for longer, or should the radio stay alive for longer?",
+ "tags": [
+  "Voyager 1",
+  "light-day",
+  "Deep Space Network",
+  "NASA",
+  "interstellar space",
+  "how spacecraft communicate",
+  "space probe",
+  "radio signals",
+  "plutonium power",
+  "space explained",
+  "Voyager 2",
+  "JPL"
+ ],
+ "ad_safety": {
+  "rating": "green",
+  "reason": "Science and space-engineering explainer with no violence, tragedy or divisive politics."
+ },
+ "sources": [
+  {
+   "title": "NASA Science: November's Night Sky Notes: Light-Day Away",
+   "url": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/novembers-night-sky-notes-light-day-away/"
+  },
+  {
+   "title": "ScienceDaily / NASA JPL: NASA's Voyager 1 is about to reach a historic one-light-day milestone (3 Nov 2026)",
+   "url": "https://www.sciencedaily.com/releases/2026/11/261103003152.htm"
+  },
+  {
+   "title": "Astrobiology.com (NASA JPL release): Voyager 1 Conserves Power, Resolves Brief Communications Pause (30 Oct 2026)",
+   "url": "https://astrobiology.com/2026/10/30/voyager-1-interstellar-probe-conserves-power-resolves-brief-communications-pause/"
+  },
+  {
+   "title": "NASA JPL: NASA's Voyager 1 Conserves Power, Resolves Brief Communications Pause",
+   "url": "https://www.jpl.nasa.gov/news/nasas-voyager-1-conserves-power-resolves-brief-communications-pause/"
+  },
+  {
+   "title": "NASA JPL: NASA Spacecraft Embarks on Historic Journey Into Interstellar Space",
+   "url": "https://www.jpl.nasa.gov/news/nasa-spacecraft-embarks-on-historic-journey-into-interstellar-space/"
+  },
+  {
+   "title": "ScienceDaily: Voyager power swap (Aug 2026)",
+   "url": "https://www.sciencedaily.com/releases/2026/08/260810015703.htm"
+  },
+  {
+   "title": "CNN: Voyager 1 will reach one light-day from Earth in 2026. Here's what that means",
+   "url": "https://www.cnn.com/2025/12/09/science/voyager-1-light-day-earth"
+  },
+  {
+   "title": "Sky at Night Magazine: NASA's Voyager 1 probe is about to reach a distance of 1 light-day from Earth",
+   "url": "https://www.skyatnightmagazine.com/news/nasa-voyager-1-light-day-milestone"
+  },
+  {
+   "title": "EarthSky: Voyager 1 to reach 1 light-day from Earth on November 18",
+   "url": "https://earthsky.org/space/voyager-1-1-light-day-from-earth-november-17-18-2026/"
+  },
+  {
+   "title": "Science News: Voyager 1 and the light-day milestone",
+   "url": "https://www.sciencenews.org/article/voyager-1-light-day-exploration"
+  },
+  {
+   "title": "NRAO: How strong is the signal from the Voyager 1 spacecraft when it reaches Earth?",
+   "url": "https://public.nrao.edu/ask/how-strong-is-the-signal-from-the-voyager-1-spacecraft-when-it-reaches-earth/"
+  },
+  {
+   "title": "Phys.org: NASA Voyager power and communications (Oct 2026)",
+   "url": "https://phys.org/news/2026-10-nasa-voyager-power-communications.html"
+  },
+  {
+   "title": "Tech Times: Voyager 2 gets one more year after JPL power swap",
+   "url": "https://www.techtimes.com/articles/324012/20260811/voyager-2-gets-one-more-year-jpl-power-swap-delays-permanent-instrument-loss.htm"
+  },
+  {
+   "title": "Universe Today: Another instrument shut down on Voyager 1 to extend its interstellar mission",
+   "url": "https://www.universetoday.com/articles/another-instrument-shut-down-on-voyager-1-to-extend-its-interstellar-mission"
+  },
+  {
+   "title": "Wikipedia: Voyager 1",
+   "url": "https://en.wikipedia.org/wiki/Voyager_1"
+  },
+  {
+   "title": "HWBusters: Voyager 1 hits one light-day from Earth on November 18",
+   "url": "https://hwbusters.com/news/voyager-1-hits-one-light-day-from-earth-on-november-18-49-years-after-launch/"
+  },
+  {
+   "title": "ScienceABC: How Do Space Probes Send Signals To Earth?",
+   "url": "https://www.scienceabc.com/nature/universe/how-space-probes-voyager-send-radiowave-communication-signals-earth-dsn"
+  },
+  {
+   "title": "SETI Institute: Detecting Voyager 1 with the ATA",
+   "url": "https://www.seti.org/news/detecting-voyager-1-with-the-ata/"
+  },
+  {
+   "title": "Tempo.co: NASA Restores Contact With Voyager 1 Ahead of Historic Light-Day Milestone (4 Nov 2026)",
+   "url": "https://en.tempo.co/read/2122960/nasa-restores-contact-with-voyager-1-ahead-of-historic-light-day-milestone"
+  }
+ ],
+ "sections": [
+  {
+   "heading": "",
+   "scenes": [
+    {
+     "narration": "On 18 November, at about 10:16 UTC according to mission projections, a 49-year-old spacecraft called Voyager 1 will become the first human-made object to sit one full light-day away from Earth.",
+     "visual": {
+      "type": "title",
+      "text": "How does Voyager 1 still talk to Earth from one light-day away?",
+      "icon": "rocket",
+      "sub": "A 22-23 watt radio, 26 billion km away"
+     }
+    },
+    {
+     "narration": "It launched in 1977, and it is still sending data home using a radio transmitter that is about as powerful as a refrigerator light bulb.",
+     "visual": {
+      "type": "hero",
+      "icon": "rocket",
+      "label": "Voyager 1",
+      "sub": "Launched in 1977, still talking"
+     }
+    },
+    {
+     "narration": "So how does a signal that weak cross twenty-six billion kilometres, and how does anyone on Earth hear it? That is what you will understand in the next five minutes.",
+     "visual": {
+      "type": "question",
+      "text": "How does a bulb-sized signal cross 26 billion kilometres?"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "One Light-Day",
+   "scenes": [
+    {
+     "narration": "A light-day is the distance light travels in twenty-four hours. That works out at about 25.9 billion kilometres, or 16.1 billion miles, from Earth.",
+     "visual": {
+      "type": "stat",
+      "value": "25.9 billion km",
+      "label": "One light-day",
+      "icon": "ruler"
+     }
+    },
+    {
+     "narration": "At that point, Voyager 1 will be nearly six times, about 5.8 times, as far from us as Neptune is from the Sun on average. Neptune is the outermost planet of our solar system.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "planet",
+       "label": "Neptune's distance from Sun",
+       "value": "1"
+      },
+      "right": {
+       "icon": "rocket",
+       "label": "Voyager 1 from Earth",
+       "value": "5.8"
+      },
+      "vs": "times"
+     }
+    },
+    {
+     "narration": "It launched on 5 September 1977, passed Saturn in 1980, crossed into interstellar space in August 2012, and reaches the one-light-day mark this month.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "1977",
+        "label": "Launch",
+        "icon": "rocket-launch",
+        "cue": "launched"
+       },
+       {
+        "year": "1980",
+        "label": "Passes Saturn",
+        "icon": "planet",
+        "cue": "Saturn"
+       },
+       {
+        "year": "2012",
+        "label": "Interstellar space",
+        "icon": "moon-stars",
+        "cue": "interstellar"
+       },
+       {
+        "year": "2026",
+        "label": "One light-day",
+        "icon": "clock",
+        "cue": "month"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Here is the twist. NASA says the spacecraft will not notice anything when it passes one light-day. The milestone measures how long our messages take to arrive.",
+     "visual": {
+      "type": "hero",
+      "icon": "hourglass-high",
+      "label": "Nothing changes on board",
+      "sub": "The line only measures delay"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "A Faint Whisper",
+   "scenes": [
+    {
+     "narration": "Voyager 1's radio transmitter runs on about twenty-two to twenty-three watts. That is comparable to the light bulb inside a refrigerator.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "lightbulb",
+       "label": "Fridge light bulb"
+      },
+      "right": {
+       "icon": "rocket",
+       "label": "Voyager 1 radio",
+       "value": "~22-23 W"
+      },
+      "vs": "about equal"
+     }
+    },
+    {
+     "narration": "Rather than shouting in every direction, a 3.7-metre dish focuses those watts into a narrow beam, which is kept pointed at Earth.",
+     "visual": {
+      "type": "zoom",
+      "icon": "rocket",
+      "label": "Voyager 1",
+      "inner_icon": "broadcast",
+      "inner_label": "3.7 m dish, narrow beam"
+     }
+    },
+    {
+     "narration": "Even a narrow beam spreads out with distance. Signal strength falls with the square of the distance, so doubling the range leaves only a quarter of the power.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "broadcast",
+        "label": "Beam leaves dish",
+        "cue": "narrow"
+       },
+       {
+        "icon": "arrows-out",
+        "label": "Spreads out",
+        "cue": "spreads"
+       },
+       {
+        "icon": "trend-down",
+        "label": "Weakens with distance",
+        "cue": "square"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "The National Radio Astronomy Observatory said Voyager 1's signal reaches Earth at less than a billionth of a billionth of a watt, and it is weaker still now.",
+     "visual": {
+      "type": "stat",
+      "value": "<10\u207b\u00b9\u2078 W",
+      "label": "Power arriving at Earth",
+      "icon": "waveform"
+     }
+    },
+    {
+     "narration": "So how do you pick a message out of that near-silence?",
+     "visual": {
+      "type": "question",
+      "text": "How do you hear something that faint?"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Giant Ears",
+   "scenes": [
+    {
+     "narration": "You build giant ears. NASA's Deep Space Network uses dishes up to 70 metres across, sometimes working together, to gather as much of the faint signal as possible.",
+     "visual": {
+      "type": "hero",
+      "icon": "broadcast",
+      "label": "70-metre dishes",
+      "sub": "Gathering a near-silent signal"
+     }
+    },
+    {
+     "narration": "The network has three sites: Goldstone in California, Madrid in Spain and Canberra in Australia, spaced roughly one hundred and twenty degrees apart around the globe.",
+     "visual": {
+      "type": "map",
+      "countries": [
+       "United States of America",
+       "Spain",
+       "Australia"
+      ],
+      "label": "Deep Space Network sites",
+      "zoom": "world"
+     }
+    },
+    {
+     "narration": "As Earth turns, the probe passes from one site's sky to the next, so that a deep-space probe is always above the horizon of at least one.",
+     "visual": {
+      "type": "cycle",
+      "center": {
+       "icon": "globe",
+       "label": "Earth turns"
+      },
+      "steps": [
+       {
+        "icon": "map-pin",
+        "label": "California",
+        "cue": "one"
+       },
+       {
+        "icon": "map-pin",
+        "label": "Spain"
+       },
+       {
+        "icon": "map-pin",
+        "label": "Australia"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "The dish focuses the radio waves onto a sensitive receiver, and computers then decode the pattern of ones and zeros into useful information.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "broadcast",
+        "label": "Giant dish",
+        "cue": "dish"
+       },
+       {
+        "icon": "cpu",
+        "label": "Sensitive receiver",
+        "cue": "receiver"
+       },
+       {
+        "icon": "code",
+        "label": "Decoded data",
+        "cue": "decode"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "The data rate is only 160 bits per second. Project manager Suzanne Dodd likens it to dial-up internet, though real dial-up was more than a hundred times faster. So every message is tiny.",
+     "visual": {
+      "type": "stat",
+      "value": "160",
+      "label": "Bits per second",
+      "icon": "waveform"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Two Days Per Reply",
+   "scenes": [
+    {
+     "narration": "Dodd gives an example. Send a \"hello\" command at eight on a Monday morning, and Voyager's reply arrives at about eight on Wednesday.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "Mon 8am",
+        "label": "Command sent",
+        "icon": "paper-plane-tilt",
+        "cue": "command"
+       },
+       {
+        "year": "Tue 8am",
+        "label": "Reaches Voyager",
+        "icon": "rocket"
+       },
+       {
+        "year": "Wed 8am",
+        "label": "Reply arrives",
+        "icon": "envelope",
+        "cue": "reply"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "The low data rate and the long delay mean engineers get only sparse health information, and cannot react quickly when something goes wrong.",
+     "visual": {
+      "type": "hero",
+      "icon": "hourglass",
+      "label": "No quick fixes",
+      "sub": "Sparse data, slow replies"
+     }
+    },
+    {
+     "narration": "Yet fixes are possible. In 2023, a corrupted memory chip made one computer send garbled data. In 2024, engineers sent a software patch across billions of kilometres, and normal communication returned.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "memory",
+        "label": "Memory chip corrupted",
+        "cue": "corrupted"
+       },
+       {
+        "icon": "file-code",
+        "label": "Patch sent from Earth",
+        "cue": "patch"
+       },
+       {
+        "icon": "check-circle",
+        "label": "Normal again",
+        "cue": "normal"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Engineers also know where it is by timing signals and measuring the Doppler shift, the tiny change in radio frequency caused by the probe's motion.",
+     "visual": {
+      "type": "list",
+      "heading": "Tracking Voyager",
+      "items": [
+       {
+        "icon": "clock",
+        "text": "Signal travel time gives distance",
+        "cue": "timing"
+       },
+       {
+        "icon": "waveform",
+        "text": "Doppler shift gives speed",
+        "cue": "Doppler"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Running On Plutonium",
+   "scenes": [
+    {
+     "narration": "Far from the Sun, solar panels are useless. Instead, Voyager 1 carries three generators that turn the heat of decaying plutonium into electricity.",
+     "visual": {
+      "type": "hero",
+      "icon": "radioactive",
+      "label": "Nuclear power source",
+      "sub": "Heat from plutonium becomes electricity"
+     }
+    },
+    {
+     "narration": "At launch they produced about 470 watts, and output has been falling by about four watts every year, so the margin is now razor thin.",
+     "visual": {
+      "type": "stat",
+      "value": "470 W",
+      "label": "Output at launch, falling about 4 W a year",
+      "icon": "lightning"
+     }
+    },
+    {
+     "narration": "So engineers switch off instruments. The cosmic ray instrument went off in February 2025, and the low-energy particle instrument in April 2026. Only two science instruments still run.",
+     "visual": {
+      "type": "list",
+      "heading": "Instruments switched off",
+      "items": [
+       {
+        "icon": "power",
+        "text": "Cosmic ray: Feb 2025",
+        "cue": "February"
+       },
+       {
+        "icon": "power",
+        "text": "Low-energy particles: Apr 2026",
+        "cue": "April"
+       },
+       {
+        "icon": "check-circle",
+        "text": "Still on: magnetometer, plasma waves",
+        "cue": "Only"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "In September, engineers carried out an operation nicknamed the Big Bang: three power-hungry devices were swapped for three lower-power ones, all at once, so the spacecraft stayed warm enough to keep working.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "flame",
+       "label": "Three power-hungry devices"
+      },
+      "right": {
+       "icon": "thermometer-simple",
+       "label": "Three low-power devices"
+      },
+      "vs": "swapped"
+     }
+    },
+    {
+     "narration": "The same swap was done on Voyager 2 about six weeks earlier, and NASA announced on 4 August that it had worked. Without it, another Voyager 1 instrument would have been switched off as early as summer 2027.",
+     "visual": {
+      "type": "hero",
+      "icon": "calendar-check",
+      "label": "Shutdown delayed",
+      "sub": "Was due as early as summer 2027"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "October's Silence",
+   "scenes": [
+    {
+     "narration": "Then came a scare. On 18 and 19 October, the Deep Space Network failed to hear Voyager 1 in two scheduled attempts, twenty-four hours apart.",
+     "visual": {
+      "type": "question",
+      "text": "Why did Voyager 1 go quiet?"
+     }
+    },
+    {
+     "narration": "No signal on the eighteenth, none on the nineteenth, and then on the twentieth the signal was detected again. NASA has been in contact since.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "18 Oct",
+        "label": "No signal",
+        "icon": "wifi-slash"
+       },
+       {
+        "year": "19 Oct",
+        "label": "No signal",
+        "icon": "wifi-slash"
+       },
+       {
+        "year": "20 Oct",
+        "label": "Signal returns",
+        "icon": "wifi-high",
+        "cue": "detected"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "NASA found that one group of thrusters went offline and the computers automatically switched to a backup set. It is not yet clear whether this caused the silence.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "warning",
+        "label": "Thrusters go offline",
+        "cue": "offline"
+       },
+       {
+        "icon": "cpu",
+        "label": "Computers detect fault"
+       },
+       {
+        "icon": "arrows-clockwise",
+        "label": "Backup set switches on",
+        "cue": "backup"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Mission manager Kareem Badaruddin said it was the first time the spacecraft had done this, and that at this point in the mission, the team has to expect the unexpected.",
+     "visual": {
+      "type": "hero",
+      "icon": "shield-check",
+      "label": "Built to fix itself",
+      "sub": "Backups switch on automatically"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "What Comes Next",
+   "scenes": [
+    {
+     "narration": "At one light-day, Voyager 1 will be only about 0.06 per cent, roughly one fifteen-hundredth, of the way to Proxima Centauri, the Sun's nearest star, in terms of distance. It is not actually heading there.",
+     "visual": {
+      "type": "stat",
+      "value": "0.06%",
+      "label": "Distance compared with Proxima Centauri",
+      "icon": "moon-stars",
+      "fraction": 0.0006
+     }
+    },
+    {
+     "narration": "NASA hopes at least one science instrument can keep running into the 2030s, but when the power finally runs out is uncertain. When it does, the radio will fall silent, but the probe will keep drifting through the Milky Way.",
+     "visual": {
+      "type": "hero",
+      "icon": "shooting-star",
+      "label": "Silent, but still travelling",
+      "sub": "When the power runs out"
+     }
+    },
+    {
+     "narration": "In one breath: a beam of about 22 to 23 watts, caught by giant dishes on three continents, decoded at 160 bits per second, powered by plutonium that fades four watts a year.",
+     "visual": {
+      "type": "list",
+      "heading": "How Voyager 1 still talks",
+      "items": [
+       {
+        "icon": "broadcast",
+        "text": "22-23 watt focused beam",
+        "cue": "beam"
+       },
+       {
+        "icon": "globe",
+        "text": "Giant dishes on three continents",
+        "cue": "three"
+       },
+       {
+        "icon": "code",
+        "text": "160 bits per second",
+        "cue": "decoded"
+       },
+       {
+        "icon": "radioactive",
+        "text": "Plutonium fading 4 W a year",
+        "cue": "plutonium"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Here is today's question. As power runs low, should NASA keep Voyager's last science instruments running for as long as possible, or keep the radio alive for as long as possible? Tell us in the comments.",
+     "visual": {
+      "type": "question",
+      "text": "Last instruments longer, or radio longer?"
+     }
+    }
+   ]
+  }
+ ],
+ "short": {
+  "scenes": [
+   1,
+   8,
+   11,
+   18,
+   27,
+   28
+  ],
+  "outro": "For the full story of how giant dishes catch a whisper from a light-day away, watch the whole episode."
+ },
+ "factcheck": {
+  "ok": true,
+  "summary": "I found no factual errors or advertiser-friendliness problems after checking all 34 scenes against NASA/JPL releases and other sources. The Neptune ratio, light-day maths, Proxima fraction and 120-degree DSN spacing were checked by calculation or from general knowledge, not sourced.",
+  "open_issues": []
+ },
+ "series": "EVERY HOW #04"
+}
