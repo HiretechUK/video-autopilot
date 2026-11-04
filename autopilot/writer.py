@@ -107,7 +107,18 @@ def _extract(text: str) -> dict:
 
 
 def write_episode(series: str, number: int, recent: list[str], lessons: str = "", notes: str = "",
-                  previous: dict | None = None) -> dict:
+                  previous: dict | None = None, edit: bool = True) -> dict:
+    """Draft, then (for new episodes) the editor agent reviews and sends it back until it clears the bar."""
+    ep = _draft(series, number, recent, lessons, notes, previous)
+    if not edit or previous is not None or series not in ("imagine_you", "every_how"):
+        return ep
+    from . import editor
+    rewrite = lambda prev, n: _draft(series, number, recent, lessons, n, prev)
+    return editor.improve(series, ep, rewrite, _ask)
+
+
+def _draft(series: str, number: int, recent: list[str], lessons: str = "", notes: str = "",
+           previous: dict | None = None) -> dict:
     if series == "every_how":  # long-form explainers: own writer with trend picking, research and fact-check
         from . import writer_everyhow
         return writer_everyhow.write(number, recent, lessons, notes, previous)

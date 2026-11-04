@@ -166,7 +166,7 @@ def test_approval_email_carries_both_every_how_videos(tmp_path):
 
 def test_every_how_email_attaches_videos():
     src = open("autopilot/pipeline.py").read()
-    assert 'mailer.send(subject, auto + body, files)' in src
+    assert 'mailer.send(subject, auto + editor.summary(ep) + body, files)' in src
 
 
 def test_approval_wording_when_auto_approve_off(monkeypatch):
@@ -195,3 +195,39 @@ def test_media_url_recorded_for_tiktok(monkeypatch):
     st = {"episodes": {"IY-03": {"series": "imagine_you", "links": {"youtube": "https://youtube.com/watch?v=x"}}}}
     pipeline.record_media_urls(st)
     assert st["episodes"]["IY-03"]["links"]["media"].startswith("https://hiretechuk.github.io/video-autopilot/media/IY-03-")
+
+
+def test_editor_sends_weak_drafts_back_and_reports(monkeypatch):
+    # Haseeb, 4 Nov: "the videos have been shit" -> every new script goes through an editor agent
+    from autopilot import editor
+    items = list(editor.RUBRICS["imagine_you"])
+    replies = iter([json.dumps({"scores": {k: 5 for k in items}, "problems": ["flat hook"], "instructions": "1. new hook"}),
+                    json.dumps({"scores": {k: 9 for k in items}, "strengths": ["sharp hook"]})])
+    ask = lambda system, user: next(replies)
+    rewrites = []
+    def rewrite(prev, notes):
+        rewrites.append(notes)
+        return {"title": "better"}
+    ep = editor.improve("imagine_you", {"title": "weak"}, rewrite, ask)
+    assert ep["title"] == "better" and ep["editor"]["ship"] and ep["editor"]["average"] == 9.0
+    assert "new hook" in rewrites[0]
+    assert "Editor score: 9.0/10" in editor.summary(ep)
+
+
+def test_editor_flags_episode_that_never_clears_bar():
+    from autopilot import editor
+    items = list(editor.RUBRICS["every_how"])
+    ask = lambda s, u: json.dumps({"scores": {k: 6 for k in items}, "problems": ["dull"], "instructions": "x"})
+    ep = editor.improve("every_how", {"title": "t"}, lambda p, n: {"title": "t2"}, ask)
+    assert ep["editor"]["ship"] is False and ep["editor"]["rounds"] == editor.MAX_ROUNDS
+    assert editor.summary(ep).startswith("WEAK")
+
+
+def test_new_episodes_go_through_editor(monkeypatch):
+    called = []
+    monkeypatch.setattr(writer, "_draft", lambda *a, **k: {"title": "d"})
+    from autopilot import editor
+    monkeypatch.setattr(editor, "improve", lambda s, ep, rw, ask: called.append(s) or ep)
+    writer.write_episode("imagine_you", 9, [])
+    writer.write_episode("imagine_you", 9, [], previous={"title": "x"}, notes="n")  # Haseeb's own revision: no editor loop
+    assert called == ["imagine_you"]

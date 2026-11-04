@@ -252,9 +252,11 @@ def email_for_approval(ref: str, rec: dict, ep: dict, video):
         except Exception as e:
             print(f"could not attach Every How videos: {e}", flush=True)
         body = body.replace("Watch it on YouTube (unlisted", "Both videos are attached (smaller preview copies). Or watch on YouTube (unlisted")
-        mailer.send(subject, auto + body, files)
+        from . import editor
+        mailer.send(subject, auto + editor.summary(ep) + body, files)
         return
-    body = auto + (f"{ep['title']}\n\n{ep.get('description', '')}\n\nScript:\n{script_text(ep)}\n\n"
+    from . import editor
+    body = auto + editor.summary(ep) + (f"{ep['title']}\n\n{ep.get('description', '')}\n\nScript:\n{script_text(ep)}\n\n"
             f"The video is attached (a smaller preview copy if the full one is too big for email).\n"
             + (f"Full quality: https://github.com/HiretechUK/video-autopilot/releases/download/"
                f"{SERIES[rec['series']].get('cache') or SERIES[rec['series']].get('release')}/{os.path.basename(video)}\n"
