@@ -175,6 +175,20 @@ def render(series: str, ep_path: str):
     return out
 
 
+def record_media_urls(st) -> None:
+    """Write each Imagine You episode's public video address into state (links.media) so the TikTok agent
+    does not guess it (4 Nov 2026: newer files are IY-03-<hash>.mp4, so <REF>.mp4 was a 404)."""
+    for ref, rec in st["episodes"].items():
+        links = rec.setdefault("links", {})
+        if rec.get("series") == "imagine_you" and str(links.get("youtube", "")).startswith("http"):
+            name = hosted_name(ref)
+            if os.path.exists(os.path.join(ROOT, "media", name)):
+                url = f"https://hiretechuk.github.io/video-autopilot/media/{name}"
+                if links.get("media") != url:
+                    links["media"] = url
+                    save(st)
+
+
 def hosted_name(ref: str) -> str:
     """The file posted for this episode in media/ (newer ones carry the render hash: IY-03-5e6ada78.mp4)."""
     import glob
@@ -416,6 +430,7 @@ def platforms(series: str):
 def publish_queue(st):
     """Post every approved episode that is not yet live on all platforms (oldest first). Safe to rerun."""
     from . import publish
+    record_media_urls(st)
     for ref, rec in sorted(st["episodes"].items(), key=lambda kv: kv[1].get("approved", "")):
         if rec["status"] == "scheduled" and datetime.now(timezone.utc) >= datetime.fromisoformat(rec["post_after"]):
             rec["status"] = "approved"

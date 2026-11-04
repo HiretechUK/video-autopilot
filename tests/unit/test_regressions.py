@@ -187,3 +187,11 @@ def test_watchdog_publishes_health_for_ceo():
     src = open("autopilot/watchdog.py").read()
     assert "def health()" in src and '"release", "upload", "status"' in src
     assert "contents: write" in open(".github/workflows/watchdog.yml").read()
+
+
+def test_media_url_recorded_for_tiktok(monkeypatch):
+    # the TikTok poster looked for media/IY-03.mp4, but the file is media/IY-03-<hash>.mp4
+    monkeypatch.setattr(pipeline, "save", lambda st: None)
+    st = {"episodes": {"IY-03": {"series": "imagine_you", "links": {"youtube": "https://youtube.com/watch?v=x"}}}}
+    pipeline.record_media_urls(st)
+    assert st["episodes"]["IY-03"]["links"]["media"].startswith("https://hiretechuk.github.io/video-autopilot/media/IY-03-")
