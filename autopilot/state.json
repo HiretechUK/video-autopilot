@@ -286,6 +286,24 @@
     "minutes": 5.9,
     "superseded": []
    }
+  },
+  "EH-05": {
+   "series": "every_how",
+   "number": 5,
+   "title": "How Will the Midterms Shape the Rest of Trump's Presidency?",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/EH-05.json",
+   "created": "2026-11-04T10:09:57.587+00:00"
+  },
+  "IY-06": {
+   "series": "imagine_you",
+   "number": 6,
+   "title": "Why You Shouldn't Look Out the Window After a Nuclear Flash",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/IY-06.json",
+   "created": "2026-11-04T10:09:57.587+00:00"
   }
  },
  "seen": [
