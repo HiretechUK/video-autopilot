@@ -294,7 +294,16 @@
    "status": "pending",
    "version": 1,
    "file": "episodes/EH-05.json",
-   "created": "2026-11-04T10:09:57.587+00:00"
+   "created": "2026-11-04T10:09:57.587+00:00",
+   "private": {
+    "full": "RstYnn3r7ds",
+    "short": "bOQl08p6CT0",
+    "thumbnail": "set",
+    "version": 1,
+    "minutes": 5.5,
+    "superseded": []
+   },
+   "emailed_at": "2026-11-04T10:26:21.180827+00:00"
   },
   "IY-06": {
    "series": "imagine_you",
