@@ -428,7 +428,7 @@ function borders(cam, a = 1) {
 }
 function newsMap(cam, lt, v, o = {}) { // terrain + borders + glowing countries + markers + arrows + labels
   terrain(cam, o.dim ?? .12); borders(cam, o.dim ? .6 : 1);
-  const { kx, P } = projector(cam), labs = [], pulse = .75 + .25 * Math.sin(lt * 3.2);
+  const { kx, P } = projector(cam), labs = [], pulse = .75 + .25 * Math.sin(lt * 3.2), placed = [];
   const groups = [[(v.focus || v.countries || []), D.red], [(v.also || []), D.amber]];
   groups.forEach(([list, col], g) => list.map(gname).filter(Boolean).forEach((c, i) => {
     const p = countryPath(c, cam); if (!p) return; const a = ein(lt, (o.at ?? .5) + (g * 2 + i) * .25, .6);
@@ -449,7 +449,8 @@ function newsMap(cam, lt, v, o = {}) { // terrain + borders + glowing countries 
     const col = ar.color === 'red' ? D.red : D.amber; ctx.save(); ctx.setLineDash([22, 14]); ctx.lineDashOffset = -lt * 60; glowStroke(path, col, 5, 1, 20); ctx.restore();
     const u = p, ex = (1 - u) ** 2 * x1 + 2 * (1 - u) * u * cx + u * u * x2, ey = (1 - u) ** 2 * y1 + 2 * (1 - u) * u * cy + u * u * y2, tx = 2 * (1 - u) * (cx - x1) + 2 * u * (x2 - cx), ty = 2 * (1 - u) * (cy - y1) + 2 * u * (y2 - cy), an = Math.atan2(ty, tx);
     glowFill(poly([[ex + Math.cos(an) * 26, ey + Math.sin(an) * 26], [ex + Math.cos(an + 2.5) * 22, ey + Math.sin(an + 2.5) * 22], [ex + Math.cos(an - 2.5) * 22, ey + Math.sin(an - 2.5) * 22]]), col, 1, 16);
-    if (ar.label) dtext(String(ar.label).toUpperCase(), cx, cy - 34, 36, { ls: 3, a: ein(lt, at + .6, .4), color: col });
+    if (ar.label) { const lx = .25 * x1 + .5 * cx + .25 * x2, ly = .25 * y1 + .5 * cy + .25 * y2 - 38, s = String(ar.label).toUpperCase();
+      placed.push([lx, ly, dW(s, 36, 'news', 3), 36]); dtext(s, lx, ly, 36, { ls: 3, a: ein(lt, at + .6, .4), color: col }); }
   });
   (v.markers || []).forEach((m, i) => {
     const q = gpoint(m.lat != null ? m : (m.at || m.place)); if (!q) return; const [x, y] = P(...q), at = cueTimes(sc_now, v.markers)[i], a = ein(lt, at, .4, eBack); if (a <= 0) return;
@@ -460,7 +461,7 @@ function newsMap(cam, lt, v, o = {}) { // terrain + borders + glowing countries 
       ctx.save(); ctx.globalAlpha = ein(lt, at + .2, .4); ctx.fillStyle = 'rgba(5,13,19,.78)'; ctx.fillRect(lx - 12, y - 28, w + 24, 56); ctx.fillStyle = col; ctx.fillRect(x > W - 500 ? lx + w + 8 : lx - 12, y - 28, 4, 56); ctx.restore();
       dtext(String(m.label).toUpperCase(), lx, y + 2, 34, { align: 'left', ls: 2, a: ein(lt, at + .2, .4), shadow: false }); }
   });
-  const placed = []; // country labels last, skipping any that would sit on another
+  // country labels last, skipping any that would sit on another label or an arrow label
   labs.forEach(([c, x, y, sz, a, col]) => { const nm = (v.names && v.names[c]) || c.replace('United States of America', 'United States'), s = nm.toUpperCase(), w = dW(s, sz, 'news', sz / 8);
     if (placed.some(([px, py, pw, ps]) => Math.abs(px - x) < (pw + w) / 2 + 12 && Math.abs(py - y) < (ps + sz) * .8)) return; placed.push([x, y, w, sz]);
     dtext(s, x, y, sz, { ls: sz / 8, a, color: col ? '#fff' : D.dim, glow: col ? 'rgba(255,59,48,.9)' : null }); });
