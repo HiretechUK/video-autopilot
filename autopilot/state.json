@@ -83,12 +83,18 @@
    "series": "paws_claws",
    "number": 2,
    "title": "Rainbow Colours Song | Learn Colours with the Paws & Claws Club",
-   "status": "scheduled",
+   "status": "published",
    "version": 1,
    "file": "episodes/PC-02.json",
    "created": "2026-11-01T16:37:52.102735+00:00",
    "post_after": "2026-11-05T16:00:00+00:00",
-   "links": {}
+   "links": {
+    "youtube": "https://youtube.com/watch?v=GMNI0a8O5O4",
+    "thumbnail": "set",
+    "instagram": "https://www.instagram.com/reel/DfXgZuCFWDw/",
+    "facebook": "https://www.facebook.com/reel/1917129166264251"
+   },
+   "approved": "2026-11-05T16:00:00+00:00"
   },
   "PC-03": {
    "series": "paws_claws",
@@ -352,7 +358,8 @@
    "status": "pending",
    "version": 1,
    "file": "episodes/IY-07.json",
-   "created": "2026-11-05T04:56:53.458378+00:00"
+   "created": "2026-11-05T04:56:53.458378+00:00",
+   "links": {}
   },
   "EH-06": {
    "series": "every_how",
@@ -369,7 +376,8 @@
     "version": 1,
     "minutes": 5.7,
     "superseded": []
-   }
+   },
+   "links": {}
   }
  },
  "seen": [
