@@ -580,7 +580,7 @@ function captions(t, cw, by) {
   const dk = isDark(sc), size = VERT ? 62 : (dk ? 40 : 42), maxW = VERT ? 960 : 1500, words = sc.narration.split(/\s+/);
   ctx.save(); ctx.font = dk ? nfont(size, 'bold') : font(size); const sp = ctx.measureText(' ').width; const lines = [[]]; let w = 0;
   words.forEach((wd, i) => { const ww = ctx.measureText(wd).width; if (w + ww > maxW && lines.at(-1).length) { lines.push([]); w = 0; } lines.at(-1).push([wd, ww, i]); w += ww + sp; }); ctx.restore();
-  const lh = size * 1.25, boxH = lines.length * lh + 28, y = by - boxH, bw = Math.max(...lines.map(l => l.reduce((a, x) => a + x[1] + sp, -sp))) + 60;
+  const lh = size * 1.25, boxH = lines.length * lh + 28, y = VERT ? 1215 : by - boxH, bw = Math.max(...lines.map(l => l.reduce((a, x) => a + x[1] + sp, -sp))) + 60;
   const a = clamp((t - sc.start + .1) / .2) * clamp((sc.end + .25 - t) / .2), shown = (t - sc.start) / Math.max(.1, sc.end - sc.start);
   if (dk) { ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = 'rgba(4,10,14,.72)'; ctx.beginPath(); ctx.roundRect(cw / 2 - bw / 2, y, bw, boxH, 10); ctx.fill(); ctx.restore(); }
   else fill(rect(cw / 2 - bw / 2, y, bw, boxH, 20), C.light, a * .94);
