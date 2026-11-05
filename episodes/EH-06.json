@@ -1,0 +1,631 @@
+{
+ "title": "How Warm Water in the Pacific Floods Peru and Dries Out Indonesia?",
+ "question": "How does El Ni\u00f1o, a patch of warm water in the Pacific, flood Peru, dry out Indonesia and change the weather across the world?",
+ "description": "In 1997 and 1998 it rained so hard on Peru's desert coast that the desert flooded, and the cause was a vast pool of warm Pacific water that spread east until it reached Peru's own coast. In plain terms: how does El Ni\u00f1o change the weather across the world? This episode follows three clues, the wind, the water and the rain, then tests the chain in Peru, Indonesia, Australia and the storm seasons. We rely on NOAA, NASA and published research, and we say plainly where effects vary from one event to the next. Which side of the seesaw are you on: wetter or drier during El Ni\u00f1o years? Tell us your country and one thing you remember.",
+ "tags": [
+  "How does El Ni\u00f1o change the weather across the world",
+  "El Ni\u00f1o",
+  "how does El Ni\u00f1o work",
+  "super El Ni\u00f1o 2026",
+  "trade winds",
+  "ENSO explained",
+  "Peru floods",
+  "Indonesia drought",
+  "Pacific Ocean",
+  "La Ni\u00f1a",
+  "weather explained",
+  "NOAA"
+ ],
+ "ad_safety": {
+  "rating": "green",
+  "reason": "Educational weather and climate explainer; focuses on mechanisms and regional patterns, not on victims or any specific tragedy."
+ },
+ "sources": [
+  {
+   "title": "NOAA: Understanding El Ni\u00f1o & ENSO",
+   "url": "https://www.noaa.gov/understanding-el-nino"
+  },
+  {
+   "title": "NOAA Climate Prediction Center: ENSO Diagnostic Discussion, 8 October 2026",
+   "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
+  },
+  {
+   "title": "NASA Science: El Ni\u00f1o (sea level 40-50 cm higher near Indonesia than off Ecuador)",
+   "url": "https://science.nasa.gov/earth/explore/el-nino/"
+  },
+  {
+   "title": "NASA Science: El Ni\u00f1o Conditions Are Growing Stronger (same sea-level figure)",
+   "url": "https://science.nasa.gov/earth/earth-observatory/el-nino-conditions-are-growing-stronger-86341/"
+  },
+  {
+   "title": "NASA Science, World of Change: El Ni\u00f1o, La Ni\u00f1a, and Rainfall",
+   "url": "https://science.nasa.gov/earth/earth-observatory/world-of-change/enso/"
+  },
+  {
+   "title": "NASA Technical Reports Server: A View from Space, Evolution of the 1997-1998 El Ni\u00f1o and La Ni\u00f1a",
+   "url": "https://ntrs.nasa.gov/citations/19990079776"
+  },
+  {
+   "title": "NASA PO.DAAC: the 1997-98 event was the first major El Ni\u00f1o observed extensively by satellites",
+   "url": "https://podaac.jpl.nasa.gov/node/592"
+  },
+  {
+   "title": "NOAA Climate.gov: Impacts of El Ni\u00f1o and La Ni\u00f1a on the hurricane season",
+   "url": "https://www.climate.gov/news-features/blogs/enso/impacts-el-nino-and-la-nina-hurricane-season"
+  },
+  {
+   "title": "NOAA AOML: How does El Ni\u00f1o impact Atlantic hurricane season",
+   "url": "https://www.aoml.noaa.gov/how-does-el-nino-impact-atlantic-hurricane-season/"
+  },
+  {
+   "title": "ABC News: Atlantic hurricane season peaks with no hurricanes as El Ni\u00f1o suppresses activity",
+   "url": "https://abcnews.com/US/atlantic-hurricane-season-peaks-hurricanes-el-nino-suppresses/story?id=136341807"
+  },
+  {
+   "title": "NASA: Severe 2015 Indonesian Fire Season Linked to El Ni\u00f1o Drought",
+   "url": "https://www.nasa.gov/centers-and-facilities/goddard/severe-2015-indonesian-fire-season-linked-to-el-ni%C3%B1o-drought/"
+  },
+  {
+   "title": "NASA Science: Peatland Fires Darken Skies in Indonesia (1.75 billion tons of greenhouse gas equivalents)",
+   "url": "https://science.nasa.gov/missions/aqua/peatland-fires-darken-skies-in-indonesia/"
+  },
+  {
+   "title": "NASA GISS: Seeing Through the Smoky Pall, Observations from a Grim Indonesian Fire Season",
+   "url": "https://www.giss.nasa.gov/research/features/archive/201512_smoke/"
+  },
+  {
+   "title": "NASA GISS: Field et al. 2016, Indonesian fire activity and smoke pollution in 2015",
+   "url": "https://www.giss.nasa.gov/pubs/abs/fi08200c.html"
+  },
+  {
+   "title": "PMC: Bayer et al., The 1997-1998 El Ni\u00f1o as an unforgettable phenomenon in northern Peru (2014)",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4317261/"
+  },
+  {
+   "title": "SciELO: Effects of El Ni\u00f1o 1997-98 on the Schooling Behaviour of the Peruvian Anchovy",
+   "url": "https://www.scielo.cl/scielo.php?script=sci_arttext&pid=S0717-71782002030100074"
+  },
+  {
+   "title": "NOAA Climate.gov: Great Barrier Reef suffers through record-breaking bleaching event",
+   "url": "https://www.climate.gov/news-features/event-tracker/great-barrier-reef-suffers-through-record-breaking-bleaching-event"
+  },
+  {
+   "title": "Hughes, Schaffelke and Kerry: How much coral has died in the Great Barrier Reef's worst bleaching event? (Nov 2016)",
+   "url": "https://www.australiangeographic.com.au/nature-wildlife/water/2016/11/how-much-coral-has-died-in-the-great-barrier-reefs-worst-bleaching-event/"
+  },
+  {
+   "title": "ScienceDaily: Life and death following Great Barrier Reef bleaching (29 Nov 2016)",
+   "url": "https://www.sciencedaily.com/releases/2016/11/161129090410.htm"
+  },
+  {
+   "title": "Science News: A 'Super El Ni\u00f1o' may be on the way. What does that mean?",
+   "url": "https://www.sciencenews.org/article/super-el-nino-high-temperatures-disease"
+  },
+  {
+   "title": "FOX Weather: Super El Ni\u00f1o helps support Super Typhoons across the Western Pacific",
+   "url": "https://www.foxweather.com/extreme-weather/super-el-nino-monster-super-typhoon-western-pacific-2026"
+  }
+ ],
+ "sections": [
+  {
+   "heading": "",
+   "scenes": [
+    {
+     "narration": "In 1997 and 1998 it rained so hard on Peru's desert coast that the desert flooded. The cause: a vast pool of unusually warm Pacific water that spread east until it reached Peru's own coast.",
+     "visual": {
+      "type": "title",
+      "text": "How does warm Pacific water flood Peru and dry out Indonesia?",
+      "icon": "waves",
+      "sub": "A desert flooded in 1997-98. Why?"
+     }
+    },
+    {
+     "narration": "NOAA, the United States ocean agency, says a new one may be the strongest since 1950. How can that much warm water change weather worldwide? A chain of three clues: the wind, the water and the rain.",
+     "visual": {
+      "type": "question",
+      "text": "How can one warm patch of sea change weather worldwide?"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The Christmas Child",
+   "scenes": [
+    {
+     "narration": "Peruvian fishermen spotted this warm water as far back as the 1600s. It arrived around Christmas, so they called it El Ni\u00f1o, Spanish for the boy, which many people understand as the Christ Child.",
+     "visual": {
+      "type": "hero",
+      "icon": "boat",
+      "label": "El Ni\u00f1o: the Christ Child",
+      "sub": "Source: NOAA, Science News"
+     }
+    },
+    {
+     "narration": "Scientists later found the warm water is half of a bigger pattern called ENSO, in which the ocean and the air pressure above it swing together across the Pacific.",
+     "visual": {
+      "type": "list",
+      "heading": "ENSO, two halves",
+      "items": [
+       {
+        "icon": "waves",
+        "text": "El Ni\u00f1o: the warm ocean",
+        "cue": "ocean"
+       },
+       {
+        "icon": "wind",
+        "text": "Southern Oscillation: the air",
+        "cue": "air"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Clue 1: The Wind",
+   "scenes": [
+    {
+     "narration": "Clue one: the wind. In a normal year, steady trade winds blow from east to west along the equator, like a giant fan blowing warm water to one end of a pool. Cold water rises from the deep to replace it.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "wind",
+        "label": "Trade winds blow west",
+        "cue": "winds"
+       },
+       {
+        "icon": "waves",
+        "label": "Warm water piles up west",
+        "cue": "pool"
+       },
+       {
+        "icon": "arrow-up",
+        "label": "Cold water rises east",
+        "cue": "rises"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "That pile of water is real. Sea level near Indonesia is normally about forty to fifty centimetres higher than off Ecuador, a gap that satellites can measure.",
+     "visual": {
+      "type": "stat",
+      "value": "40-50 cm",
+      "label": "Higher near Indonesia than Ecuador. Source: NASA",
+      "icon": "waves"
+     }
+    },
+    {
+     "narration": "When the trade winds slacken, the piled-up water sloshes east in huge, slow waves under the surface, like bathwater when you tilt the tub back.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "wind",
+        "label": "Winds slacken",
+        "cue": "slacken"
+       },
+       {
+        "icon": "waves",
+        "label": "Warm water sloshes east",
+        "cue": "sloshes"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Warm water spreading east chokes off the cold water that normally rises from the deep off South America, bringing food for fish.",
+     "visual": {
+      "type": "zoom",
+      "icon": "waves",
+      "label": "Coast of South America",
+      "inner_icon": "drop-slash",
+      "inner_label": "Cold water from the deep cut off"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Clue 2: The Water",
+   "scenes": [
+    {
+     "narration": "Clue two: the water. Scientists call it El Ni\u00f1o when the central Pacific stays about half a degree Celsius warmer than usual, for months on end. Small number, enormous ocean.",
+     "visual": {
+      "type": "hero",
+      "icon": "thermometer-hot",
+      "label": "About half a degree warmer, for months",
+      "sub": "Source: NOAA"
+     }
+    },
+    {
+     "narration": "And here is the trap: it can become a vicious circle. Warmer water weakens the winds, weaker winds let even more warm water spread east, and that warms the east further.",
+     "visual": {
+      "type": "cycle",
+      "center": "Vicious circle",
+      "steps": [
+       {
+        "icon": "thermometer-hot",
+        "label": "Warmer water in the east",
+        "cue": "Warmer"
+       },
+       {
+        "icon": "wind",
+        "label": "Weaker trade winds",
+        "cue": "weakens"
+       },
+       {
+        "icon": "waves",
+        "label": "More warm water spreads east",
+        "cue": "spread"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "This year it keeps strengthening. In September, NOAA reports, parts of the eastern equatorial Pacific were more than four degrees Celsius above normal.",
+     "visual": {
+      "type": "stat",
+      "value": "+4\u00b0C",
+      "label": "Above normal in parts of the eastern Pacific. Source: NOAA",
+      "icon": "thermometer-hot"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Clue 3: The Rain",
+   "scenes": [
+    {
+     "narration": "Clue three: the rain. Why does rain follow warm water? Air over a hot sea soaks up moisture and rises.",
+     "visual": {
+      "type": "zoom",
+      "icon": "waves",
+      "label": "Warm sea surface",
+      "inner_icon": "cloud",
+      "inner_label": "Moist air rising"
+     }
+    },
+    {
+     "narration": "High up, that air cools and dumps its water as towering clouds and heavy rain. So the rain goes wherever the hot water goes.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "thermometer-hot",
+        "label": "Warm sea",
+        "cue": "hot"
+       },
+       {
+        "icon": "arrow-up",
+        "label": "Air rises and cools",
+        "cue": "cools"
+       },
+       {
+        "icon": "cloud-rain",
+        "label": "Heavy rain falls",
+        "cue": "rain"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Move the warm pool east, and the rain moves with it. Like a seesaw, as one side gets soaked, the other tends to dry out.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "cloud-rain",
+       "label": "Eastern Pacific",
+       "value": "Wetter"
+      },
+      "right": {
+       "icon": "sun",
+       "label": "Western Pacific",
+       "value": "Drier"
+      },
+      "vs": "seesaw"
+     }
+    },
+    {
+     "narration": "The change climbs into the sky too. A strong El Ni\u00f1o can steer the jet stream, a river of air high above, sending more winter storms across California and the southern United States.",
+     "visual": {
+      "type": "hero",
+      "icon": "wind",
+      "label": "El Ni\u00f1o steers the jet stream",
+      "sub": "Source: NOAA"
+     }
+    },
+    {
+     "narration": "Hold on. If this is a chain, why doesn't El Ni\u00f1o always deliver the same weather in the same places?",
+     "visual": {
+      "type": "question",
+      "text": "But why doesn't it always go the same way?"
+     }
+    },
+    {
+     "narration": "Because no two El Ni\u00f1os are alike. Strength and timing differ, and other climate patterns join in. NOAA says impacts become more likely, not guaranteed, which is why forecasters say tends to.",
+     "visual": {
+      "type": "list",
+      "heading": "Why events differ",
+      "items": [
+       {
+        "icon": "gauge",
+        "text": "Strength differs",
+        "cue": "Strength"
+       },
+       {
+        "icon": "clock",
+        "text": "Timing differs",
+        "cue": "timing"
+       },
+       {
+        "icon": "shuffle",
+        "text": "Other patterns join in",
+        "cue": "patterns"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Around The World",
+   "scenes": [
+    {
+     "narration": "Time to test the chain. In El Ni\u00f1o years, Peru, Ecuador and East Africa tend to get more rain, while Indonesia, Australia, the Philippines and southern Africa tend to get less.",
+     "visual": {
+      "type": "map",
+      "countries": [
+       "Peru",
+       "Ecuador",
+       "Kenya",
+       "Indonesia",
+       "Australia",
+       "Philippines",
+       "South Africa",
+       "Botswana",
+       "Namibia"
+      ],
+      "label": "Typical pattern, varies by event",
+      "zoom": "world"
+     }
+    },
+    {
+     "narration": "Start in Peru, where the northern coast is normally desert. In 1997 to 1998, Tumbes got about three thousand three hundred millimetres of rain, more than sixteen times its normal yearly total, according to a 2014 study of Tumbes residents. Other estimates put it nearer twelve times.",
+     "visual": {
+      "type": "zoom",
+      "icon": "sun",
+      "label": "Peru's desert coast",
+      "inner_icon": "cloud-rain",
+      "inner_label": "About 3,300 mm. Source: Bayer et al., 2014 (PMC)"
+     }
+    },
+    {
+     "narration": "That event was one of the strongest El Ni\u00f1os on record. It was the first major El Ni\u00f1o observed extensively by satellites, and it was followed through the La Ni\u00f1a that came after it.",
+     "visual": {
+      "type": "hero",
+      "icon": "binoculars",
+      "label": "First seen extensively by satellites",
+      "sub": "1997 to 1998. Source: NASA"
+     }
+    },
+    {
+     "narration": "The loss of cold water shows in the fish. A Peruvian study says the 1997 to 1998 El Ni\u00f1o affected the anchovy, whose population fell from 5.8 million tons to 1.2 million tons.",
+     "visual": {
+      "type": "bars",
+      "title": "Peruvian anchovy population",
+      "unit": "million tons",
+      "items": [
+       {
+        "label": "May 1997",
+        "value": 5.8,
+        "cue": "5.8"
+       },
+       {
+        "label": "September 1998",
+        "value": 1.2,
+        "cue": "1.2"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "El Ni\u00f1o tends to deepen Indonesia's dry season. NASA links the 2015 fires partly to that drought, which let them smoulder underground in swamp soil, releasing about 1.75 billion tons of greenhouse gases, more than Japan emits in a year.",
+     "visual": {
+      "type": "stat",
+      "value": "1.75 billion tons",
+      "label": "Greenhouse gases (CO2-equivalent), 2015 fires: more than Japan emits in a year. Source: NASA",
+      "icon": "fire"
+     }
+    },
+    {
+     "narration": "Eastern and northern Australia tend to get less winter and spring rain. The 2016 mass bleaching of the Great Barrier Reef struck at the tail end of the 2015 to 2016 El Ni\u00f1o, on top of long-term ocean warming.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "sun",
+       "label": "Eastern Australia",
+       "value": "Often drier"
+      },
+      "right": {
+       "icon": "waves",
+       "label": "Great Barrier Reef",
+       "value": "Mass bleaching, 2016"
+      },
+      "vs": "El Ni\u00f1o"
+     }
+    },
+    {
+     "narration": "Underwater surveys by Hughes and colleagues found that about two-thirds of the shallow-water coral along the reef's northern stretch, some seven hundred kilometres, was lost.",
+     "visual": {
+      "type": "stat",
+      "value": "About 2 in 3",
+      "label": "Shallow coral lost, northern reef. Source: Hughes et al.",
+      "icon": "waves",
+      "fraction": 0.67
+     }
+    },
+    {
+     "narration": "Storms take sides too. FOX Weather counts seven super typhoons in the western Pacific this year, as warm water shifted east gives storms more warm sea to cross, though no single storm is caused by El Ni\u00f1o alone.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "waves",
+        "label": "Warm water shifts east",
+        "cue": "shifted"
+       },
+       {
+        "icon": "hurricane",
+        "label": "Intense typhoons more likely",
+        "cue": "typhoons"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "The Atlantic gets the opposite effect. El Ni\u00f1o tends to bring strong winds high up that tear young hurricanes apart, and ABC News reported in September that the season's peak had arrived without a single hurricane.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "hurricane",
+       "label": "Pacific",
+       "value": "Intense storms more likely"
+      },
+      "right": {
+       "icon": "cloud",
+       "label": "Atlantic",
+       "value": "Often fewer hurricanes"
+      },
+      "vs": "Source: NOAA, ABC News"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The Payoff",
+   "scenes": [
+    {
+     "narration": "So the answer is a chain: wind moves the water, and water moves the rain. The ocean does not send weather; it moves where the rain falls.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "wind",
+        "label": "Wind slackens",
+        "cue": "wind"
+       },
+       {
+        "icon": "waves",
+        "label": "Warm water moves",
+        "cue": "water"
+       },
+       {
+        "icon": "cloud-rain",
+        "label": "Rain follows",
+        "cue": "rain"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "That is how a vast pool of warm water, spreading east across the Pacific to Peru's own coast, could flood a desert while Indonesia dried and the Atlantic went quiet.",
+     "visual": {
+      "type": "hero",
+      "icon": "cloud-rain",
+      "label": "The flooded desert, explained",
+      "sub": "One patch, one chain"
+     }
+    },
+    {
+     "narration": "If NOAA is right, this chain is already playing out. Its latest outlook, from 8 October, gave an eighty-three percent chance that October to December will be the strongest since 1950, by NOAA's own measure. Next update: 12 November.",
+     "visual": {
+      "type": "stat",
+      "value": "83%",
+      "label": "NOAA, 8 Oct outlook: chance of strongest since 1950. Next update 12 Nov",
+      "icon": "thermometer-hot",
+      "fraction": 0.83
+     }
+    },
+    {
+     "narration": "One more twist: El Ni\u00f1o returns every two to seven years, and when the winds recover the ocean can swing to La Ni\u00f1a, the cold opposite, and the seesaw tips back.",
+     "visual": {
+      "type": "cycle",
+      "center": "ENSO",
+      "steps": [
+       {
+        "icon": "thermometer-hot",
+        "label": "El Ni\u00f1o: weak winds",
+        "cue": "El Ni\u00f1o"
+       },
+       {
+        "icon": "equals",
+        "label": "Back to normal",
+        "cue": "recover"
+       },
+       {
+        "icon": "thermometer-cold",
+        "label": "La Ni\u00f1a: strong winds",
+        "cue": "La Ni\u00f1a"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Which side of the seesaw are you on: wetter or drier during El Ni\u00f1o years? Tell us your country, and one thing you remember, like a flood, a failed harvest or a mild winter.",
+     "visual": {
+      "type": "question",
+      "text": "Wetter or drier in El Ni\u00f1o years? Tell us your country."
+     }
+    }
+   ]
+  }
+ ],
+ "short": {
+  "scenes": [
+   1,
+   2,
+   14,
+   19,
+   27
+  ],
+  "outro": "For the full chain of clues behind El Ni\u00f1o, watch the whole episode."
+ },
+ "factcheck": {
+  "ok": true,
+  "summary": "I checked every claim I could against sources and found no errors. One claim, the 40\u201350 cm sea-level gap in scene 6, I did not check myself and left on the writer's NASA citation.",
+  "open_issues": []
+ },
+ "series": "EVERY HOW #06",
+ "editor": {
+  "scores": {
+   "question": 8,
+   "hook": 6,
+   "story": 6,
+   "surprise": 7,
+   "clarity": 7,
+   "pacing": 6,
+   "ending": 6,
+   "accuracy_tone": 7
+  },
+  "average": 6.6,
+  "ship": false,
+  "strengths": [
+   "Timely and evergreen: a possibly strong El Ni\u00f1o now, with a vivid 'desert flooded' image to anchor it.",
+   "The three-clue frame (wind, water, rain) gives the explainer a spine, and the analogies are good (fan blowing water to one end of a pool, bathwater sloshing, seesaw).",
+   "The 'Hold on, why doesn't it always go the same way?' scene is a real mid-episode turn, and the 'tends to / more likely, not guaranteed' hedging is the right tone.",
+   "On-screen source labels, and honest handling of the reef's long-term warming and the single-storm caveat.",
+   "The Peru, anchovy and Indonesia-fire facts are concrete and mostly sourced."
+  ],
+  "problems": [
+   "Hook: scene 1 opens with an ambiguous 'it rained so hard' and no number. The strongest 'wait, really?' fact (Tumbes got over 16 times its normal yearly rain) is buried in scene 19. Scene 2 then spends the first 15 seconds on 'strongest since 1950' and 'a chain of three clues' instead of a payoff.",
+   "Clarity hole: the draft never explains why slackening winds and warm water feed each other. Clue 1 says slack winds push the water east, Clue 2 says warm water weakens the winds, and the viewer is left with a chicken-and-egg loop. The missing link is that air rises over the warm pool and the winds blow toward it. 'Southern Oscillation: the air' is jargon with no payoff. The jet-stream line is asserted, not explained. 'Dries out Indonesia', half the title, gets only 'seesaw' plus a fire stat, with no mention of sinking air clearing the sky.",
+   "Story: after scene 17 the 'Around the World' section (scenes 18-26) becomes a list of regions: Peru, satellites, anchovy, Indonesia, Australia, reef, typhoons, Atlantic. There is no prediction-and-test tension, even though scene 18 says 'time to test the chain'.",
+   "Pacing: 31 scenes, with filler and repeats. The Christmas Child and ENSO-halves scenes delay the question. Scene 20 (first observed by satellites, 'followed through the La Ni\u00f1a') adds nothing to the question. The reef takes two scenes on a bleaching topic that is not rain. The chain is restated at scene 2, scene 27, scene 28 and in the title. 'Peru's own coast' is repeated.",
+   "Ending: the answer (scene 27) arrives before the 83% outlook and the La Ni\u00f1a twist, so the episode deflates into a stat and a side fact before the comment prompt. Scene 28 repeats scene 27. The prompt ('wetter or drier?') is a binary most viewers can answer in one word. Only the second half ('one thing you remember') invites stories.",
+   "Accuracy risks: 'Other estimates put it nearer twelve times' is unsourced and vague. The 'more than Japan emits in a year' comparison has no Japan source in the list. The fact-check admits it did not verify the 40-50 cm figure. The 'strongest since 1950' claim is hedged as 'may be' in scene 2 but stated as an 83% chance in scene 29 with no explanation of NOAA's measure. 'The Atlantic went quiet' turns one season's anecdote (ABC News) into proof. FOX Weather is a weak source for the super-typhoon count. 'Warm water shifted east gives storms more warm sea to cross' is confusing. 'Here is the trap' and 'Storms take sides' are slightly breathless. 'This year' and 'next update 12 November' will date quickly.",
+   "Smaller wording issues: the title is ungrammatical ('How Warm Water ... Floods'), and the description's 'it rained' has an unclear subject. 'The cause was' in the hook is stronger than the 'tends to' tone used elsewhere."
+  ],
+  "rounds": 2
+ }
+}

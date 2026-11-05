@@ -1,0 +1,339 @@
+{
+ "id": "iy-07-eating-snow",
+ "title": "Why Eating Snow Burns Your Last Heat",
+ "description": "Lost in a whiteout, you're thirsty and surrounded by snow. Eating it feels like the obvious fix, but your body pays for every mouthful in heat, and the wind collects the rest. Would you stay in your snow hole or walk for the ridge?",
+ "tags": [
+  "survival",
+  "snow survival",
+  "whiteout",
+  "hypothermia",
+  "survival tips",
+  "eating snow",
+  "what would you do",
+  "shorts"
+ ],
+ "series": "SURVIVE #07",
+ "voice": "am_michael",
+ "speed": 1.15,
+ "costume": "cap",
+ "hud": [
+  "DAY 1 \u00b7 02:00 PM",
+  "\u25cf LOST IN A WHITEOUT",
+  "WATER: ZERO"
+ ],
+ "scenes": [
+  {
+   "bg": "snow",
+   "pose": "kneel",
+   "poses": [
+    "kneel",
+    "reach",
+    "drink"
+   ],
+   "x": 0.45,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.18
+   },
+   "hud": [
+    "DAY 1 \u00b7 02:00 PM",
+    "\u25cf LOST IN A WHITEOUT",
+    "WATER: ZERO"
+   ],
+   "mood": "tense",
+   "narration": "Imagine you're lost in snow, and eating it kills faster than thirst.",
+   "highlight": [
+    "kills",
+    "thirst"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "stand",
+   "poses": [
+    "stand",
+    "kneel",
+    "drink"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.12
+   },
+   "rule": {
+    "n": 1,
+    "text": "NEVER EAT SNOW",
+    "sub": "MELT IT FIRST"
+   },
+   "mood": "urgent",
+   "narration": "Your bottle is empty and the snow looks like water. You swallow one mouthful. Rule one: never eat it raw.",
+   "highlight": [
+    "one mouthful",
+    "never"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "reach",
+   "poses": [
+    "reach",
+    "drink",
+    "shiver"
+   ],
+   "x": 0.4,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 1 \u00b7 02:30 PM",
+    "\u25cf MELTING SNOW IN YOUR MOUTH",
+    "10 IN SNOW = 1 IN WATER"
+   ],
+   "mood": "calm",
+   "narration": "Melting a handful pulls as much heat from your core as a cup of ice water. You see, it's like dropping ice into hot tea: the tea cools.",
+   "highlight": [
+    "cup of ice water",
+    "tea cools"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "shiver",
+   "poses": [
+    "shiver",
+    "cower",
+    "shiver"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "shake",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.22
+   },
+   "hud": [
+    "DAY 1 \u00b7 04:00 PM",
+    "\u25cf WIND STARTS",
+    "CORE TEMP: 35\u00b0C"
+   ],
+   "mood": "tense",
+   "narration": "Two hours later, your teeth chatter and your hands shake. Then wind hits your wet gloves. Wind plus wet skin does the rest.",
+   "highlight": [
+    "teeth chatter",
+    "wet skin"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "build",
+   "poses": [
+    "build",
+    "crouch",
+    "shock"
+   ],
+   "x": 0.35,
+   "props": [
+    "fire"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 1 \u00b7 06:00 PM",
+    "\u25cf FIRE VS WIND",
+    "FIRE: DYING"
+   ],
+   "mood": "tense",
+   "narration": "You strike a fire to melt water. [pause] The wind bends the flame... and snuffs it out.",
+   "highlight": [
+    "wind",
+    "snuffs it out"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "kneel",
+   "poses": [
+    "kneel",
+    "build",
+    "crouch"
+   ],
+   "x": 0.4,
+   "move_to": 0.6,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 1 \u00b7 09:00 PM",
+    "\u25cf FIRE OUT \u00b7 -20\u00b0C",
+    "HANDS: WHITE"
+   ],
+   "rule": {
+    "n": 2,
+    "text": "DIG IN EARLY",
+    "sub": "SNOW INSULATES"
+   },
+   "mood": "urgent",
+   "narration": "The light fades. It's minus twenty, and your fingers turn white. Rule two: dig into a drift and crawl in.",
+   "highlight": [
+    "minus twenty",
+    "dig"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "build",
+   "poses": [
+    "build",
+    "crouch",
+    "sit"
+   ],
+   "x": 0.6,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.1,
+    "z1": 1.22
+   },
+   "mood": "whisper",
+   "narration": "You dig and crawl in. You see, snow works like a down jacket: outside it's minus twenty, inside it stays near zero.",
+   "highlight": [
+    "down jacket",
+    "near zero"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "sit",
+   "poses": [
+    "sit",
+    "stand",
+    "think"
+   ],
+   "x": 0.55,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.25
+   },
+   "hud": [
+    "DAY 2 \u00b7 06:30 AM",
+    "\u25cf SNOW HOLE: 2\u00b0C",
+    "WATER: ZERO"
+   ],
+   "mood": "reveal",
+   "narration": "You wake alive. Your hole sits at two degrees. The same snow that stole your heat just saved your life.",
+   "highlight": [
+    "two degrees",
+    "saved your life"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "sit",
+   "poses": [
+    "sit",
+    "drink",
+    "lookout"
+   ],
+   "x": 0.4,
+   "props": [
+    "fire"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.12
+   },
+   "hud": [
+    "DAY 2 \u00b7 07:00 AM",
+    "\u25cf CANDLE LIT IN THE HOLE",
+    "WATER: ONE CUP"
+   ],
+   "mood": "calm",
+   "narration": "Inside, one candle melts a cup of snow. You drink. Then a ridge appears, four hours away.",
+   "highlight": [
+    "one candle",
+    "four hours"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "stand",
+   "poses": [
+    "stand",
+    "think",
+    "point"
+   ],
+   "x": 0.45,
+   "props": [
+    "fire"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.15
+   },
+   "mood": "tense",
+   "narration": "Stay with one cup, or walk four hours into the wind? Comment A or B.",
+   "highlight": [
+    "stay",
+    "walk"
+   ],
+   "choice": {
+    "q": "WHAT DO YOU DO?",
+    "options": [
+     "A \u00b7 STAY: 1 CUP, NO ONE KNOWS WHERE YOU ARE",
+     "B \u00b7 WALK 4 HRS: -20\u00b0C WIND, NO SHELTER"
+    ]
+   },
+   "hold_after": 2.0
+  }
+ ],
+ "editor": {
+  "scores": {
+   "premise": 6,
+   "hook": 5,
+   "title": 7,
+   "specificity": 6,
+   "escalation": 5,
+   "twist": 5,
+   "showability": 6,
+   "voice": 6
+  },
+  "average": 5.8,
+  "ship": false,
+  "strengths": [
+   "The title's curiosity gap is decent: 'Last Heat' implies a hidden cost.",
+   "The core idea is counter-intuitive and visual: snow steals heat, then snow insulates.",
+   "The time-stamped HUD gives a clear clock, and the 'down jacket' comparison after 'You see,' is a good one.",
+   "The final A/B has real stakes on both sides, and the word count (~190) is in range.",
+   "The scene-8 line 'The same snow that stole your heat just saved your life' is a strong thesis line."
+  ],
+  "problems": [
+   "Hook: it opens with 'Imagine', which is setup, and the claim 'kills faster than thirst' is overstated. Thirst takes days, and no viewer who knows that will believe it.",
+   "Premise: lost in a whiteout with no water is the familiar survival-tip setup. The danger (shivering from cold water) is slow and abstract, with no vivid moment of 'this is how you die'.",
+   "Escalation: the mechanism chain breaks. Eating snow leads to shivering, then wind on wet gloves, then a fire that fails, then a snow hole. The gloves and fire are tangents unconnected to eating snow. There are 10 scenes where the rubric asks for 3-5 beats, and the stakes go flat once the hole is dug.",
+   "Both rules ('NEVER EAT SNOW', 'DIG IN EARLY') are announced before the consequence is shown. That kills tension and makes the episode a lecture.",
+   "Specificity: 'as much heat as a cup of ice water' is vague and unverifiable. The HUD line '10 IN SNOW = 1 IN WATER' is never explained in narration, so it is not shown by anything the viewer hears. 'Wind plus wet skin does the rest' is filler. 'Core temp 35\u00b0C' appears with no cause.",
+   "Twist: the 'snow saved you' reveal lands in scene 8, not near the end. The last two scenes then add an unrelated new problem (a ridge), so nothing recontextualises the story.",
+   "A/B choice: staying put is the textbook survival answer, so the choice isn't hard. The options are also loaded with negative labels ('NO ONE KNOWS' vs 'NO SHELTER') instead of two real tradeoffs.",
+   "Showability: 'wind bends the flame', 'a ridge appears four hours away' and 'wet gloves' have no clean literal visual. The candle reuses the 'fire' prop. The 'drink' pose is used with no bottle or cup.",
+   "Voice: 'Imagine' is used, and 'You swallow one mouthful' is flat. Several lines are narrated summary ('The light fades') instead of punchy facts."
+  ],
+  "rounds": 2
+ }
+}

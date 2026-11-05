@@ -344,6 +344,32 @@
     "facebook": "https://www.facebook.com/reel/4372091849787558",
     "media": "https://hiretechuk.github.io/video-autopilot/media/IY-06-50ff2389.mp4"
    }
+  },
+  "IY-07": {
+   "series": "imagine_you",
+   "number": 7,
+   "title": "Why Eating Snow Burns Your Last Heat",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/IY-07.json",
+   "created": "2026-11-05T04:56:53.458378+00:00"
+  },
+  "EH-06": {
+   "series": "every_how",
+   "number": 6,
+   "title": "How Warm Water in the Pacific Floods Peru and Dries Out Indonesia?",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/EH-06.json",
+   "created": "2026-11-05T06:25:08.864008+00:00",
+   "private": {
+    "full": "BeJ5jkU6WY8",
+    "short": "fL2WxurmVVU",
+    "thumbnail": "set",
+    "version": 1,
+    "minutes": 5.7,
+    "superseded": []
+   }
   }
  },
  "seen": [
