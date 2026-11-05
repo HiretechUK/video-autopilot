@@ -1,0 +1,751 @@
+{
+ "title": "What Happens If the Strait of Hormuz Reopens?",
+ "question": "What happens to oil, prices and your money if the Strait of Hormuz reopens after eight months?",
+ "description": "For eight months the Strait of Hormuz, the route for a fifth of the world's oil, has been almost shut. Now Qatar is pushing a deal and oil is falling. Here is how a reopening would actually work, what it could do to prices in Asia, Africa, Europe and the Americas, and what it means for your money. Will the strait be open by the new year? Tell us in the comments.",
+ "tags": [
+  "Strait of Hormuz",
+  "oil prices",
+  "Iran",
+  "Brent crude",
+  "Qatar",
+  "oil market",
+  "fuel prices",
+  "inflation",
+  "Persian Gulf",
+  "explained",
+  "what happens if"
+ ],
+ "ad_safety": {
+  "rating": "yellow",
+  "reason": "An ongoing war; handled as economics and diplomacy with no violence shown or described."
+ },
+ "money": true,
+ "thumbnail": {
+  "text": "Hormuz reopens? / Your money",
+  "countries": [
+   "Iran"
+  ],
+  "markers": [
+   {
+    "lat": 26.57,
+    "lon": 56.25
+   }
+  ]
+ },
+ "sources": [
+  {
+   "title": "Reuters via Lufkin Daily News: Tankers hit in Hormuz as Iran keeps up pressure after US vote (5 Nov 2026)",
+   "url": "https://lufkindailynews.com/news_reuters/top_news/tankers-hit-in-hormuz-as-iran-keeps-up-pressure-after-us-vote/article_e2a7f1bc-c0e8-5c4c-86c2-9b049ebc5dfc.html"
+  },
+  {
+   "title": "Gulf News live: Trump weighs Iran strikes or deal after midterm loss; Brent falls to $93 (5 Nov 2026)",
+   "url": "https://gulfnews.com/world/mena/trump-weighs-iran-strikes-or-deal-after-midterm-loss-as-vance-urges-agreement-qatar-mediates-brent-oil-falls-to-93-1.500736556"
+  },
+  {
+   "title": "Oilprice.com: Iran opens Strait of Hormuz to China and India as US blockade continues (5 Nov 2026)",
+   "url": "https://oilprice.com/Energy/Energy-General/Iran-Opens-Strait-of-Hormuz-to-China-and-India-as-U.S.-Blockade-Continues.html"
+  },
+  {
+   "title": "US EIA: Amid regional conflict, the Strait of Hormuz remains critical oil chokepoint",
+   "url": "https://eia.gov/todayinenergy/detail.php?id=65504"
+  },
+  {
+   "title": "straits.live (IMF PortWatch transit data)",
+   "url": "https://straits.live/"
+  },
+  {
+   "title": "Wikipedia: 2026 Strait of Hormuz crisis",
+   "url": "https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis"
+  },
+  {
+   "title": "Wikipedia: 2026-2028 world oil market chronology",
+   "url": "https://en.wikipedia.org/wiki/2026%E2%80%932028_world_oil_market_chronology"
+  }
+ ],
+ "sections": [
+  {
+   "heading": "",
+   "scenes": [
+    {
+     "narration": "For most of the past eight months, the most important stretch of water in the global economy has been almost shut. On one recent day, ship-tracking data counted just two cargo ships crossing.",
+     "visual": {
+      "type": "newsmap",
+      "from": "world",
+      "focus": [
+       "Iran"
+      ],
+      "markers": [
+       {
+        "lat": 26.57,
+        "lon": 56.25,
+        "label": "Strait of Hormuz",
+        "cue": "water"
+       }
+      ],
+      "label": "Day 249"
+     }
+    },
+    {
+     "narration": "This week brought more damaged tankers, a shock result in America's midterm elections, and a new push by Qatar to restart peace talks.",
+     "visual": {
+      "type": "headline",
+      "source": "Reuters",
+      "date": "5 Nov 2026",
+      "text": "Tankers hit in Hormuz as Iran keeps up pressure after US vote"
+     }
+    },
+    {
+     "narration": "Oil traders moved fast. Brent crude fell almost eight percent on Wednesday, dropping below a hundred dollars a barrel for the first time since early October.",
+     "visual": {
+      "type": "price",
+      "label": "Brent crude, $ per barrel",
+      "from": 118,
+      "to": 93.6,
+      "points": [
+       118,
+       103.6,
+       93.6
+      ],
+      "prefix": "$",
+      "scenario": false,
+      "note": "Last Friday's high, Tuesday's close, Thursday morning"
+     }
+    },
+    {
+     "narration": "So here is the question the whole oil market is asking. What happens if the Strait of Hormuz actually reopens?",
+     "visual": {
+      "type": "kicker",
+      "text": "What if Hormuz / reopens?",
+      "countries": [
+       "Iran"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The chokepoint",
+   "scenes": [
+    {
+     "narration": "The strait links the Persian Gulf to the open ocean, squeezed between Iran on one side and Oman on the other.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "Iran"
+      ],
+      "also": [
+       "Oman",
+       "United Arab Emirates"
+      ],
+      "markers": [
+       {
+        "lat": 26.57,
+        "lon": 56.25,
+        "label": "Strait of Hormuz",
+        "cue": "squeezed"
+       }
+      ],
+      "zoom": "close"
+     }
+    },
+    {
+     "narration": "Before the war, about twenty million barrels of oil a day passed through it. That is roughly a fifth of all the oil the world uses.",
+     "visual": {
+      "type": "stat",
+      "value": "20%",
+      "label": "of the world's oil use passed through here",
+      "icon": "drop",
+      "fraction": 0.2
+     }
+    },
+    {
+     "narration": "Most of it sailed east. China, India, Japan and South Korea together took nearly seven in every ten barrels of crude.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "Iran"
+      ],
+      "also": [
+       "China",
+       "India",
+       "Japan",
+       "South Korea"
+      ],
+      "arrows": [
+       {
+        "from": [
+         26.57,
+         56.25
+        ],
+        "to": "India",
+        "cue": "India"
+       },
+       {
+        "from": [
+         26.57,
+         56.25
+        ],
+        "to": "China",
+        "cue": "China"
+       },
+       {
+        "from": [
+         26.57,
+         56.25
+        ],
+        "to": "Japan",
+        "cue": "Japan"
+       }
+      ],
+      "zoom": "wide",
+      "labels": false
+     }
+    },
+    {
+     "narration": "And it is not just oil. About a fifth of the world's liquefied natural gas trade came this way too, almost all of it from Qatar.",
+     "visual": {
+      "type": "hero",
+      "icon": "flame",
+      "label": "Liquefied natural gas",
+      "sub": "About 1 in 5 cargoes worldwide"
+     }
+    },
+    {
+     "narration": "If you want one big story like this explained every day, subscribe. Now, how did one strip of water shake the whole world economy?",
+     "visual": {
+      "type": "question",
+      "text": "How did one strip of water shake the world?"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "How it closed",
+   "scenes": [
+    {
+     "narration": "The war began on the twenty-eighth of February, when the United States and Israel struck Iran. Within a week, Iran declared the strait closed.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "28 Feb",
+        "label": "US and Israel strike Iran",
+        "icon": "warning",
+        "cue": "began"
+       },
+       {
+        "year": "4 Mar",
+        "label": "Iran declares the strait closed",
+        "icon": "prohibit",
+        "cue": "declared"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Iran did not need to sink every ship. A few attacks and the threat of mines made the trip too risky, and insurers stopped covering it.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "warning",
+        "label": "Attacks",
+        "cue": "attacks"
+       },
+       {
+        "icon": "shield-warning",
+        "label": "Mine threat",
+        "cue": "mines"
+       },
+       {
+        "icon": "file-text",
+        "label": "No insurance",
+        "cue": "insurers"
+       },
+       {
+        "icon": "anchor",
+        "label": "Ships wait",
+        "cue": "covering"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "On a normal day, about eighty-five commercial ships cross. On the twenty-fifth of October, ship-tracking data counted just two.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "boat",
+       "label": "Normal day",
+       "value": "85"
+      },
+      "right": {
+       "icon": "boat",
+       "label": "25 October",
+       "value": "2"
+      },
+      "vs": "vs"
+     }
+    },
+    {
+     "narration": "Here is the key thing about oil: it has one global price. When supply vanishes anywhere, buyers everywhere bid against each other for what is left.",
+     "visual": {
+      "type": "cycle",
+      "center": "One world price",
+      "steps": [
+       {
+        "icon": "drop",
+        "label": "Supply drops"
+       },
+       {
+        "icon": "users-three",
+        "label": "Buyers compete"
+       },
+       {
+        "icon": "trend-up",
+        "label": "Price rises"
+       },
+       {
+        "icon": "globe-hemisphere-east",
+        "label": "Everyone pays"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "That is why Brent, the world's benchmark crude, hit a hundred and twenty-six dollars a barrel at the end of April, up from about seventy-two before the war.",
+     "visual": {
+      "type": "stat",
+      "value": "$126",
+      "label": "Brent's peak on 30 April, from about $72 before the war",
+      "icon": "trend-up"
+     }
+    },
+    {
+     "narration": "Governments released four hundred million barrels from emergency stockpiles. It sounds huge, but it is only about four days of the world's demand.",
+     "visual": {
+      "type": "bars",
+      "title": "Emergency oil release",
+      "unit": "",
+      "items": [
+       {
+        "label": "Released (million barrels)",
+        "value": 400
+       },
+       {
+        "label": "Days of world demand",
+        "value": 4
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The deal on the table",
+   "scenes": [
+    {
+     "narration": "Now Qatar is trying to broker a way out. Its draft plan reportedly sets out three days of confidence-building steps that could restart talks within days.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "Qatar"
+      ],
+      "also": [
+       "Iran"
+      ],
+      "arrows": [
+       {
+        "from": "Qatar",
+        "to": "Iran",
+        "label": "talks",
+        "cue": "broker"
+       }
+      ],
+      "label": "Qatar mediates"
+     }
+    },
+    {
+     "narration": "Iran says it will not reopen the strait until three things happen: the American naval blockade of its ports ends, sanctions are eased, and its frozen money is released.",
+     "visual": {
+      "type": "list",
+      "heading": "Iran's conditions",
+      "items": [
+       {
+        "icon": "anchor",
+        "text": "End the naval blockade",
+        "cue": "blockade"
+       },
+       {
+        "icon": "scales",
+        "text": "Ease sanctions",
+        "cue": "sanctions"
+       },
+       {
+        "icon": "lock-open",
+        "text": "Release frozen funds",
+        "cue": "frozen"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Iran is already picking favourites. This week a senior Iranian lawmaker said ships from India, China, Iraq and Qatar may now pass freely.",
+     "visual": {
+      "type": "quote",
+      "text": "We have currently exempted India, China, Iraq and Qatar from transit restrictions in the Strait of Hormuz.",
+      "who": "Ahmad Hayat-Moghaddam, Iranian MP"
+     }
+    },
+    {
+     "narration": "In Washington, the picture is split. Reports say some advisers want a deal, while others want to keep the blockade, and the military is still preparing options.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "handshake",
+       "label": "Make a deal"
+      },
+      "right": {
+       "icon": "shield",
+       "label": "Keep the pressure"
+      },
+      "vs": "or"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The scenario",
+   "scenes": [
+    {
+     "narration": "Now the scenario. None of this has happened yet. Let's say a deal holds and the strait reopens.",
+     "visual": {
+      "type": "kicker",
+      "text": "Scenario: / the strait reopens",
+      "countries": [
+       "Iran",
+       "Oman"
+      ]
+     }
+    },
+    {
+     "narration": "Reopening is not a switch. It is a ladder: talks restart, the blockade eases, mines are cleared, insurers return, and only then do the big tankers come back.",
+     "visual": {
+      "type": "ladder",
+      "title": "How a reopening works",
+      "steps": [
+       {
+        "label": "Talks restart",
+        "cue": "talks"
+       },
+       {
+        "label": "Blockade eases",
+        "cue": "blockade"
+       },
+       {
+        "label": "Mines cleared",
+        "cue": "mines"
+       },
+       {
+        "label": "Insurers return",
+        "cue": "insurers"
+       },
+       {
+        "label": "Tankers sail",
+        "cue": "tankers"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Mines are the slow part. By August, American underwater drones had already identified more than a hundred suspected mines in the area.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "Iran"
+      ],
+      "also": [
+       "Oman"
+      ],
+      "markers": [
+       {
+        "lat": 26.57,
+        "lon": 56.25,
+        "label": "100+ suspected mines",
+        "cue": "hundred"
+       }
+      ],
+      "zoom": "close",
+      "labels": false
+     }
+    },
+    {
+     "narration": "Then there is the traffic jam. In May, Saudi Aramco said more than six hundred ships were stuck inside the Gulf, with another two hundred and forty waiting outside.",
+     "visual": {
+      "type": "photo",
+      "query": "oil tanker at sea",
+      "caption": "Ships waiting to sail",
+      "icon": "boat"
+     }
+    },
+    {
+     "narration": "We have had a preview. In June, when tankers were moving again, Brent sank to about seventy-four dollars. A lasting reopening could pull prices back toward that level.",
+     "visual": {
+      "type": "price",
+      "label": "Brent crude, $ per barrel",
+      "from": 93.6,
+      "to": 74,
+      "prefix": "$",
+      "note": "If June repeats itself: an illustration, not a forecast"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The ripple",
+   "scenes": [
+    {
+     "narration": "First ring: the Gulf itself. Qatar's gas has no other way out, so its exports could restart, and Gulf oil producers could sell at full speed again.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "Qatar"
+      ],
+      "also": [
+       "Saudi Arabia",
+       "United Arab Emirates",
+       "Kuwait",
+       "Iraq"
+      ],
+      "markers": [
+       {
+        "lat": 25.92,
+        "lon": 51.55,
+        "label": "Ras Laffan gas",
+        "cue": "gas"
+       }
+      ],
+      "label": "Ring one"
+     }
+    },
+    {
+     "narration": "Second ring: Asia. Japan gets about seventy percent of its Middle Eastern oil through this strait, so refiners in Japan, India and China would feel the relief first.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "Japan",
+       "India",
+       "China"
+      ],
+      "arrows": [
+       {
+        "from": [
+         26.57,
+         56.25
+        ],
+        "to": "Japan",
+        "cue": "Japan"
+       },
+       {
+        "from": [
+         26.57,
+         56.25
+        ],
+        "to": "India",
+        "cue": "India"
+       }
+      ],
+      "label": "Ring two",
+      "zoom": "wide"
+     }
+    },
+    {
+     "narration": "Third ring: everyone else. Oil is still about twenty dollars above its pre-war price, and that gap is built into fuel, flights and shipping costs worldwide.",
+     "visual": {
+      "type": "bars",
+      "title": "Brent crude, $ per barrel",
+      "items": [
+       {
+        "label": "Before the war",
+        "value": 72
+       },
+       {
+        "label": "April peak",
+        "value": 126
+       },
+       {
+        "label": "This week",
+        "value": 94
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Cheaper diesel makes trucking and farming cheaper, and fertiliser supplies, which were also disrupted, could recover, easing pressure on food prices.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "gas-pump",
+        "label": "Cheaper diesel",
+        "cue": "diesel"
+       },
+       {
+        "icon": "truck",
+        "label": "Cheaper transport",
+        "cue": "trucking"
+       },
+       {
+        "icon": "plant",
+        "label": "Fertiliser recovers",
+        "cue": "fertiliser"
+       },
+       {
+        "icon": "shopping-cart",
+        "label": "Food prices ease",
+        "cue": "food"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "But there is another branch. Two sources told Reuters they still expect renewed American strikes, and in late April, after talks broke down, oil shot above a hundred and twenty dollars.",
+     "visual": {
+      "type": "question",
+      "text": "And if the talks fail?"
+     }
+    },
+    {
+     "narration": "So the market swings between two memories: June's seventy-four dollars and April's hundred and twenty-six. Every headline nudges it one way or the other.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "trend-down",
+       "label": "Deal holds (June)",
+       "value": "$74"
+      },
+      "right": {
+       "icon": "trend-up",
+       "label": "Talks fail (April)",
+       "value": "$126"
+      },
+      "vs": "or"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Your money",
+   "scenes": [
+    {
+     "narration": "So what does all this mean for your money, wherever you live?",
+     "visual": {
+      "type": "title",
+      "text": "Your money",
+      "icon": "wallet"
+     }
+    },
+    {
+     "narration": "Fuel prices usually take a while to follow crude, so do not expect cheaper petrol the day a deal is signed. And if talks fail, prices can rise faster than they fall.",
+     "visual": {
+      "type": "hero",
+      "icon": "gas-pump",
+      "label": "Fuel follows oil, slowly",
+      "sub": "Up fast, down slow"
+     }
+    },
+    {
+     "narration": "Oil also feeds inflation, and inflation shapes interest rates. Cheaper oil gives central banks more room to cut rates. Another spike could keep borrowing expensive for longer.",
+     "visual": {
+      "type": "zoom",
+      "icon": "bank",
+      "label": "Your central bank",
+      "inner_icon": "percent",
+      "inner_label": "Interest rates"
+     }
+    },
+    {
+     "narration": "A few calm moves work in either branch: keep a few months of essential costs saved, avoid big money decisions on one headline, and budget for fuel and food to swing twenty percent either way.",
+     "visual": {
+      "type": "list",
+      "heading": "Calm moves",
+      "items": [
+       {
+        "icon": "piggy-bank",
+        "text": "Keep months of costs saved",
+        "cue": "saved"
+       },
+       {
+        "icon": "newspaper",
+        "text": "No big moves on one headline",
+        "cue": "headline"
+       },
+       {
+        "icon": "calculator",
+        "text": "Budget for a 20% swing",
+        "cue": "budget"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "None of this is a prediction, and none of it is financial advice. It is a map of the possibilities, so the next headline does not catch you off guard.",
+     "visual": {
+      "type": "kicker",
+      "text": "Not a prediction / Not advice"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The bottom line",
+   "scenes": [
+    {
+     "narration": "Eight months ago, one narrow strait went quiet, and people far from the Gulf felt it at the pump and at the checkout.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "Iran"
+      ],
+      "markers": [
+       {
+        "lat": 26.57,
+        "lon": 56.25,
+        "label": "Strait of Hormuz"
+       }
+      ],
+      "zoom": "wide",
+      "labels": false
+     }
+    },
+    {
+     "narration": "Whether it reopens now depends on talks that have not even restarted, and on steps like mine clearing that take time.",
+     "visual": {
+      "type": "hero",
+      "icon": "handshake",
+      "label": "It starts with trust",
+      "sub": "Talks, then mines, then ships"
+     }
+    },
+    {
+     "narration": "So what do you think? Will the strait be open by the new year, or will the talks fall apart again? Tell me in the comments.",
+     "visual": {
+      "type": "question",
+      "text": "Open by the new year, or talks collapse?"
+     }
+    }
+   ]
+  }
+ ],
+ "short": {
+  "scenes": [
+   1,
+   6,
+   3,
+   21,
+   24,
+   35
+  ],
+  "outro": "The full story, and what it means for your money, is on Every How."
+ }
+}
