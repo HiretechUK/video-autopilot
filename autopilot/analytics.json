@@ -748,6 +748,178 @@
      }
     }
    }
+  },
+  {
+   "at": "2026-11-05T13:17:41.447976+00:00",
+   "series": {
+    "imagine_you": {
+     "channel": "Imagine You",
+     "subscribers": 11,
+     "channel_views": 6216,
+     "videos": {
+      "IY-01:youtube": {
+       "id": "d-OCr2W4klA",
+       "views": 1247,
+       "likes": 11,
+       "comments": 2,
+       "duration": "PT52S",
+       "problems": []
+      },
+      "IY-02:youtube": {
+       "id": "MPu00hbAaWw",
+       "views": 1332,
+       "likes": 28,
+       "comments": 3,
+       "duration": "PT1M1S",
+       "problems": []
+      },
+      "IY-03:youtube": {
+       "id": "VQhguRtVFIQ",
+       "views": 1350,
+       "likes": 59,
+       "comments": 4,
+       "duration": "PT1M9S",
+       "problems": []
+      },
+      "IY-05:youtube": {
+       "id": "IiNVhreNKEA",
+       "views": 1105,
+       "likes": 52,
+       "comments": 2,
+       "duration": "PT1M15S",
+       "problems": []
+      },
+      "IY-06:youtube": {
+       "id": "Zpns0VrWFRA",
+       "views": 1223,
+       "likes": 48,
+       "comments": 5,
+       "duration": "PT1M14S",
+       "problems": []
+      }
+     },
+     "deep": {
+      "d-OCr2W4klA": {
+       "views": 1248,
+       "estimatedMinutesWatched": 292,
+       "averageViewDuration": 24,
+       "averageViewPercentage": 46.36,
+       "subscribersGained": 2,
+       "shares": 0,
+       "kept_10": 0.95,
+       "kept_50": 0.41,
+       "kept_90": 0.26
+      },
+      "MPu00hbAaWw": {
+       "views": 1337,
+       "estimatedMinutesWatched": 450,
+       "averageViewDuration": 30,
+       "averageViewPercentage": 50.23,
+       "subscribersGained": 1,
+       "shares": 1,
+       "kept_10": 0.94,
+       "kept_50": 0.45,
+       "kept_90": 0.3
+      },
+      "VQhguRtVFIQ": {
+       "views": 1144,
+       "estimatedMinutesWatched": 460,
+       "averageViewDuration": 43,
+       "averageViewPercentage": 62.55,
+       "subscribersGained": 2,
+       "shares": 0,
+       "kept_10": 1.04,
+       "kept_50": 0.59,
+       "kept_90": 0.44
+      }
+     }
+    },
+    "every_how": {
+     "channel": "Every How",
+     "subscribers": 2,
+     "channel_views": 529,
+     "videos": {
+      "EH-01:youtube": {
+       "id": "efmYR44H1QU",
+       "views": 2,
+       "likes": 1,
+       "comments": 0,
+       "duration": "PT4M43S",
+       "problems": []
+      },
+      "EH-01:youtube_short": {
+       "id": "sJYE5bGNISA",
+       "views": 124,
+       "likes": 3,
+       "comments": 0,
+       "duration": "PT56S",
+       "problems": []
+      },
+      "EH-05:youtube": {
+       "id": "RstYnn3r7ds",
+       "views": 4,
+       "likes": 1,
+       "comments": 0,
+       "duration": "PT5M30S",
+       "problems": []
+      },
+      "EH-05:youtube_short": {
+       "id": "bOQl08p6CT0",
+       "views": 427,
+       "likes": 5,
+       "comments": 1,
+       "duration": "PT58S",
+       "problems": []
+      }
+     },
+     "deep": {
+      "sJYE5bGNISA": {
+       "views": 122,
+       "estimatedMinutesWatched": 15,
+       "averageViewDuration": 18,
+       "averageViewPercentage": 32.43,
+       "subscribersGained": 0,
+       "shares": 0,
+       "kept_10": 0.86,
+       "kept_50": 0.21,
+       "kept_90": 0.14
+      },
+      "efmYR44H1QU": {
+       "views": 4,
+       "estimatedMinutesWatched": 4,
+       "averageViewDuration": 62,
+       "averageViewPercentage": 21.96,
+       "subscribersGained": 0,
+       "shares": 0
+      }
+     }
+    },
+    "paws_claws": {
+     "channel": "Paws & Claws Club",
+     "subscribers": 1,
+     "channel_views": 23,
+     "videos": {
+      "PC-01:youtube": {
+       "id": "tOKfsqphH0I",
+       "views": 28,
+       "likes": 2,
+       "comments": 0,
+       "duration": "PT3M19S",
+       "problems": []
+      }
+     },
+     "deep": {
+      "tOKfsqphH0I": {
+       "views": 13,
+       "estimatedMinutesWatched": 22,
+       "averageViewDuration": 103,
+       "averageViewPercentage": 51.849999999999994,
+       "subscribersGained": 1,
+       "shares": 0
+      }
+     }
+    }
+   }
   }
  ],
  "lessons": {
