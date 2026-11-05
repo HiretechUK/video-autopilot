@@ -1,8 +1,12 @@
 <!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:Kalam;font-weight:700;src:url(fonts/kalam-latin-700-normal.woff2)}
 @font-face{font-family:Hand;font-weight:400;src:url(fonts/patrick-hand-latin-400-normal.woff2)}
+@font-face{font-family:News;font-weight:700;src:url(fonts/oswald-latin-700-normal.woff2)}
+@font-face{font-family:Sans;font-weight:500;src:url(fonts/inter-latin-500-normal.woff2)}
+@font-face{font-family:Sans;font-weight:700;src:url(fonts/inter-latin-700-normal.woff2)}
 body{margin:0;background:#000}</style></head><body>
 <script src="assets.js"></script>
+<script src="geo50.js"></script>
 <script>
 /* Every How renderer: Paper Cut-Out style.
    setup(timeline) then draw(t) per frame. timeline = {duration, vertical, title, scenes:[{start,end,narration,visual,heading,idx}]}
@@ -332,27 +336,271 @@ KIT.end = (v, sc, lt) => {
   chip('Subscribe', W / 2, 780, 56, C.accents[6], ein(lt, 1.0, .5, eBack));
 };
 
+// ---------------------------------------------------------------- the dark "news" layer (hybrid look)
+// News scenes (maps, photos, headlines, kicker boxes, escalation ladders, price moves) are dark and cinematic:
+// shaded-relief terrain, glowing borders, bold condensed type. Explainer scenes stay Paper Cut-Out.
+const D = { bg: '#050D13', ink: '#EEF4F3', dim: 'rgba(238,244,243,.6)', red: '#FF3B30', amber: '#FFB020', teal: '#5FD3C6', hl: '#FFD34D', line: 'rgba(150,215,210,.28)' };
+const DARK = new Set(['newsmap', 'photo', 'headline', 'kicker', 'ladder', 'price']);
+const isDark = sc => DARK.has(sc && sc.visual && sc.visual.type);
+let TERRAIN = null, GRAIN = null; const IMGS = {};
+const MAPY = 470;
+function nfont(size, f = 'news') { return f === 'news' ? `700 ${size}px News` : `${f === 'bold' ? 700 : 500} ${size}px Sans`; }
+function dW(s, size, f, ls = 0) { ctx.save(); ctx.font = nfont(size, f); ctx.letterSpacing = ls + 'px'; const w = ctx.measureText(String(s)).width; ctx.restore(); return w; }
+function dtext(s, x, y, size, o = {}) {
+  if ((o.a ?? 1) <= .01 || s == null) return;
+  ctx.save(); ctx.globalAlpha *= (o.a ?? 1); ctx.font = nfont(size, o.f); ctx.letterSpacing = (o.ls || 0) + 'px';
+  ctx.textAlign = o.align || 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = o.color || D.ink;
+  if (o.glow) { ctx.shadowColor = o.glow; ctx.shadowBlur = 22; } else if (o.shadow !== false) { ctx.shadowColor = 'rgba(0,0,0,.75)'; ctx.shadowBlur = 12; ctx.shadowOffsetY = 3; }
+  ctx.fillText(String(s), x, y); ctx.restore();
+}
+function dwrap(s, size, maxW, f, ls = 0) {
+  ctx.save(); ctx.font = nfont(size, f); ctx.letterSpacing = ls + 'px'; const words = String(s || '').split(/\s+/), lines = []; let cur = '';
+  for (const w of words) { const t = cur ? cur + ' ' + w : w; if (ctx.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t; }
+  if (cur) lines.push(cur); ctx.restore(); return lines;
+}
+function dpara(s, x, y, size, maxW, o = {}) {
+  let sz = size, lines = dwrap(s, sz, maxW, o.f, o.ls);
+  while (lines.length > (o.max || 3) && sz > 24) { sz -= 4; lines = dwrap(s, sz, maxW, o.f, o.ls); }
+  const lh = sz * (o.lh || 1.16), y0 = o.valign === 'top' ? y : y - (lines.length - 1) * lh / 2;
+  lines.forEach((l, i) => dtext(l, x, y0 + i * lh, sz, o)); return lines.length * lh;
+}
+function glowStroke(path, color, w, a = 1, blur = 26) {
+  if (a <= .01) return;
+  ctx.save(); ctx.globalAlpha *= a; ctx.lineJoin = ctx.lineCap = 'round'; ctx.strokeStyle = color;
+  ctx.shadowColor = color; ctx.shadowBlur = blur; ctx.lineWidth = w * 2.2; ctx.globalAlpha *= .45; ctx.stroke(path);
+  ctx.globalAlpha /= .45; ctx.shadowBlur = blur / 3; ctx.lineWidth = w; ctx.stroke(path); ctx.restore();
+}
+function glowFill(path, color, a = 1, blur = 30) { if (a <= .01) return; ctx.save(); ctx.globalAlpha *= a; ctx.shadowColor = color; ctx.shadowBlur = blur; ctx.fillStyle = color; ctx.fill(path); ctx.restore(); }
+function makeGrain() {
+  const t = document.createElement('canvas'); t.width = t.height = 256; const g = t.getContext('2d'), r = rng(7), im = g.createImageData(256, 256);
+  for (let i = 0; i < im.data.length; i += 4) { const v = r() * 255 | 0; im.data[i] = im.data[i + 1] = im.data[i + 2] = v; im.data[i + 3] = 255; }
+  g.putImageData(im, 0, 0); GRAIN = ctx.createPattern(t, 'repeat');
+}
+function finish(dim = 0) { // vignette + film grain over every dark scene
+  if (dim) { ctx.fillStyle = `rgba(3,9,13,${dim})`; ctx.fillRect(0, 0, W, H); }
+  const g = ctx.createRadialGradient(W / 2, H / 2, H * .35, W / 2, H / 2, H * 1.05); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.72)');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  if (GRAIN) { ctx.save(); ctx.globalAlpha = .045; ctx.globalCompositeOperation = 'overlay'; GRAIN.setTransform(new DOMMatrix().translate(hash(boil) * 256, hash(boil + 1) * 256).scale(1 / S)); ctx.fillStyle = GRAIN; ctx.fillRect(0, 0, W, H); ctx.restore(); }
+}
+
+// --- geography: equirectangular with a standard parallel at the camera's latitude (looks right at regional zooms)
+for (const n in GEO) GEO[n].rb = GEO[n].r.map(r => { let a = 1e9, b = 1e9, c = -1e9, d = -1e9; for (let i = 0; i < r.length; i += 2) { a = Math.min(a, r[i]); c = Math.max(c, r[i]); b = Math.min(b, r[i + 1]); d = Math.max(d, r[i + 1]); } return [a, b, c, d]; });
+const GALIAS = { 'usa': 'United States of America', 'united states': 'United States of America', 'us': 'United States of America', 'america': 'United States of America', 'uk': 'United Kingdom', 'britain': 'United Kingdom', 'great britain': 'United Kingdom', 'england': 'United Kingdom', 'uae': 'United Arab Emirates', 'czech republic': 'Czechia', 'ivory coast': "Côte d'Ivoire", 'drc': 'Dem. Rep. Congo', 'dr congo': 'Dem. Rep. Congo', 'democratic republic of the congo': 'Dem. Rep. Congo', 'bosnia': 'Bosnia and Herz.', 'south sudan': 'S. Sudan', 'central african republic': 'Central African Rep.', 'dominican republic': 'Dominican Rep.', 'palestine': 'Palestine', 'gaza': 'Palestine', 'west bank': 'Palestine', 'burma': 'Myanmar', 'eswatini': 'eSwatini', 'swaziland': 'eSwatini', 'north macedonia': 'Macedonia', 'equatorial guinea': 'Eq. Guinea', 'western sahara': 'W. Sahara', 'solomon islands': 'Solomon Is.', 'east timor': 'Timor-Leste' };
+function gname(n) { if (!n) return null; if (GEO[n]) return n; const k = String(n).toLowerCase().trim(); if (GALIAS[k] && GEO[GALIAS[k]]) return GALIAS[k];
+  return Object.keys(GEO).find(c => c.toLowerCase() === k) || Object.keys(GEO).find(c => c.toLowerCase().startsWith(k)) || null; }
+function gpoint(p) { // "Iran" | [lat, lon] | {lat, lon}
+  if (p == null) return null; if (Array.isArray(p)) return [+p[1], +p[0]]; if (typeof p === 'object') return [+p.lon, +p.lat];
+  const c = gname(p); if (!c) return null; const b = GEO[c].b; return [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2];
+}
+const WORLD_CAM = { lon: 15, lat: 18, k: W / (360 * Math.cos(18 * Math.PI / 180)) * 1.02 };
+function camFor(names = [], pts = [], pad = 2.0) {
+  const bx = []; names.map(gname).filter(Boolean).forEach(c => bx.push(GEO[c].b)); pts.forEach(p => p && bx.push([p[0], p[1], p[0], p[1]]));
+  if (!bx.length) return { ...WORLD_CAM };
+  const b = [Math.min(...bx.map(q => q[0])), Math.min(...bx.map(q => q[1])), Math.max(...bx.map(q => q[2])), Math.max(...bx.map(q => q[3]))];
+  const lat = (b[1] + b[3]) / 2, cs = Math.cos(lat * Math.PI / 180), dlon = Math.max(b[2] - b[0], 4), dlat = Math.max(b[3] - b[1], 3);
+  const k = clamp(Math.min(W / (cs * dlon * pad), 760 / (dlat * pad)), WORLD_CAM.k, W / (cs * 7));
+  return { lon: (b[0] + b[2]) / 2, lat: clamp(lat, -60, 75), k };
+}
+function camLerp(a, b, p) { return { lon: lerp(a.lon, b.lon, p), lat: lerp(a.lat, b.lat, p), k: Math.exp(lerp(Math.log(a.k), Math.log(b.k), p)) }; }
+function projector(cam) { const kx = cam.k * Math.cos(cam.lat * Math.PI / 180); return { kx, P: (lon, lat) => [W / 2 + (lon - cam.lon) * kx, MAPY - (lat - cam.lat) * cam.k] }; }
+function ringPath(p, r, P, sh) { for (let i = 0; i < r.length; i += 2) { const [x, y] = P(r[i] + sh, r[i + 1]); i ? p.lineTo(x, y) : p.moveTo(x, y); } p.closePath(); }
+function countryPath(c, cam) {
+  const { kx, P } = projector(cam), L0 = cam.lon - W / 2 / kx - 2, L1 = cam.lon + W / 2 / kx + 2, B0 = cam.lat - (H - MAPY) / cam.k - 2, B1 = cam.lat + MAPY / cam.k + 2, p = new Path2D(); let any = false;
+  GEO[c].r.forEach((r, i) => { const bb = GEO[c].rb[i]; if (bb[3] < B0 || bb[1] > B1) return;
+    for (const sh of [-360, 0, 360]) if (bb[2] + sh > L0 && bb[0] + sh < L1) { ringPath(p, r, P, sh); any = true; } });
+  return any ? p : null;
+}
+function terrain(cam, dim = .15) {
+  ctx.fillStyle = D.bg; ctx.fillRect(0, 0, W, H);
+  if (TERRAIN) {
+    const { kx, P } = projector(cam), IW = TERRAIN.width, IH = TERRAIN.height, latT = Math.min(90, cam.lat + MAPY / cam.k), latB = Math.max(-90, cam.lat - (H - MAPY) / cam.k);
+    for (const sh of [-360, 0, 360]) {
+      const a = Math.max(cam.lon - W / 2 / kx - sh, -180), b = Math.min(cam.lon + W / 2 / kx - sh, 180); if (b <= a || latT <= latB) continue;
+      const [dx, dy] = P(a + sh, latT);
+      ctx.drawImage(TERRAIN, (a + 180) / 360 * IW, (90 - latT) / 180 * IH, (b - a) / 360 * IW, (latT - latB) / 180 * IH, dx, dy, (b - a) * kx, (latT - latB) * cam.k);
+    }
+  }
+  if (dim) { ctx.fillStyle = `rgba(3,9,13,${dim})`; ctx.fillRect(0, 0, W, H); }
+}
+function borders(cam, a = 1) {
+  const p = new Path2D(); for (const c in GEO) { const q = countryPath(c, cam); if (q) p.addPath(q); }
+  ctx.save(); ctx.globalAlpha *= a; ctx.lineWidth = 1.3; ctx.lineJoin = 'round'; ctx.strokeStyle = D.line; ctx.stroke(p); ctx.restore();
+}
+function newsMap(cam, lt, v, o = {}) { // terrain + borders + glowing countries + markers + arrows + labels
+  terrain(cam, o.dim ?? .12); borders(cam, o.dim ? .6 : 1);
+  const { kx, P } = projector(cam), labs = [], pulse = .75 + .25 * Math.sin(lt * 3.2);
+  const groups = [[(v.focus || v.countries || []), D.red], [(v.also || []), D.amber]];
+  groups.forEach(([list, col], g) => list.map(gname).filter(Boolean).forEach((c, i) => {
+    const p = countryPath(c, cam); if (!p) return; const a = ein(lt, (o.at ?? .5) + (g * 2 + i) * .25, .6);
+    glowFill(p, col, a * .22 * pulse, 0); glowStroke(p, col, 3.2, a, 30);
+    if (v.labels !== false) { const b = GEO[c].b, [x, y] = P((b[0] + b[2]) / 2, (b[1] + b[3]) / 2); labs.push([c, x, y, g ? 34 : 46, a, col]); }
+  }));
+  if (v.labels !== false && o.names !== false) { // quiet labels for big neighbours, so the viewer knows where they are
+    const seen = new Set(labs.map(l => l[0]));
+    Object.keys(GEO).map(c => { const b = GEO[c].b, [x, y] = P((b[0] + b[2]) / 2, (b[1] + b[3]) / 2); return [c, x, y, (b[2] - b[0]) * kx]; })
+      .filter(([c, x, y, w]) => !seen.has(c) && w > 230 && x > 140 && x < W - 140 && y > 140 && y < 800).sort((p, q) => q[3] - p[3]).slice(0, 8)
+      .forEach(([c, x, y]) => labs.push([c, x, y, 30, ein(lt, .3, .6) * .55, null]));
+  }
+  (v.arrows || []).forEach((ar, i) => {
+    const f = gpoint(ar.from), t = gpoint(ar.to); if (!f || !t) return;
+    const [x1, y1] = P(...f), [x2, y2] = P(...t), mx = (x1 + x2) / 2, my = (y1 + y2) / 2, dx = x2 - x1, dy = y2 - y1, cx = mx - dy * .25, cy = my + dx * .25 - Math.hypot(dx, dy) * .1;
+    const at = cueTimes(sc_now, v.arrows)[i] + .2, p = ein(lt, at, 1.1, eIO); if (p <= 0) return;
+    const path = new Path2D(), N = 40; for (let k = 0; k <= N * p; k++) { const u = k / N, x = (1 - u) ** 2 * x1 + 2 * (1 - u) * u * cx + u * u * x2, y = (1 - u) ** 2 * y1 + 2 * (1 - u) * u * cy + u * u * y2; k ? path.lineTo(x, y) : path.moveTo(x, y); }
+    const col = ar.color === 'red' ? D.red : D.amber; ctx.save(); ctx.setLineDash([22, 14]); ctx.lineDashOffset = -lt * 60; glowStroke(path, col, 5, 1, 20); ctx.restore();
+    const u = p, ex = (1 - u) ** 2 * x1 + 2 * (1 - u) * u * cx + u * u * x2, ey = (1 - u) ** 2 * y1 + 2 * (1 - u) * u * cy + u * u * y2, tx = 2 * (1 - u) * (cx - x1) + 2 * u * (x2 - cx), ty = 2 * (1 - u) * (cy - y1) + 2 * u * (y2 - cy), an = Math.atan2(ty, tx);
+    glowFill(poly([[ex + Math.cos(an) * 26, ey + Math.sin(an) * 26], [ex + Math.cos(an + 2.5) * 22, ey + Math.sin(an + 2.5) * 22], [ex + Math.cos(an - 2.5) * 22, ey + Math.sin(an - 2.5) * 22]]), col, 1, 16);
+    if (ar.label) dtext(String(ar.label).toUpperCase(), cx, cy - 34, 36, { ls: 3, a: ein(lt, at + .6, .4), color: col });
+  });
+  (v.markers || []).forEach((m, i) => {
+    const q = gpoint(m.lat != null ? m : (m.at || m.place)); if (!q) return; const [x, y] = P(...q), at = cueTimes(sc_now, v.markers)[i], a = ein(lt, at, .4, eBack); if (a <= 0) return;
+    const col = m.color === 'amber' ? D.amber : D.red;
+    for (let k = 0; k < 2; k++) { const ph = ((lt - at) * .8 + k * .5) % 1; if (lt > at) glowStroke(circle(x, y, 18 + ph * 90, k), col, 3, (1 - ph) * a, 10); }
+    glowFill(circle(x, y, 13 * a, 3), col, 1, 24); glowFill(circle(x, y, 6 * a, 4), '#fff', 1, 6);
+    if (m.label) { const w = dW(String(m.label).toUpperCase(), 34, 'news', 2), lx = x + (x > W - 500 ? -40 - w : 40);
+      ctx.save(); ctx.globalAlpha = ein(lt, at + .2, .4); ctx.fillStyle = 'rgba(5,13,19,.78)'; ctx.fillRect(lx - 12, y - 28, w + 24, 56); ctx.fillStyle = col; ctx.fillRect(x > W - 500 ? lx + w + 8 : lx - 12, y - 28, 4, 56); ctx.restore();
+      dtext(String(m.label).toUpperCase(), lx, y + 2, 34, { align: 'left', ls: 2, a: ein(lt, at + .2, .4), shadow: false }); }
+  });
+  const placed = []; // country labels last, skipping any that would sit on another
+  labs.forEach(([c, x, y, sz, a, col]) => { const nm = (v.names && v.names[c]) || c.replace('United States of America', 'United States'), s = nm.toUpperCase(), w = dW(s, sz, 'news', sz / 8);
+    if (placed.some(([px, py, pw, ps]) => Math.abs(px - x) < (pw + w) / 2 + 12 && Math.abs(py - y) < (ps + sz) * .8)) return; placed.push([x, y, w, sz]);
+    dtext(s, x, y, sz, { ls: sz / 8, a, color: col ? '#fff' : D.dim, glow: col ? 'rgba(255,59,48,.9)' : null }); });
+}
+let sc_now = null;
+function backdrop(lt, dim = .5) { // the episode's region, slowly drifting, behind every non-map news scene
+  const c = TL.backdrop || WORLD_CAM, d = Math.sin(lt * .07 + (sc_now ? sc_now.idx : 0)) * .04;
+  const cam = { lon: c.lon + d * W / c.k / 4, lat: c.lat, k: c.k * (1.08 + lt * .006) };
+  terrain(cam, 0); borders(cam, .5); (TL.backdropFocus || []).forEach(n => { const p = countryPath(n, cam); if (p) glowStroke(p, D.red, 2.5, .55, 20); });
+  ctx.fillStyle = `rgba(3,9,13,${dim})`; ctx.fillRect(0, 0, W, H);
+}
+function dchip(s, x, y, size, color, a = 1, align = 'center') { // condensed caps tag
+  if (a <= .01) return; s = String(s).toUpperCase(); const w = dW(s, size, 'news', size / 10) + size * .9, x0 = align === 'left' ? x : x - w / 2;
+  ctx.save(); ctx.globalAlpha *= a; ctx.fillStyle = color; ctx.shadowColor = 'rgba(0,0,0,.6)'; ctx.shadowBlur = 16; ctx.fillRect(x0, y - size * .75, w, size * 1.5); ctx.restore();
+  dtext(s, x0 + w / 2, y + size * .04, size, { ls: size / 10, a, shadow: false, color: color === '#fff' || color === D.hl ? '#0B0F12' : '#fff' });
+}
+function kickerBoxes(lines, cx, cy, size, lt, at = .3, maxW = 1560) { // the thumbnail look: bold black words in white boxes
+  const n = lines.length; let sz = size; while (sz > 60 && Math.max(...lines.map(l => dW(l.toUpperCase(), sz, 'news', 2))) > maxW - sz) sz -= 6;
+  const lh = sz * 1.32, y0 = cy - (n - 1) * lh / 2;
+  lines.forEach((l, i) => {
+    const s = l.toUpperCase(), w = dW(s, sz, 'news', 2) + sz * .7, a = ein(lt, at + i * .35, .45, eBack), red = i === n - 1 && n > 1, y = y0 + i * lh;
+    if (a <= 0) return; ctx.save(); ctx.translate(cx, y); ctx.rotate((i % 2 ? .012 : -.015)); ctx.scale(a, a);
+    ctx.shadowColor = 'rgba(0,0,0,.7)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 10; ctx.fillStyle = '#fff'; ctx.fillRect(-w / 2, -sz * .66, w, sz * 1.24); ctx.restore();
+    ctx.save(); ctx.translate(cx, y); ctx.rotate((i % 2 ? .012 : -.015)); ctx.scale(a, a); dtext(s, 0, sz * .02, sz, { ls: 2, shadow: false, color: red ? '#D7261E' : '#0B0F12' }); ctx.restore();
+  });
+}
+Object.assign(KIT, {
+  newsmap(v, sc, lt) {
+    const focus = v.focus || v.countries || [], pts = [...(v.markers || []).map(m => gpoint(m.lat != null ? m : (m.at || m.place))), ...(v.arrows || []).flatMap(a => [gpoint(a.from), gpoint(a.to)])].filter(Boolean);
+    let target = v.center ? { ...camFor([], [gpoint(v.center)]), k: camFor(focus, pts).k } : camFor(focus.concat(v.also || []), pts);
+    if (v.zoom === 'world') target = { ...WORLD_CAM };
+    if (v.zoom === 'close') target.k *= 1.6; if (v.zoom === 'wide') target.k /= 1.8;
+    const start = v.from === 'world' ? { ...WORLD_CAM } : { ...target, k: target.k / 1.35 }, dur = sc.end - sc.start;
+    const cam = camLerp(start, target, ein(lt, 0, v.from === 'world' ? 2.6 : 1.8, eIO)); cam.k *= 1 + .05 * clamp(lt / Math.max(dur, 1));
+    newsMap(cam, lt, v, { at: v.from === 'world' ? 1.6 : .4 });
+    if (v.label) dchip(v.label, 110, 150, 46, D.red, ein(lt, .9, .4, eBack), 'left');
+    if (v.kicker) kickerBoxes(String(v.kicker).split('/').map(s => s.trim()).filter(Boolean), W / 2, MID, 120, lt, 1.2);
+    finish();
+  },
+  kicker(v, sc, lt) {
+    const lines = String(v.text || '').split('/').map(s => s.trim()).filter(Boolean);
+    if ((v.countries || v.focus || []).length) { const t = camFor(v.countries || v.focus); newsMap({ ...t, k: t.k * (1 + lt * .01) }, lt, { focus: v.countries || v.focus, labels: false }, { dim: .3, at: 0 }); }
+    else backdrop(lt, .45);
+    kickerBoxes(lines, W / 2, MID, 150, lt, .25);
+    if (v.sub) dpara(v.sub, W / 2, MID + lines.length * 105 + 60, 44, 1300, { f: 'bold', a: ein(lt, 1, .5), max: 2 });
+    finish();
+  },
+  headline(v, sc, lt) {
+    backdrop(lt, .6);
+    const a = ein(lt, .1, .6), y = MID + (1 - a) * 60, w = 1440, x0 = W / 2 - w / 2;
+    const sz = dwrap(v.text, 66, w - 160, 'bold').length > 4 ? 54 : 66, L = dwrap(v.text, sz, w - 160, 'bold').slice(0, 5), h = 190 + L.length * sz * 1.22;
+    ctx.save(); ctx.globalAlpha = a; ctx.shadowColor = 'rgba(0,0,0,.7)'; ctx.shadowBlur = 50; ctx.fillStyle = 'rgba(9,18,24,.92)'; ctx.fillRect(x0, y - h / 2, w, h);
+    ctx.shadowBlur = 0; ctx.strokeStyle = 'rgba(255,255,255,.14)'; ctx.lineWidth = 2; ctx.strokeRect(x0, y - h / 2, w, h); ctx.fillStyle = D.red; ctx.fillRect(x0, y - h / 2, 12, h); ctx.restore();
+    dtext(String(v.source || '').toUpperCase(), x0 + 80, y - h / 2 + 70, 42, { align: 'left', ls: 5, color: D.red, a, shadow: false });
+    if (v.date) dtext(String(v.date).toUpperCase(), x0 + w - 70, y - h / 2 + 70, 34, { align: 'right', ls: 3, color: D.dim, a, shadow: false });
+    const words = sc.narration.split(/\s+/).length, shown = clamp((lt - .4) / Math.max(1, (sc.end - sc.start) * .6));
+    L.forEach((l, i) => dtext(l, x0 + 80, y - h / 2 + 150 + sz * .6 + i * sz * 1.22, sz, { f: 'bold', align: 'left', a: a * (i / L.length <= shown + .15 ? 1 : .3), shadow: false }));
+    if (v.label) dchip(v.label, W / 2, y + h / 2 + 70, 38, D.hl, ein(lt, 1.2, .4, eBack));
+    finish();
+  },
+  ladder(v, sc, lt) {
+    backdrop(lt, .62);
+    const st = (v.steps || []).slice(0, 6), n = st.length, t = cueTimes(sc, st), x0 = 230, x1 = 1690, yb = 800, yt = 300, sw = (x1 - x0) / n;
+    if (v.title) dtext(String(v.title).toUpperCase(), W / 2, 150, 58, { ls: 6, a: ein(lt, 0, .4) });
+    const cur = t.reduce((k, at, i) => lt >= at ? i : k, -1);
+    st.forEach((s, i) => {
+      const x = x0 + i * sw, y = yb - (n > 1 ? i * (yb - yt) / (n - 1) : 0), on = lt >= t[i], a = ein(lt, t[i] - .6, .5), hot = i === cur;
+      const slab = new Path2D(); slab.rect(x + 8, y, sw - 16, yb + 60 - y);
+      ctx.save(); ctx.globalAlpha = .9; ctx.fillStyle = on ? (hot ? 'rgba(255,59,48,.30)' : 'rgba(255,59,48,.14)') : 'rgba(255,255,255,.05)'; ctx.fill(slab); ctx.restore();
+      const top = new Path2D(); top.moveTo(x + 8, y); top.lineTo(x + sw - 8, y);
+      if (on) glowStroke(top, D.red, hot ? 7 : 4, 1, hot ? 34 : 12); else { ctx.save(); ctx.strokeStyle = 'rgba(255,255,255,.25)'; ctx.lineWidth = 3; ctx.stroke(top); ctx.restore(); }
+      dtext(String(i + 1), x + sw / 2, y + 60, 54, { color: on ? '#fff' : 'rgba(255,255,255,.35)', glow: hot ? D.red : null });
+      dpara(String(s.label).toUpperCase(), x + sw / 2, y - 70, 34, sw - 24, { ls: 1.5, max: 3, a: Math.max(a, on ? 1 : .45), color: on ? '#fff' : 'rgba(238,244,243,.55)' });
+    });
+    finish();
+  },
+  price(v, sc, lt) {
+    backdrop(lt, .7);
+    const f = num(v.from), to = num(v.to), pts = Array.isArray(v.points) && v.points.length > 1 ? v.points.map(Number) : null, N = pts ? pts.length : 64;
+    const vals = pts || Array.from({ length: N }, (_, i) => { const u = i / (N - 1), s = u < .45 ? u * .08 : .036 + Math.pow((u - .45) / .55, .55) * .964; return f + (to - f) * s + (to - f) * .06 * (hash(i * 3.1 + hstr(v.label)) - .5) * (i && i < N - 1 ? 1 : 0); });
+    const lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * .18 || 1, X0 = 250, X1 = 1600, Y0 = 250, Y1 = 760, X = i => X0 + (X1 - X0) * i / (N - 1), Y = val => Y1 - (Y1 - Y0) * (val - lo + pad) / (hi - lo + 2 * pad);
+    ctx.save(); ctx.strokeStyle = 'rgba(255,255,255,.08)'; ctx.lineWidth = 2; for (let g = 0; g <= 4; g++) { const y = Y0 + (Y1 - Y0) * g / 4; ctx.beginPath(); ctx.moveTo(X0, y); ctx.lineTo(X1, y); ctx.stroke(); } ctx.restore();
+    const up = to >= f, col = v.color === 'teal' || !up ? D.teal : D.red, p = ein(lt, .5, Math.max(1.5, (sc.end - sc.start) * .65), eIO), m = p * (N - 1), k = Math.floor(m);
+    const line = new Path2D(); for (let i = 0; i <= k; i++) i ? line.lineTo(X(i), Y(vals[i])) : line.moveTo(X(i), Y(vals[i]));
+    const hv = k < N - 1 ? lerp(vals[k], vals[k + 1], m - k) : vals[N - 1], hx = X0 + (X1 - X0) * m / (N - 1), hy = Y(hv); line.lineTo(hx, hy);
+    const area = new Path2D(line); area.lineTo(hx, Y1); area.lineTo(X0, Y1); area.closePath();
+    const gr = ctx.createLinearGradient(0, Y0, 0, Y1); gr.addColorStop(0, col + '55'); gr.addColorStop(1, col + '00'); ctx.fillStyle = gr; ctx.fill(area);
+    glowStroke(line, col, 6, 1, 26); glowFill(circle(hx, hy, 14, 1), col, 1, 30); glowFill(circle(hx, hy, 6, 2), '#fff', 1, 4);
+    const fmt = val => (v.prefix || '') + (Math.abs(to) >= 100 || Math.abs(f) >= 100 ? Math.round(val).toLocaleString('en-GB') : (+val).toFixed(Math.abs(to) < 10 ? 2 : 1)) + (v.suffix || '');
+    dtext(fmt(hv), Math.min(hx + 30, X1 - 10), hy - 60, 84, { align: 'left', color: '#fff', glow: col });
+    dtext(fmt(f), X0 - 20, Y(vals[0]), 40, { align: 'right', color: D.dim });
+    if (v.label) dtext(String(v.label).toUpperCase(), X0, 160, 54, { align: 'left', ls: 5, a: ein(lt, 0, .4) });
+    if (v.scenario !== false) { const s = 'SCENARIO', w = dW(s, 34, 'news', 4) + 36; ctx.save(); ctx.globalAlpha = ein(lt, .4, .4); ctx.strokeStyle = D.amber; ctx.lineWidth = 3; ctx.strokeRect(X1 - w, 160 - 26, w, 52); ctx.restore(); dtext(s, X1 - w / 2, 162, 34, { ls: 4, color: D.amber, a: ein(lt, .4, .4), shadow: false }); }
+    if (v.note) dpara(v.note, W / 2, 840, 40, 1400, { f: 'bold', color: D.dim, a: ein(lt, 1.2, .5), max: 1 });
+    finish();
+  },
+  photo(v, sc, lt) {
+    const img = v.src && IMGS[v.src], dur = sc.end - sc.start;
+    if (img) {
+      const z = 1.06 + .1 * clamp(lt / Math.max(dur + .5, 1)), dir = hstr(v.src) % 4, s = Math.max(W / img.width, H / img.height) * z, w = img.width * s, h = img.height * s;
+      const u = clamp(lt / Math.max(dur + .5, 1)), px = [-1, 1, 0, 0][dir] * (w - W) / 2 * (u - .5), py = [0, 0, -1, 1][dir] * (h - H) / 2 * (u - .5);
+      ctx.fillStyle = D.bg; ctx.fillRect(0, 0, W, H); ctx.drawImage(img, W / 2 - w / 2 + px, H / 2 - h / 2 + py, w, h);
+      ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = 'rgba(120,170,175,.55)'; ctx.fillRect(0, 0, W, H); ctx.restore(); // cool cinematic grade
+      const g = ctx.createLinearGradient(0, H * .45, 0, H); g.addColorStop(0, 'rgba(3,9,13,0)'); g.addColorStop(1, 'rgba(3,9,13,.8)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      if (v.credit) dtext(v.credit, W - 60, 118, 22, { f: 'sans', align: 'right', color: 'rgba(238,244,243,.55)' });
+    } else { backdrop(lt, .55); const a = ein(lt, .1, .6, eBack); glowFill(icon(v.icon || 'globe-hemisphere-east', W / 2, MID - 20, 330 * a), D.teal, .9, 50); }
+    if (v.caption) dchip(v.caption, 110, 150, 46, D.red, ein(lt, .7, .4, eBack), 'left');
+    if (v.kicker) kickerBoxes(String(v.kicker).split('/').map(s => s.trim()).filter(Boolean), W / 2, MID, 120, lt, 1.0);
+    finish();
+  },
+});
+
 // ---------------------------------------------------------------- captions, chrome, transitions
 function captions(t, cw, by) {
   const sc = TL.scenes.find(s => t >= s.start - .1 && t <= s.end + .25); if (!sc || !sc.narration) return;
-  const size = VERT ? 62 : 42, maxW = VERT ? 960 : 1500, words = sc.narration.split(/\s+/);
-  ctx.save(); ctx.font = font(size); const sp = ctx.measureText(' ').width; const lines = [[]]; let w = 0;
+  const dk = isDark(sc), size = VERT ? 62 : (dk ? 40 : 42), maxW = VERT ? 960 : 1500, words = sc.narration.split(/\s+/);
+  ctx.save(); ctx.font = dk ? nfont(size, 'bold') : font(size); const sp = ctx.measureText(' ').width; const lines = [[]]; let w = 0;
   words.forEach((wd, i) => { const ww = ctx.measureText(wd).width; if (w + ww > maxW && lines.at(-1).length) { lines.push([]); w = 0; } lines.at(-1).push([wd, ww, i]); w += ww + sp; }); ctx.restore();
   const lh = size * 1.25, boxH = lines.length * lh + 28, y = by - boxH, bw = Math.max(...lines.map(l => l.reduce((a, x) => a + x[1] + sp, -sp))) + 60;
   const a = clamp((t - sc.start + .1) / .2) * clamp((sc.end + .25 - t) / .2), shown = (t - sc.start) / Math.max(.1, sc.end - sc.start);
-  fill(rect(cw / 2 - bw / 2, y, bw, boxH, 20), C.light, a * .94);
+  if (dk) { ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = 'rgba(4,10,14,.72)'; ctx.beginPath(); ctx.roundRect(cw / 2 - bw / 2, y, bw, boxH, 10); ctx.fill(); ctx.restore(); }
+  else fill(rect(cw / 2 - bw / 2, y, bw, boxH, 20), C.light, a * .94);
+  const said = i => (i + .5) / words.length <= shown + .08, cur = words.findIndex((_, i) => !said(i)) - 1;
   lines.forEach((l, li) => { let x = cw / 2 - l.reduce((q, z) => q + z[1] + sp, -sp) / 2;
-    l.forEach(([wd, ww, i]) => { text(wd, x, y + 14 + lh * (li + .5), size, { align: 'left', a: a * ((i + .5) / words.length <= shown + .08 ? 1 : .35), shadow: false }); x += ww + sp; }); });
+    l.forEach(([wd, ww, i]) => { const yy = y + 14 + lh * (li + .5);
+      if (dk) dtext(wd, x, yy, size, { f: 'bold', align: 'left', a: a * (said(i) ? 1 : .45), color: i === cur ? D.hl : '#fff', shadow: false });
+      else text(wd, x, yy, size, { align: 'left', a: a * (said(i) ? 1 : .35), shadow: false }); x += ww + sp; }); });
 }
 function chrome(sc, t) {
   if (sc.visual?.type === 'end') return;
+  if (isDark(sc)) { const p = clamp(t / TL.duration), bar = new Path2D(); bar.moveTo(40, 30); bar.lineTo(40 + (W - 80) * p, 30); glowStroke(bar, D.red, 5, .9, 12);
+    if (sc.heading && !VERT) dtext(String(sc.heading).toUpperCase(), 70, 80, 34, { align: 'left', ls: 5, a: .85 });
+    if (!VERT) dtext('EVERY HOW', W - 70, 80, 34, { align: 'right', ls: 5, a: .55 }); return; }
   const p = clamp(t / TL.duration), bar = new Path2D(); bar.moveTo(40, 30); bar.lineTo(40 + (W - 80) * p, 30); stroke(bar, shade(C.bg[(sc.section || 0) % C.bg.length], -0.3), 8, .9);
   if (sc.heading && !VERT) text(sc.heading, 70, 78, 40, { align: 'left', head: true, a: .75 });
   if (!VERT) text('Every How', W - 70, 78, 40, { align: 'right', head: true, a: .5 });
 }
 function drawScene(sc, t) {
-  const lt = t - sc.start + .15;
-  background(sc, lt);
+  const lt = t - sc.start + .15; sc_now = sc;
+  if (!isDark(sc)) background(sc, lt);
   const v = sc.visual || { type: 'question', text: '' }, fn = KIT[v.type] || KIT.question;
   ctx.save(); fn(v, sc, lt); ctx.restore();
   chrome(sc, t);
@@ -375,8 +623,24 @@ window.setup = async tl => {
   S = tl.scale || 4 / 3;
   OUT = document.createElement('canvas'); OUT.width = Math.round((VERT ? 1080 : W) * S); OUT.height = Math.round((VERT ? 1920 : H) * S); document.body.appendChild(OUT); octx = OUT.getContext('2d');
   const work = VERT ? Object.assign(document.createElement('canvas'), { width: Math.round(W * S), height: Math.round(H * S) }) : OUT; ctx = work.getContext('2d'); window._work = work;
-  await Promise.all(['700 40px Kalam', '400 40px Hand'].map(f => document.fonts.load(f)));
-  makeFibre();
+  await Promise.all(['700 40px Kalam', '400 40px Hand', '700 40px News', '500 40px Sans', '700 40px Sans'].map(f => document.fonts.load(f)));
+  makeFibre(); makeGrain();
+  const first = TL.scenes.find(s => ['newsmap', 'kicker'].includes(s.visual?.type) && (s.visual.focus || s.visual.countries || []).length);
+  TL.backdropFocus = first ? (first.visual.focus || first.visual.countries).map(gname).filter(Boolean) : [];
+  TL.backdrop = first ? camFor(TL.backdropFocus, [], 2.6) : { ...WORLD_CAM };
+};
+window.loadImages = async m => { // {name: dataURI}; 'terrain' is the base map, the rest are episode photos
+  await Promise.all(Object.entries(m || {}).map(([k, src]) => new Promise(res => { const im = new Image(); im.onload = () => { if (k === 'terrain') TERRAIN = im; else IMGS[k] = im; res(); }; im.onerror = () => res(); im.src = src; })));
+  return Object.keys(IMGS).length + (TERRAIN ? 1 : 0);
+};
+window.thumb = sp => { // YouTube thumbnail: glowing map on the right, the kicker words in white boxes on the left
+  ctx.setTransform(S, 0, 0, S, 0, 0); sc_now = { narration: '', start: 0, end: 1, idx: 0 }; const focus = (sp.countries || []).map(gname).filter(Boolean);
+  const pts = (sp.markers || []).map(m => gpoint(m.lat != null ? m : m.at)).filter(Boolean), cam = camFor(focus, pts, 1.5), { kx } = projector(cam);
+  if (focus.length || pts.length) cam.lon -= W * .2 / kx;
+  newsMap(cam, 6, { focus, also: sp.also || [], markers: (sp.markers || []).map(m => ({ ...m, label: null })), names: false }, { dim: .05, at: 0, names: false });
+  const lines = String(sp.text || TL.title).split('/').map(s => s.trim()).filter(Boolean);
+  kickerBoxes(lines, focus.length || pts.length ? 610 : W / 2, H / 2, 190, 9, 0, focus.length || pts.length ? 1080 : 1600);
+  finish(); return OUT.toDataURL('image/jpeg', .9).split(',')[1];
 };
 window.draw = t => {
   boil = Math.floor(t * 8);
@@ -384,12 +648,12 @@ window.draw = t => {
   // vertical cut: the 16:9 picture in the middle, title above, big captions below
   ctx.setTransform(S, 0, 0, S, 0, 0); frame169(t);
   const work = window._work, real = ctx; ctx = octx; ctx.setTransform(S, 0, 0, S, 0, 0);
-  ctx.fillStyle = C.bg[0]; ctx.fillRect(0, 0, 1080, 1920); ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = .55; ctx.fillStyle = fibre; ctx.fillRect(0, 0, 1080, 1920); ctx.restore();
-  text('Every How', 540, 150, 54, { head: true, a: .6 });
-  para(TL.title, 540, 330, 82, 960, { head: true, max: 3 });
-  ctx.save(); ctx.shadowColor = C.shadow; ctx.shadowOffsetY = 10; ctx.shadowBlur = 20; ctx.drawImage(work, 0, 0, work.width, work.height, 0, 560, 1080, 608); ctx.restore();
+  const g = ctx.createLinearGradient(0, 0, 0, 1920); g.addColorStop(0, '#0A1A22'); g.addColorStop(1, '#03080B'); ctx.fillStyle = g; ctx.fillRect(0, 0, 1080, 1920);
+  dtext('EVERY HOW', 540, 150, 44, { ls: 8, a: .6 });
+  dpara(String(TL.title).toUpperCase(), 540, 340, 84, 980, { ls: 1, max: 3 });
+  ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.8)'; ctx.shadowOffsetY = 10; ctx.shadowBlur = 30; ctx.drawImage(work, 0, 0, work.width, work.height, 0, 560, 1080, 608); ctx.restore();
   captions(t, 1080, 1560);
-  if (t > TL.duration - 4) chip('Full video on YouTube', 540, 1700, 50, C.accents[6], ein(t - (TL.duration - 4), 0, .5, eBack));
+  if (t > TL.duration - 4) dchip('Full video on YouTube', 540, 1700, 50, D.red, ein(t - (TL.duration - 4), 0, .5, eBack));
   ctx = real;
 };
 </script></body></html>

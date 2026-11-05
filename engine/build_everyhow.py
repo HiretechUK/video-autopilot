@@ -1,9 +1,12 @@
-"""Every How: script JSON -> narrated Paper Cut-Out explainer (16:9) plus a vertical cut for Reels/TikTok/Shorts.
+"""Every How: script JSON -> narrated hybrid explainer (dark news scenes + Paper Cut-Out explainers, 16:9),
+a vertical Short, and a YouTube thumbnail.
 
 All free and CPU only: Kokoro voice (bm_fable), a gentle numpy music bed, paper "swish" sound on every cut,
 and the canvas renderer in engine/everyhow/renderer.html driven frame by frame by headless Chromium.
 
-Usage: python build_everyhow.py episode.json out.mp4 [--short out_short.mp4] [--models DIR] [--fps 30] [--workers N]
+Usage: python build_everyhow.py episode.json out.mp4 [--short out_short.mp4] [--thumb out.jpg] [--models DIR] [--fps 30] [--workers N]
+Photos for `photo` scenes are fetched (public domain / CC0 only, see photos.py) into <out dir>/media and credited
+in <out>.timeline.json under "credits".
 Episode JSON (see autopilot/writer.py): {"title", "sections": [{"heading", "scenes": [{"narration", "visual"}]}],
                                          "short": {"scenes": [global scene numbers, 1-based], "outro": "..."}}
 """
@@ -155,6 +158,44 @@ def mix_audio(voice, dur, cut_times, path, seed):
 
 
 # ------------------------------------------------------------------ picture
+def data_uri(path):
+    return "data:image/jpeg;base64," + base64.b64encode(open(path, "rb").read()).decode()
+
+
+def images_for(scenes):
+    imgs = {"terrain": data_uri(os.path.join(KIT, "terrain.jpg"))}
+    for s in scenes:
+        src = (s.get("visual") or {}).get("src")
+        if src and os.path.exists(src):
+            imgs[src] = data_uri(src)
+    return imgs
+
+
+def open_kit(p, scenes):
+    br = p.chromium.launch()
+    pg = br.new_page(viewport={"width": 1920, "height": 1080})  # canvas renders at 2560x1440 (renderer S=4/3)
+    pg.on("pageerror", lambda e: print("PAGE ERROR", e, file=sys.stderr))
+    pg.goto("file://" + os.path.join(KIT, "renderer.html"))
+    pg.evaluate("m => loadImages(m)", images_for(scenes))
+    return br, pg
+
+
+def render_thumb(ep, timeline, path):
+    """1280x720 JPEG: glowing map of the story's countries with the kicker words in bold boxes."""
+    from playwright.sync_api import sync_playwright
+    th = ep.get("thumbnail") or {}
+    if not th.get("countries"):  # default: the first news map's countries
+        first = next((s["visual"] for s in timeline["scenes"] if (s.get("visual") or {}).get("type") in ("newsmap", "kicker")), {})
+        th = dict(th, countries=first.get("focus") or first.get("countries") or [])
+    th.setdefault("text", ep.get("thumbnail_text") or ep["title"])
+    with sync_playwright() as p:
+        br, pg = open_kit(p, [])
+        pg.evaluate("tl => setup(tl)", {"duration": 1, "title": ep["title"], "scenes": [], "scale": 2 / 3})
+        open(path, "wb").write(base64.b64decode(pg.evaluate("sp => thumb(sp)", th)))
+        br.close()
+    return path
+
+
 def render_frames(timeline, wav, out, fps, workers, size):
     from playwright.sync_api import sync_playwright
     total = int(math.ceil(timeline["duration"] * fps))
@@ -170,10 +211,7 @@ def render_frames(timeline, wav, out, fps, workers, size):
                                "-i", "-", "-c:v", "libx264", "-preset", "fast", "-crf", "16", "-tune", "animation", "-pix_fmt", "yuv420p",
                                "-s", f"{w}x{h}", seg], stdin=subprocess.PIPE)
         with sync_playwright() as p:
-            br = p.chromium.launch()
-            pg = br.new_page(viewport={"width": 1920, "height": 1080})  # canvas renders at 2560x1440 (renderer S=4/3)
-            pg.on("pageerror", lambda e: print("PAGE ERROR", e, file=sys.stderr))
-            pg.goto("file://" + os.path.join(KIT, "renderer.html"))
+            br, pg = open_kit(p, timeline["scenes"])
             pg.evaluate("tl => setup(tl)", timeline)
             for i in range(a, b):
                 b64 = pg.evaluate("t => { draw(t); return document.querySelector('canvas').toDataURL('image/jpeg', 0.96).split(',')[1]; }", i / fps)
@@ -198,10 +236,14 @@ def end_scene(section):
     return {"narration": "", "visual": {"type": "end", "text": "A new question, every day."}, "section": section, "heading": ""}
 
 
-def build(ep_path, out, short_out=None, models=None, fps=30, workers=2):
+def build(ep_path, out, short_out=None, models=None, fps=30, workers=2, thumb_out=None):
     ep = json.load(open(ep_path))
     models = models or os.path.join(HERE, "models")
     scenes = flatten(ep)
+    sys.path.insert(0, HERE)
+    import photos
+    credits = photos.fill_episode(scenes, os.path.join(os.path.dirname(os.path.abspath(out)), "media"))
+    print(f"photos: {len(credits)} of {sum(1 for s in scenes if (s.get('visual') or {}).get('type') == 'photo')}")
     short = ep.get("short") or {}
     short_idx = [i - 1 for i in short.get("scenes", []) if 1 <= i <= len(scenes)]
     outro = short.get("outro", "The full story is on Every How.")
@@ -211,13 +253,15 @@ def build(ep_path, out, short_out=None, models=None, fps=30, workers=2):
     tl, voice, t = lay_out(scenes, clips[: len(scenes)])
     tl.append(dict(end_scene(scenes[-1]["section"] + 1), start=round(t, 3), end=round(t + END_CARD, 3)))
     dur = t + END_CARD
-    timeline = {"duration": round(dur, 3), "title": ep["title"], "scenes": tl}
+    timeline = {"duration": round(dur, 3), "title": ep["title"], "scenes": tl, "credits": credits}
     wav = out.replace(".mp4", ".wav")
     mix_audio(voice, dur, [s["start"] - 0.25 for s in tl[1:]], wav, seed)
     print(f"{ep['title']}: {len(scenes)} scenes, {dur / 60:.1f} min")
     render_frames(timeline, wav, out, fps, workers, (2560, 1440))
     os.remove(wav)
     json.dump(timeline, open(out.replace(".mp4", ".timeline.json"), "w"))
+    if thumb_out:
+        render_thumb(ep, timeline, thumb_out)
 
     if short_out and short_idx:
         sub = [dict(scenes[i], section=0) for i in short_idx]
@@ -239,8 +283,9 @@ if __name__ == "__main__":
     ap.add_argument("episode")
     ap.add_argument("out")
     ap.add_argument("--short")
+    ap.add_argument("--thumb")
     ap.add_argument("--models")
     ap.add_argument("--fps", type=int, default=30)
     ap.add_argument("--workers", type=int, default=max(1, min(4, (os.cpu_count() or 2))))
     a = ap.parse_args()
-    build(a.episode, a.out, a.short, a.models, a.fps, a.workers)
+    build(a.episode, a.out, a.short, a.models, a.fps, a.workers, a.thumb)

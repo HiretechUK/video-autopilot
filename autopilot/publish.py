@@ -2,6 +2,7 @@
 is reported and retried on the next run; the others still post."""
 from __future__ import annotations
 
+import json
 import os
 import traceback
 
@@ -94,8 +95,14 @@ def descriptions(ep: dict, timeline_path: str, full_url: str = "") -> tuple[str,
     cfg = ACCOUNTS["every_how"]
     srcs = "\n".join(f"- {s.get('title')}: {s.get('url')}" for s in ep.get("sources", []))
     chap = chapters(timeline_path)
-    long_desc = (f"{ep.get('description', '')}\n\n" + (f"Chapters\n{chap}\n\n" if chap else "") +
-                 f"Sources\n{srcs}\n\n{cfg['hashtags']}")[:4900]
+    try:
+        credits = json.load(open(timeline_path)).get("credits") or []
+    except Exception:
+        credits = []
+    photo = "\n".join(f"- {c['credit']}: {c['page']}" for c in credits)
+    money = "\n\nNothing in this video is financial advice. Scenarios are illustrations, not forecasts." if ep.get("money") else ""
+    long_desc = (f"{ep.get('description', '')}{money}\n\n" + (f"Chapters\n{chap}\n\n" if chap else "") +
+                 f"Sources\n{srcs}\n\n" + (f"Photos (public domain)\n{photo}\n\n" if photo else "") + f"{cfg['hashtags']}")[:4900]
     short_desc = (f"{ep.get('description', '')}\n\n" + (f"Full video: {full_url}\n\n" if full_url else "") +
                   "#Shorts #EveryHow #explained")[:4900]
     return long_desc, short_desc

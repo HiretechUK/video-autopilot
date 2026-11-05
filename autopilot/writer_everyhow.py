@@ -2,7 +2,7 @@
 
 Flow (one `make`):
   1. trending(): Google Trends daily RSS (GB + US) and Wikipedia's most-read articles from yesterday. Free.
-  2. Claude (with web search) picks a "How does/did/will" question, researches it and writes the episode JSON
+  2. Claude (with web search) picks today's big global story as a "What happens if / How would" question, researches it and writes the episode JSON
      against the series bible and the scene kit in engine/everyhow/.
   3. validate() checks structure and repairs small slips (unknown icon or country names).
   4. A separate Claude call (with web search) fact-checks every claim; problems go back for one rewrite.
@@ -22,16 +22,24 @@ HERE = os.path.join(ROOT, "autopilot")
 KIT = os.path.join(ROOT, "engine", "everyhow")
 MODELS = [os.environ.get("EVERYHOW_MODEL", "claude-sonnet-5-5"), "claude-sonnet-4-5"]
 MAX_SEARCHES = int(os.environ.get("EVERYHOW_MAX_SEARCHES", "8"))
-TYPES = {"title", "hero", "compare", "list", "flow", "cycle", "timeline", "stat", "bars", "map", "quote", "zoom", "crowd", "question"}
+PAPER = {"title", "hero", "compare", "list", "flow", "cycle", "timeline", "stat", "bars", "map", "quote", "zoom", "crowd", "question"}
+DARK = {"newsmap", "photo", "headline", "kicker", "ladder", "price"}
+TYPES = PAPER | DARK
+TITLE_START = re.compile(r"^(what happens if|what would happen if|how would|how will|how does|how do|how did|how could|how can) ", re.I)
+PEOPLE = re.compile(r"\b(person|people|man|men|woman|women|girl|boy|child|portrait|face|crowd|protest|president|minister|"
+                    r"soldier|troops|politician|leader|king|queen|prince)\b", re.I)
+NO_ADVICE = "none of this is a prediction, and none of it is financial advice"
 UA = {"User-Agent": "EveryHow/1.0 (https://github.com/HiretechUK/video-autopilot)"}
 
 SCHEMA = """Return ONLY one JSON object, no prose before or after:
-{"title": "<YouTube title, max 70 chars, starts with 'How', ends with '?'>",
+{"title": "<YouTube title, max 70 chars, starts with 'What Happens If' / 'How Would' / 'How Will' / 'How Does' etc, ends with '?'>",
  "question": "<the full question>",
  "description": "<3-4 sentence YouTube description; first line hooks; ends with the comment question>",
  "tags": ["8-12 search tags"],
  "ad_safety": {"rating": "green" | "yellow", "reason": "<one line>"},
  "sources": [{"title": "...", "url": "https://..."}, ... at least 4],
+ "money": true,
+ "thumbnail": {"text": "<2-5 words, '/' between lines>", "countries": ["..."], "markers": [{"lat": 0, "lon": 0}]},
  "sections": [{"heading": "" for the first, then 2-4 words, "scenes": [{"narration": "...", "visual": {"type": "...", ...}}]}],
  "short": {"scenes": [4-7 scene numbers], "outro": "..."}}"""
 
@@ -112,7 +120,15 @@ def _extract(text: str) -> dict:
 
 
 # ------------------------------------------------------------------ validation + small repairs
-_ICONS = _COUNTRIES = None
+_ICONS = _COUNTRIES = _GEO = None
+
+
+def _geo_names():
+    global _GEO
+    if _GEO is None:
+        js = open(os.path.join(KIT, "geo50.js")).read()
+        _GEO = list(json.loads(js[js.index("window.GEO=") + len("window.GEO="):].rstrip().rstrip(";")).keys())
+    return _GEO
 
 
 def _kit_names():
@@ -144,8 +160,8 @@ def _fix_icon(n: str) -> str:
     return near[0] if near else "question"
 
 
-def _fix_country(n: str) -> str | None:
-    _, countries = _kit_names()
+def _fix_country(n: str, countries: list[str] | None = None) -> str | None:
+    countries = countries or _kit_names()[1]
     if n in countries:
         return n
     k = str(n).lower().strip()
@@ -162,16 +178,17 @@ def validate(ep: dict) -> list[str]:
     """Return problems the writer must fix. Repairs icon and country names in place."""
     errs = []
     title = ep.get("title", "")
-    if not title.lower().startswith("how ") or len(title) > 70:
-        errs.append("title must start with 'How' and be at most 70 characters")
+    if not TITLE_START.match(title) or len(title) > 70 or not title.rstrip().endswith("?"):
+        errs.append("title must start with 'What Happens If', 'How Would', 'How Will', 'How Does' (etc.), end with '?' "
+                    "and be at most 70 characters")
     if len(ep.get("sources") or []) < 4 or not all(str(s.get("url", "")).startswith("http") for s in ep.get("sources", [])):
         errs.append("give at least 4 sources, each with a full https URL")
     if (ep.get("ad_safety") or {}).get("rating") not in ("green", "yellow"):
         errs.append("ad_safety.rating must be green or yellow")
     secs = ep.get("sections") or []
     scenes = [s for sec in secs for s in sec.get("scenes", [])]
-    if not 5 <= len(secs) <= 10:
-        errs.append(f"need 5-9 sections, got {len(secs)}")
+    if not 6 <= len(secs) <= 10:
+        errs.append(f"need 6-9 sections, got {len(secs)}")
     if not 28 <= len(scenes) <= 60:
         errs.append(f"need 30-55 scenes, got {len(scenes)}")
     words = 0
@@ -210,14 +227,54 @@ def validate(ep: dict) -> list[str]:
             if not fixed:
                 errs.append(f"scene {i}: map has no recognisable country names")
             v["countries"] = fixed
+        if t in ("newsmap", "kicker"):
+            geo = _geo_names()
+            for key in ("focus", "also", "countries"):
+                if key in v:
+                    v[key] = [c for c in (_fix_country(c, geo) for c in v.get(key) or []) if c]
+            for m in v.get("markers") or []:
+                try:
+                    if not (-90 <= float(m["lat"]) <= 90 and -180 <= float(m["lon"]) <= 180):
+                        raise ValueError
+                except (KeyError, TypeError, ValueError):
+                    errs.append(f"scene {i}: every marker needs numeric lat and lon")
+            if t == "newsmap" and not (v.get("focus") or v.get("also") or v.get("markers")):
+                errs.append(f"scene {i}: newsmap needs focus countries (Natural Earth names) or markers")
+        if t == "photo" and (not v.get("query") or PEOPLE.search(v.get("query", ""))):
+            errs.append(f"scene {i}: photo needs a query for a place or object, never people")
+        if t == "headline" and not (v.get("source") and v.get("text")):
+            errs.append(f"scene {i}: headline needs source and the exact text")
+        if t == "price" and not (re.search(r"\d", str(v.get("from", ""))) and re.search(r"\d", str(v.get("to", "")))):
+            errs.append(f"scene {i}: price needs numeric from and to")
+        if t == "ladder" and not 3 <= len(v.get("steps") or []) <= 6:
+            errs.append(f"scene {i}: ladder needs 3-6 steps")
+        if t == "kicker" and not v.get("text"):
+            errs.append(f"scene {i}: kicker needs text")
         if t == "bars" and any(not re.search(r"\d", str(b.get("value", ""))) for b in v.get("items", [])):
             errs.append(f"scene {i}: bars values must be numbers")
         if t == "quote" and not v.get("who"):
             errs.append(f"scene {i}: quotes need 'who' (and must be exact, sourced words)")
     if not 750 <= words <= 1250:
         errs.append(f"narration is {words} words; target 800-1150 (5-7 minutes)")
-    if len(types) < 7:
-        errs.append(f"only {len(types)} visual types used; use at least 7")
+    if len(types) < 9:
+        errs.append(f"only {len(types)} visual types used; use at least 9")
+    kinds = [(s.get("visual") or {}).get("type") for s in scenes]
+    nd, npaper = sum(k in DARK for k in kinds), sum(k in PAPER for k in kinds)
+    if nd < 8 or npaper < 8:
+        errs.append(f"use at least 8 dark news scenes and 8 paper scenes (now {nd} dark, {npaper} paper)")
+    if sum(k == "photo" for k in kinds) > 6:
+        errs.append("at most 6 photo scenes")
+    alltext = " ".join(s.get("narration", "") for s in scenes).lower().replace("\u2019", "'")
+    if not ep.get("money") or NO_ADVICE not in alltext:
+        errs.append("include the 'Your money' section, set \"money\": true, and say exactly: "
+                    "\"None of this is a prediction, and none of it is financial advice.\"")
+    if not any("subscribe" in (s.get("narration") or "").lower() for s in scenes[3:10]):
+        errs.append("ask viewers to subscribe once, naturally, between scenes 5 and 9")
+    th = ep.get("thumbnail") or {}
+    if not th.get("text") or len(re.sub(r"/", " ", th["text"]).split()) > 6:
+        errs.append("thumbnail.text must be 2-5 words")
+    elif th.get("countries"):
+        th["countries"] = [c for c in (_fix_country(c, _geo_names()) for c in th["countries"]) if c]
     sh = (ep.get("short") or {}).get("scenes") or []
     if not 3 <= len(sh) <= 8 or not all(isinstance(x, int) and 1 <= x <= len(scenes) for x in sh):
         errs.append("short.scenes must be 4-7 valid scene numbers")

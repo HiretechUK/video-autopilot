@@ -167,7 +167,28 @@ html,body{{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000}}
 
 
 def every_how(ep: dict, out: str) -> dict:
+    """Hybrid look (Haseeb, 5 Nov 2026, after Paycheckology's style): dark terrain map with the story's countries
+    glowing red, the thumbnail words in bold white boxes. Falls back to the paper card if the renderer fails."""
     th = thumb_text("every_how", ep)
+    try:
+        import sys
+        sys.path.insert(0, os.path.join(ROOT, "engine"))
+        import build_everyhow
+        text = th["text"]
+        if "/" not in text:  # two balanced lines
+            w = text.split()
+            k = max(1, min(len(w) - 1, round(len(w) / 2))) if len(w) > 2 else len(w)
+            text = " ".join(w[:k]) + (" / " + " ".join(w[k:]) if w[k:] else "")
+        spec = dict(ep.get("thumbnail") or {}, text=text)
+        scenes = [{"visual": sc.get("visual", {})} for sec in ep.get("sections", []) for sc in sec.get("scenes", [])]
+        build_everyhow.render_thumb(dict(ep, thumbnail=spec), {"scenes": scenes}, out)
+        return th
+    except Exception as e:
+        print(f"dark thumbnail failed ({e}); using the paper card", flush=True)
+    return every_how_paper(ep, out, th)
+
+
+def every_how_paper(ep: dict, out: str, th: dict) -> dict:
     icon = th.get("icon")
     if not icon:
         for sec in ep.get("sections", []):

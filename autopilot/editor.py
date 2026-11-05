@@ -25,14 +25,14 @@ RUBRICS = {
         "voice": "Fast, plain, punchy spoken English; no cliches, no filler, no 'imagine' overuse; 160-210 words",
     },
     "every_how": {
-        "question": "Would a curious global viewer click this question today? Timely or evergreen-fascinating, not a textbook chapter",
-        "hook": "The first 15 seconds promise a payoff and contain a 'wait, really?' fact",
-        "story": "Told as a story with a question, tension and reveal, not a list of facts",
+        "question": "Is this the big global story people are talking about today, framed as a gripping 'what happens if' a viewer in Lagos or Jakarta would click?",
+        "hook": "The cold open lands a real quote or headline and the question within 20 seconds, with a 'wait, really?' fact",
+        "story": "Told as an unfolding scenario with rising stakes (place, region, world), not a list of facts",
         "surprise": "At least three facts most viewers will not know, each sourced",
-        "clarity": "A 12-year-old could follow every step; one idea per scene; analogies where needed",
-        "pacing": "No scene drags; no repeated points; length earns its minutes",
-        "ending": "A satisfying answer to the title question, then a comment prompt worth answering",
-        "accuracy_tone": "Neutral, careful wording; nothing that the fact-check would flag; no sensationalism",
+        "clarity": "A 12-year-old could follow every step; the mechanism is explained with simple analogies",
+        "money": "The 'Your money' section is concrete and useful worldwide (prices, rates, savings, jobs), calm, no stock tips",
+        "visuals": "Dark news scenes (maps, headlines, ladder, price) carry the news; paper scenes carry the explanations; every visual matches its line",
+        "accuracy_tone": "Facts and scenario clearly separated, scenario numbers sourced, neutral wording, nothing graphic or sensational",
     },
 }
 
