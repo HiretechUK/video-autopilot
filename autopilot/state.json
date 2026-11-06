@@ -404,6 +404,15 @@
     "minutes": 6.5,
     "superseded": []
    }
+  },
+  "IY-09": {
+   "series": "imagine_you",
+   "number": 9,
+   "title": "Why a Locked Bunker Can Kill You With Air That Looks Fine",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/IY-09.json",
+   "created": "2026-11-06T18:07:21.994818+00:00"
   }
  },
  "seen": [

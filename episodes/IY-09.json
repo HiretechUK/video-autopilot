@@ -1,0 +1,314 @@
+{
+ "id": "locked-bunker-co2",
+ "title": "Why a Locked Bunker Can Kill You With Air That Looks Fine",
+ "description": "You're locked in a bunker with plenty of oxygen, yet the air is slowly turning against you. Two instincts make it worse, and the way out was closer than you thought. Do you sit still and wait, or pry the hatch now?",
+ "tags": [
+  "survival",
+  "bunker",
+  "carbon dioxide",
+  "trapped",
+  "survival tips",
+  "what would you do",
+  "ventilation",
+  "survival rules"
+ ],
+ "series": "SURVIVE #09",
+ "voice": "am_michael",
+ "speed": 1.15,
+ "costume": "cap",
+ "hud": [
+  "DAY 1 \u00b7 09:00 PM",
+  "\u25cf LOCKED IN",
+  "AIR: LOOKS FINE"
+ ],
+ "scenes": [
+  {
+   "bg": "bunker",
+   "pose": "shock",
+   "poses": [
+    "shock",
+    "lookout"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.12
+   },
+   "hud": [
+    "DAY 1 \u00b7 09:00 PM",
+    "\u25cf LOCKED IN",
+    "AIR: LOOKS FINE"
+   ],
+   "mood": "tense",
+   "narration": "In a locked bunker, you can suffocate with oxygen still left.",
+   "highlight": [
+    "oxygen"
+   ]
+  },
+  {
+   "bg": "bunker",
+   "pose": "reach",
+   "poses": [
+    "reach",
+    "carry",
+    "sit"
+   ],
+   "x": 0.35,
+   "move_to": 0.5,
+   "props": [
+    "crate"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "DAY 1 \u00b7 09:30 PM",
+    "\u25cf HATCH JAMMED",
+    "CO2: 0.04%"
+   ],
+   "mood": "calm",
+   "narration": "Ten by eight, six hundred cubic feet, a jammed hatch. You shove the crate against the wall and sit.",
+   "highlight": [
+    "jammed"
+   ]
+  },
+  {
+   "bg": "bunker",
+   "pose": "reach",
+   "poses": [
+    "reach",
+    "run",
+    "shock"
+   ],
+   "x": 0.6,
+   "move_to": 0.3,
+   "props": [
+    "crate"
+   ],
+   "fx": "shake",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.18
+   },
+   "hud": [
+    "DAY 2 \u00b7 06:00 AM",
+    "\u25cf BREATHING: 30/MIN",
+    "CO2: 3%"
+   ],
+   "mood": "urgent",
+   "narration": "Normal air holds point-oh-four percent carbon dioxide. You breathe out a kilo a day. Pacing and pulling, you hit three percent by dawn, and you pant.",
+   "highlight": [
+    "three percent"
+   ]
+  },
+  {
+   "bg": "bunker",
+   "pose": "sit",
+   "poses": [
+    "sit",
+    "think"
+   ],
+   "x": 0.5,
+   "props": [
+    "crate"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.12
+   },
+   "rule": {
+    "n": 1,
+    "text": "STAY STILL",
+    "sub": "MOVING MAKES CO2"
+   },
+   "mood": "calm",
+   "narration": "You see, that panting is carbon dioxide, not missing oxygen. Moving makes more, like a tap running over a sink with no drain.",
+   "highlight": [
+    "carbon dioxide"
+   ]
+  },
+  {
+   "bg": "bunker",
+   "pose": "shiver",
+   "poses": [
+    "shiver",
+    "build"
+   ],
+   "x": 0.4,
+   "props": [
+    "crate"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.15
+   },
+   "hud": [
+    "DAY 2 \u00b7 06:00 PM",
+    "\u25cf FREEZING",
+    "WATER: 2 DAYS"
+   ],
+   "mood": "tense",
+   "narration": "Day two, evening. The concrete is freezing, so you wedge your jacket behind the crate to stop the cold creeping in.",
+   "highlight": [
+    "jacket"
+   ]
+  },
+  {
+   "bg": "bunker",
+   "pose": "point",
+   "poses": [
+    "point",
+    "shock"
+   ],
+   "x": 0.55,
+   "props": [
+    "crate"
+   ],
+   "fx": "red",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.18
+   },
+   "rule": {
+    "n": 2,
+    "text": "LEAVE A GAP",
+    "sub": "AIR MUST SWAP"
+   },
+   "mood": "urgent",
+   "narration": "You see, sealed air is like a plastic bag over your head: it's full of oxygen, but you only rebreathe your own breath.",
+   "highlight": [
+    "rebreathe"
+   ]
+  },
+  {
+   "bg": "bunker",
+   "pose": "kneel",
+   "poses": [
+    "kneel",
+    "cower"
+   ],
+   "x": 0.5,
+   "props": [
+    "crate"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 3 \u00b7 06:00 AM",
+    "\u25cf DIZZY",
+    "CO2: 7%"
+   ],
+   "mood": "whisper",
+   "narration": "By day three it's seven percent, where people black out. Your hands shake, and you slide down the wall.",
+   "highlight": [
+    "seven percent"
+   ]
+  },
+  {
+   "bg": "bunker",
+   "pose": "shock",
+   "poses": [
+    "shock",
+    "reach"
+   ],
+   "x": 0.35,
+   "move_to": 0.65,
+   "props": [
+    "crate"
+   ],
+   "fx": "flash",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 3 \u00b7 06:30 AM",
+    "\u25cf AIR: MOVING",
+    "WATER: 1 DAY"
+   ],
+   "mood": "reveal",
+   "narration": "You shove the crate aside... A vent, behind it, plugged with your jacket. You sealed yourself in.",
+   "highlight": [
+    "vent"
+   ]
+  },
+  {
+   "bg": "bunker",
+   "pose": "sit",
+   "poses": [
+    "sit",
+    "think",
+    "lookout"
+   ],
+   "x": 0.5,
+   "props": [
+    "crate"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "DAY 3 \u00b7 07:00 AM",
+    "\u25cf AIR: A TRICKLE",
+    "WATER: 1 DAY"
+   ],
+   "mood": "tense",
+   "narration": "It gives a trickle: enough for one person sitting still, not for prying. Wait three days, or pry now? Comment A or B.",
+   "highlight": [
+    "A or B"
+   ],
+   "choice": {
+    "q": "WHAT DO YOU DO?",
+    "options": [
+     "A \u00b7 SIT STILL, WAIT 3 DAYS",
+     "B \u00b7 PRY THE HATCH, MIGHT FREE YOU IN 1 HOUR"
+    ]
+   },
+   "hold_after": 2.0
+  }
+ ],
+ "editor": {
+  "scores": {
+   "premise": 6,
+   "hook": 8,
+   "title": 6,
+   "specificity": 7,
+   "escalation": 5,
+   "twist": 5,
+   "showability": 4,
+   "voice": 6
+  },
+  "average": 5.9,
+  "ship": false,
+  "strengths": [
+   "Scene 1 is a real paradox in 11 words with no setup: suffocating with oxygen left.",
+   "The mechanism is real and counter-intuitive: panting and the urge to breathe come from CO2, not low oxygen. Both 'You see,' comparisons are clear.",
+   "The CO2 numbers (0.04%, ~3%, ~7%) and the 'kilo a day' figure are roughly accurate.",
+   "The HUD clock and CO2 readout give the viewer something to track.",
+   "The 'you sealed yourself in' reveal is a good idea: the victim caused the danger.",
+   "Word count is about 180, in range."
+  ],
+  "problems": [
+   "Showability is the biggest failure. Only a crate is available as a prop, yet the story depends on a jacket and a vent. 'Ten by eight, six hundred cubic feet' can't be drawn, and neither can the tap, the sink or the plastic bag. Narration is carrying the story instead of the screen.",
+   "The twist is telegraphed. Rule card 2 ('LEAVE A GAP') appears before the reveal, the narration says 'sealed air', and the description says 'the way out was closer than you thought'. The audience solves it before you do.",
+   "The final choice is muddy and not truly hard. Nothing explains why you'd wait 3 days (rescue timing is never given). Water drops from 2 days to 1 day in only 12 hours. 'Might free you in 1 hour' has no stated downside. After the vent opens, A looks like the obvious answer.",
+   "Escalation is mostly a number ticking up. The cold beat (scene 5) is filler unrelated to the main threat, scene 4 is a pause, and the jacket is a contrived plug. Scenes 1-5 are all 'sit and breathe', so the protagonist never does anything to make things worse.",
+   "The title describes the situation ('a locked bunker can kill you') more than it teases a hidden mechanism. It is also long and generic.",
+   "The voice is clunky in places. 'Point-oh-four percent' is awkward for TTS. 'Pacing and pulling' is vague, since pulling what? Scene 2 packs three facts into one clipped line, and 'Day two, evening.' is pure filler.",
+   "The premise (a locked bunker) is remote and the protagonist is passive. No urgency or rescue clock is set up front, so there is little reason to care.",
+   "The description spoils the twist."
+  ],
+  "rounds": 2
+ }
+}
