@@ -1,0 +1,314 @@
+{
+ "id": "avalanche-spit-test",
+ "title": "Why Buried Skiers Spit Before They Dig",
+ "description": "Most avalanche victims die from their own breath, not the cold or the weight of the snow. Once you stop moving, spit is your compass: it tells you which way is up so you can dig out. Your partner is buried and the slope is still loaded. Would you search or go for help?",
+ "tags": [
+  "avalanche",
+  "avalanche survival",
+  "survival",
+  "survival tips",
+  "snow",
+  "mountain safety",
+  "what would you do",
+  "shorts"
+ ],
+ "series": "SURVIVE #08",
+ "voice": "am_michael",
+ "speed": 1.15,
+ "costume": "cap",
+ "hud": [
+  "DAY 1 \u00b7 10:40 AM",
+  "\u25cf BACKCOUNTRY SLOPE",
+  "BURIED: 0 MIN"
+ ],
+ "scenes": [
+  {
+   "bg": "snow",
+   "pose": "walk",
+   "poses": [
+    "walk",
+    "lookout",
+    "shock"
+   ],
+   "x": 0.3,
+   "move_to": 0.55,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "DAY 1 \u00b7 10:40 AM",
+    "\u25cf BACKCOUNTRY SLOPE",
+    "BURIED: 0 MIN"
+   ],
+   "mood": "tense",
+   "narration": "Most avalanche victims die from their own breath. You cut straight across a slope. It cracks.",
+   "highlight": [
+    "own breath"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "shock",
+   "poses": [
+    "shock",
+    "run",
+    "cower"
+   ],
+   "x": 0.7,
+   "move_to": 0.3,
+   "props": [],
+   "fx": "shake",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "mood": "urgent",
+   "narration": "The hillside breaks loose at highway speed. You can't outrun it. It hits.",
+   "highlight": [
+    "highway speed"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "cower",
+   "poses": [
+    "cower",
+    "build"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "shake",
+   "cam": {
+    "z0": 1.1,
+    "z1": 1.25
+   },
+   "hud": [
+    "DAY 1 \u00b7 10:42 AM",
+    "\u25cf SWEPT UNDER",
+    "BURIED: 0 MIN"
+   ],
+   "rule": {
+    "n": 1,
+    "text": "MAKE A POCKET",
+    "sub": "BEFORE IT STOPS"
+   },
+   "mood": "urgent",
+   "narration": "Rule one: before it stops, carve a pocket at your face. You see, moving snow flows like water, but stopped snow sets like cement.",
+   "highlight": [
+    "pocket",
+    "cement"
+   ]
+  },
+  {
+   "bg": "bunker",
+   "pose": "cower",
+   "poses": [
+    "cower",
+    "shiver",
+    "think"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.15,
+    "z1": 1.25
+   },
+   "hud": [
+    "DAY 1 \u00b7 10:46 AM",
+    "\u25cf BURIED, NO LIGHT",
+    "BURIED: 4 MIN"
+   ],
+   "mood": "whisper",
+   "narration": "Minute four. Your pocket holds a few breaths of air. That pocket is your only air. You can't tell which way is up.",
+   "highlight": [
+    "only air",
+    "which way is up"
+   ]
+  },
+  {
+   "bg": "bunker",
+   "pose": "think",
+   "poses": [
+    "think",
+    "reach",
+    "build"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.1,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 1 \u00b7 10:48 AM",
+    "\u25cf SPIT FALLS DOWN",
+    "BURIED: 6 MIN"
+   ],
+   "rule": {
+    "n": 2,
+    "text": "SPIT TEST",
+    "sub": "FIRST, ONCE STILL"
+   },
+   "mood": "tense",
+   "narration": "Rule two: once you're still, spit. You can't feel up or down. Spit falls, the way bubbles show a diver which way is up. Dig the opposite way.",
+   "highlight": [
+    "spit",
+    "opposite way"
+   ]
+  },
+  {
+   "bg": "bunker",
+   "pose": "cower",
+   "poses": [
+    "cower",
+    "shiver",
+    "cower"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.15,
+    "z1": 1.25
+   },
+   "hud": [
+    "DAY 1 \u00b7 10:51 AM",
+    "\u25cf ICE SHELL \u00b7 CO2: RISING",
+    "BURIED: 9 MIN"
+   ],
+   "mood": "tense",
+   "narration": "Minute nine. You see, your breath melts the snow, then refreezes into an ice shell, like a plastic bag sealed over your face.",
+   "highlight": [
+    "ice shell",
+    "plastic bag"
+   ]
+  },
+  {
+   "bg": "bunker",
+   "pose": "reach",
+   "poses": [
+    "build",
+    "reach"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "",
+   "cam": {
+    "z0": 1.15,
+    "z1": 1.25
+   },
+   "hud": [
+    "DAY 1 \u00b7 10:56 AM",
+    "\u25cf DIGGING UP",
+    "BURIED: 14 MIN"
+   ],
+   "mood": "urgent",
+   "narration": "Minute fourteen. After fifteen, survival falls from ninety percent to thirty. Your pocket let you move your arm, which most victims can't. Your hand breaks through.",
+   "highlight": [
+    "fifteen",
+    "breaks through"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "crouch",
+   "poses": [
+    "crouch",
+    "lookout",
+    "shock"
+   ],
+   "x": 0.4,
+   "move_to": 0.6,
+   "props": [],
+   "fx": "flash",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.15
+   },
+   "hud": [
+    "DAY 1 \u00b7 10:58 AM",
+    "\u25cf ALIVE",
+    "OUT AT: 14 MIN"
+   ],
+   "mood": "reveal",
+   "narration": "You look back. The crack starts at your tracks. The snow didn't fall on you. You pulled the trigger. Nine in ten victims do.",
+   "highlight": [
+    "your tracks",
+    "pulled the trigger"
+   ]
+  },
+  {
+   "bg": "snow",
+   "pose": "phone",
+   "poses": [
+    "phone",
+    "lookout",
+    "think"
+   ],
+   "x": 0.5,
+   "props": [
+    "radio"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.15
+   },
+   "hud": [
+    "DAY 1 \u00b7 11:05 AM",
+    "\u25cf PHONE: NO SIGNAL",
+    "PARTNER: 40 M, BURIED"
+   ],
+   "mood": "tense",
+   "narration": "Your partner is buried forty meters away. The slope above is still loaded. Search now, or go for help? Comment A or B.",
+   "highlight": [
+    "Comment A or B"
+   ],
+   "choice": {
+    "q": "WHAT DO YOU DO?",
+    "options": [
+     "A \u00b7 SEARCH NOW",
+     "B \u00b7 GO FOR HELP"
+    ]
+   },
+   "hold_after": 2.0
+  }
+ ],
+ "editor": {
+  "scores": {
+   "premise": 8,
+   "hook": 7,
+   "title": 8,
+   "specificity": 6,
+   "escalation": 6,
+   "twist": 6,
+   "showability": 5,
+   "voice": 7
+  },
+  "average": 6.6,
+  "ship": false,
+  "strengths": [
+   "Premise is a real, vivid, counter-intuitive survival rule (spit to find up) that people will stop for.",
+   "Title opens a real curiosity gap about a hidden mechanism.",
+   "Hook is 8 words with no setup and a surprising deadly claim.",
+   "The 'stopped snow sets like cement' and 'plastic bag over your face' comparisons are visual and sticky.",
+   "HUD clock and buried-minutes counter line up, and the timeline is coherent (0, 4, 6, 9, 14 min).",
+   "Ending flips from survival to responsibility ('you pulled the trigger') and hands off to a question."
+  ],
+  "problems": [
+   "Hook claim 'die from their own breath' is loose and over-simplified. Most deaths are asphyxiation from packed snow and rebreathed CO2, plus trauma. It is also never paid off cleanly before scene 6.",
+   "Survival stat is garbled: 'after fifteen, survival falls from ninety percent to thirty' compresses the real curve (about 90% at 15 min, about 30% by 35 min) and sounds invented.",
+   "The twist ('you triggered it') is unrelated to the hook and the spit mechanism, so it feels bolted on. 'Nine in ten victims do' is also muddled: it is about avalanches triggered by the victim or their party.",
+   "The A/B choice is not hard. Standard guidance is to search immediately in the first 15 minutes, and 'phone: no signal' makes B obviously worse. It needs a real cost on both sides.",
+   "Escalation is uneven. Scene 4 repeats itself ('pocket holds a few breaths... only air'). Scene 5 is a rule lecture, not a worse moment. Scene 7 is a flat stat dump followed by 'hand breaks through' with no peak.",
+   "Showability is weak. Every props array is empty except the final radio, so spit, the ice shell, the pocket and the crack at the tracks are narrated but not drawn. The phone pose is paired with a radio prop and a 'no signal' HUD, which is confusing. 'CO2: RISING' is an invisible concept. Scene 8 asks the viewer to see the crack start at tracks, with no prop for it.",
+   "Voice is mostly good but 'Your pocket let you move your arm, which most victims can't' is clunky. 'You can't tell which way is up' appears twice (scenes 4 and 5). The draft runs about 199 words, at the top of the range, with no room to add anything without cuts."
+  ],
+  "rounds": 2
+ }
+}

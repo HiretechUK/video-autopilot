@@ -378,6 +378,32 @@
     "superseded": []
    },
    "links": {}
+  },
+  "IY-08": {
+   "series": "imagine_you",
+   "number": 8,
+   "title": "Why Buried Skiers Spit Before They Dig",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/IY-08.json",
+   "created": "2026-11-05T23:57:01.072682+00:00"
+  },
+  "EH-07": {
+   "series": "every_how",
+   "number": 7,
+   "title": "What Happens If the AI Chip Boom Cracks?",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/EH-07.json",
+   "created": "2026-11-06T01:21:31.061336+00:00",
+   "private": {
+    "full": "fmdsJNsqsNE",
+    "short": "BEKxPuCgQF0",
+    "thumbnail": "set",
+    "version": 1,
+    "minutes": 6.5,
+    "superseded": []
+   }
   }
  },
  "seen": [

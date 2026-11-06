@@ -1,0 +1,869 @@
+{
+ "title": "What Happens If the AI Chip Boom Cracks?",
+ "question": "What happens if the AI chip boom cracks, who feels it first, and what could it mean for your money?",
+ "description": "On Friday, South Korea's stock market halted trading after a global sell-off in AI and chip shares. This episode explains why two Korean companies sit at the centre of the AI boom, how a slowdown could travel from Seoul to phone prices, pensions and jobs, and which calm steps people often consider. We use IMF analysis, Reuters, CNN and industry data. Do you think AI spending keeps climbing over the next year, or slows and resets? Tell us in the comments.",
+ "tags": [
+  "AI bubble",
+  "Kospi",
+  "Samsung",
+  "SK Hynix",
+  "memory chips",
+  "semiconductors",
+  "stock market crash",
+  "South Korea economy",
+  "IMF",
+  "phone prices",
+  "what happens if",
+  "Nasdaq"
+ ],
+ "ad_safety": {
+  "rating": "green",
+  "reason": "Market and economics explainer; the US midterms are mentioned only as one of several factors investors cited, with no political verdict."
+ },
+ "sources": [
+  {
+   "title": "CNN: Massive tech sell-off wipes $2.5 trillion from the stock market",
+   "url": "https://www.cnn.com/2026/11/05/investing/tech-heavy-nasdaq-plunges"
+  },
+  {
+   "title": "Korea Herald: Kospi plunges, circuit breaker halts trading (6 Nov 2026)",
+   "url": "https://www.koreaherald.com/article/10927992"
+  },
+  {
+   "title": "Korea Times: Kospi crashes below 5,000 as AI fears batter chip stocks (6 Nov 2026)",
+   "url": "https://www.koreatimes.co.kr/economy/20261106/kospi-crashes-below-5000-ai-fears-batter-chip-stocks"
+  },
+  {
+   "title": "Reuters via Yahoo Finance: Asia stocks to drop after AI rout rocks US markets (6 Nov 2026)",
+   "url": "https://finance.yahoo.com/markets/world-indices/articles/asia-stocks-drop-ai-rout-235808955.html"
+  },
+  {
+   "title": "Reuters via Yahoo Finance Singapore: Asian stocks fall in tech rout",
+   "url": "https://sg.finance.yahoo.com/news/asian-stocks-fall-tech-rout-143244825.html"
+  },
+  {
+   "title": "Nikkei Asia: Asian stock markets drop as Democratic win stokes fears over AI scrutiny",
+   "url": "https://asia.nikkei.com/business/markets/asian-stock-markets-drop-as-democratic-win-stokes-fears-over-ai-scrutiny"
+  },
+  {
+   "title": "Bloomingbit: Kospi falls below 5,000, circuit breaker triggered (6 Nov 2026)",
+   "url": "https://en.bloomingbit.io/feed/news/123783"
+  },
+  {
+   "title": "Seoul Economic Daily: Kospi falls below 5,000 for first time in nine months (6 Nov 2026)",
+   "url": "https://en.sedaily.com/finance/2026/11/06/kospi-falls-below-5000-for-first-time-in-nine-months"
+  },
+  {
+   "title": "BigGo Finance: Kospi sidecar triggered on 5 Nov 2026",
+   "url": "https://finance.biggo.com/news/376aa964-1be8-460b-9ddc-fb69f27eab51"
+  },
+  {
+   "title": "NBC News: South Korea's Kospi index sinks more than 7% on semiconductor share sell-off",
+   "url": "https://www.nbcnews.com/world/asia/south-korea-kospi-index-sinks-semiconductor-share-sell-ai-boom-worries-rcna603143"
+  },
+  {
+   "title": "NBC News: Stocks plunge as election outcome and AI worries crush tech shares",
+   "url": "https://www.nbcnews.com/business/markets/tech-stocks-plunge-ai-midterms-rcna607650"
+  },
+  {
+   "title": "CNBC: Stock market today, live updates (4 Nov 2026)",
+   "url": "https://cnbc.com/2026/11/04/stock-market-today-live-updates.html"
+  },
+  {
+   "title": "Korea JoongAng Daily: Samsung leads global DRAM market in Q3 as SK hynix gains share (Counterpoint Research)",
+   "url": "https://www.koreajoongangdaily.com/business/samsung-keeps-dram-lead-as-sk-hynix-claws-back-global-share-in-q3/12958078"
+  },
+  {
+   "title": "Counterpoint Research: DRAM super cycle nears $200B",
+   "url": "https://counterpointresearch.com/en/insights/dram-super-cycle-nears-dollar-200b"
+  },
+  {
+   "title": "FourWeekMBA: Korea chip exports jump 259% in October 2026 (Korea trade ministry data)",
+   "url": "https://fourweekmba.com/ai-korea-chip-exports-jump-259-to-56-4b-now-49-of-exports/"
+  },
+  {
+   "title": "TechEdge AI: Gartner forecasts worldwide AI spending to grow 49.5% in 2026 (16 Sept 2026)",
+   "url": "https://techedgeai.com/gartner-forecasts-worldwide-ai-spending-to-grow-49-5-in-2026/"
+  },
+  {
+   "title": "Gartner: Surging memory costs will reduce global PC and smartphone shipments in 2026 (26 Feb 2026)",
+   "url": "https://www.gartner.com/en/newsroom/press-releases/2026-02-26-gartner-says-surging-memory-costs-will-reduce-global-pc-and-smartphone-shipments-in-2026"
+  },
+  {
+   "title": "Technology.org: Why your next laptop costs more, inside the AI memory shortage (Gartner, IDC)",
+   "url": "https://www.technology.org/2026/07/24/memory-shortage-consumer-prices-2026/"
+  },
+  {
+   "title": "Digital Trends: The memory crisis isn't going to ease, says a research firm",
+   "url": "https://www.digitaltrends.com/computing/the-memory-crisis-isnt-going-to-ease-and-you-will-pay-the-price-for-it-says-a-research-firm/"
+  },
+  {
+   "title": "Reuters via Yahoo Finance: SK Hynix CEO sees worst year for memory supply in 2027",
+   "url": "https://finance.yahoo.com/technology/articles/sk-hynix-ceo-sees-worst-182328326.html"
+  },
+  {
+   "title": "IMF blog, January 2026: Global economy shakes off tariff shock amid tech-driven boom",
+   "url": "https://www.imf.org/en/blogs/articles/2026/01/19/global-economy-shakes-off-tariff-shock-amid-tech-driven-boom"
+  },
+  {
+   "title": "Xenospectrum: IMF AI and global financial risks (October 2026 scenario)",
+   "url": "https://xenospectrum.com/en/imf-ai-global-financial-risks/"
+  },
+  {
+   "title": "Unite.AI: IMF warns AI market correction could trigger global financial turmoil",
+   "url": "https://www.unite.ai/imf-warns-ai-market-correction-could-trigger-global-financial-turmoil/"
+  },
+  {
+   "title": "Ahram Online: IMF Global Financial Stability Report coverage (Oct 2026)",
+   "url": "https://english.ahram.org.eg/UI/Front/Inner.aspx?NewsContentID=578800"
+  },
+  {
+   "title": "Investing.com: IMF flags risks to global economy from AI market correction, war and debt",
+   "url": "https://www.investing.com/news/economy-news/imf-flags-risks-to-global-economy-from-ai-market-correction-war-and-debt-4946017"
+  },
+  {
+   "title": "BusinessDay / Reuters: IMF warns of risks from AI market correction and war (13 Oct 2026)",
+   "url": "https://www.businessday.co.za/world/americas/2026-10-13-imf-warns-of-risks-from-ai-market-correction-and-war/"
+  },
+  {
+   "title": "Al Jazeera: IMF says AI investment bubble could burst, comparable to dot-com bubble",
+   "url": "https://www.aljazeera.com/economy/2025/10/14/imf-says-ai-investment-bubble-could-burst-comparable-to-dot-com-bubble"
+  },
+  {
+   "title": "RiskHub: The Dot-Com Bubble and Burst (Nasdaq peak and trough figures)",
+   "url": "https://riskhub.org/blogs/the-dot-com-bubble-and-burst"
+  },
+  {
+   "title": "TechTimes: IMF names $1.4T AI financing loop as top trigger for global market shock",
+   "url": "https://www.techtimes.com/articles/328970/20261014/imf-names-14t-ai-financing-loop-top-trigger-global-market-shock.htm"
+  }
+ ],
+ "money": true,
+ "thumbnail": {
+  "text": "Chip crash / Your phone?",
+  "countries": [
+   "South Korea"
+  ],
+  "markers": [
+   {
+    "lat": 37.57,
+    "lon": 126.98
+   }
+  ]
+ },
+ "sections": [
+  {
+   "heading": "",
+   "scenes": [
+    {
+     "narration": "On Friday, South Korea's Kospi plunged more than 8% in early trading, triggering a circuit breaker that halted trading for 20 minutes.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "South Korea"
+      ],
+      "markers": [
+       {
+        "lat": 37.57,
+        "lon": 126.98,
+        "label": "Seoul"
+       }
+      ],
+      "label": "Trading halted",
+      "from": "world",
+      "zoom": "close"
+     }
+    },
+    {
+     "narration": "It followed a rout on Wall Street, where the Nasdaq slumped 5.52% on Thursday and closed in correction, more than 10% below its record high.",
+     "visual": {
+      "type": "headline",
+      "source": "CNN",
+      "date": "5 Nov 2026",
+      "text": "Massive tech sell-off wipes $2.5 trillion from the stock market",
+      "label": "Wall Street"
+     }
+    },
+    {
+     "narration": "Analysts told Reuters the fear is a slowdown in the AI buildout, and Seoul's chipmakers sit right at the centre of it.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "South Korea"
+      ],
+      "also": [
+       "United States of America"
+      ],
+      "arrows": [
+       {
+        "from": "United States of America",
+        "to": "South Korea",
+        "label": "AI fears travel"
+       }
+      ],
+      "zoom": "wide"
+     }
+    },
+    {
+     "narration": "So what happens if the AI chip boom cracks, who feels it first, and what could it mean for your money? Here is how it works.",
+     "visual": {
+      "type": "kicker",
+      "text": "Chip boom / Cracking?",
+      "countries": [
+       "South Korea"
+      ],
+      "sub": "What happens next?"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The place",
+   "scenes": [
+    {
+     "narration": "If you want one big story explained like this every day, subscribe. Now, why does a fall in Seoul matter to everyone?",
+     "visual": {
+      "type": "photo",
+      "query": "semiconductor factory clean room",
+      "caption": "Memory chips come from a few huge factories",
+      "icon": "cpu"
+     }
+    },
+    {
+     "narration": "Reuters said chipmakers and data-centre suppliers in South Korea, Taiwan and Japan were seen as especially vulnerable. South Korea sits at the heart of that chain.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "South Korea"
+      ],
+      "also": [
+       "Taiwan",
+       "Japan"
+      ],
+      "markers": [
+       {
+        "lat": 37.57,
+        "lon": 126.98,
+        "label": "Seoul"
+       }
+      ],
+      "label": "Asia's chip belt",
+      "zoom": "wide"
+     }
+    },
+    {
+     "narration": "Samsung and SK Hynix together held 67% of global DRAM memory revenue in the third quarter, Counterpoint Research said. DRAM is the memory inside phones, laptops and AI servers.",
+     "visual": {
+      "type": "stat",
+      "value": "67%",
+      "label": "of world DRAM revenue: two Korean firms",
+      "icon": "cpu",
+      "fraction": 0.67
+     }
+    },
+    {
+     "narration": "In October, chip exports were about 49% of South Korea's total, up from roughly a quarter a year earlier, based on trade ministry data.",
+     "visual": {
+      "type": "stat",
+      "value": "49%",
+      "label": "of Korea's October exports were chips",
+      "icon": "factory",
+      "fraction": 0.49
+     }
+    }
+   ]
+  },
+  {
+   "heading": "How it works",
+   "scenes": [
+    {
+     "narration": "To see why Seoul matters, follow the money from an American data centre to a Korean factory floor.",
+     "visual": {
+      "type": "title",
+      "text": "How it works",
+      "icon": "gear",
+      "sub": "From data centre to chip factory"
+     }
+    },
+    {
+     "narration": "Tech giants spend billions on AI data centres. Those data centres need huge amounts of memory chips. And Korean makers, with America's Micron, supply most of them.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "currency-dollar",
+        "label": "Tech giants spend",
+        "cue": "billions"
+       },
+       {
+        "icon": "hard-drives",
+        "label": "Data centres",
+        "cue": "data"
+       },
+       {
+        "icon": "cpu",
+        "label": "Memory chips",
+        "cue": "memory"
+       },
+       {
+        "icon": "factory",
+        "label": "Korean makers",
+        "cue": "Korean"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Gartner now forecasts worldwide AI spending of about 2.7 trillion dollars in 2026, up almost 50% on last year. That is the bet investors are now questioning.",
+     "visual": {
+      "type": "stat",
+      "value": "$2.7 trillion",
+      "label": "AI spending forecast for 2026 (Gartner)",
+      "icon": "currency-circle-dollar"
+     }
+    },
+    {
+     "narration": "Counterpoint said third-quarter DRAM revenue rose 369% from a year earlier, driven mainly by higher prices. That squeeze is what phone and laptop makers are feeling.",
+     "visual": {
+      "type": "stat",
+      "value": "+369%",
+      "label": "DRAM revenue, Q3 vs a year earlier (Counterpoint)",
+      "icon": "chart-line-up"
+     }
+    },
+    {
+     "narration": "In February, Gartner estimated combined DRAM and SSD prices would surge about 130% by the end of 2026, lifting PC prices about 17% and smartphone prices about 13% versus 2025.",
+     "visual": {
+      "type": "bars",
+      "title": "Gartner, Feb 2026: estimated rise by end-2026 vs 2025",
+      "unit": "%",
+      "items": [
+       {
+        "label": "DRAM + SSD prices",
+        "value": 130
+       },
+       {
+        "label": "PC prices",
+        "value": 17
+       },
+       {
+        "label": "Smartphone prices",
+        "value": 13
+       }
+      ]
+     }
+    },
+    {
+     "narration": "It works as a loop. More AI spending means more chip orders, which lifts profits and share prices, which builds confidence for more spending. Loops can also run in reverse.",
+     "visual": {
+      "type": "cycle",
+      "center": "Boom loop",
+      "steps": [
+       {
+        "icon": "currency-dollar",
+        "label": "More AI spending",
+        "cue": "spending"
+       },
+       {
+        "icon": "cpu",
+        "label": "More chip orders",
+        "cue": "orders"
+       },
+       {
+        "icon": "chart-line-up",
+        "label": "Higher profits and prices",
+        "cue": "profits"
+       },
+       {
+        "icon": "rocket",
+        "label": "More confidence",
+        "cue": "confidence"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Markets have brakes. When prices fall too fast, Korea's exchange can suspend all trading for 20 minutes, and a separate sidecar pauses computer-driven selling for five.",
+     "visual": {
+      "type": "zoom",
+      "icon": "bank",
+      "label": "Seoul's stock exchange",
+      "inner_icon": "pause-circle",
+      "inner_label": "20-minute halt"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The trigger",
+   "scenes": [
+    {
+     "narration": "Investors pointed to fears that Democratic midterm gains could bring tougher rules on AI data centres and slow the buildout. Analysts disagree on how much each factor mattered.",
+     "visual": {
+      "type": "headline",
+      "source": "Nikkei Asia",
+      "text": "Asian stock markets drop as Democratic win stokes fears over AI scrutiny",
+      "label": "Markets"
+     }
+    },
+    {
+     "narration": "The Kospi peaked above 9,000 earlier this year, according to NBC News. When Friday's halt hit, it stood near 4,920, below 5,000 for the first time in months.",
+     "visual": {
+      "type": "price",
+      "label": "Kospi index",
+      "from": 9000,
+      "to": 4923,
+      "scenario": false,
+      "note": "2026 peak above 9,000 to Friday's halt"
+     }
+    },
+    {
+     "narration": "Selling in New York on Thursday spread to Asia on Friday, with Seoul plunging and tech shares sliding across the region. Chip and data-centre suppliers had already come under pressure on Thursday.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "South Korea"
+      ],
+      "also": [
+       "Taiwan",
+       "Japan"
+      ],
+      "markers": [
+       {
+        "lat": 37.57,
+        "lon": 126.98,
+        "label": "Seoul"
+       },
+       {
+        "lat": 25.03,
+        "lon": 121.57,
+        "label": "Taipei"
+       },
+       {
+        "lat": 35.68,
+        "lon": 139.69,
+        "label": "Tokyo"
+       }
+      ],
+      "arrows": [
+       {
+        "from": "United States of America",
+        "to": "South Korea",
+        "label": "Wall Street rout"
+       }
+      ],
+      "label": "Selling spreads",
+      "zoom": "wide"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Bubble or not?",
+   "scenes": [
+    {
+     "narration": "Is it a bubble? Nobody can say for certain. Korea's chip export value jumped 259% in October, though much of that reflects sharply higher memory prices rather than just more chips shipped. A boom can be real and still be priced too high.",
+     "visual": {
+      "type": "list",
+      "heading": "Two readings",
+      "items": [
+       {
+        "icon": "factory",
+        "text": "Export value up 259%, much of it from higher prices",
+        "cue": "jumped"
+       },
+       {
+        "icon": "question",
+        "text": "Open question: are prices too high?",
+        "cue": "priced"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "The IMF's October 2026 outlook said unwinding AI investment could directly cut global GDP by up to 0.4% by 2028. A steeper scenario, with asset prices falling sharply, would cut it about 1.1%.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "chart-line-down",
+       "label": "IMF: direct effect of AI unwinding",
+       "value": "up to -0.4% GDP"
+      },
+      "right": {
+       "icon": "chart-line-down",
+       "label": "IMF steeper: asset prices fall",
+       "value": "-1.1% GDP"
+      },
+      "vs": "vs baseline, by 2028"
+     }
+    },
+    {
+     "narration": "The IMF said even the steeper scenario was not likely to push global growth down to recession levels.",
+     "visual": {
+      "type": "hero",
+      "icon": "scales",
+      "label": "Even the steeper case: no recession",
+      "sub": "The IMF's own assessment"
+     }
+    },
+    {
+     "narration": "For a precedent, look at 2000. The Nasdaq peaked in March 2000, fell about 78% by October 2002, and did not regain that peak until 2015.",
+     "visual": {
+      "type": "timeline",
+      "events": [
+       {
+        "year": "2000",
+        "label": "Nasdaq peaks",
+        "icon": "chart-line-up",
+        "cue": "peaked"
+       },
+       {
+        "year": "2002",
+        "label": "Down about 78%",
+        "icon": "chart-line-down",
+        "cue": "fell"
+       },
+       {
+        "year": "2015",
+        "label": "Peak regained",
+        "icon": "flag-checkered",
+        "cue": "regain"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "The IMF has compared today's AI investment boom with the dot-com era, and has also named a growing financing loop around AI as a risk to watch.",
+     "visual": {
+      "type": "hero",
+      "icon": "desktop",
+      "label": "AI boom vs dot-com era",
+      "sub": "A comparison the IMF has made"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The ripple",
+   "scenes": [
+    {
+     "narration": "Now the scenario. None of this has happened yet, and analysts disagree about whether it will.",
+     "visual": {
+      "type": "kicker",
+      "text": "Scenario / Not a forecast",
+      "sub": "None of this has happened"
+     }
+    },
+    {
+     "narration": "Suppose AI spending slowed. It could go in steps: orders ease, memory prices follow, Korean exports and profits shrink, and share markets around the world reprice.",
+     "visual": {
+      "type": "ladder",
+      "title": "If AI spending slows",
+      "steps": [
+       {
+        "label": "Chip orders ease",
+        "cue": "orders"
+       },
+       {
+        "label": "Memory prices fall",
+        "cue": "prices"
+       },
+       {
+        "label": "Exports and profits shrink",
+        "cue": "exports"
+       },
+       {
+        "label": "Markets reprice",
+        "cue": "reprice"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "First, Korea itself. With chips making up nearly half of exports in October, a slowdown in orders could weigh on the wider economy.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "South Korea"
+      ],
+      "markers": [
+       {
+        "lat": 37.57,
+        "lon": 126.98,
+        "label": "Seoul"
+       }
+      ],
+      "label": "Ring one: Korea",
+      "zoom": "close"
+     }
+    },
+    {
+     "narration": "Next, the region. Taiwan and Japan host similar chip and data-centre suppliers, which Reuters said were seen as especially vulnerable, so a shock could travel along that chain.",
+     "visual": {
+      "type": "newsmap",
+      "focus": [
+       "South Korea"
+      ],
+      "also": [
+       "Taiwan",
+       "Japan"
+      ],
+      "label": "Ring two: Asia",
+      "zoom": "wide"
+     }
+    },
+    {
+     "narration": "Then the world. The IMF's October 2026 Global Financial Stability Report warned that an AI-linked market correction is a key risk, and that rising leverage across the AI ecosystem could amplify it.",
+     "visual": {
+      "type": "map",
+      "countries": [
+       "South Korea",
+       "Taiwan",
+       "Japan",
+       "United States of America",
+       "Germany",
+       "India",
+       "Brazil"
+      ],
+      "label": "Ring three: the world",
+      "zoom": "world"
+     }
+    },
+    {
+     "narration": "There is a twist for consumers. Slower AI demand could ease memory prices, but SK Hynix's CEO has said 2027 could be the tightest year for memory supply, and some analysts expect relief only in late 2027 or 2028.",
+     "visual": {
+      "type": "compare",
+      "left": {
+       "icon": "trend-down",
+       "label": "Slower AI demand",
+       "value": "Cheaper chips?"
+      },
+      "right": {
+       "icon": "factory",
+       "label": "Analysts' view of relief",
+       "value": "Late 2027-2028"
+      },
+      "vs": "but"
+     }
+    },
+    {
+     "narration": "So is this a pause, a correction, or something bigger? Nobody knows yet, and anyone claiming certainty is guessing.",
+     "visual": {
+      "type": "question",
+      "text": "Pause, correction, or something bigger?"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "Your money",
+   "scenes": [
+    {
+     "narration": "Now, what could this mean for your money, wherever you live?",
+     "visual": {
+      "type": "title",
+      "text": "Your money",
+      "icon": "wallet",
+      "sub": "Wherever you live"
+     }
+    },
+    {
+     "narration": "You could feel it in four places: the price of devices, pensions and savings invested in shares, jobs tied to tech and exports, and your currency.",
+     "visual": {
+      "type": "list",
+      "heading": "Where you might feel it",
+      "items": [
+       {
+        "icon": "device-mobile",
+        "text": "Phone and laptop prices",
+        "cue": "devices"
+       },
+       {
+        "icon": "piggy-bank",
+        "text": "Pensions and savings in shares",
+        "cue": "pensions"
+       },
+       {
+        "icon": "briefcase",
+        "text": "Tech and export jobs",
+        "cue": "jobs"
+       },
+       {
+        "icon": "currency-dollar",
+        "text": "Your currency and rates",
+        "cue": "currency"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "This is general information, not advice. People often review their emergency savings, whether their loans are fixed or variable, and their device budget, and avoid decisions made in a panic.",
+     "visual": {
+      "type": "list",
+      "heading": "What people often review",
+      "items": [
+       {
+        "icon": "shield-check",
+        "text": "Emergency savings: a few months of costs",
+        "cue": "emergency"
+       },
+       {
+        "icon": "percent",
+        "text": "Fixed vs variable loan rates",
+        "cue": "fixed"
+       },
+       {
+        "icon": "calendar-check",
+        "text": "A device budget",
+        "cue": "device"
+       },
+       {
+        "icon": "hand-palm",
+        "text": "Avoid decisions made in a panic",
+        "cue": "panic"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "Perspective helps. Even after this week's sell-off, the Nasdaq Composite is still well above its level on Election Day 2024.",
+     "visual": {
+      "type": "hero",
+      "icon": "chart-line-up",
+      "label": "Still above Election Day 2024",
+      "sub": "Even after this week's fall"
+     }
+    },
+    {
+     "narration": "None of this is a prediction, and none of it is financial advice. Markets can swing both ways, and a few bad days are not a verdict.",
+     "visual": {
+      "type": "hero",
+      "icon": "scales",
+      "label": "Not financial advice",
+      "sub": "Markets swing both ways"
+     }
+    }
+   ]
+  },
+  {
+   "heading": "The bottom line",
+   "scenes": [
+    {
+     "narration": "In short: AI spending drives demand for memory chips, Korean firms make most of them, and doubts about that spending halted a stock market on Friday, with your phone caught in the middle.",
+     "visual": {
+      "type": "flow",
+      "steps": [
+       {
+        "icon": "currency-dollar",
+        "label": "AI spending",
+        "cue": "spending"
+       },
+       {
+        "icon": "cpu",
+        "label": "Memory chips",
+        "cue": "memory"
+       },
+       {
+        "icon": "factory",
+        "label": "Korean firms",
+        "cue": "Korean"
+       },
+       {
+        "icon": "device-mobile",
+        "label": "Your phone",
+        "cue": "phone"
+       }
+      ]
+     }
+    },
+    {
+     "narration": "On Friday morning, trading in Seoul fell silent for twenty minutes. Behind those screens sits something very ordinary: the phone in your pocket, and what it costs.",
+     "visual": {
+      "type": "photo",
+      "query": "stock market screens",
+      "caption": "A pause in trading",
+      "icon": "chart-line-down"
+     }
+    },
+    {
+     "narration": "Over the next year, will AI spending keep climbing, or will it slow and force a reset? Tell us in the comments.",
+     "visual": {
+      "type": "kicker",
+      "text": "Boom goes on / Or resets?",
+      "sub": "Tell us in the comments"
+     }
+    }
+   ]
+  }
+ ],
+ "short": {
+  "scenes": [
+   1,
+   2,
+   8,
+   12,
+   13,
+   32
+  ],
+  "outro": "The full video explains how a chip crash in Seoul could reach phone prices, pensions and jobs near you."
+ },
+ "factcheck": {
+  "ok": false,
+  "summary": "Almost every number checks out against sources: the Kospi 8%+ drop and 20-minute halt, the Nasdaq's 5.52% fall, the 67% DRAM share, the 49% export share, 259%, 369%, Gartner's $2.7T and 130%/17%/13%, the IMF's 0.4%/1.1%, and the dot-com figures. Three things need fixing or confirming: the unverified Nasdaq-vs-Election-Day-2024 claim, the NBC attribution for the Kospi peak, and the Reuters 'especially vulnerable' wording.",
+  "open_issues": [
+   {
+    "scene": 34,
+    "claim": "Even after this week's sell-off, the Nasdaq Composite is still well above its level on Election Day 2024.",
+    "problem": "I found no source for this comparison, and none of the writer's sources give a post-sell-off Nasdaq level or an Election Day 2024 close. CNN confirms the index fell more than 10% from its Oct 6, 2026 record, but not where it now sits against Nov 5, 2024. It is probably true given the 2025-26 rally, but it is unverified. 'Well above' is also vague.",
+    "fix": "State a checked figure, for example: 'Even after this week's sell-off, the Nasdaq Composite is still up roughly X% from Election Day 2024.' Use the Nov 5, 2024 close and the Nov 5, 2026 close. If you can't verify it, remove the line.",
+    "source": "https://www.cnn.com/2026/11/05/investing/tech-heavy-nasdaq-plunges"
+   },
+   {
+    "scene": 17,
+    "claim": "The Kospi peaked above 9,000 earlier this year, according to NBC News.",
+    "problem": "The peak is correct. Wikipedia's all-time-high table shows a record close of about 9,114 on 22 June 2026 and an intraday high of about 9,385. But the NBC article in the writer's list is headlined about a 7% drop, and I could not confirm it states the 9,000 peak, so the attribution is unverified.",
+    "fix": "The Kospi peaked above 9,000 in June, then fell below 5,000 on Friday. (Drop the 'according to NBC News' attribution unless the article is checked, or cite exchange data.)",
+    "source": "https://en.wikipedia.org/wiki/KOSPI"
+   },
+   {
+    "scene": 6,
+    "claim": "Reuters said chipmakers and data-centre suppliers in South Korea, Taiwan and Japan were seen as especially vulnerable. (Repeated in scene 27.)",
+    "problem": "I couldn't open the cited Reuters/Yahoo article, and no search result confirmed this wording. The Reuters figures in other scenes (Kospi, IMF) did check out. Confirm the attribution before publishing.",
+    "fix": "Keep only if the Reuters text matches. Otherwise attribute more loosely: 'Chipmakers across Asia, including Japan and Taiwan, also came under pressure.'",
+    "source": "https://finance.yahoo.com/markets/world-indices/articles/asia-stocks-drop-ai-rout-235808955.html"
+   }
+  ]
+ },
+ "series": "EVERY HOW #07",
+ "editor": {
+  "scores": {
+   "question": 7,
+   "hook": 6,
+   "story": 5,
+   "surprise": 6,
+   "clarity": 5,
+   "money": 5,
+   "visuals": 6,
+   "accuracy_tone": 6
+  },
+  "average": 5.8,
+  "ship": false,
+  "strengths": [
+   "The news peg is strong and current: a Kospi circuit breaker on Friday, following a Nasdaq correction. The title and thumbnail ('Chip crash / Your phone?') connect Seoul to an ordinary object.",
+   "The Samsung and SK Hynix 67% DRAM share and the chips-at-49%-of-Korean-exports figure are real 'wait, really?' facts. The IMF 0.4% / 1.1% scenario numbers and the 'even the steeper case: no recession' line give a calm, sourced counterweight.",
+   "Facts and scenario are clearly separated. The 'Scenario / Not a forecast' kicker, the hedging ('nobody knows yet') and the lack of stock tips are all good.",
+   "The visual vocabulary is varied (newsmap, headline, price, ladder, cycle, timeline), and the dot-com 2000-2015 precedent is useful context.",
+   "The ending returns to the phone in your pocket and asks one clear comment question."
+  ],
+  "problems": [
+   "HOOK: The cold open is three number-heavy sentences (8%, circuit breaker, 5.52%, 'closed in correction') with no actual quote. The question only arrives in scene 4, about 30 seconds in. Scene 5 then immediately asks for a subscribe, which kills the momentum. There is no stunning single fact such as the Kospi having nearly halved from its 9,000 peak.",
+   "STORY: This is a stat-driven explainer, not an unfolding scenario. The 'what if' arrives at scene ~27 of 34. Before it come about 20 scenes of facts, including a 'Bubble or not?' block that is a lecture. The ladder is a generic four-step abstraction with no numbers, no named people, and no concrete moment such as a Korean supplier cutting shifts or a phone maker repricing. Ring one, two and three are one flat sentence each, and rings two and three carry no real stakes.",
+   "CLARITY: There is almost no analogy. 'Circuit breaker', 'sidecar', 'correction', 'reprice', 'leverage across the AI ecosystem', 'financing loop' and 'DRAM' are used with thin or no explanation, and a 12-year-old would get lost. The boom loop is shown on screen but never made tangible. Scene 13 stacks four consecutive stat scenes (67%, 49%, $2.7T, +369%), and Gartner's '130% DRAM+SSD prices' is confusing without a physical comparison.",
+   "MONEY: The section is generic. It says 'review emergency savings, fixed vs variable loans', but gives no prices, rates or job numbers and nothing specific for Lagos, Jakarta or Nairobi. It never explains the currency link (a falling tech trade and a strong dollar make imported phones dearer in naira or rupiah). It never turns Gartner's 13% into a real price such as a $500 phone, and the 'device budget' bullet is vague. The 'Nasdaq still above Election Day 2024' line has no number and is flagged unverified by the fact check. It is also a US-centric comfort line.",
+   "SURPRISE: There are about four good facts, but several are buried in a numbers parade. Sourcing leans on weak aggregators (FourWeekMBA, Bloomingbit, BigGo, Xenospectrum, TechTimes, Unite.AI) for key numbers such as the 259% export jump and the IMF coverage. The 28-link list reads as padding. Viewers will not trust 'FourWeekMBA' the way they would the Korean trade ministry or the IMF.",
+   "VISUALS: Several 'hero' scenes are abstract icons with no data: 'AI boom vs dot-com era', 'Not financial advice', 'Still above Election Day 2024'. The 'stock market screens' photo does not match the line about 'the phone in your pocket'. 'Ring two: Asia' has no markers or arrows, so it does not show travel. Dark news scenes and paper scenes are mixed unevenly, with the explainer flow arriving late.",
+   "ACCURACY/TONE: The fact check is ok:false with three open issues (Nasdaq vs Election Day 2024, NBC attribution of the 9,000 peak, Reuters 'especially vulnerable' wording). The IMF is referenced inconsistently ('October 2026 outlook' vs 'Global Financial Stability Report'). The ladder and ring scenes carry no sourced scenario numbers. 'Below 5,000 for the first time in months' is vague against a source saying nine months. The decline from 9,000 to 4,923 is about 45%, yet the draft treats it as a one-day story."
+  ],
+  "rounds": 1
+ }
+}
