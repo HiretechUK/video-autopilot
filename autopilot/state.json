@@ -386,7 +386,8 @@
    "status": "pending",
    "version": 1,
    "file": "episodes/IY-08.json",
-   "created": "2026-11-05T23:57:01.072682+00:00"
+   "created": "2026-11-05T23:57:01.072682+00:00",
+   "links": {}
   },
   "EH-07": {
    "series": "every_how",
@@ -403,16 +404,41 @@
     "version": 1,
     "minutes": 6.5,
     "superseded": []
-   }
+   },
+   "links": {}
   },
   "IY-09": {
    "series": "imagine_you",
    "number": 9,
    "title": "Why a Locked Bunker Can Kill You With Air That Looks Fine",
-   "status": "pending",
+   "status": "partly_published",
    "version": 1,
    "file": "episodes/IY-09.json",
-   "created": "2026-11-06T18:07:21.994818+00:00"
+   "created": "2026-11-06T18:07:21.994818+00:00",
+   "approved": "2026-11-06T21:02:15.214173+00:00",
+   "links": {
+    "youtube": "https://youtube.com/watch?v=lnwEku639YY",
+    "thumbnail": "set",
+    "instagram": "failed: Graph API 17841480788622807/media: Any of the pages_read_engagement, pages_manage_metadata,\n        pages_read_user_content, pages_manage_ads, pages_show_list or\n        pages_messaging permission(s) must be granted before impersonating a\n        user's page.",
+    "facebook": "failed: Graph API 1342769218927866/video_reels: Any of the pages_read_engagement, pages_manage_metadata,\n        pages_read_user_content, pages_manage_ads, pages_show_list or\n        pages_messaging permission(s) must be granted before impersonating a\n        user's page."
+   }
+  },
+  "EH-08": {
+   "series": "every_how",
+   "number": 8,
+   "title": "How Will the Moon Decide When Ramadan 2027 Begins?",
+   "status": "pending",
+   "version": 1,
+   "file": "episodes/EH-08.json",
+   "created": "2026-11-06T21:39:33.808470+00:00",
+   "private": {
+    "full": "ism2WGv_4Jo",
+    "short": "pxpp8iQY5gY",
+    "thumbnail": "set",
+    "version": 1,
+    "minutes": 6.0,
+    "superseded": []
+   }
   }
  },
  "seen": [
@@ -423,6 +449,7 @@
   "<AM9P194MB14592DDB872E36278672CE70A66A2@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
   "<AM9P194MB1459E6137FBEB168E86F38CBA6682@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>",
   "<CANa5RAoVso_fTCyaeG84T-zO7B2mdmo5uuauZNLWSvQn1z---w@mail.gmail.com>",
-  "<CANa5RAqDfLAjq9fKsA=B6ZnO4bp9vuJAQYpkfckqE+eD33h8BA@mail.gmail.com>"
+  "<CANa5RAqDfLAjq9fKsA=B6ZnO4bp9vuJAQYpkfckqE+eD33h8BA@mail.gmail.com>",
+  "<AM9P194MB145911590CF1396750883348A6762@AM9P194MB1459.EURP194.PROD.OUTLOOK.COM>"
  ]
 }
