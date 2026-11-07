@@ -1,0 +1,352 @@
+{
+ "id": "supermarket-earthquake-exit",
+ "title": "Why the Doorway Kills First in Earthquakes",
+ "description": "You're in a supermarket when the floor starts rolling, and every instinct says run for the exit. Real earthquake guidance explains why the doorway is where a building drops its debris, and why noise only travels through metal. Would you keep tapping and wait, or crawl toward the gap?",
+ "tags": [
+  "earthquake",
+  "survival",
+  "trapped",
+  "survival tips",
+  "earthquake safety",
+  "what would you do",
+  "second person",
+  "shorts"
+ ],
+ "series": "SURVIVE #10",
+ "voice": "am_michael",
+ "speed": 1.15,
+ "costume": "cap",
+ "hud": [
+  "TUESDAY \u00b7 05:42 PM",
+  "\u25cf EARTHQUAKE",
+  "EXIT: 40 STEPS"
+ ],
+ "scenes": [
+  {
+   "bg": "supermarket",
+   "pose": "stand",
+   "poses": [
+    "stand",
+    "shock"
+   ],
+   "x": 0.5,
+   "props": [],
+   "fx": "shake",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "TUESDAY \u00b7 05:42 PM",
+    "\u25cf EARTHQUAKE",
+    "EXIT: 40 STEPS"
+   ],
+   "mood": "urgent",
+   "narration": "The exit door is the deadliest spot in a collapsing store. The floor starts rolling.",
+   "highlight": [
+    "exit door"
+   ]
+  },
+  {
+   "bg": "supermarket",
+   "pose": "shock",
+   "poses": [
+    "shock",
+    "lookout",
+    "cower"
+   ],
+   "x": 0.4,
+   "props": [],
+   "fx": "shake",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.15
+   },
+   "mood": "tense",
+   "narration": "Cans rain off the shelves. Your legs say run. Don't.",
+   "highlight": [
+    "Don't"
+   ]
+  },
+  {
+   "bg": "supermarket",
+   "pose": "walk",
+   "poses": [
+    "walk",
+    "crouch",
+    "cower"
+   ],
+   "x": 0.35,
+   "move_to": 0.55,
+   "props": [
+    "crate"
+   ],
+   "fx": "shake",
+   "cam": {
+    "z0": 1.1,
+    "z1": 1.2
+   },
+   "rule": {
+    "n": 1,
+    "text": "LEAVE SHELVES",
+    "sub": "COUNTER, NOT EXIT"
+   },
+   "mood": "urgent",
+   "narration": "Rule one: leave the shelves. Crouch under the checkout counter, arm over your head. Running in a quake is like sprinting on a trampoline.",
+   "highlight": [
+    "checkout counter"
+   ]
+  },
+  {
+   "bg": "supermarket",
+   "pose": "cower",
+   "poses": [
+    "cower",
+    "shock"
+   ],
+   "x": 0.55,
+   "props": [
+    "crate"
+   ],
+   "fx": "shake",
+   "cam": {
+    "z0": 1.15,
+    "z1": 1.25
+   },
+   "mood": "tense",
+   "narration": "You see, a building sheds its outer skin first, like a snake dropping scales. Every scale lands on the doorway.",
+   "highlight": [
+    "doorway"
+   ]
+  },
+  {
+   "bg": "supermarket",
+   "pose": "shock",
+   "poses": [
+    "shock",
+    "lookout",
+    "reach"
+   ],
+   "x": 0.5,
+   "props": [
+    "crate",
+    "radio"
+   ],
+   "fx": "red",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "05:43 PM",
+    "\u25cf EXIT: BLOCKED",
+    "AIR: DUST"
+   ],
+   "mood": "tense",
+   "narration": "A shelf topples across the aisle. The exit is gone. Your hand finds a radio.",
+   "highlight": [
+    "radio"
+   ]
+  },
+  {
+   "bg": "supermarket",
+   "pose": "reach",
+   "poses": [
+    "reach",
+    "kneel",
+    "build"
+   ],
+   "x": 0.5,
+   "props": [
+    "crate",
+    "radio"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.15
+   },
+   "rule": {
+    "n": 2,
+    "text": "TAP, NO SHOUT",
+    "sub": "COVER YOUR MOUTH"
+   },
+   "mood": "whisper",
+   "narration": "Rule two: stay inside, make noise only through metal. Cover your mouth, tap a steel shelf leg.",
+   "highlight": [
+    "metal"
+   ]
+  },
+  {
+   "bg": "supermarket",
+   "pose": "kneel",
+   "poses": [
+    "kneel",
+    "build",
+    "build"
+   ],
+   "x": 0.5,
+   "props": [
+    "crate",
+    "radio"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.1,
+    "z1": 1.2
+   },
+   "mood": "calm",
+   "narration": "You see, shouting makes you gulp dust, but a tap travels through steel, like a radiator knock three floors up.",
+   "highlight": [
+    "tap"
+   ]
+  },
+  {
+   "bg": "supermarket",
+   "pose": "sit",
+   "poses": [
+    "sit",
+    "shock",
+    "build"
+   ],
+   "x": 0.55,
+   "move_to": 0.4,
+   "props": [
+    "crate",
+    "radio"
+   ],
+   "fx": "shake",
+   "cam": {
+    "z0": 1.0,
+    "z1": 1.1
+   },
+   "hud": [
+    "08:30 PM",
+    "\u25cf AFTERSHOCK",
+    "JUICE: 6 BOTTLES"
+   ],
+   "mood": "tense",
+   "narration": "Eight-thirty. An aftershock slides the shelf closer. Six bottles left.",
+   "highlight": [
+    "closer"
+   ]
+  },
+  {
+   "bg": "supermarket",
+   "pose": "lookout",
+   "poses": [
+    "lookout",
+    "point",
+    "reach"
+   ],
+   "x": 0.4,
+   "props": [
+    "crate",
+    "radio"
+   ],
+   "fx": "flash",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.2
+   },
+   "hud": [
+    "DAY 2 \u00b7 06:10 AM",
+    "\u25cf SHELF GROANING",
+    "JUICE: 6 BOTTLES"
+   ],
+   "mood": "tense",
+   "narration": "Day two. The shelf groans... and a gap opens with light behind it.",
+   "highlight": [
+    "gap"
+   ]
+  },
+  {
+   "bg": "city_night",
+   "pose": "lookout",
+   "poses": [
+    "lookout",
+    "shock"
+   ],
+   "x": 0.35,
+   "props": [
+    "crate",
+    "radio"
+   ],
+   "fx": "flash",
+   "cam": {
+    "z0": 1.1,
+    "z1": 1.25
+   },
+   "mood": "reveal",
+   "narration": "The radio crackles. Rescuers dug out the front doors first, because everyone ran there. They found nobody. Your tapping is why they came inside.",
+   "highlight": [
+    "front doors"
+   ]
+  },
+  {
+   "bg": "supermarket",
+   "pose": "lookout",
+   "poses": [
+    "lookout",
+    "think",
+    "point"
+   ],
+   "x": 0.5,
+   "props": [
+    "crate",
+    "radio"
+   ],
+   "fx": "",
+   "cam": {
+    "z0": 1.05,
+    "z1": 1.15
+   },
+   "mood": "tense",
+   "narration": "What do you do? A: keep tapping, six bottles left, rescuers three meters away. B: crawl under the groaning shelf toward the gap. Comment A or B.",
+   "highlight": [
+    "groaning shelf"
+   ],
+   "choice": {
+    "q": "WHAT DO YOU DO?",
+    "options": [
+     "A \u00b7 KEEP TAPPING, SIX BOTTLES LEFT, RESCUERS THREE METERS AWAY",
+     "B \u00b7 CRAWL UNDER THE GROANING SHELF TOWARD THE GAP"
+    ]
+   },
+   "hold_after": 2.0
+  }
+ ],
+ "editor": {
+  "scores": {
+   "premise": 6,
+   "hook": 6,
+   "title": 5,
+   "specificity": 5,
+   "escalation": 6,
+   "twist": 5,
+   "showability": 5,
+   "voice": 7
+  },
+  "average": 5.6,
+  "ship": false,
+  "strengths": [
+   "Supermarket plus earthquake is a relatable, visual setting, and the 'run for the exit' instinct is a real tension.",
+   "The word count (about 194) fits the range, and the lines are short and spoken.",
+   "The radiator-knock comparison is a good 'You see,' line: everyday, accurate and drawable.",
+   "The HUD clock jumps (05:42, 08:30 PM, Day 2) and the countdown items (EXIT: 40 STEPS, JUICE: 6 BOTTLES) give a survival-log feel.",
+   "The twist idea is good: rescuers dug where everyone ran, and the tapping is what brought them inside."
+  ],
+  "problems": [
+   "The core claim is shaky. 'The exit door is the deadliest spot' and 'the doorway kills first' echo the debunked doorway myth. Real guidance is Drop, Cover, Hold On, and the real hazard is falling facade and debris just outside the entrance. Savvy commenters will tear it apart.",
+   "The description says 'noise only travels through metal', which is false. Sound carries through concrete and air too. Steel carries a tap farther and with less dust-gulping than shouting, so say that instead.",
+   "The title states the claim ('Doorway Kills First') rather than opening a gap about a hidden mechanism. It reads like a headline and repeats the shaky claim.",
+   "The snake-scales line is a metaphor that can't be drawn, and the mechanism it covers ('sheds its outer skin') is vague. It is the weakest specificity moment and it carries the title's whole promise.",
+   "Rule one contradicts the scenes. You are told to leave the shelves, then a shelf topples on you in the same aisle, and you hide beside crates and a radio that appear without explanation.",
+   "The escalation stalls in the middle. Scenes 6-7 are 'calm' and 'whisper' with no new danger, and the jump from 05:43 PM to 08:30 PM has no beat. The 'six bottles' stakes appear from nowhere, with no scene of drinking or running low.",
+   "The twist is delivered in a different location (the city_night background) as pure narration, and 'rescuers dug the front doors first' doesn't clearly recontextualise the doorway rule. It also never explains why your tapping mattered more than the rescuers' own search.",
+   "The final choice is not hard. A (keep tapping, rescuers 3 m away) is obviously correct and B (crawl under a groaning shelf) is obviously suicidal. The '3 meters' fact is also introduced only in the choice, never shown.",
+   "Several lines are not drawable: 'Your legs say run', 'a gap opens with light behind it' (no gap prop is specified), and the HUD 'AIR: DUST'. Poses like 'build' for a person tapping a shelf leg don't match the narration."
+  ],
+  "rounds": 2
+ }
+}
