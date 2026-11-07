@@ -1114,6 +1114,238 @@
      }
     }
    }
+  },
+  {
+   "at": "2026-11-07T11:47:38.903190+00:00",
+   "series": {
+    "imagine_you": {
+     "channel": "Imagine You",
+     "subscribers": 13,
+     "channel_views": 6480,
+     "videos": {
+      "IY-01:youtube": {
+       "id": "d-OCr2W4klA",
+       "views": 1259,
+       "likes": 11,
+       "comments": 2,
+       "duration": "PT52S",
+       "problems": []
+      },
+      "IY-02:youtube": {
+       "id": "MPu00hbAaWw",
+       "views": 1332,
+       "likes": 28,
+       "comments": 3,
+       "duration": "PT1M1S",
+       "problems": []
+      },
+      "IY-03:youtube": {
+       "id": "VQhguRtVFIQ",
+       "views": 1350,
+       "likes": 58,
+       "comments": 4,
+       "duration": "PT1M9S",
+       "problems": []
+      },
+      "IY-05:youtube": {
+       "id": "IiNVhreNKEA",
+       "views": 1277,
+       "likes": 53,
+       "comments": 2,
+       "duration": "PT1M15S",
+       "problems": []
+      },
+      "IY-06:youtube": {
+       "id": "Zpns0VrWFRA",
+       "views": 1265,
+       "likes": 48,
+       "comments": 5,
+       "duration": "PT1M14S",
+       "problems": []
+      },
+      "IY-09:youtube": {
+       "id": "lnwEku639YY",
+       "views": 1041,
+       "likes": 31,
+       "comments": 1,
+       "duration": "PT1M4S",
+       "problems": []
+      }
+     },
+     "deep": {
+      "d-OCr2W4klA": {
+       "views": 1247,
+       "estimatedMinutesWatched": 293,
+       "averageViewDuration": 24,
+       "averageViewPercentage": 46.54,
+       "subscribersGained": 2,
+       "shares": 0,
+       "kept_10": 0.95,
+       "kept_50": 0.41,
+       "kept_90": 0.26
+      },
+      "IiNVhreNKEA": {
+       "views": 1099,
+       "estimatedMinutesWatched": 780,
+       "averageViewDuration": 76,
+       "averageViewPercentage": 101.86999999999999,
+       "subscribersGained": 0,
+       "shares": 0,
+       "kept_10": 1.38,
+       "kept_50": 0.97,
+       "kept_90": 0.88
+      },
+      "Zpns0VrWFRA": {
+       "views": 1218,
+       "estimatedMinutesWatched": 543,
+       "averageViewDuration": 42,
+       "averageViewPercentage": 56.93,
+       "subscribersGained": 8,
+       "shares": 0,
+       "kept_10": 0.97,
+       "kept_50": 0.53,
+       "kept_90": 0.4
+      },
+      "MPu00hbAaWw": {
+       "views": 1336,
+       "estimatedMinutesWatched": 452,
+       "averageViewDuration": 30,
+       "averageViewPercentage": 50.74000000000001,
+       "subscribersGained": 1,
+       "shares": 1,
+       "kept_10": 0.94,
+       "kept_50": 0.46,
+       "kept_90": 0.3
+      },
+      "VQhguRtVFIQ": {
+       "views": 1357,
+       "estimatedMinutesWatched": 538,
+       "averageViewDuration": 42,
+       "averageViewPercentage": 61.77,
+       "subscribersGained": 2,
+       "shares": 0,
+       "kept_10": 1.04,
+       "kept_50": 0.58,
+       "kept_90": 0.43
+      }
+     }
+    },
+    "every_how": {
+     "channel": "Every How",
+     "subscribers": 2,
+     "channel_views": 589,
+     "videos": {
+      "EH-01:youtube": {
+       "id": "efmYR44H1QU",
+       "views": 2,
+       "likes": 1,
+       "comments": 0,
+       "duration": "PT4M43S",
+       "problems": []
+      },
+      "EH-01:youtube_short": {
+       "id": "sJYE5bGNISA",
+       "views": 124,
+       "likes": 3,
+       "comments": 0,
+       "duration": "PT56S",
+       "problems": []
+      },
+      "EH-05:youtube": {
+       "id": "RstYnn3r7ds",
+       "views": 2,
+       "likes": 1,
+       "comments": 0,
+       "duration": "PT5M30S",
+       "problems": []
+      },
+      "EH-05:youtube_short": {
+       "id": "bOQl08p6CT0",
+       "views": 461,
+       "likes": 5,
+       "comments": 1,
+       "duration": "PT58S",
+       "problems": []
+      }
+     },
+     "deep": {
+      "sJYE5bGNISA": {
+       "views": 124,
+       "estimatedMinutesWatched": 16,
+       "averageViewDuration": 19,
+       "averageViewPercentage": 34.72,
+       "subscribersGained": 0,
+       "shares": 0,
+       "kept_10": 0.89,
+       "kept_50": 0.23,
+       "kept_90": 0.15
+      },
+      "RstYnn3r7ds": {
+       "views": 2,
+       "estimatedMinutesWatched": 0,
+       "averageViewDuration": 15,
+       "averageViewPercentage": 4.69,
+       "subscribersGained": 0,
+       "shares": 0
+      },
+      "bOQl08p6CT0": {
+       "views": 425,
+       "estimatedMinutesWatched": 102,
+       "averageViewDuration": 37,
+       "averageViewPercentage": 64.94,
+       "subscribersGained": 1,
+       "shares": 0,
+       "kept_10": 0.97,
+       "kept_50": 0.63,
+       "kept_90": 0.49
+      },
+      "efmYR44H1QU": {
+       "views": 2,
+       "estimatedMinutesWatched": 3,
+       "averageViewDuration": 114,
+       "averageViewPercentage": 40.39,
+       "subscribersGained": 0,
+       "shares": 0
+      }
+     }
+    },
+    "paws_claws": {
+     "channel": "Paws & Claws Club",
+     "subscribers": 1,
+     "channel_views": 33,
+     "videos": {
+      "PC-01:youtube": {
+       "id": "tOKfsqphH0I",
+       "views": 37,
+       "likes": 2,
+       "comments": 0,
+       "duration": "PT3M19S",
+       "problems": []
+      },
+      "PC-02:youtube": {
+       "id": "GMNI0a8O5O4",
+       "views": 6,
+       "likes": 1,
+       "comments": 0,
+       "duration": "PT3M28S",
+       "problems": []
+      }
+     },
+     "deep": {
+      "tOKfsqphH0I": {
+       "views": 29,
+       "estimatedMinutesWatched": 80,
+       "averageViewDuration": 167,
+       "averageViewPercentage": 84.1,
+       "subscribersGained": 1,
+       "shares": 0,
+       "kept_10": 0.97,
+       "kept_50": 0.83,
+       "kept_90": 0.79
+      }
+     }
+    }
+   }
   }
  ],
  "lessons": {
